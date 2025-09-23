@@ -6,7 +6,8 @@
     "db:down": "docker compose down -v",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev --name init",
-    "dev": "pnpm db:up && pnpm prisma:generate && pnpm prisma:migrate"
+    "prisma:seed": "node ./prisma/seed.js",
+    "dev": "pnpm db:up && pnpm prisma:generate && pnpm prisma:migrate && pnpm prisma:seed"
   },
   "devDependencies": {
     "prisma": "^5.19.0"
