@@ -1,0 +1,10 @@
+{
+  "name": "easysave",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm -C backend dev",
+    "db:down": "pnpm -C backend db:down"
+  }
+}
+
+

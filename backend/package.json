@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "private": true,
+  "scripts": {
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down -v",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev --name init",
+    "dev": "pnpm db:up && pnpm prisma:generate && pnpm prisma:migrate"
+  },
+  "devDependencies": {
+    "prisma": "^5.19.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.19.0"
+  }
+}
+
+
