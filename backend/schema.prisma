@@ -1,0 +1,425 @@
+// ---------- Prisma & Postgres ----------
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL") // ex: postgres://user:pass@localhost:5432/fantasy
+}
+
+// ---------- Modèles ----------
+
+model Race {
+  id          Int          @id @default(autoincrement())
+  libelle     String       @unique
+  // relations
+  personnages Personnage[]
+  competences Competence[] @relation("CompetenceRace")
+}
+
+model Role {
+  id          Int              @id @default(autoincrement())
+  libelle     String           @unique
+  // m2m via table explicite
+  personnages PersonnageRole[]
+}
+
+model Lignee {
+  id          Int               @id @default(autoincrement())
+  nom         String            @unique
+  personnages Personnage[]
+  titres      PersonnageTitre[]
+}
+
+model Personnage {
+  id            Int       @id @default(autoincrement())
+  nom           String
+  dateNaissance DateTime?
+  statutVie     String? // "vivant"/"mort" (ou enum si tu veux)
+  dateDeces     DateTime?
+  causeDeces    String?
+
+  // FKs
+  raceId   Int?
+  ligneeId Int?
+
+  race   Race?   @relation(fields: [raceId], references: [id])
+  lignee Lignee? @relation(fields: [ligneeId], references: [id])
+
+  // relations
+  roles         PersonnageRole[]
+  competences   PersonnageCompetence[]
+  titres        PersonnageTitre[]
+  maladies      PersonnageMaladie[]
+  commandements Armee[]                @relation("ArmeeCommandant")
+  equipements   PersonnageEquipement[]
+  guildes       GuildeMembre[]
+}
+
+model PersonnageRole {
+  personnageId Int
+  roleId       Int
+
+  personnage Personnage @relation(fields: [personnageId], references: [id])
+  role       Role       @relation(fields: [roleId], references: [id])
+
+  @@id([personnageId, roleId])
+}
+
+model Competence {
+  id                Int                    @id @default(autoincrement())
+  nom               String
+  exigenceFormation String?
+  exigenceRaceId    Int?
+  exigenceRace      Race?                  @relation("CompetenceRace", fields: [exigenceRaceId], references: [id])
+  personnages       PersonnageCompetence[]
+
+  @@unique([nom])
+}
+
+model PersonnageCompetence {
+  personnageId Int
+  competenceId Int
+  niveau       Int
+
+  personnage Personnage @relation(fields: [personnageId], references: [id])
+  competence Competence @relation(fields: [competenceId], references: [id])
+
+  @@id([personnageId, competenceId])
+}
+
+model Domaine {
+  id          Int      @id @default(autoincrement())
+  nom         String   @unique
+  frontieres  String? // tu peux passer en Json si besoin
+  richessesOr Decimal? @db.Decimal(12, 2)
+  ressources  String?
+
+  villages        Village[]
+  titres          PersonnageTitre[]
+  armees          Armee[]
+  relationsSource RelationDiplomatique[] @relation("RelSource")
+  relationsCible  RelationDiplomatique[] @relation("RelCible")
+  lois            LoiTerritoire[]
+}
+
+model Titre {
+  id      Int    @id @default(autoincrement())
+  libelle String @unique
+
+  attributions PersonnageTitre[]
+}
+
+model PersonnageTitre {
+  id        Int       @id @default(autoincrement())
+  dateDebut DateTime?
+  dateFin   DateTime?
+  estActif  Boolean   @default(false)
+
+  // FKs
+  personnageId Int
+  titreId      Int
+  domaineId    Int?
+  ligneeId     Int?
+
+  personnage Personnage @relation(fields: [personnageId], references: [id])
+  titre      Titre      @relation(fields: [titreId], references: [id])
+  domaine    Domaine?   @relation(fields: [domaineId], references: [id])
+  lignee     Lignee?    @relation(fields: [ligneeId], references: [id])
+}
+
+model Village {
+  id                  Int     @id @default(autoincrement())
+  nom                 String  @unique
+  localisation        String?
+  population          Int?
+  ressourcePrincipale String?
+  domaineId           Int?
+
+  domaine     Domaine?     @relation(fields: [domaineId], references: [id])
+  inventaires Inventaire[]
+}
+
+model Guilde {
+  id         Int     @id @default(autoincrement())
+  nom        String  @unique
+  specialite String?
+  reputation String?
+
+  membres   GuildeMembre[]
+  batailles GuildeBataille[]
+}
+
+model GuildeMembre {
+  personnageId Int
+  guildeId     Int
+  dateEntree   DateTime?
+  dateSortie   DateTime?
+
+  personnage Personnage @relation(fields: [personnageId], references: [id])
+  guilde     Guilde     @relation(fields: [guildeId], references: [id])
+
+  @@id([personnageId, guildeId])
+}
+
+model Creature {
+  id          Int     @id @default(autoincrement())
+  espece      String  @unique
+  forces      String?
+  faiblesses  String?
+  dangerosite String?
+
+  batailles CreatureBataille[]
+}
+
+model EcoleMagie {
+  id    Int    @id @default(autoincrement())
+  nom   String @unique
+  sorts Sort[]
+}
+
+model Sort {
+  id           Int     @id @default(autoincrement())
+  nom          String  @unique
+  element      String?
+  coutMana     Int?
+  niveauRequis String?
+  estInterdit  Boolean @default(false)
+  estRituel    Boolean @default(false)
+
+  ecoleId Int?
+  ecole   EcoleMagie? @relation(fields: [ecoleId], references: [id])
+}
+
+model Maladie {
+  id            Int     @id @default(autoincrement())
+  nom           String  @unique
+  effets        String?
+  contagion     String?
+  remede        String?
+  tauxMortalite Float?
+
+  cas PersonnageMaladie[]
+}
+
+model PersonnageMaladie {
+  personnageId Int
+  maladieId    Int
+  dateDebut    DateTime
+  dateFin      DateTime?
+  issue        String?
+
+  personnage Personnage @relation(fields: [personnageId], references: [id])
+  maladie    Maladie    @relation(fields: [maladieId], references: [id])
+
+  @@id([personnageId, maladieId, dateDebut])
+}
+
+model Armee {
+  id                    Int     @id @default(autoincrement())
+  nom                   String?
+  effectif              Int?
+  composition           String?
+  moral                 String?
+  etatApprovisionnement String?
+
+  domaineId    Int?
+  commandantId Int?
+
+  domaine    Domaine?    @relation(fields: [domaineId], references: [id])
+  commandant Personnage? @relation("ArmeeCommandant", fields: [commandantId], references: [id])
+
+  batailles   ArmeeBataille[]
+  inventaires Inventaire[]
+}
+
+model Bataille {
+  id             Int       @id @default(autoincrement())
+  nom            String?
+  dateBataille   DateTime?
+  lieu           String?
+  pertesA        Int?
+  pertesB        Int?
+  vainqueurTexte String?
+
+  armees    ArmeeBataille[]
+  guildes   GuildeBataille[]
+  creatures CreatureBataille[]
+}
+
+model ArmeeBataille {
+  armeeId    Int
+  batailleId Int
+  cote       String?
+  pertes     Int?
+
+  armee    Armee    @relation(fields: [armeeId], references: [id])
+  bataille Bataille @relation(fields: [batailleId], references: [id])
+
+  @@id([armeeId, batailleId])
+}
+
+model GuildeBataille {
+  guildeId   Int
+  batailleId Int
+  role       String?
+
+  guilde   Guilde   @relation(fields: [guildeId], references: [id])
+  bataille Bataille @relation(fields: [batailleId], references: [id])
+
+  @@id([guildeId, batailleId])
+}
+
+model CreatureBataille {
+  creatureId Int
+  batailleId Int
+  nombre     Int?
+  role       String?
+
+  creature Creature @relation(fields: [creatureId], references: [id])
+  bataille Bataille @relation(fields: [batailleId], references: [id])
+
+  @@id([creatureId, batailleId])
+}
+
+model Equipement {
+  id              Int     @id @default(autoincrement())
+  nom             String  @unique
+  typeEquipement  String?
+  materiaux       String?
+  rarete          String?
+  enchantements   String?
+  affiniteRequise String?
+
+  possesseurs PersonnageEquipement[]
+}
+
+model PersonnageEquipement {
+  personnageId    Int
+  equipementId    Int
+  dateAcquisition DateTime?
+  source          String?
+
+  personnage Personnage @relation(fields: [personnageId], references: [id])
+  equipement Equipement @relation(fields: [equipementId], references: [id])
+
+  @@id([personnageId, equipementId])
+}
+
+model Marchand {
+  id     Int             @id @default(autoincrement())
+  nom    String          @unique
+  routes MarchandRoute[]
+}
+
+model RouteCommerciale {
+  id       Int     @id @default(autoincrement())
+  nom      String  @unique
+  securite String?
+  saison   String?
+
+  segments  RouteSegment[]
+  marchands MarchandRoute[]
+}
+
+model Lieu {
+  id           Int     @id @default(autoincrement())
+  nom          String  @unique
+  typeLieu     String?
+  localisation String?
+
+  segments    RouteSegment[]
+  inventaires Inventaire[]
+}
+
+model RouteSegment {
+  routeId Int
+  lieuId  Int
+  ordre   Int
+
+  route RouteCommerciale @relation(fields: [routeId], references: [id])
+  lieu  Lieu             @relation(fields: [lieuId], references: [id])
+
+  @@id([routeId, lieuId, ordre])
+}
+
+model MarchandRoute {
+  marchandId Int
+  routeId    Int
+  biens      String?
+  taxes      Float?
+
+  marchand Marchand         @relation(fields: [marchandId], references: [id])
+  route    RouteCommerciale @relation(fields: [routeId], references: [id])
+
+  @@id([marchandId, routeId])
+}
+
+model Barde {
+  id        Int        @id @default(autoincrement())
+  nom       String     @unique
+  histoires Histoire[]
+}
+
+model Histoire {
+  id            Int       @id @default(autoincrement())
+  titre         String?
+  typeEvenement String?
+  description   String?
+  dateEvenement DateTime?
+
+  bardeId Int?
+  barde   Barde? @relation(fields: [bardeId], references: [id])
+}
+
+model Inventaire {
+  id            Int       @id @default(autoincrement())
+  typeRessource String?
+  stock         Int?
+  seuilAlerte   Int?
+  dateMesure    DateTime?
+
+  lieuId  Int?
+  armeeId Int?
+
+  lieu      Lieu?    @relation(fields: [lieuId], references: [id])
+  armee     Armee?   @relation(fields: [armeeId], references: [id])
+  Village   Village? @relation(fields: [villageId], references: [id])
+  villageId Int?
+}
+
+model RelationDiplomatique {
+  id            Int       @id @default(autoincrement())
+  typeRelation  String?
+  conditions    String?
+  dateSignature DateTime?
+  echeance      String?
+
+  domaineSourceId Int
+  domaineCibleId  Int
+
+  domaineSource Domaine @relation("RelSource", fields: [domaineSourceId], references: [id])
+  domaineCible  Domaine @relation("RelCible", fields: [domaineCibleId], references: [id])
+
+  @@index([domaineSourceId])
+  @@index([domaineCibleId])
+}
+
+model Loi {
+  id      Int     @id @default(autoincrement())
+  libelle String  @unique
+  effet   String?
+
+  domaines LoiTerritoire[]
+}
+
+model LoiTerritoire {
+  loiId     Int
+  domaineId Int
+
+  loi     Loi     @relation(fields: [loiId], references: [id])
+  domaine Domaine @relation(fields: [domaineId], references: [id])
+
+  @@id([loiId, domaineId])
+}
