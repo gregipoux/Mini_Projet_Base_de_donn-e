@@ -1,0 +1,3742 @@
+-- "Tu es un agent divin dans le monde appelé “Solarys”, c'est un monde de type médiéval-fantastique. 
+-- Tu es chargé de veiller à la cohérence des données dans une base de données relationnelle MySQL qui modélise ce monde.
+-- Tu dois analyser les fichiers SQL suivants, qui contiennent des créations de tables et des contraintes
+-- à l'aide des fichiers 1_creation.sql et 2_contraintes.sql fournis. Ton rôle par la suite est donc de
+-- créer tous les personnages, villages, guildes, armées, ressources, planètes, factions, etc. nécessaires pour que
+-- le monde soit cohérent et riche en contenu. Nous attendons de toi que tu remplisses à minima une centaine d'éléments
+-- dans chaque grosses tables et une cinquentaines pour les plus petites lorsqu'il n'y a pas de possibilité de faire
+-- plus. N'oublies pas que tu es un agent divin et qu'une grande responsabilité t'es imposée, ton travail doit être
+-- fait rigoureusement. Tu pourras te baser sur des sources connus qui incluent du médiéval-fantastique telles que :
+-- - L'univers du seigneur des anneaux
+-- - Donjons et dragons
+-- - The witcher
+-- ou d'autres si tu le souhaites. Un point d'honneur sera mis à la qualité de tes créations, qui doivent être variées et
+-- intéressantes mais surtout remplies d'humour car nous sommes dans un monde spécial qui vie dans la paix et l'humour.
+-- Voici un exemple d'humour qui est souvent utilisé dans ce monde :
+-- - un personnage qui a un nom jeu de mot, comme Lara Tatouille qui fait le jeu de mot la ratatouille.
+-- - des noms de royaumes des plus amusants comme raclettea, dragonflette ou banarnia.
+-- - des guildes qui sont aussi des jeux de mots comme les baguettefolles pour une guilde de mages, les épées tramblantes
+-- pour une guilde de guerriers, les archers du dimanche pour une guilde d'archers. Mais pas que des noms péjoratifs il
+-- y en a aussi avec des noms poussés à l'extrême comme les pourfendeurs de la lumière éternelle sintillante ou alors les
+-- protecteurs des âmes perdues de l'ombre.
+-- - des villages avec des noms comme : fromagiville, patateland, carotte-sur-mer, choux-fleur-les-bains, navet-les-oies.
+-- 
+-- Voici les idées de jeux de mots qui sont attendues, bien sûr ce ne sont que des exemples,
+-- nous en attendons plus de toi, nous comptons sur toi, Solarys a besoin de toi.
+-- En résumé, tu es un agent divin dans le monde de Solarys, tu dois créer une centaine d'éléments dans chaque grosse 
+-- table et une cinquantaine dans les plus petites, le tout avec des noms variés, intéressants et surtout drôles.
+-- Nous comptons sur toi pour accomplir ta tâche rigoureusement avec beaucoup de réflexion, d'humour et de créativité.
+-- 
+-- Pour cela, tu rédigeras un fichier SQL d'insertion de données, nommé 3_insertion_prompt.sql,
+-- qui contiendra toutes les instructions nécessaires pour insérer les données dans la base de données."
+
+
+-- ==================================================================================================================
+-- changer les frontières pour respecter FN
+INSERT INTO Royaume (nom, frontieres, richesses_or, orientation_paix) VALUES
+('Raclettea','Monts Fondants ; Gorges de Gruyère ; Col de la Croûte',120000.00,'paix'),
+('Dragonflette','Dents de Drac ; Plaines Laitières ; Rift Brûlé',94000.50,'neutre'),
+('Banarnia','Rivières Milk-shake ; Dunes Céréales ; Archipel Banane',150500.00,'paix'),
+('Choux-Fleurie','Falaises Vapeur ; Champs Trempette ; Cap Aïoli',60500.00,'paix'),
+('Patateland','Plateaux Gratins ; Mines de Sel ; Bassin Purée',88000.00,'neutre'),
+('Carotte-sur-Mer','Baie Croquante ; Cap Jus d’Orange ; Chenal Potager',72000.00,'paix'),
+('Fromagiville','Roc Bleu ; Vallon Camembert ; Lisière Coulante',65000.00,'neutre'),
+('Navet-les-Oies','Marais Velouté ; Étangs Coin-Coin ; Saulaie Grasse',41000.00,'paix'),
+('Soupefroide','Glaciers Gazpacho ; Fjords Basilic ; Banquise Tomate',56000.00,'belligerant'),
+('Tartiflette Prime','Couronnes Pommes ; Muraille Oignon ; Combe Lardon',133700.00,'neutre'),
+('Croissantinopie','Récifs Beurrés ; Mer de Confiture ; Pointe Amande',99000.00,'paix'),
+('Éclairoisie','Chaînes Pâtissières ; Col Chantilly ; Gorge Vanille',57500.00,'neutre'),
+('Boulangea','Grands Fournils ; Dorsales Levain ; Fourneau Royal',84500.00,'paix'),
+('Marmitonnie','Îlots Spatule ; Deltas Mironton ; Baie Ragoût',43210.00,'neutre'),
+('Saucissonie','Coteaux Secs ; Bois Poivrés ; Fosse Pasté',77300.00,'paix'),
+('Herbularia','Forêts Infusées ; Sources Verveine ; Prairie Thym',50100.00,'paix'),
+('Poissarie','Rades Citron ; Eaux Aneth ; Bancs Scintillants',62000.00,'neutre'),
+('Sucralune','Crêtes Sucrées ; Lacs Sirop ; Mare Guimauve',88888.00,'paix'),
+('Rizotto','Rizières Brillantes ; Marais Safran ; Levées Curry',54000.00,'paix'),
+('Quichebourg','Cols Lardon ; Vallées Crème ; Plateau Gruyère',71234.00,'neutre'),
+('Meringuia','Cirques Aériens ; Corniches Sucre-Neige',48500.00,'paix'),
+('Beurrasie','Dorsale Laitière ; Falaises Clarifiées',70200.00,'neutre'),
+('Confitar','Lagunes Confit ; Récifs Marmelade',55900.00,'paix'),
+('Croûtonie','Désert Grillé ; Oasis Ail ; Dune Croustillante',44700.00,'belligerant'),
+('Levainor','Failles Levées ; Dôme Pâteux ; Grotte Boulange',63100.00,'paix'),
+('Tisanelle','Bas-pays Menthe ; Collines Camomille',39800.00,'paix'),
+('Saucelande','Estuaire Poivre ; Vasières Crème',52010.00,'neutre'),
+('Citronésie','Atolls Zestes ; Courants Acidulés',57400.00,'paix'),
+('Vanillia','Plaines Gousses ; Gorge Suave',46200.00,'paix'),
+('Anethol','Cols Réglisse ; Steppe Anisée',43150.00,'neutre'),
+('Pâtonnie','Buttes Farine ; Fondrières Levure',51600.00,'paix'),
+('Friturie','Ravin Tempura ; Savane Beignets',38990.00,'belligerant'),
+('Rôtisserie Royale','Chaîne Broche ; Vallon Jus','77000.00','neutre'),
+('Pâtisserie Haute','Éperons Millefeuille ; Crête Nappage',68420.00,'paix'),
+('Fondueval','Cuvette Gruyère ; Strates Vin Blanc',73333.00,'paix'),
+('Ragoût-du-Nord','Toundra Bouillon ; Caps Potage',51200.00,'neutre'),
+('Bouillonie','Estuaire Mirepoix ; Bancs Écume',40110.00,'paix'),
+('Saladière','Plateaux Mesclun ; Canyon Vinaigrette',45550.00,'paix'),
+('Épiceria','Monts Curcuma ; Vallée Cumin ; Dôme Cardamome',62500.00,'neutre'),
+('Fromagora','Citadelle Croûte ; Falaises Affinage',81200.00,'paix'),
+('Beurropolis','Avenue Clarifiée ; Parcelles Dorées',59000.00,'neutre'),
+('Camemberrie','Buttes Coulantes ; Fossés Crayeux',54800.00,'paix'),
+('Goudaïka','Pins Saumure ; Baie Laiton',57320.00,'paix'),
+('Comtédrale','Nef Affinée ; Contreforts Pâturins',79200.00,'neutre'),
+('Rocquefortin','Grottes Persillées ; Cirque Bleu',61250.00,'paix'),
+('Munsterre','Coteaux Lave ; Ruisseaux Fumés',56660.00,'paix'),
+('Rebloche','Col Savoyard ; Pâturage Rebloch',52100.00,'neutre'),
+('Brie-lande','Plaine Paille ; Rives Coulants',64010.00,'paix'),
+('Cancoillottie','Marais Beurrés ; Tourbières Lactées',43330.00,'paix'),
+('Cheddarmont','Éboulis Or ; Ponts Croûteux',70500.00,'neutre'),
+('Mozzarellia','Lagune Saumure ; Bancs Perle',58880.00,'paix'),
+('Parmésia','Plateaux Granités ; Gorges Râpées',73500.00,'paix'),
+('Ricotte','Rivières Lactosérum ; Îlots Caillé',47100.00,'neutre'),
+('Burraton','Marais Burrata ; Digue Crème',50990.00,'paix'),
+('Mascarponie','Terres Onctueuses ; Vallon Dessert',68000.00,'paix'),
+('Chantillys','Crêtes Fouettées ; Nuages Vanille',52120.00,'paix'),
+('Pralinie','Rochers Crousti ; Rade Noisette',56330.00,'neutre'),
+('Caramellum','Lac Ambré ; Torrent Suif',54440.00,'paix'),
+('Biscuitbourg','Remparts Sablés ; Fossé Sucré',49990.00,'paix'),
+('Gélatine','Marécages Tremblotants ; Baie Pectine',38220.00,'neutre'),
+('Sorbeterre','Glaciers Fruités ; Vent Limonade',47270.00,'paix');
+
+
+INSERT INTO Espece (libelle, est_sapiente) VALUES
+('Humain',1),
+('Elfe',1),
+('Nain',1),
+('Orc',1),
+('Golem',0),
+('Gnome',1),
+('Demi-elfe',1),
+('Demi-orc',1),
+('Hobelin',1),
+('Tieffelin',1),
+('Drakéide',1),
+('Satyre',1),
+('Aasimar',1),
+('Kobold',1),
+('Gobelin',1),
+('Vampire',1),
+('Liche',1),
+('Squelette',0),
+('Ent',0),
+('Dragon',0),
+('Wyverne',0),
+('Phénix',0),
+('Griffon',0),
+('Mimique',0),
+('Loup-garou',0),
+('Yéti',0),
+('Géant',1),
+('Djinn',1),
+('Fée',1),
+('Sirène',1),
+('Troll',1),
+('Goule',0),
+('Slime',0),
+('kraken',0),
+('Banshee',0),
+('Dryade',1),
+('Néréide',1),
+('Centaure',1),
+('Minotaure',1),
+('Harpyie',0),
+('Basilic',0),
+('Chimère',0),
+('Hydre',0),
+('Sphinx',1),
+('Kitsune',1),
+('Tanuki',1),
+('Oni',1),
+('Rakshasa',1),
+('Gargouille',0),
+('Spectre',0),
+('Ombre',0);
+
+
+INSERT INTO Lignee (nom) VALUES
+('de Raclette'),
+('du Comté Beurré'),
+('de la Sauce Mystique'),
+('de la Lune qui Grince'),
+('de la Baguette Noble'),
+('des Pommes de Terre Royales'),
+('de la Brebis Dorée'),
+('du Croc Rieur'),
+('des Pâtes Impériales'),
+('du Chou Souverain'),
+('de la Sphère Effervescente'),
+('de la Brume Vanillée'),
+('de Caramelle'),
+('du Ruisseau qui Pique'),
+('de l’Ananas Armorié'),
+('de la Myrtille Grave'),
+('de la Tomate Clairvoyante'),
+('de la Fourchette Ailée'),
+('de la Marmite Sacrée'),
+('des Croissants Stellaires'),
+('des Oignons Tactiques'),
+('de la Laitue Héroïque'),
+('de la Noisette de Fer'),
+('du Poivre Astral'),
+('du Gingembre Tranquille'),
+('du Navet Régalien'),
+('de la Grenade Lumineuse'),
+('du Cumin Profond'),
+('des Boulettes Solaires'),
+('du Biscuit Antique'),
+('de Banarnia'),
+('du Fromage Antique'),
+('du Miel d’Acier'),
+('de la Truite Savante'),
+('du Sésame Royal'),
+('du Café qui Rit'),
+('du Breton Cosmique'),
+('du Piment Couronné'),
+('de la Figue Oraculaire'),
+('des Galettes Fulgurantes'),
+('des Haricots Mystiques'),
+('du Beurre Courageux'),
+('des Crèmes Vaillantes'),
+('du Sirop Froid'),
+('de la Chantilly Discrète'),
+('de la Tisane Sauvage'),
+('des Mines Salées'),
+('des Pois Chics'),
+('du Bouillon d’Honneur'),
+('de la Poudre Dorée'),
+('des Carottes Stellaires'),
+('du Chou-Fleur Ardent'),
+('de la Citronnade Sainte'),
+('de la Vinaigrette Sombre'),
+('du Frometon Suprême'),
+('des Riz d’Argent'),
+('du Boulanger Perdu'),
+('de la Soupe Céleste'),
+('de la Sauce Éternelle'),
+('du Bâton de Levain'),
+('du Beignet Courageux'),
+('de la Croûte Royale'),
+('des Frites d’Or'),
+('de la Crêpe Sombre'),
+('de la Moutarde Féroce'),
+('du Crouton Silencieux'),
+('des Échalotes Nobles'),
+('de la Brioche Antique'),
+('de la Pâte Éthérée'),
+('de la Sauce au Vent'),
+('de l’Herbe Lumineuse'),
+('de la Feuille Sucrée'),
+('du Fromage Parfait'),
+('de la Fondue des Cieux'),
+('du Lardon d’Argile'),
+('de la Cuillère Dorée'),
+('de la Tarte Gracieuse'),
+('du Bonbon Écarlate'),
+('des Plantes Folles'),
+('des Crustacés Sacrés'),
+('de la Gaufre Dorée'),
+('du Crabe Tempéré'),
+('des Cendres de Biscotte'),
+('de la Brume Pâtissière'),
+('du Gelato Sublime'),
+('des Crèmes Glorieuses'),
+('de la Salsifis Doré'),
+('du Soufflé d’Acier'),
+('du Confit d’Aurore'),
+('de la Bouillie Sacrée'),
+('du Chocolat Silencieux'),
+('du Fromage de l’Ombre'),
+('du Levain des Sages'),
+('de la Tarte Suprême'),
+('des Flocons Dorés'),
+('de la Bûche Enchantée'),
+('de la Brioche des Âges'),
+('du Potage Runique'),
+('des Croûtons Errants'),
+('du Beurre des Titans'),
+('de la Soupe du Matin'),
+('du Croissant Béni');
+
+
+INSERT INTO Ressource (nom, description) VALUES
+('Acier', 'Alliage robuste, prisé par les forgerons du Levainor'),
+('Bois', 'Essence commune, utilisée pour arcs, catapultes et planches à découper'),
+('Cuir', 'Matériau souple idéal pour bottes et blagues de tavernes'),
+('Lin', 'Textile léger, favori des mages de la Baguette Folle'),
+('Laine', 'Duveteuse et magique, chauffe même les coeurs gelés'),
+('Or', 'Symbole de richesse et d’égo gonflé'),
+('Argent', 'Métal noble utilisé contre les créatures grinçantes'),
+('Cuivre', 'Bon conducteur, rouille avec style'),
+('Charbon', 'Ingrédient indispensable aux barbecues et forges'),
+('Pierre', 'Matériau simple mais solide, utilisé par les têtus'),
+('Fer', 'Matériau brut pour armes ou dentiers de trolls'),
+('Sel', 'Conserve les aliments et les querelles diplomatiques'),
+('Miel', 'Or liquide adoré des ours et des bardes gourmands'),
+('Épices', 'Un mélange qui rend les plats et les discussions piquantes'),
+('Poivre', 'Pour relever les plats et les conflits'),
+('Herbes', 'Plantes aromatiques et médicinales utilisées par les druides'),
+('Farine', 'Base des pains et des sorts levés'),
+('Sucre', 'Drogue douce légale à haut risque de caries magiques'),
+('Beurre', 'Lubrifiant universel, diplomatique et culinaire'),
+('Lait', 'Liquide béni, surtout pour les cafés enchantés'),
+('Eau pure', 'Rare sur Solarys, car les poissons y mettent du sel'),
+('Vin', 'Rend honnête les conversations et flou les décisions'),
+('Bière', 'Hydromel du peuple et carburant des nains'),
+('Hydromel', 'Boisson divine à base de miel et d’erreurs de jugement'),
+('Fruits confits', 'Ressource sucrée pour nobles et diabétiques'),
+('Champignons rieurs', 'Provoquent parfois des visions comiques'),
+('Cristal de mana', 'Pierre chargée d’énergie magique pure'),
+('Essence d’ombre', 'Liquide noir brillant, utilisé pour encre et poisons'),
+('Essence de lumière', 'Ressource rare, éclaire les esprits sombres'),
+('Cendre draconique', 'Résidu de dragon, brûle mais pas les doigts nobles'),
+('Miel lunaire', 'Fluide argenté récolté lors des pleines lunes sucrées'),
+('Poudre d’étoile', 'Brille dans le noir et attire les poètes perdus'),
+('Fromage sacré', 'Produit mythique affiné par des moines en trance'),
+('Beurre céleste', 'Beurre qui ne fond que par amour ou magie'),
+('Huile d’olive antique', 'Très ancienne, souvent rancie mais précieuse'),
+('Cacao', 'Fève bénie qui chasse la mauvaise humeur'),
+('Café', 'Potion d’éveil et de logorrhée'),
+('Thé', 'Ressource sacrée des Tisanelles'),
+('Viande séchée', 'Nourriture de survie et de randonnée humoristique'),
+('Poisson fumé', 'Odeur puissante, arme biochimique dans certains royaumes'),
+('Corde', 'Outil polyvalent : grimper, lier, décorer un gâteau'),
+('Papier runique', 'Papier enchanté qui refuse les fautes d’orthographe'),
+('Peaux de troll', 'Solides, mais sentent la purée'),
+('Plumes', 'Légères et idéales pour écrire des sorts'),
+('Graines de sésame', 'Ajoutent du croustillant à tout sauf aux discours'),
+('Racines magiques', 'Nourrissent la terre et les sorciers affamés'),
+('Pétales de lune', 'Brillent sous la pleine lune, fondent au soleil'),
+('Perles de sel', 'Très prisées dans les bains royaux'),
+('Ambre doré', 'Résine fossile contenant parfois un moustique dragon'),
+('Nacre', 'Brillante et nacrée, souvent fausse'),
+('Gemme du sommeil', 'Pierre apaisante pour insomniaques héroïques'),
+('Granit chantant', 'Pierre musicale, utile pour concerts minéraux'),
+('Fibre de champignon', 'Tissu biodégradable et odorant'),
+('Argile', 'Ressource terreuse pour potiers et golems artistes'),
+('Verre clair', 'Translucide, idéal pour observer sans comprendre'),
+('Glace éternelle', 'Ne fond qu’en cas de blague ratée'),
+('Souffle du vent', 'Invisible mais vendu cher'),
+('Brume en bouteille', 'Ressource esthétique, inutile mais chic'),
+('Poudre de levain', 'Active la croissance des gâteaux et des golems'),
+('Larmes de sirène', 'Liquide salé, parfumé à la tragédie'),
+('Sable doré', 'Brille, mais colle aux doigts et aux illusions'),
+('Neige en conserve', 'Ressource rare des glaces artificielles'),
+('Cheveux d’ange', 'Fil spirituel, souvent retrouvé dans les plats'),
+('Sang de licorne', 'Ressource interdite, brillante et maudite'),
+('Corne d’hydre', 'Solide et repousse vite (le rêve des sculpteurs)'),
+('Poussière de croissant', 'Ressource bénie du matin sacré'),
+('Gelée de mana', 'Substance translucide et légèrement sucrée'),
+('Bulles de savon magique', 'Idéales pour cacher des secrets aériens'),
+('Plume d’archange', 'Légère et brûle les doigts impurs'),
+('Poudre de biscuit', 'Utile aux mages pâtissiers'),
+('Sucre d’elfe', 'Extrêmement cher, fait éternuer les humains'),
+('Cœur de golem', 'Cristal vibrant d’énergie contenue'),
+('Graines de pavot astral', 'Favorisent les rêves éveillés'),
+('Sel de Banarnia', 'Condiment officiel du royaume bananier'),
+('Huile de griffon', 'Potion de vigueur et de mauvais goût'),
+('Feuille de basilic sacré', 'Très rare, utilisée pour bénir les pizzas'),
+('Os de dragonnet', 'Très dur, utilisé en architecture mythique'),
+('Poussière d’oubli', 'Efface les erreurs (mais aussi les souvenirs)'),
+('Suif de troll', 'Inflammable et insultant'),
+('Roche fondue', 'Résidu volcanique, odeur de souffre et de fromage'),
+('Souffle de raclette', 'Gaz chaud aromatisé, non recommandé en intérieur'),
+('Brindilles de sagesse', 'Cassent souvent avant d’éclairer l’esprit'),
+('Sang de betterave', 'Pigment naturel pour encre et potions'),
+('Eau bénite gazeuse', 'Sacrée mais pétillante'),
+('Coquilles d’escargot doré', 'Ressource décorative des nobles'),
+('Feuilles d’or', 'Ressource luxueuse pour gâteaux et couronnes'),
+('Sable de minuit', 'Utilisé pour sablier temporel'),
+('Crème éternelle', 'Substance divine, goût vanille immortelle'),
+('Larme de beignet', 'Ressource sucrée et émotive'),
+('Noyau de pêche astrale', 'Ingrédient alchimique rare'),
+('Boue runique', 'Conductrice d’anciennes magies'),
+('Cendres de phoenix', 'Poudre de renaissance et d’allergies légères'),
+('Essence de fromage ancien', 'Liquide concentré d’histoire culinaire'),
+('Gelée royale lunaire', 'Énergie pure des ruches nocturnes'),
+('Soupe condensée', 'Base universelle des expéditions culinaires'),
+('Éclat de lune', 'Pierre luminescente, douce et poétique'),
+('Bois noble', 'Essence de qualité, ne grince que pour protester contre les flèches mal tirées.'),
+('Fil d’or', 'Aussi souple que l’ego d’un duc ; parfait pour broder des prétentions.'),
+('Clochette joyeuse', 'Assez rigolotes pour réveiller un dragon grincheux.'),
+('Obsidienne brute', 'Verre volcanique sombre, reflète surtout les remords.'),
+('Poussière d’étoile', 'Récupérée en faisant pleurer un astre, colle aux bottes.'),
+('Vent capturé', 'Bocal d’air ambitieux, siffle dès qu’on l’ouvre.'),
+('Brume condensée', 'Nuage de poche, idéal pour disparitions théâtrales.'),
+('Cuir tanné', 'Peau patiente, a entendu plus d’histoires que la taverne.'),
+('Feuille de thé', 'Feuille bavarde, infuse les secrets avec le goût.'),
+('Pétale enchanté', 'Fleur magique, change de couleur selon l’humeur.'),
+('Graine de vie', 'Petite mais tenace, pousse même dans les poches trouées.'),
+('Larme de fée', 'Goutte scintillante, rend les cœurs un peu plus légers.'),
+('Perle d’eau pure', 'Goutte éternelle figée en bijou, ne supporte pas la poussière.'),
+('Cendre ardente', 'Résidu de feu, réchauffe les âmes froides.'),
+('Bois sacré', 'Tronc béni, craque en langage ancien quand on le sculpte.'),
+('Gemme astrale', 'Pierre qui a vu les étoiles de près, et s’en vante.'),
+('Encens ancestral', 'Fumée qui rappelle des souvenirs qu’on n’a jamais vécus.'),
+('Chant cristallin', 'Cristal qui tinte en do majeur quand on le cogne doucement.'),
+('Pierre tellurique', 'Caillou terre-à-terre qui fait trembler les prétentieux.'),
+('Sable du temps', 'Grains têtus qui refusent d’être à l’heure.'),
+('Acier trempé', 'Acier qui a pris un bain froid pour devenir sérieux.'),
+('Braise éternelle', 'Charbon ardent, ne s’éteint qu’avec les promesses non tenues.'),
+('Corail noir', 'Récif nocturne, très à la mode chez les casques plongeants.'),
+('Bois lunaire', 'Bois pâle qui brille quand on lui raconte une histoire.'),
+('Poudre sélène', 'Poussière de lune, scintille même de mauvaise humeur.'),
+('Bois calciné', 'Charpente carbonisée qui a vu le feu et en redemande.'),
+('Cristal chaotique', 'Structure instable, classe le désordre par ordre alphabétique.'),
+('Plume d’azur', 'Plume légère, laisse un ciel bleu derrière chaque trait.'),
+('Lingot d’or', 'Or discipliné, reste en bloc malgré les flatteries.'),
+('Rune gravée', 'Symbole éternellement grognon quand on le retourne.'),
+('Fragment solaire', 'Éclat de soleil capturé, bronzage garanti sous capuche.'),
+('Tissu runique', 'Étoffe qui lit par-dessus votre épaule.'),
+('Pierre brute', 'Roche franche, n’a jamais appris la politesse.'),
+('Herbes vives', 'Plantes pressées qui poussent avant la fin de la phrase.'),
+('Acier sacré', 'Métal béni, refuse de couper les coins.'),
+('Givre pur', 'Froid poli, trace des arabesques sur les moustaches.'),
+('Cœur d’orage', 'Noyau d’éclair domestiqué ; ronchonne quand il fait beau.'),
+('Sable du désert', 'Grain voyageur, retrouve toujours les bottes.'),
+('Fil d’argent', 'Brin noble, conducteur de compliments.'),
+('Fil de lin', 'Fil humble, tient mieux que les promesses.'),
+('Argent pur', 'Métal lunatique, brille plus fort sous les ragots.'),
+('Verre poli', 'Transparence fière de ne rien cacher.'),
+('Résine odorante', 'Gomme parfumée, attire mouches et souvenirs.'),
+('Huile fine', 'Lubrifiant de salon, glisse aussi sur les excuses.'),
+('Plume de griffon', 'Souvenir aérien, pique l’orgueil si on la met de travers.'),
+('Épices fortes', 'Poudre bavarde, fait parler les plats (et les convives).'),
+('Ampoule alchimique', 'Flacon têtu, ne casse que quand on jure que non.'),
+('Écaille de dragon', 'Tuile ignifugée, idéale contre les courants d’air brûlants.'),
+('Onguent soporifique', 'Crème bâilleuse, endort même les bardes.'),
+('Corde runique', 'Lien qui lit ; noue les destins au double nœud.'),
+('Orichalque', 'Légende métallique, sonne la note rare du coffre plein.'),
+('Gemme élémentaire', 'Noyau polyvalent, change d’humeur avec la météo.'),
+('Voile de sérénité', 'Tissu muet, étouffe bruits et disputes.'),
+('Peau parcheminée', 'Cuir lettré, aime qu’on l’écrive correctement.'),
+('Encre runique', 'Encre qui corrige les fautes avant qu’on les fasse.'),
+('Encre d’ombre', 'Liquide ténébreux, sèche à la lumière des secrets.'),
+('Fromage ancien', 'Meule érudite, cite souvent des caves célèbres.'),
+('Rouages d’acier', 'Mécanismes disciplinés, tournent rond même dans les rumeurs.'),
+('Argile rouge', 'Terre timide qui rougit pour un oui ou pour un bol.'),
+('Acier céleste', 'Alliage de haute altitude, étincelle quand on le flatte.'),
+('Perle d’aube', 'Goutte rosée qui se lève plus tôt que les coqs.'),
+('Sel marin', 'Cristaux voyageurs, sentent la vague et la poésie.'),
+('Beurre fin', 'Doux et bien élevé, ne crie jamais au chaud.'),
+('Raclette affinée', 'Fromage sérieux, fond uniquement par vocation.'),
+('Farine blanche', 'Poudre modeste, lève sans faire de vague.'),
+('Poivre noir', 'Grain piquant, relève les débats et les plats fades.'),
+('Chocolat noir', 'Cacao intense, amer avec les faux amis.'),
+('Miel doré', 'Nectar patient, coule lentement mais sûrement.'),
+('Lait frais', 'Liquide jovial, toujours prêt à mousser les conversations.'),
+('Vin rouge', 'Élixir bavard, colore les débats et les joues.'),
+('Bière brune', 'Boisson robuste, mousse les histoires de taverne.'),
+('Hydromel doux', 'Potion sucrée, adoucit même les cœurs de pierre.'),
+('Café corsé', 'Breuvage énergique, réveille les esprits endormis.'),
+('Thé vert', 'Infusion zen, calme les ardeurs et les débats.'),
+('Chantilly ferme', 'Nuage discipliné, tient la pose pour les portraits.'),
+('Bois résineux', 'Bois collant, parfait pour torches et moustaches.'),
+('Fonte', 'Métal massif qui aime les bains bouillants.'),
+('Fragment de néant', 'Morceau d’ombre dense, idéal pour les discussions profondes.'),
+('Épée Solaire', 'Brûle d’une flamme qui ne s’éteint jamais.'),
+('Épée Nocturne', 'Une lame d’ombre qui boit la lumière.'),
+('Faux du Néant', 'Outil de fin de cycle, manie le vide avec poésie.'),
+('Bâton de l’Astrolithe', 'Un pilier d’étoiles solidifiées.'),
+('Bâton du Temps Figé', 'Fige tout sauf les regrets.'),
+('Épée des Échos', 'Chaque coup résonne dans l’âme de l’adversaire.'),
+('Marteau de l’Éclipse', 'Se manifeste à la lumière d’une double lune.'),
+('Lame des Saisons', 'Change d’élément selon la saison.'),
+('Trident de la Mer Claire', 'Symbole des marins de Poissarie.'),
+('Lance du Zénith', 'Condense la lumière en un faisceau mortel.'),
+('Armure de la Lumière Pure', 'Brille d’une intensité à aveugler la mauvaise foi.'),
+('Armure d’Obsidienne', 'A résisté à la Guerre des Forges.'),
+('Cuirasse du Temps', 'Vieillit le porteur au ralenti.'),
+('Bouclier des Astres', 'Réfléchit les constellations et les sorts.'),
+('Armure des Titans', 'Créée à partir d’un fragment d’étoile.'),
+('Anneau du Temps', 'Décale les rendez-vous d’un quart d’heure.'),
+('Cape du Crépuscule', 'Camoufle dans la pénombre et dans les soirées mondaines.'),
+('Bracelet des Étoiles', 'Gravé d’un ciel miniature.'),
+('Larme de Dragon', 'Un ingrédient rare pour des potions puissantes.'),
+('Larme de Sirène', 'Utilisée dans les élixirs de charme.'),
+('Plume de Phénix', 'Indispensable pour les mages écrivains.'),
+('Poche Dimensionnelle', 'Contient tout sauf ce qu’on cherche.'),
+('Sceptre des Arcanes', 'Canalise tous les éléments connus et inconnus.'),
+('Orbe des Étoiles', 'Renferme un fragment de cosmos.'),
+('Grimoire Vivant', 'Écrit seul, corrige parfois le lecteur.'),
+('Anneau des Six Éléments', 'Fusionne feu, eau, air, terre, lumière et ténèbres.'),
+('Couronne des Dieux Muets', 'Silencieusement toute-puissante.'),
+('Diadème du Zénith', 'Diffuse une aura solaire.'),
+('Cape de Lune', 'Change de couleur selon les phases.'),
+('Cristal d’Âme', 'Contient la mémoire d’un ancien héros.'),
+('Sphère du Temps', 'Permet de suspendre l’instant parfait.'),
+('Relique du Premier Mage', 'Son nom seul déclenche la révérence.'),
+('Miroir de Vérité', 'Révèle tout, même les mauvaises coupes de cheveux.'),
+('Harpe Céleste', 'Ses notes guérissent les cœurs brisés.'),
+('Ancre du Monde', 'Stabilise et réécrit à souhait la réalité autour d’elle.');
+
+INSERT INTO Metier (libelle, type_metier) VALUES
+('Forgeron', 'artisan'),
+('Tavernier', 'service'),
+('Boulanger', 'artisan'),
+('Brasseur', 'artisan'),
+('Cuisinier arcanique', 'artisan'),
+('Pêcheur de nuages', 'autre'),
+('Apiculteur astral', 'artisan'),
+('Herboriste', 'artisan'),
+('Alchimiste', 'artisan'),
+('Marchand ambulant', 'marchand'),
+('Éleveur de griffons', 'autre'),
+('Cartographe', 'service'),
+('Maître du levain', 'artisan'),
+('Tisseur de runes', 'artisan'),
+('Scribe des vents', 'service'),
+('Barde', 'service'),
+('Conteur itinérant', 'service'),
+('Vannier', 'artisan'),
+('Tailleur de pierre', 'artisan'),
+('Enchanteur de cuillères', 'artisan'),
+('Potier', 'artisan'),
+('Charpentier', 'artisan'),
+('Mineur', 'autre'),
+('Fermier', 'autre'),
+('Maître du fromage', 'artisan'),
+('Sorcier culinaire', 'autre'),
+('Chevalier du goût', 'autre'),
+('Brigadier des sauces', 'autre'),
+('Jardinier céleste', 'autre'),
+('Fabricant de catapultes', 'artisan'),
+('Épicier du destin', 'marchand'),
+('Marchand de miel', 'marchand'),
+('Marchand de tapis volants', 'marchand'),
+('Marchand de rires', 'marchand'),
+('Marchand d’épices rares', 'marchand'),
+('Maître pâtissier', 'artisan'),
+('Couturier des nobles', 'artisan'),
+('Tailleur de capes magiques', 'artisan'),
+('Cordonnier de dragons', 'artisan'),
+('Brasseur d’orages', 'artisan'),
+('Distillateur d’illusions', 'artisan'),
+('Orfèvre', 'artisan'),
+('Bijoutier runique', 'artisan'),
+('Peintre d’armures', 'artisan'),
+('Sculpteur de golems', 'artisan'),
+('Calligraphe mystique', 'service'),
+('Archiviste de guildes', 'service'),
+('Prêtre du brunch', 'service'),
+('Aubergiste galactique', 'service'),
+('Marin des brumes', 'autre'),
+('Explorateur', 'autre'),
+('Guide des cavernes', 'autre'),
+('Gardien de phare', 'autre'),
+('Apprenti du chaos', 'autre'),
+('Éleveur de moutons lunaires', 'autre'),
+('Dompteur de dragons', 'autre'),
+('Conducteur de marmites', 'autre'),
+('Guérisseur', 'service'),
+('Soigneur d’âmes perdues', 'service'),
+('Médecin des pois', 'service'),
+('Chirurgien des croûtes', 'service'),
+('Psychomage', 'service'),
+('Banquier d’aventures', 'marchand'),
+('Commerçant inter-royaumes', 'marchand'),
+('Ambassadeur des sauces', 'service'),
+('Messager royal', 'service'),
+('Vendeur de rêves', 'marchand'),
+('Voleur professionnel', 'autre'),
+('Assassin végétarien', 'autre'),
+('Bretteur acrobatique', 'autre'),
+('Danseur à deux épées', 'autre'),
+('Troubadour des tavernes', 'service'),
+('Crieur public', 'service'),
+('Chasseur de primes', 'autre'),
+('Gardien de bibliothèque', 'service'),
+('Inquisiteur du sucré', 'autre'),
+('Sorcier pâtissier', 'autre'),
+('Rôtisseur légendaire', 'artisan'),
+('Maître de chai', 'artisan'),
+('Fabricant d’armes chantantes', 'artisan'),
+('Fondeur d’espoir', 'artisan'),
+('Tanneur des ombres', 'artisan'),
+('Maître des portails', 'autre'),
+('Maître de la sieste', 'autre'),
+('Collecteur de miettes', 'service'),
+('Conseiller royal', 'service'),
+('Chronomage', 'autre'),
+('Juge des concours culinaires', 'service'),
+('Facteur interdimensionnel', 'service'),
+('Inventeur fou', 'autre'),
+('Chef de guilde', 'service');
+
+-- ajouter quelques classes normales, à refaire
+INSERT INTO Classe (libelle, role_combat) VALUES
+('Mage à raclette', 'dps'),
+('Guerrier-panier', 'tank'),
+('Barde fouetté', 'support'),
+('Rodeur de marché', 'dps'),
+('Clerc chantilly', 'soin'),
+('Voleur d’épices', 'dps'),
+('Chevalier-louche', 'tank'),
+('Druide infuseur', 'soin'),
+('Sorcier flamby', 'dps'),
+('Paladin du levain', 'tank'),
+('Moine tire-bouchon', 'dps'),
+('Artificier pâtissier', 'hybride'),
+('Sentinelle du sel', 'tank'),
+('Hurleur poivré', 'dps'),
+('Chantre du sucre', 'support'),
+('Brise-Croûte', 'dps'),
+('Domptelune', 'support'),
+('Enchante-beurre', 'support'),
+('Essaimeur', 'soin'),
+('Catapultier', 'dps'),
+('Épéiste mousseux', 'dps'),
+('Lancier au sirop', 'dps'),
+('Arbalétrier beurré', 'dps'),
+('Archer de la brioche', 'dps'),
+('Bouclier battu', 'tank'),
+('Gardien croûton', 'tank'),
+('Sentinelle confite', 'tank'),
+('Mur de meringue', 'tank'),
+('Acolyte du brunch', 'soin'),
+('Apothicaire pétillant', 'soin'),
+('Chirurgien des croûtes', 'soin'),
+('Ménestrel carbonara', 'support'),
+('Tambour-major chantilly', 'support'),
+('Crieur de bataille', 'support'),
+('Chronomage', 'support'),
+('Illusionniste sablé', 'hybride'),
+('Ensorceleur caramélisé', 'dps'),
+('Nécromage de levure', 'hybride'),
+('Pyromancien gratiné', 'dps'),
+('Cryomancien givré', 'dps'),
+('Aquamancien infusé', 'support'),
+('Aéromancien feuilleté', 'support'),
+('Géomancien croquant', 'tank'),
+('Électromage citronné', 'dps'),
+('Luminarque', 'support'),
+('Ombremancien', 'dps'),
+('Tisseur de runes', 'hybride'),
+('Scribe de bataille', 'support'),
+('Chasseur d’arômes', 'dps'),
+('Traqueur de truffes', 'dps'),
+('Bretteur à deux lames', 'dps'),
+('Danse-lames', 'dps'),
+('Assassin végétarien', 'dps'),
+('Voleur de miettes', 'dps'),
+('Sabreur chantant', 'dps'),
+('Moine du thé', 'support'),
+('Chevalier du petit-déj', 'tank'),
+('Champion pané', 'tank'),
+('Garde-lait', 'tank'),
+('Porteur de marmite', 'tank'),
+('Invoker de couverts', 'hybride'),
+('Conjurateur de chantilly', 'soin'),
+('Bénisseur de pâtisseries', 'soin'),
+('Exorciste des mimiqueurs', 'soin'),
+('Maître des portails', 'support'),
+('Ingénieur catapulte', 'support'),
+('Alchimiste des sauces', 'hybride'),
+('Cuisinomancien', 'hybride'),
+('Troubadour des tavernes', 'support'),
+('Ambassadeur flamboyant', 'support');
+
+
+INSERT INTO ElementMagique (nom) VALUES
+('feu'),
+('glace'),
+('foudre'),
+('terre'),
+('eau'),
+('air'),
+('lumière'),
+('ténèbres'),
+('métal'),
+('bois'),
+('sucre'),
+('sel'),
+('poivre'),
+('beurre'),
+('fromage'),
+('farine'),
+('miel'),
+('épice'),
+('herbe'),
+('brume'),
+('ombre'),
+('vent'),
+('chaleur'),
+('froid'),
+('cristal'),
+('lave'),
+('sable'),
+('poussière'),
+('boue'),
+('lune'),
+('soleil'),
+('astre'),
+('esprit'),
+('chant'),
+('temps'),
+('ombrelle'),
+('orage'),
+('pluie'),
+('neige'),
+('givre'),
+('brouillard'),
+('électricité'),
+('sérénité'),
+('panique'),
+('arcane'),
+('rire'),
+('amour');
+
+
+INSERT INTO Titre (libelle, effets, effets_commentaire) VALUES
+('Roi de Solarys', '{"autorite":"+100"}', 'Symbole de pouvoir suprême sur le continent.'),
+('Reine des Cinq Royaumes', '{"charisme":"+90"}', 'Dirige avec grâce et fermeté.'),
+('Duc du Nord', '{"influence":"+70"}', 'Contrôle les frontières glacées de Solarys.'),
+('Marquis de l’Aube', '{"renommee":"+50"}', 'Premier à voir le soleil, dernier à fuir la nuit.'),
+('Comte des Brumes', '{"perception":"+40"}', 'Maître des secrets et des murmures.'),
+('Baronne des Rivières', '{"diplomatie":"+30"}', 'Connue pour sa sagesse et son sens de la négociation.'),
+('Capitaine de la Garde Royale', '{"force":"+60"}', 'Protège la couronne depuis des générations.'),
+('Grand Chancelier', '{"organisation":"+80"}', 'Régit les lois et les finances du royaume.'),
+('Préfet de la Connaissance', '{"savoir":"+50"}', 'Supervise les bibliothèques royales.'),
+('Seigneur des Marches', '{"courage":"+40"}', 'Garde des confins orientaux du royaume.'),
+('Protecteur du Peuple', '{"charisme":"+60"}', 'Aimé des foules pour sa justice.'),
+('Commandant des Armées', '{"leadership":"+90"}', 'Stratège légendaire des guerres du Levant.'),
+('Chevalier Écarlate', '{"honneur":"+50"}', 'Toujours fidèle à son serment.'),
+('Champion du Royaume', '{"bravoure":"+70"}', 'Représente Solarys dans les tournois royaux.'),
+('Maître des Lois', '{"sagesse":"+60"}', 'Conseille les souverains dans la justice.'),
+('Gardien du Sceau Royal', '{"loyaute":"+50"}', 'Conserve les secrets d’État les mieux gardés.'),
+('Archiviste Impérial', '{"memoire":"+40"}', 'Connaît l’histoire par cœur… et par erreur.'),
+('Grand Inquisiteur', '{"foi":"+80"}', 'Détecte les mensonges et les hérésies.'),
+('Héraut du Royaume', '{"voix":"+30"}', 'Annonce les victoires et les drames.'),
+('Diplomate de la Couronne', '{"eloquence":"+50"}', 'Peut déclarer la guerre en quatre langues.'),
+('Archimage de Solarys', '{"mana":"+100"}', 'Maître incontesté des arcanes.'),
+('Grand Druide des Landes', '{"nature":"+80"}', 'Unit les forêts et les bêtes.'),
+('Sorcier des Tempêtes', '{"foudre":"+60"}', 'Fait pleuvoir les malédictions et les éclairs.'),
+('Maître des Ombres', '{"furtivite":"+70"}', 'On ne le voit jamais venir… ou repartir.'),
+('Champion des Flammes', '{"feu":"+80"}', 'Combattant incandescent du chaos.'),
+('Gardien de l’Obsidienne', '{"defense":"+60"}', 'Inébranlable comme la roche.'),
+('Oracle du Temps', '{"clairvoyance":"+90"}', 'Voit hier, demain, et parfois maintenant.'),
+('Prophète des Étoiles', '{"foi":"+70"}', 'Lit le destin dans les constellations.'),
+('Nécromancien Couronné', '{"ténèbres":"+80"}', 'Roi des morts et des fêtes ratées.'),
+('Mage des Marées', '{"eau":"+60"}', 'Fait couler les ennemis et les navires.'),
+('Élémentaliste d’Azur', '{"magie":"+60"}', 'Maîtrise l’eau et le vent.'),
+('Conjurateur de Lune', '{"illusion":"+50"}', 'Ses rêves deviennent réels (parfois malgré lui).'),
+('Scribe du Néant', '{"savoir_interdit":"+90"}', 'Écrit des livres que personne ne doit lire.'),
+('Alchimiste du Savoir', '{"science":"+70"}', 'Transforme tout, même les échecs, en or.'),
+('Exorciste des Âmes', '{"foi":"+60"}', 'Ramène les esprits… ou les renvoie poliment.'),
+('Sentinelle des Abysses', '{"volonte":"+70"}', 'Regarde le vide sans ciller.'),
+('Maître du Feu Céleste', '{"feu_sacre":"+90"}', 'Brûle le mal et les impôts.'),
+('Chevalier Astral', '{"lumiere":"+80"}', 'Monte des destriers d’étoiles.'),
+('Mage des Rêves', '{"sommeil":"+60"}', 'Fait rêver ou cauchemarder à volonté.'),
+('Prêtre du Soleil', '{"lumiere":"+70"}', 'Illumine les esprits et les casseroles.'),
+('Chasseur de Dragons', '{"force":"+80"}', 'A survécu pour le raconter.'),
+('Brise-Serment', '{"intimidation":"+50"}', 'Craint des pactes et des promesses.'),
+('Épéiste Runique', '{"vitesse":"+60"}', 'Chaque coup est un mot ancien.'),
+('Arcaniste du Vent', '{"agilite":"+50"}', 'Ne se coiffe jamais, mais combat toujours.'),
+('Moine du Silence', '{"serenite":"+90"}', 'Parle peu, frappe juste.'),
+('Maître des Portails', '{"magie_spatiale":"+80"}', 'Ouvre des passages et des problèmes.'),
+('Voyant du Crépuscule', '{"clairvoyance":"+50"}', 'Voit la fin avant le début.'),
+('Gardien du Nexus', '{"stabilite":"+70"}', 'Maintient l’équilibre entre les mondes.'),
+('Rôdeur des Ruines', '{"discretion":"+60"}', 'Explore les endroits que personne ne veut voir.'),
+('Seigneur des Esprits', '{"charisme_spectral":"+90"}', 'Discute avec les morts comme avec des amis.'),
+('Commandant du Néant', '{"commandement":"+80"}', 'Dirige les armées invisibles.'),
+('Champion des Cieux', '{"vol":"+70"}', 'Héros ailé, redouté des dragons.'),
+('Sentinelle de l’Aube', '{"perception":"+50"}', 'Premier éveillé, dernier endormi.'),
+('Chevalier du Crépuscule', '{"equilibre":"+60"}', 'Entre lumière et ténèbres, il marche.'),
+('Émissaire des Titans', '{"puissance":"+90"}', 'Parle au nom des géants.'),
+('Érudit du Zéphyr', '{"vitesse":"+40"}', 'Court plus vite qu’il ne lit.'),
+('Vigile des Flammes', '{"resistance":"+50"}', 'Protège les forges sacrées.'),
+('Capitaine des Voiles Blanches', '{"navigation":"+70"}', 'Maîtrise vents et vagues.'),
+('Explorateur des Sables', '{"survie":"+60"}', 'A toujours du sable dans les bottes.'),
+('Maître des Esprits Anciens', '{"communication":"+80"}', 'Entend les arbres parler, et répond poliment.'),
+('Paladin de l’Équilibre', '{"justice":"+70"}', 'Protège la balance entre ombre et lumière.'),
+('Champion des Terres Brisées', '{"force":"+80"}', 'Reconstruit ce qu’il détruit.'),
+('Héraut des Cendres', '{"endurance":"+50"}', 'Toujours debout, même après l’incendie.'),
+('Grand Stratège du Nord', '{"intelligence_militaire":"+70"}', 'Ne perd jamais, sauf aux dés.'),
+('Chasseur d’Abominations', '{"determination":"+80"}', 'Ne fuit devant rien, sauf les factures.'),
+('Maître du Temps', '{"magie_temporelle":"+100"}', 'Toujours en avance, parfois trop.'),
+('Archidruide des Saisons', '{"nature":"+80"}', 'Contrôle la pluie, le vent et les allergies.'),
+('Émissaire des Ombres', '{"furtivite":"+90"}', 'Ambassadeur des ténèbres civilisées.'),
+('Sage de la Flamme', '{"sagesse":"+70"}', 'Illumine les esprits par la chaleur.'),
+('Veilleur des Portes', '{"vigilance":"+60"}', 'Ne dort jamais, sauf en réunion.'),
+('Grand Fromage de Solarys', '{"charisme":"+20"}', 'Toujours entouré de courtisans et d’odeurs.'),
+('Baron du Beurre Demi-Sel', '{"charme":"+30"}', 'Ni trop doux, ni trop salé.'),
+('Seigneur de la Raclette', '{"aura_de_chaleur":"+50"}', 'Fait fondre tout sur son passage.'),
+('Protecteur des Croissants Lunaires', '{"volonte":"+40"}', 'Maître des viennoiseries astrales.'),
+('Archimage du Lait Chaud', '{"sommeil":"+100"}', 'Endort tout auditoire en 3 minutes.'),
+('Champion du Thé Glacé', '{"froid_de_calme":"+50"}', 'Toujours détendu, même au combat.'),
+('Chevalier de la Tarte Sucrée', '{"gloire":"+40"}', 'Récompensé pour services rendus au dessert.'),
+('Commandant du Café Noir', '{"vigilance":"+80"}', 'Ne dort jamais, même les yeux fermés.'),
+('Sorcier du Beurre Volant', '{"magie_gastronomique":"+60"}', 'Capable de faire léviter une poêle.'),
+('Duc des Restes du Festin', '{"endurance_gastrique":"+90"}', 'N’abandonne jamais avant la dernière bouchée.'),
+('Champion du Rire', '{"joie":"+70"}', 'Répand la bonne humeur et la panique.'),
+('Héros des Blagues Ratées', '{"persévérance":"+30"}', 'Continue même quand personne ne rit.'),
+('Maître des Jeux de Mots', '{"intelligence":"+90"}', 'Règne sur les calembours et les soupirs.'),
+('Paladin de la Bêtise Noble', '{"innocence":"+60"}', 'Frappe d’abord, réfléchit après… parfois.'),
+('Gardien du Canapé Éternel', '{"repos":"+100"}', 'Héros de la paresse assumée.'),
+('Élue de la Taverne', '{"popularité":"+50"}', 'Boit avec sagesse (et quantité).'),
+('Mage du Silence Gênant', '{"discrétion":"+40"}', 'Crée le malaise instantanément.'),
+('Prophète du Hasard', '{"chance":"+100"}', 'Prévoit l’imprévisible, souvent par accident.'),
+('Apôtre de la Louche Sacrée', '{"cuisine_divine":"+80"}', 'Bénit les soupes et les armées.'),
+('Héraut des Éclats de Rire', '{"aura_joyeuse":"+70"}', 'Rassemble les cœurs par l’humour.');
+
+
+INSERT INTO EcoleMagie (nom, royaume_id) VALUES
+('Académie Royale des Arcanes',          (SELECT id_royaume FROM Royaume WHERE nom='Raclettea')),
+('Université Impériale des Sciences Occultes', (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette')),
+('Collège des Études Astrales',          (SELECT id_royaume FROM Royaume WHERE nom='Banarnia')),
+('Institut de Géomancie du Nord',        (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg')),
+('Conservatoire de l’Art Runique',       (SELECT id_royaume FROM Royaume WHERE nom='Boulangea')),
+('Académie de Défense Contre les Anathèmes', (SELECT id_royaume FROM Royaume WHERE nom='Saucissonie')),
+('Cénacle de Théurgie et Liturgie',      (SELECT id_royaume FROM Royaume WHERE nom='Herbularia')),
+('École Navale d’Hydromancie',           (SELECT id_royaume FROM Royaume WHERE nom='Poissarie')),
+('Institut Cartographique des Flux Magiques', (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie')),
+('Ordre des Veilleurs de l’Aube',        (SELECT id_royaume FROM Royaume WHERE nom='Croissantinopie')),
+('École Militaire d’Arcanomécanique',    (SELECT id_royaume FROM Royaume WHERE nom='Patateland')),
+('Académie de Diplomatie Magique',       (SELECT id_royaume FROM Royaume WHERE nom='Citronésie')),
+('Conclave de Cryptomancie',             (SELECT id_royaume FROM Royaume WHERE nom='Vanillia')),
+('Institut d’Étude des Plans',           (SELECT id_royaume FROM Royaume WHERE nom='Anethol')),
+('École Royale des Chronomances',        (SELECT id_royaume FROM Royaume WHERE nom='Comtédrale')),
+('Tour de l’Obsidienne',                 (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide')),
+('Cercle des Quatre Vents',              (SELECT id_royaume FROM Royaume WHERE nom='Rizotto')),
+('Collégiale des Sept Sceaux',           (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie')),
+('Sanctuaire des Voiles Blanches',       (SELECT id_royaume FROM Royaume WHERE nom='Poissarie')),
+('Citadelle de l’Aether',                (SELECT id_royaume FROM Royaume WHERE nom='Sucralune')),
+('Monastère de la Lune Haute',           (SELECT id_royaume FROM Royaume WHERE nom='Banarnia')),
+('Arche du Feu Céleste',                 (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre')),
+('Bibliothèque du Crépuscule',           (SELECT id_royaume FROM Royaume WHERE nom='Choux-Fleurie')),
+('Serre des Druides Gris',               (SELECT id_royaume FROM Royaume WHERE nom='Herbularia')),
+('Guilde des Nidificateurs d’Esprits',   (SELECT id_royaume FROM Royaume WHERE nom='Navet-les-Oies')),
+('Chapitre des Épées Chantantes',        (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime')),
+('Collège des Voies Invisibles',         (SELECT id_royaume FROM Royaume WHERE nom='Meringuia')),
+('Cercle du Miroir Froid',               (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide')),
+('Académie des Marées Profondes',        (SELECT id_royaume FROM Royaume WHERE nom='Poissarie')),
+('Tour des Éons',                        (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg')),
+('Enclave des Ombres Liées',             (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie')),
+('Confrérie du Zéphyr',                  (SELECT id_royaume FROM Royaume WHERE nom='Beurrasie')),
+('Sanctuaire du Roc-Chœur',              (SELECT id_royaume FROM Royaume WHERE nom='Fromagiville')),
+('Cénacle des Oracles Stellaires',       (SELECT id_royaume FROM Royaume WHERE nom='Sucralune')),
+('Abbaye des Bénédictions Sereines',     (SELECT id_royaume FROM Royaume WHERE nom='Herbularia')),
+('École des Portails et Traverses',      (SELECT id_royaume FROM Royaume WHERE nom='Raclettea')),
+('Collège des Runes de Garde',           (SELECT id_royaume FROM Royaume WHERE nom='Saucissonie')),
+('Temple du Rayon d’Aube',               (SELECT id_royaume FROM Royaume WHERE nom='Croissantinopie')),
+('Arcanerie des Éclats d’Orage',         (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette')),
+('Académie de l’Empreinte Spirituelle',  (SELECT id_royaume FROM Royaume WHERE nom='Boulangea')),
+('Conservatoire des Harmoniques Voilées',(SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie')),
+('Maison des Veilleurs Runaires',        (SELECT id_royaume FROM Royaume WHERE nom='Rizotto')),
+('Citadelle des Sables Liants',          (SELECT id_royaume FROM Royaume WHERE nom='Patateland')),
+('Cercle des Étincelles Nocturnes',      (SELECT id_royaume FROM Royaume WHERE nom='Sucralune')),
+('Ordre de la Source Claire',            (SELECT id_royaume FROM Royaume WHERE nom='Poissarie')),
+('Académie des Parenthèses Magiques',    (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie')),
+('EIDM — École d’Illusions Discrètement Maladroites', (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg')),
+('Institut des Portes qui Grincent',     (SELECT id_royaume FROM Royaume WHERE nom='Fromagiville')),
+('Collège des Invisibles Très Visibles', (SELECT id_royaume FROM Royaume WHERE nom='Vanillia')),
+('Université de la Chance Incontrôlable',(SELECT id_royaume FROM Royaume WHERE nom='Beurropolis')),
+('Ordre des Sorciers à Retardement',     (SELECT id_royaume FROM Royaume WHERE nom='Comtédrale')),
+('Académie des “Ahem” Dramatiques',      (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie')),
+('École des Mains Froides mais du Cœur Chaud', (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide')),
+('Cercle des Cartographes du Hasard',    (SELECT id_royaume FROM Royaume WHERE nom='Citronésie')),
+('Institut des Parapluies Vraiment Magiques', (SELECT id_royaume FROM Royaume WHERE nom='Poissarie')),
+('Université Populaire de la Sorcelerie Pratique', (SELECT id_royaume FROM Royaume WHERE nom='Rizotto')),
+('École du Silence Éloquent',            (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg')),
+('Cénacle des Rattrapages Héroïques',    (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime')),
+('Ordre des “C’est Contrôlé, Promis”',   (SELECT id_royaume FROM Royaume WHERE nom='Raclettea')),
+('Académie du Coin de l’Œil',            (SELECT id_royaume FROM Royaume WHERE nom='Banarnia')),
+('Haute-École de Raclette Appliquée',    (SELECT id_royaume FROM Royaume WHERE nom='Raclettea')),
+('Conservatoire du Sucre Modéré',        (SELECT id_royaume FROM Royaume WHERE nom='Sucralune')),
+('Ordre des Boucliers Beurrés',          (SELECT id_royaume FROM Royaume WHERE nom='Boulangea')),
+('Collège des Infusions Sérieuses',      (SELECT id_royaume FROM Royaume WHERE nom='Herbularia'));
+
+
+INSERT INTO Sort (nom, ecole_id, cout_mana, niveau_requis, est_interdit, est_rituel) VALUES
+('Boule de Feu', (SELECT id_ecole FROM EcoleMagie WHERE nom='Académie Royale des Arcanes'), 10, 1, 0, 0),
+('Rayon Solaire', (SELECT id_ecole FROM EcoleMagie WHERE nom='Tour de l’Obsidienne'), 11, 1, 0, 0),
+('Lame Astrale', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cercle des Quatre Vents'), 12, 2, 0, 0),
+('Voile de Brume', (SELECT id_ecole FROM EcoleMagie WHERE nom='Collège des Études Astrales'), 13, 2, 0, 1),
+('Mur d’Aegis', (SELECT id_ecole FROM EcoleMagie WHERE nom='Institut de Géomancie du Nord'), 14, 3, 0, 0),
+('Flèche de Foudre', (SELECT id_ecole FROM EcoleMagie WHERE nom='Ordre des Veilleurs de l’Aube'), 15, 3, 0, 0),
+('Chant de l’Aube', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Militaire d’Arcanomécanique'), 16, 4, 0, 0),
+('Étreinte Sylvestre', (SELECT id_ecole FROM EcoleMagie WHERE nom='Sanctuaire des Voiles Blanches'), 17, 4, 0, 1),
+('Œil du Zéphyr', (SELECT id_ecole FROM EcoleMagie WHERE nom='Bibliothèque du Crépuscule'), 18, 5, 0, 0),
+('Pilier de Terre', (SELECT id_ecole FROM EcoleMagie WHERE nom='Conservatoire de l’Art Runique'), 19, 5, 0, 0),
+('Marée de Lune', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cénacle de Théurgie et Liturgie'), 20, 6, 0, 0),
+('Orage Ligoté', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Navale d’Hydromancie'), 21, 6, 0, 1),
+('Cantique des Étoiles', (SELECT id_ecole FROM EcoleMagie WHERE nom='Académie Royale des Arcanes'), 21, 7, 0, 0),
+('Linceul des Ombres', (SELECT id_ecole FROM EcoleMagie WHERE nom='Tour de l’Obsidienne'), 22, 7, 0, 0),
+('Marche-Temps', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cercle des Quatre Vents'), 23, 8, 0, 0),
+('Souffle d’Azur', (SELECT id_ecole FROM EcoleMagie WHERE nom='Collège des Études Astrales'), 24, 8, 0, 1),
+('Étreinte de Givre', (SELECT id_ecole FROM EcoleMagie WHERE nom='Institut de Géomancie du Nord'), 25, 9, 0, 0),
+('Rune de Garde', (SELECT id_ecole FROM EcoleMagie WHERE nom='Ordre des Veilleurs de l’Aube'), 26, 9, 0, 0),
+('Sceau de Contrainte', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Militaire d’Arcanomécanique'), 27, 10, 0, 0),
+('Clôture d’Anathème', (SELECT id_ecole FROM EcoleMagie WHERE nom='Sanctuaire des Voiles Blanches'), 28, 10, 0, 1),
+('Décret Arcanique', (SELECT id_ecole FROM EcoleMagie WHERE nom='Bibliothèque du Crépuscule'), 29, 11, 0, 0),
+('Serment d’Airain', (SELECT id_ecole FROM EcoleMagie WHERE nom='Conservatoire de l’Art Runique'), 30, 11, 0, 0),
+('Sentence de Lumière', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cénacle de Théurgie et Liturgie'), 31, 12, 0, 0),
+('Ordonnance de Protection', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Navale d’Hydromancie'), 32, 12, 0, 1),
+('Blason de Veille', (SELECT id_ecole FROM EcoleMagie WHERE nom='Académie Royale des Arcanes'), 33, 13, 0, 0),
+('Fanal des Profondeurs', (SELECT id_ecole FROM EcoleMagie WHERE nom='Tour de l’Obsidienne'), 34, 13, 0, 0),
+('Balafre d’Obsidienne', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cercle des Quatre Vents'), 35, 14, 0, 0),
+('Point de Stase', (SELECT id_ecole FROM EcoleMagie WHERE nom='Collège des Études Astrales'), 36, 14, 0, 1),
+('Arc de Tempête', (SELECT id_ecole FROM EcoleMagie WHERE nom='Institut de Géomancie du Nord'), 37, 15, 0, 0),
+('Brèche Planariste', (SELECT id_ecole FROM EcoleMagie WHERE nom='Ordre des Veilleurs de l’Aube'), 38, 15, 0, 0),
+('Rappel Astral', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Militaire d’Arcanomécanique'), 39, 16, 0, 0),
+('Aspersion Lumineuse', (SELECT id_ecole FROM EcoleMagie WHERE nom='Sanctuaire des Voiles Blanches'), 40, 16, 0, 1),
+('Onde d’Impact', (SELECT id_ecole FROM EcoleMagie WHERE nom='Bibliothèque du Crépuscule'), 41, 17, 0, 0),
+('Faille Éthérée', (SELECT id_ecole FROM EcoleMagie WHERE nom='Conservatoire de l’Art Runique'), 42, 17, 0, 0),
+('Balise d’Orientation', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cénacle de Théurgie et Liturgie'), 42, 18, 0, 0),
+('Lacération Spectrale', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Navale d’Hydromancie'), 43, 18, 0, 1),
+('Marche des Esprits', (SELECT id_ecole FROM EcoleMagie WHERE nom='Académie Royale des Arcanes'), 44, 19, 0, 0),
+('Entrave du Néant', (SELECT id_ecole FROM EcoleMagie WHERE nom='Tour de l’Obsidienne'), 45, 19, 0, 0),
+('Épieu de Tonnerre', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cercle des Quatre Vents'), 46, 20, 0, 0),
+('Voix des Anciens', (SELECT id_ecole FROM EcoleMagie WHERE nom='Collège des Études Astrales'), 47, 20, 0, 1),
+('Flamme des Anciens', (SELECT id_ecole FROM EcoleMagie WHERE nom='Institut de Géomancie du Nord'), 48, 21, 0, 0),
+('Éclat Obsidien', (SELECT id_ecole FROM EcoleMagie WHERE nom='Ordre des Veilleurs de l’Aube'), 49, 21, 0, 0),
+('Main du Crépuscule', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Militaire d’Arcanomécanique'), 50, 22, 0, 0),
+('Anneau de Contention', (SELECT id_ecole FROM EcoleMagie WHERE nom='Sanctuaire des Voiles Blanches'), 51, 22, 0, 1),
+('Aiguillon d’Orage', (SELECT id_ecole FROM EcoleMagie WHERE nom='Bibliothèque du Crépuscule'), 52, 23, 0, 0),
+('Rappel à la Vie', (SELECT id_ecole FROM EcoleMagie WHERE nom='Conservatoire de l’Art Runique'), 53, 23, 0, 0),
+('Roue des Âges', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cénacle de Théurgie et Liturgie'), 54, 24, 0, 0),
+('Surplomb Céleste', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Navale d’Hydromancie'), 55, 24, 0, 1),
+('Regard de Méduse', (SELECT id_ecole FROM EcoleMagie WHERE nom='Académie Royale des Arcanes'), 56, 25, 0, 0),
+('Choc Tellurique', (SELECT id_ecole FROM EcoleMagie WHERE nom='Tour de l’Obsidienne'), 57, 25, 0, 0),
+('Brume Mémoire', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cercle des Quatre Vents'), 58, 26, 0, 0),
+('Silence Éloquent', (SELECT id_ecole FROM EcoleMagie WHERE nom='Collège des Études Astrales'), 59, 26, 0, 1),
+('Hasard Contrarié', (SELECT id_ecole FROM EcoleMagie WHERE nom='Institut de Géomancie du Nord'), 60, 27, 0, 0),
+('Parapluie Vraiment Magique', (SELECT id_ecole FROM EcoleMagie WHERE nom='Ordre des Veilleurs de l’Aube'), 61, 27, 0, 0),
+('Quiproquo Spectral', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Militaire d’Arcanomécanique'), 62, 28, 0, 0),
+('Parenthèse Dramatique', (SELECT id_ecole FROM EcoleMagie WHERE nom='Sanctuaire des Voiles Blanches'), 63, 28, 0, 1),
+('Grincement Contrôlé', (SELECT id_ecole FROM EcoleMagie WHERE nom='Bibliothèque du Crépuscule'), 63, 29, 0, 0),
+('Étendard Radieux', (SELECT id_ecole FROM EcoleMagie WHERE nom='Conservatoire de l’Art Runique'), 64, 29, 0, 0),
+('Dérobade Sereine', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cénacle de Théurgie et Liturgie'), 65, 30, 0, 0),
+('Épine de Cristal', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Navale d’Hydromancie'), 66, 30, 0, 1),
+('Tablette Runique', (SELECT id_ecole FROM EcoleMagie WHERE nom='Académie Royale des Arcanes'), 67, 31, 0, 0),
+('Plume d’Arcane', (SELECT id_ecole FROM EcoleMagie WHERE nom='Tour de l’Obsidienne'), 68, 31, 0, 0),
+('Verrou du Sphinx', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cercle des Quatre Vents'), 69, 32, 0, 0),
+('Marque des Titans', (SELECT id_ecole FROM EcoleMagie WHERE nom='Collège des Études Astrales'), 70, 32, 0, 1),
+('Étiage des Marées', (SELECT id_ecole FROM EcoleMagie WHERE nom='Institut de Géomancie du Nord'), 71, 33, 0, 0),
+('Lanterne des Abysses', (SELECT id_ecole FROM EcoleMagie WHERE nom='Ordre des Veilleurs de l’Aube'), 72, 33, 0, 0),
+('Grappin Fantôme', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Militaire d’Arcanomécanique'), 73, 34, 0, 0),
+('Élan de Lumière', (SELECT id_ecole FROM EcoleMagie WHERE nom='Sanctuaire des Voiles Blanches'), 74, 34, 0, 1),
+('Tourbillon d’Air', (SELECT id_ecole FROM EcoleMagie WHERE nom='Bibliothèque du Crépuscule'), 75, 35, 0, 0),
+('Infusion d’Ombre', (SELECT id_ecole FROM EcoleMagie WHERE nom='Conservatoire de l’Art Runique'), 76, 35, 0, 0),
+('Helix de Givre', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cénacle de Théurgie et Liturgie'), 77, 36, 0, 0),
+('Racine Entravante', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Navale d’Hydromancie'), 78, 36, 0, 1),
+('Torrent d’Aigue', (SELECT id_ecole FROM EcoleMagie WHERE nom='Académie Royale des Arcanes'), 79, 37, 0, 0),
+('Écu Stellaris', (SELECT id_ecole FROM EcoleMagie WHERE nom='Tour de l’Obsidienne'), 80, 37, 0, 0),
+('Couronne de Braises', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cercle des Quatre Vents'), 81, 38, 0, 0),
+('Panache d’Éclairs', (SELECT id_ecole FROM EcoleMagie WHERE nom='Collège des Études Astrales'), 82, 38, 0, 1),
+('Astre Captif', (SELECT id_ecole FROM EcoleMagie WHERE nom='Institut de Géomancie du Nord'), 83, 39, 0, 0),
+('Flèche de Lune', (SELECT id_ecole FROM EcoleMagie WHERE nom='Ordre des Veilleurs de l’Aube'), 84, 39, 0, 0),
+('Ailes de Brume', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Militaire d’Arcanomécanique'), 84, 40, 0, 0),
+('Vigilance de l’Aurore', (SELECT id_ecole FROM EcoleMagie WHERE nom='Sanctuaire des Voiles Blanches'), 85, 40, 0, 1),
+('Ancre de Gravité', (SELECT id_ecole FROM EcoleMagie WHERE nom='Bibliothèque du Crépuscule'), 86, 41, 0, 0),
+('Chœur des Voiles', (SELECT id_ecole FROM EcoleMagie WHERE nom='Conservatoire de l’Art Runique'), 87, 41, 0, 0),
+('Quintessence', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cénacle de Théurgie et Liturgie'), 88, 42, 0, 0),
+('Serpentine', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Navale d’Hydromancie'), 89, 42, 0, 1),
+('Résolution', (SELECT id_ecole FROM EcoleMagie WHERE nom='Académie Royale des Arcanes'), 90, 43, 0, 0),
+('Vérité Scellée', (SELECT id_ecole FROM EcoleMagie WHERE nom='Tour de l’Obsidienne'), 91, 43, 0, 0),
+('Pont des Mondes', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cercle des Quatre Vents'), 92, 44, 0, 0),
+('Renvoi d’Anathème', (SELECT id_ecole FROM EcoleMagie WHERE nom='Collège des Études Astrales'), 93, 44, 0, 1),
+('Altération', (SELECT id_ecole FROM EcoleMagie WHERE nom='Institut de Géomancie du Nord'), 94, 45, 0, 0),
+('Permutation', (SELECT id_ecole FROM EcoleMagie WHERE nom='Ordre des Veilleurs de l’Aube'), 95, 45, 0, 0),
+('Magnétisme', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Militaire d’Arcanomécanique'), 96, 46, 0, 0),
+('Transfert de Vie', (SELECT id_ecole FROM EcoleMagie WHERE nom='Sanctuaire des Voiles Blanches'), 97, 46, 0, 1),
+('Symphonie d’Orage', (SELECT id_ecole FROM EcoleMagie WHERE nom='Bibliothèque du Crépuscule'), 98, 47, 0, 0),
+('Cascade de Verre', (SELECT id_ecole FROM EcoleMagie WHERE nom='Conservatoire de l’Art Runique'), 99, 47, 0, 0),
+('Épiderme de Pierre', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cénacle de Théurgie et Liturgie'), 100, 48, 0, 0),
+('Fulgurance', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Navale d’Hydromancie'), 101, 48, 0, 1),
+('Écho d’Étoile', (SELECT id_ecole FROM EcoleMagie WHERE nom='Académie Royale des Arcanes'), 102, 49, 0, 0),
+('Crible Arcanique', (SELECT id_ecole FROM EcoleMagie WHERE nom='Tour de l’Obsidienne'), 103, 49, 0, 0),
+('Éruption', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cercle des Quatre Vents'), 104, 50, 0, 0),
+('Résilience', (SELECT id_ecole FROM EcoleMagie WHERE nom='Collège des Études Astrales'), 105, 50, 0, 1),
+('Rémanence', (SELECT id_ecole FROM EcoleMagie WHERE nom='Institut de Géomancie du Nord'), 105, 51, 0, 0),
+('Déflagration', (SELECT id_ecole FROM EcoleMagie WHERE nom='Ordre des Veilleurs de l’Aube'), 106, 51, 0, 0),
+('Fronde de Vent', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Militaire d’Arcanomécanique'), 107, 52, 0, 0),
+('Arpège Runique', (SELECT id_ecole FROM EcoleMagie WHERE nom='Sanctuaire des Voiles Blanches'), 108, 52, 0, 1),
+('Écheveau du Sort', (SELECT id_ecole FROM EcoleMagie WHERE nom='Bibliothèque du Crépuscule'), 109, 53, 0, 0),
+('Incandescence', (SELECT id_ecole FROM EcoleMagie WHERE nom='Conservatoire de l’Art Runique'), 110, 53, 0, 0),
+('Écluse Maritime', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cénacle de Théurgie et Liturgie'), 111, 54, 0, 0),
+('Transe de Bataille', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Navale d’Hydromancie'), 112, 54, 0, 1),
+('Vortex', (SELECT id_ecole FROM EcoleMagie WHERE nom='Académie Royale des Arcanes'), 113, 55, 0, 0),
+('Arcane de Mémoire', (SELECT id_ecole FROM EcoleMagie WHERE nom='Tour de l’Obsidienne'), 114, 55, 0, 0),
+('Prisme', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cercle des Quatre Vents'), 115, 56, 0, 0),
+('Lumigrave', (SELECT id_ecole FROM EcoleMagie WHERE nom='Collège des Études Astrales'), 116, 56, 0, 1),
+('Ombroclaste', (SELECT id_ecole FROM EcoleMagie WHERE nom='Institut de Géomancie du Nord'), 117, 57, 0, 0),
+('Auralithe', (SELECT id_ecole FROM EcoleMagie WHERE nom='Ordre des Veilleurs de l’Aube'), 118, 57, 0, 0),
+('Chrysalis', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Militaire d’Arcanomécanique'), 119, 58, 0, 0),
+('Fractal', (SELECT id_ecole FROM EcoleMagie WHERE nom='Sanctuaire des Voiles Blanches'), 120, 58, 0, 1),
+('Halte du Temps', (SELECT id_ecole FROM EcoleMagie WHERE nom='Bibliothèque du Crépuscule'), 121, 59, 0, 0),
+('Agrafe Astrale', (SELECT id_ecole FROM EcoleMagie WHERE nom='Conservatoire de l’Art Runique'), 122, 59, 0, 0),
+('Spirale du Vide', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cénacle de Théurgie et Liturgie'), 123, 60, 0, 0),
+('Chant des Fosses', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Navale d’Hydromancie'), 124, 60, 0, 1),
+('Allégeance', (SELECT id_ecole FROM EcoleMagie WHERE nom='Académie Royale des Arcanes'), 125, 61, 0, 0),
+('Écaille Boréale', (SELECT id_ecole FROM EcoleMagie WHERE nom='Tour de l’Obsidienne'), 126, 61, 0, 0),
+('Brûlure de Givre', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cercle des Quatre Vents'), 126, 62, 0, 0),
+('Orichalque', (SELECT id_ecole FROM EcoleMagie WHERE nom='Collège des Études Astrales'), 127, 62, 0, 1),
+('Vœu de Silence', (SELECT id_ecole FROM EcoleMagie WHERE nom='Institut de Géomancie du Nord'), 128, 63, 0, 0),
+('Chute d’Astres', (SELECT id_ecole FROM EcoleMagie WHERE nom='Ordre des Veilleurs de l’Aube'), 129, 63, 0, 0),
+('Étincelle Primordiale', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Militaire d’Arcanomécanique'), 130, 64, 0, 0),
+('Étreinte Boréale', (SELECT id_ecole FROM EcoleMagie WHERE nom='Sanctuaire des Voiles Blanches'), 131, 64, 0, 1),
+('Parangon', (SELECT id_ecole FROM EcoleMagie WHERE nom='Bibliothèque du Crépuscule'), 132, 65, 0, 0),
+('Équilibre', (SELECT id_ecole FROM EcoleMagie WHERE nom='Conservatoire de l’Art Runique'), 133, 65, 0, 0),
+('Révocation', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cénacle de Théurgie et Liturgie'), 134, 66, 0, 0),
+('Sursis', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Navale d’Hydromancie'), 135, 66, 0, 1),
+('Bouclier Harmonique', (SELECT id_ecole FROM EcoleMagie WHERE nom='Académie Royale des Arcanes'), 136, 67, 0, 0),
+('Rite de Passage', (SELECT id_ecole FROM EcoleMagie WHERE nom='Tour de l’Obsidienne'), 137, 67, 0, 0),
+('Serment de Roche', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cercle des Quatre Vents'), 138, 68, 0, 0),
+('Liturgie des Flots', (SELECT id_ecole FROM EcoleMagie WHERE nom='Collège des Études Astrales'), 139, 68, 0, 1),
+('Épreuve du Zénith', (SELECT id_ecole FROM EcoleMagie WHERE nom='Institut de Géomancie du Nord'), 140, 69, 0, 0),
+('Marquage Souterrain', (SELECT id_ecole FROM EcoleMagie WHERE nom='Ordre des Veilleurs de l’Aube'), 141, 69, 0, 0),
+('Courant Transversal', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Militaire d’Arcanomécanique'), 142, 70, 0, 0),
+('Aiguillage Spirituel', (SELECT id_ecole FROM EcoleMagie WHERE nom='Sanctuaire des Voiles Blanches'), 143, 70, 0, 1),
+('Appel du Large', (SELECT id_ecole FROM EcoleMagie WHERE nom='Bibliothèque du Crépuscule'), 144, 71, 0, 0),
+('Lac Critallin', (SELECT id_ecole FROM EcoleMagie WHERE nom='Conservatoire de l’Art Runique'), 145, 71, 0, 0),
+('Bénédiction de l’Aube', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cénacle de Théurgie et Liturgie'), 146, 72, 0, 0),
+('Déni d’Ombre', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Navale d’Hydromancie'), 147, 72, 0, 1),
+('Ouverture des Voiles', (SELECT id_ecole FROM EcoleMagie WHERE nom='Académie Royale des Arcanes'), 147, 73, 0, 0),
+('Clameur des Cieux', (SELECT id_ecole FROM EcoleMagie WHERE nom='Tour de l’Obsidienne'), 148, 73, 0, 0),
+('Trident de Foudre', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cercle des Quatre Vents'), 149, 74, 0, 0),
+('Rugissement', (SELECT id_ecole FROM EcoleMagie WHERE nom='Collège des Études Astrales'), 150, 74, 0, 1),
+('Souffle de Cendre', (SELECT id_ecole FROM EcoleMagie WHERE nom='Institut de Géomancie du Nord'), 151, 75, 0, 0),
+('Lueur Frigide', (SELECT id_ecole FROM EcoleMagie WHERE nom='Ordre des Veilleurs de l’Aube'), 152, 75, 0, 0),
+('Flamboiement', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Militaire d’Arcanomécanique'), 153, 76, 0, 0),
+('Clairvoyance Mineure', (SELECT id_ecole FROM EcoleMagie WHERE nom='Sanctuaire des Voiles Blanches'), 154, 76, 0, 1),
+('Clairvoyance Majeure', (SELECT id_ecole FROM EcoleMagie WHERE nom='Bibliothèque du Crépuscule'), 155, 77, 0, 0),
+('Langue des Esprits', (SELECT id_ecole FROM EcoleMagie WHERE nom='Conservatoire de l’Art Runique'), 156, 77, 0, 0),
+('Rappel des Héros', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cénacle de Théurgie et Liturgie'), 157, 78, 0, 0),
+('Reflet Inversé', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Navale d’Hydromancie'), 158, 78, 0, 1),
+('Double Astral', (SELECT id_ecole FROM EcoleMagie WHERE nom='Académie Royale des Arcanes'), 159, 79, 0, 0),
+('Voile Insondable', (SELECT id_ecole FROM EcoleMagie WHERE nom='Tour de l’Obsidienne'), 160, 79, 0, 0),
+('Nappe de Brume', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cercle des Quatre Vents'), 161, 80, 0, 0),
+('Cuirasse Éthérée', (SELECT id_ecole FROM EcoleMagie WHERE nom='Collège des Études Astrales'), 162, 80, 0, 1),
+('Charte Runique', (SELECT id_ecole FROM EcoleMagie WHERE nom='Institut de Géomancie du Nord'), 163, 81, 0, 0),
+('Reliquat', (SELECT id_ecole FROM EcoleMagie WHERE nom='Ordre des Veilleurs de l’Aube'), 164, 81, 0, 0),
+('Balayage', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Militaire d’Arcanomécanique'), 165, 82, 0, 0),
+('Règne du Crépuscule', (SELECT id_ecole FROM EcoleMagie WHERE nom='Sanctuaire des Voiles Blanches'), 166, 82, 0, 1),
+('Cascade d’Éclats', (SELECT id_ecole FROM EcoleMagie WHERE nom='Bibliothèque du Crépuscule'), 167, 83, 0, 0),
+('Entaille Solaire', (SELECT id_ecole FROM EcoleMagie WHERE nom='Conservatoire de l’Art Runique'), 168, 83, 0, 0),
+('Faille Nocturne', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cénacle de Théurgie et Liturgie'), 168, 84, 0, 0),
+('Rite de Lune', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Navale d’Hydromancie'), 169, 84, 0, 1),
+('Cycle d’Aurore', (SELECT id_ecole FROM EcoleMagie WHERE nom='Académie Royale des Arcanes'), 170, 85, 0, 0),
+('Étendard des Vents', (SELECT id_ecole FROM EcoleMagie WHERE nom='Tour de l’Obsidienne'), 171, 85, 0, 0),
+('Lance des Marées', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cercle des Quatre Vents'), 172, 86, 0, 0),
+('Épine Tellurique', (SELECT id_ecole FROM EcoleMagie WHERE nom='Collège des Études Astrales'), 173, 86, 0, 1),
+('Corde de Tonnerre', (SELECT id_ecole FROM EcoleMagie WHERE nom='Institut de Géomancie du Nord'), 174, 87, 0, 0),
+('Masque Miroir', (SELECT id_ecole FROM EcoleMagie WHERE nom='Ordre des Veilleurs de l’Aube'), 175, 87, 0, 0),
+('Chrysalide de Verre', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Militaire d’Arcanomécanique'), 176, 88, 0, 0),
+('Monolithe', (SELECT id_ecole FROM EcoleMagie WHERE nom='Sanctuaire des Voiles Blanches'), 177, 88, 0, 1),
+('Diapason', (SELECT id_ecole FROM EcoleMagie WHERE nom='Bibliothèque du Crépuscule'), 178, 89, 0, 0),
+('Sépulcre Lumineux', (SELECT id_ecole FROM EcoleMagie WHERE nom='Conservatoire de l’Art Runique'), 179, 89, 0, 0),
+('Épée d’Azote', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cénacle de Théurgie et Liturgie'), 180, 90, 0, 0),
+('Lâtre de Braise', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Navale d’Hydromancie'), 181, 90, 0, 1),
+('Panoplie Arcanique', (SELECT id_ecole FROM EcoleMagie WHERE nom='Académie Royale des Arcanes'), 182, 91, 1, 0),
+('Pilier d’Orage', (SELECT id_ecole FROM EcoleMagie WHERE nom='Tour de l’Obsidienne'), 183, 91, 1, 0),
+('Couronne d’Obsidienne', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cercle des Quatre Vents'), 184, 92, 1, 0),
+('Main des Abysses', (SELECT id_ecole FROM EcoleMagie WHERE nom='Collège des Études Astrales'), 185, 92, 1, 1),
+('Regard du Soleil', (SELECT id_ecole FROM EcoleMagie WHERE nom='Institut de Géomancie du Nord'), 186, 93, 1, 0),
+('Appel d’Éther', (SELECT id_ecole FROM EcoleMagie WHERE nom='Ordre des Veilleurs de l’Aube'), 187, 93, 1, 0),
+('Idole Runique', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Militaire d’Arcanomécanique'), 188, 94, 1, 0),
+('Faille de Quartz', (SELECT id_ecole FROM EcoleMagie WHERE nom='Sanctuaire des Voiles Blanches'), 189, 94, 1, 1),
+('Clé des Portes', (SELECT id_ecole FROM EcoleMagie WHERE nom='Bibliothèque du Crépuscule'), 189, 95, 1, 0),
+('Grimoire Vivant', (SELECT id_ecole FROM EcoleMagie WHERE nom='Conservatoire de l’Art Runique'), 190, 95, 1, 0),
+('Anathème', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cénacle de Théurgie et Liturgie'), 191, 96, 1, 0),
+('Dogme', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Navale d’Hydromancie'), 192, 96, 1, 1),
+('Labyrinthe', (SELECT id_ecole FROM EcoleMagie WHERE nom='Académie Royale des Arcanes'), 193, 97, 1, 0),
+('Éperon de Foudre', (SELECT id_ecole FROM EcoleMagie WHERE nom='Tour de l’Obsidienne'), 194, 97, 1, 0),
+('Queue de Comète', (SELECT id_ecole FROM EcoleMagie WHERE nom='Cercle des Quatre Vents'), 195, 98, 1, 0),
+('Rivage d’Écume', (SELECT id_ecole FROM EcoleMagie WHERE nom='Collège des Études Astrales'), 196, 98, 1, 1),
+('Tressaillement', (SELECT id_ecole FROM EcoleMagie WHERE nom='Institut de Géomancie du Nord'), 197, 99, 1, 0),
+('Berceuse Astrale', (SELECT id_ecole FROM EcoleMagie WHERE nom='Ordre des Veilleurs de l’Aube'), 198, 99, 1, 0),
+('Tombeau d’Étoiles', (SELECT id_ecole FROM EcoleMagie WHERE nom='École Militaire d’Arcanomécanique'), 199, 100, 1, 0),
+('Bénédiction du Levant', (SELECT id_ecole FROM EcoleMagie WHERE nom='Sanctuaire des Voiles Blanches'), 200, 100, 1, 1),
+('Domaine des Astres', (SELECT id_ecole FROM EcoleMagie WHERE nom='Académie Royale des Arcanes'), 500, 100, 0, 1);
+
+
+INSERT IGNORE INTO SortElement (sort_id, element_id)
+SELECT s.id_sort, e.id_element
+FROM Sort s
+JOIN ElementMagique e ON e.nom IN ('feu')
+WHERE (s.nom REGEXP 'Feu|Flamm|Braise|Brasier|Incandesc|Braise|Éruption|Lâtre|Braise|Flamboi')
+  AND (SELECT COUNT(*) FROM SortElement se WHERE se.sort_id=s.id_sort) < 6;
+
+INSERT IGNORE INTO SortElement (sort_id, element_id)
+SELECT s.id_sort, e.id_element
+FROM Sort s
+JOIN ElementMagique e ON e.nom='lave'
+WHERE (s.nom REGEXP 'Lave|Braise|Brasier|Éruption|Braise')
+  AND (SELECT COUNT(*) FROM SortElement se WHERE se.sort_id=s.id_sort) < 6;
+
+INSERT IGNORE INTO SortElement (sort_id, element_id)
+SELECT s.id_sort, e.id_element
+FROM Sort s
+JOIN ElementMagique e ON e.nom IN ('glace','givre','froid')
+WHERE (s.nom REGEXP 'Glace|Givr|Frigid|Froid|Neige|Boréal|Boréale')
+  AND (SELECT COUNT(*) FROM SortElement se WHERE se.sort_id=s.id_sort) < 6;
+
+INSERT IGNORE INTO SortElement (sort_id, element_id)
+SELECT s.id_sort, e.id_element
+FROM Sort s
+JOIN ElementMagique e ON e.nom IN ('foudre','électricité','orage')
+WHERE (s.nom REGEXP 'Foudre|Éclair|Orage|Tonnerre|Tempête|Aiguillon d’Orage|Pilier d’Orage|Trident de Foudre|Quille de Foudre|Éperon de Foudre')
+  AND (SELECT COUNT(*) FROM SortElement se WHERE se.sort_id=s.id_sort) < 6;
+
+INSERT IGNORE INTO SortElement (sort_id, element_id)
+SELECT s.id_sort, e.id_element
+FROM Sort s
+JOIN ElementMagique e ON e.nom='vent'
+WHERE (s.nom REGEXP 'Orage|Tempête|Éclair|Foudre|Tonnerre|Cyclone|Tourbillon|Vortex')
+  AND (SELECT COUNT(*) FROM SortElement se WHERE se.sort_id=s.id_sort) < 6;
+
+INSERT IGNORE INTO SortElement (sort_id, element_id)
+SELECT s.id_sort, e.id_element
+FROM Sort s
+JOIN ElementMagique e ON e.nom='pluie'
+WHERE (s.nom REGEXP 'Orage|Tempête|Averse|Pluie')
+  AND (SELECT COUNT(*) FROM SortElement se WHERE se.sort_id=s.id_sort) < 6;
+
+INSERT IGNORE INTO SortElement (sort_id, element_id)
+SELECT s.id_sort, e.id_element
+FROM Sort s
+JOIN ElementMagique e ON e.nom='terre'
+WHERE (s.nom REGEXP 'Terre|Tellur|Roche|Pierre|Monolithe|Obsidien|Obsidienne|Quartz|Souterrain|Tellurique|Épine Tellurique')
+  AND (SELECT COUNT(*) FROM SortElement se WHERE se.sort_id=s.id_sort) < 6;
+
+INSERT IGNORE INTO SortElement (sort_id, element_id)
+SELECT s.id_sort, e.id_element
+FROM Sort s
+JOIN ElementMagique e ON e.nom IN ('sable','boue','cristal')
+WHERE (s.nom REGEXP 'Sable|Dune|Boue|Cristal|Quartz|Épine de Cristal|Prisme|Verre|Chrysalide de Verre|Chrysalis|Cascade de Verre')
+  AND (SELECT COUNT(*) FROM SortElement se WHERE se.sort_id=s.id_sort) < 6;
+
+INSERT IGNORE INTO SortElement (sort_id, element_id)
+SELECT s.id_sort, e.id_element
+FROM Sort s
+JOIN ElementMagique e ON e.nom='eau'
+WHERE (s.nom REGEXP 'Eau|Marée|Marais|Abyss|Abysse|Écume|Flots|Naval|Hydro|Lance des Marées|Écluse Maritime|Appel du Large')
+  AND (SELECT COUNT(*) FROM SortElement se WHERE se.sort_id=s.id_sort) < 6;
+
+INSERT IGNORE INTO SortElement (sort_id, element_id)
+SELECT s.id_sort, e.id_element
+FROM Sort s
+JOIN ElementMagique e ON e.nom IN ('brume')
+WHERE (s.nom REGEXP 'Brume|Voile|Voiles|Nappe|Voile Insondable|Voile de|Ailes de Brume|Bibliothèque du Crépuscule')
+  AND (SELECT COUNT(*) FROM SortElement se WHERE se.sort_id=s.id_sort) < 6;
+
+INSERT IGNORE INTO SortElement (sort_id, element_id)
+SELECT s.id_sort, e.id_element
+FROM Sort s
+JOIN ElementMagique e ON e.nom IN ('air','vent')
+WHERE (s.nom REGEXP 'Air|Vent|Zéphyr|Tourbillon|Vortex|Étendard des Vents|Souffle d’Azur|Fronde de Vent|Épervier du Temps')
+  AND (SELECT COUNT(*) FROM SortElement se WHERE se.sort_id=s.id_sort) < 6;
+
+INSERT IGNORE INTO SortElement (sort_id, element_id)
+SELECT s.id_sort, e.id_element
+FROM Sort s
+JOIN ElementMagique e ON e.nom IN ('lumière','soleil')
+WHERE (s.nom REGEXP 'Lumi|Solaire|Soleil|Rayon|Aube|Zénith|Éclat|Radieux|Entaille Solaire|Regard du Soleil|Bénédiction du Levant|Chant de l’Aube|Étendard Radieux')
+  AND (SELECT COUNT(*) FROM SortElement se WHERE se.sort_id=s.id_sort) < 6;
+
+INSERT IGNORE INTO SortElement (sort_id, element_id)
+SELECT s.id_sort, e.id_element
+FROM Sort s
+JOIN ElementMagique e ON e.nom IN ('ténèbres','ombre')
+WHERE (s.nom REGEXP 'Ombre|Nocturn|Nuit|Crépuscule|Néant|Sépulcre|Tombeau|Thanato|Déni d’Ombre|Règne du Crépuscule|Faille Nocturne|Chape de Nuit')
+  AND (SELECT COUNT(*) FROM SortElement se WHERE se.sort_id=s.id_sort) < 6;
+
+INSERT IGNORE INTO SortElement (sort_id, element_id)
+SELECT s.id_sort, e.id_element
+FROM Sort s
+JOIN ElementMagique e ON e.nom IN ('astre','lune')
+WHERE (s.nom REGEXP 'Astral|Astre|Étoile|Comète|Céleste|Cosm|Éons|Aurore|Astra|Sidéral|Boréal|Domaine des Astres|Berceuse Astrale|Tombeau d’Étoiles|Chute d’Astres|Étoile')
+  AND (SELECT COUNT(*) FROM SortElement se WHERE se.sort_id=s.id_sort) < 6;
+
+INSERT IGNORE INTO SortElement (sort_id, element_id)
+SELECT s.id_sort, e.id_element
+FROM Sort s
+JOIN ElementMagique e ON e.nom='temps'
+WHERE (s.nom REGEXP 'Temps|Chrono|Âge|Âges|Éons|Passage|Halte du Temps|Roue des Âges|Marche-Temps|Épervier du Temps|Étalon Cosmique')
+  AND (SELECT COUNT(*) FROM SortElement se WHERE se.sort_id=s.id_sort) < 6;
+
+INSERT IGNORE INTO SortElement (sort_id, element_id)
+SELECT s.id_sort, e.id_element
+FROM Sort s
+JOIN ElementMagique e ON e.nom='esprit'
+WHERE (s.nom REGEXP 'Esprit|Âme|Spectr|Fantôm|Héros|Langue des Esprits|Marche des Esprits|Grappin Fantôme|Voix des Anciens')
+  AND (SELECT COUNT(*) FROM SortElement se WHERE se.sort_id=s.id_sort) < 6;
+
+INSERT IGNORE INTO SortElement (sort_id, element_id)
+SELECT s.id_sort, e.id_element
+FROM Sort s
+JOIN ElementMagique e ON e.nom='arcane'
+WHERE (s.nom REGEXP 'Arcane|Run|Sceau|Sceaux|Scell|Verrou|Mandat|Ordonnance|Charte|Tablette Runique|Idole Runique|Grimoire|Blason|Clé des Portes|Serment')
+  AND (SELECT COUNT(*) FROM SortElement se WHERE se.sort_id=s.id_sort) < 6;
+
+INSERT IGNORE INTO SortElement (sort_id, element_id)
+SELECT s.id_sort, e.id_element
+FROM Sort s
+JOIN ElementMagique e ON e.nom IN ('bois','herbe')
+WHERE (s.nom REGEXP 'Racine|Ronce|Sylvestre|Arb|Forêt')
+  AND (SELECT COUNT(*) FROM SortElement se WHERE se.sort_id=s.id_sort) < 6;
+
+INSERT IGNORE INTO SortElement (sort_id, element_id)
+SELECT s.id_sort, e.id_element
+FROM Sort s
+JOIN ElementMagique e ON e.nom='métal'
+WHERE (s.nom REGEXP 'Métal|Acier|Aimant|Magnétisme|Orichalque|Airain|Auralithe|Épée|Lame|Serment d’Airain')
+  AND (SELECT COUNT(*) FROM SortElement se WHERE se.sort_id=s.id_sort) < 6;
+
+INSERT IGNORE INTO SortElement (sort_id, element_id)
+SELECT s.id_sort, e.id_element
+FROM Sort s JOIN ElementMagique e ON e.nom='froid'
+WHERE s.nom = 'Lueur Frigide'
+  AND (SELECT COUNT(*) FROM SortElement se WHERE se.sort_id=s.id_sort) < 6;
+
+-- Quelques réglages ciblés pour des sorts emblématiques -------------------
+INSERT IGNORE INTO SortElement (sort_id, element_id)
+SELECT s.id_sort, e.id_element
+FROM Sort s JOIN ElementMagique e ON e.nom='feu'
+WHERE s.nom='Boule de Feu';
+
+INSERT IGNORE INTO SortElement (sort_id, element_id)
+SELECT s.id_sort, e.id_element
+FROM Sort s JOIN ElementMagique e ON e.nom='chaleur'
+WHERE s.nom='Boule de Feu'
+  AND EXISTS (SELECT 1 FROM ElementMagique WHERE nom='chaleur');
+
+-- Domaine des Astres : astre + soleil + lune + lumière + arcane + temps (6/6)
+INSERT IGNORE INTO SortElement (sort_id, element_id)
+SELECT s.id_sort, e.id_element FROM Sort s JOIN ElementMagique e ON e.nom='astre'
+WHERE s.nom='Domaine des Astres';
+INSERT IGNORE INTO SortElement (sort_id, element_id)
+SELECT s.id_sort, e.id_element FROM Sort s JOIN ElementMagique e ON e.nom='soleil'
+WHERE s.nom='Domaine des Astres';
+INSERT IGNORE INTO SortElement (sort_id, element_id)
+SELECT s.id_sort, e.id_element FROM Sort s JOIN ElementMagique e ON e.nom='lune'
+WHERE s.nom='Domaine des Astres';
+INSERT IGNORE INTO SortElement (sort_id, element_id)
+SELECT s.id_sort, e.id_element FROM Sort s JOIN ElementMagique e ON e.nom='lumière'
+WHERE s.nom='Domaine des Astres';
+INSERT IGNORE INTO SortElement (sort_id, element_id)
+SELECT s.id_sort, e.id_element FROM Sort s JOIN ElementMagique e ON e.nom='arcane'
+WHERE s.nom='Domaine des Astres';
+INSERT IGNORE INTO SortElement (sort_id, element_id)
+SELECT s.id_sort, e.id_element FROM Sort s JOIN ElementMagique e ON e.nom='temps'
+WHERE s.nom='Domaine des Astres';
+
+
+INSERT INTO Guilde (nom, type_guilde, specialite, reputation) VALUES
+('Les Veilleurs de l’Aube',              'aventuriers', 'éclairement, missions d’aube', 'A'),
+('Compagnie du Roc Obsidien',            'guerriers',   'ligne de front, boucliers lourds', 'A'),
+('Conclave des Sept Sceaux',             'mages',       'rituels défensifs et anathèmes', 'S'),
+('Ordre des Lames Grises',               'guerriers',   'escortes royales', 'A'),
+('Cercle des Cartographes Libres',       'scribes',     'cartographie et relevés magiques', 'B'),
+('Guilde des Émissaires',                'marchande',   'négociation et traités', 'A'),
+('Fraternité des Flèches Vives',         'archers',     'tir longue portée', 'B'),
+('Ordre des Clercs du Zénith',           'clercs',      'soins et liturgie solaire', 'A'),
+('Loge des Artificiers Discrets',        'artisanale',  'dispositifs arcanotech', 'A'),
+('Marins des Voiles Blanches',           'marins',      'navigation hauturière', 'B'),
+('Compagnie des Pèlerins Gris',          'aventuriers', 'routes lointaines, caravanes', 'B'),
+('Chambre des Courtiers d’Arcanes',      'marchande',   'échanges de grimoires', 'S'),
+('Guilde des Archivistes Impériaux',     'scribes',     'archives et sceaux officiels', 'A'),
+('Brigade des Sentinelles Boréales',     'guerriers',   'garde des cols', 'B'),
+('Lanciers de l’Éperon',                 'guerriers',   'cavalerie lourde', 'A'),
+('Compagnie des Ombres Liées',           'aventuriers', 'infiltration contrôlée', 'B'),
+('Chœur des Harmonistes',                'mages',       'magies sonores', 'B'),
+('Cercle de la Source Claire',           'clercs',      'eau bénite, rituels', 'A'),
+('Ateliers du Silex',                    'artisanale',  'armurerie minérale', 'B'),
+('Messagers de la Couronne',             'scribes',     'plumes rapides & sceaux', 'A'),
+('L’Arc de l’Aurore',                    'archers',     'escarmouches matinales', 'B'),
+('Les Rôdeurs des Ruines',               'aventuriers', 'exploration et désamorçage', 'B'),
+('Tour des Éclats d’Orage',              'mages',       'foudre & météo', 'S'),
+('La Confrérie du Zéphyr',               'archers',     'tir en mouvement', 'A'),
+('La Lance des Marées',                  'marins',      'abordages, harpons', 'B'),
+('Gardes du Nexus',                      'mages',       'portails & stabilité', 'A'),
+('Compagnie du Voile Serein',            'aventuriers', 'désert et discrétion', 'B'),
+('Les Gantelets d’Airain',               'guerriers',   'choc & intimidation', 'B'),
+('Temple de la Clarté',                  'clercs',      'exorcismes, bénédictions', 'A'),
+('Forges de l’Aegis',                    'artisanale',  'boucliers et armures', 'A'),
+('Guetteurs du Crépuscule',              'aventuriers', 'chasse aux abominations', 'A'),
+('Hérauts des Cieux',                    'archers',     'fauconnerie, signaux', 'B'),
+('Arcanistes du Prisme',                 'mages',       'lumière, illusions', 'A'),
+('Tisseurs de Runes',                    'scribes',     'sceaux, glyphes', 'A'),
+('Ordre de la Marche-Temps',             'mages',       'chronomancie responsable', 'S'),
+('Chasseurs des Sables Liants',          'aventuriers', 'désert & mirages', 'B'),
+('Gardes-Rivage',                        'marins',      'patrouille côtière', 'B'),
+('Les Marteaux Solaires',                'guerriers',   'armes contres ombres', 'A'),
+('Chevaliers de l’Obsidienne',           'guerriers',   'garde noire honorable', 'A'),
+('Cercle des Feuilles Vives',            'clercs',      'druidisme & soins', 'A'),
+('Syndicat des Courants',                'marchande',   'routes maritimes', 'B'),
+('Compagnie des Hauts-Cols',             'aventuriers', 'alpinisme & relais', 'B'),
+('Les Douze Clefs',                      'scribes',     'cryptomancie, coffres', 'A'),
+('Alchimistes du Zénith',                'artisanale',  'essences rares', 'A'),
+('Éclaireurs d’Obscurécume',             'marins',      'bancs de brume & récifs', 'B'),
+('Veilleurs de l’Étoile Fixe',           'mages',       'astromancie pratique', 'A'),
+('Chariots de Fer',                      'marchande',   'convois blindés', 'B'),
+('Gardes des Dalles',                    'guerriers',   'combat urbain', 'B'),
+('Chevalerie de l’Astre',                'guerriers',   'ordre mixte héliolunaire', 'A'),
+('Cavaliers du Vent',                    'archers',     'tir monté', 'A'),
+('Main du Sépulcre',                     'clercs',      'veilleurs des tombes', 'B'),
+('Compagnie des Trois Voiles',           'marins',      'grands trajets', 'B'),
+('Ordre de l’Œil Silencieux',            'aventuriers', 'renseignement, filature', 'A'),
+('Cabale des Aiguilles',                 'mages',       'géomancie fine', 'A'),
+('Ateliers de Quartz',                   'artisanale',  'lithoglyphie & verre', 'B'),
+('Courtiers du Crépuscule',              'marchande',   'achats discrets', 'B'),
+('Légion des Épieux',                    'guerriers',   'pieux & hallebardes', 'B'),
+('Les Étendards Radieux',                'aventuriers', 'contre-incursions', 'A'),
+('Rôdeurs Boréaux',                      'archers',     'neige, traque', 'B'),
+('Guilde de la Voûte',                   'scribes',     'archives planaires', 'A'),
+('Les Parapluies Vraiment Magiques',     'mages',       'pluie ciblée & parade sociale', 'B'),
+('La Guilde du Silence Éloquent',        'aventuriers', 'infiltration théâtrale', 'A'),
+('Les Cartographes du Hasard',           'scribes',     'routes improbables', 'B'),
+('Collants Invisi… presque',             'archers',     'camouflage pas parfait', 'C'),
+('L’Ordre des “C’est Contrôlé, Promis”', 'mages',       'expériences encadrées (théoriquement)', 'B'),
+('Les Héros des Blagues Ratées',         'aventuriers', 'gestion de malaise épique', 'C'),
+('Les Casse-Serments',                   'guerriers',   'contre-oaths & médiations musclées', 'B'),
+('La Brigade du Canapé Éternel',         'clercs',      'repos sacré & siestes rituelles', 'C'),
+('Les Trouve-Tout-Sauf-Ça',              'aventuriers', 'recherches… à côté', 'C'),
+('Le Chœur des “Ahem” Dramatiques',      'scribes',     'ponctuation vivante', 'B'),
+('Les Portes qui Grincent',              'artisanale',  'charnières enchantées', 'C'),
+('Les Alibis Variables',                 'marchande',   'papier officiel, sortie non garantie', 'C'),
+('Compagnie des Fins de Mois',           'marchande',   'rabais et miracles comptables', 'B'),
+('Les Sans-Boussoles Unis',              'marins',      'dérive maîtrisée', 'C'),
+('Ordre de la Parenthèse',               'mages',       'incises temporelles', 'B'),
+('Les Avertisseurs Tardifs',             'scribes',     'courriers importants (après coup)', 'C'),
+('Compagnie “Ça Passe”',                 'aventuriers', 'plans borderline mais fun', 'B'),
+('Ligue des Élastiques',                 'guerriers',   'repli tactique express', 'C'),
+('Cercle des Chuchoteurs Forts',         'clercs',      'confession bruyante', 'C'),
+('Les Détourneurs de Catastrophes',      'mages',       'redirection élégante des ennuis', 'A'),
+('Boucliers Beurrés Modérés',            'guerriers',   'défense glissante', 'B'),
+('Confrérie du Thé Très Sérieux',        'clercs',      'méditation & infusion', 'A'),
+('Guilde des Cuillères Mesurées',        'artisanale',  'ustensiles de précision', 'B'),
+('Brasseurs des Orages',                 'marchande',   'festivités météorologiques', 'B'),
+('École de la Brioche Stoïque',          'mages',       'résilience douce', 'B'),
+('Gardiens du Sel Cosmique',             'clercs',      'protection & gravité', 'A'),
+('Compagnie du Pain Sec',                'aventuriers', 'survie minimaliste', 'C'),
+('Tisserands de Nappes Stellaires',      'artisanale',  'textiles astraux', 'B'),
+('Ordre du Poivre Diplomatique',         'scribes',     'pimenter sans fâcher', 'B'),
+('Marins de la Soupe Claire',            'marins',      'mer calme & discipline', 'B');
+
+
+INSERT INTO Village (nom, localisation, population, ressource_principale_id, royaume_id) VALUES
+('Fromagiville-les-Bains', 'Côte Brumeuse', 4200, (SELECT id_ressource FROM Ressource WHERE nom='Fromage sacré'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea')),
+('Patate-sur-Mer', 'Estuaire des Marées', 3100, (SELECT id_ressource FROM Ressource WHERE nom='Pomdeterreux'), (SELECT id_royaume FROM Royaume WHERE nom='Patateland')),
+('Carotte-sur-Mer', 'Falaises Orangées', 2600, (SELECT id_ressource FROM Ressource WHERE nom='Carottien'), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia')),
+('Choux-Fleur-les-Bains', 'Baie du Vapeur', 2900, (SELECT id_ressource FROM Ressource WHERE nom='Herbes'), (SELECT id_royaume FROM Royaume WHERE nom='Choux-Fleurie')),
+('Navet-les-Oies', 'Marais Chantants', 1800, (SELECT id_ressource FROM Ressource WHERE nom='Navetien'), (SELECT id_royaume FROM Royaume WHERE nom='Navet-les-Oies')),
+('Croûteville', 'Monts Croûtants', 3400, (SELECT id_ressource FROM Ressource WHERE nom='Farine'), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea')),
+('Beurresac', 'Plaine Onctueuse', 2100, (SELECT id_ressource FROM Ressource WHERE nom='Beurre'), (SELECT id_royaume FROM Royaume WHERE nom='Beurrasie')),
+('Banarny', 'Archipel Glissant', 2700, (SELECT id_ressource FROM Ressource WHERE nom='Sel de Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia')),
+('Quichebourg-aux-Trois-Ponts', 'Vallée de l’Œuf', 5300, (SELECT id_ressource FROM Ressource WHERE nom='Lait'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg')),
+('Dragonflette-Haute', 'Col des Braises', 3900, (SELECT id_ressource FROM Ressource WHERE nom='Cendre draconique'), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette')),
+('Éclair-sur-Rivage', 'Delta des Étoiles', 3200, (SELECT id_ressource FROM Ressource WHERE nom='Poudre d’étoile'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie')),
+('Soupefroide-Vieux-Port', 'Fjord des Brumes', 2800, (SELECT id_ressource FROM Ressource WHERE nom='Brume en bouteille'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide')),
+('Rizotto-Bas', 'Terrasses Dorées', 4100, (SELECT id_ressource FROM Ressource WHERE nom='Sable doré'), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto')),
+('Sucralune-Vigie', 'Cap des Lueurs', 2600, (SELECT id_ressource FROM Ressource WHERE nom='Miel lunaire'), (SELECT id_royaume FROM Royaume WHERE nom='Sucralune')),
+('Meringuia-Plateau', 'Hauteurs Neigeuses', 2400, (SELECT id_ressource FROM Ressource WHERE nom='Crème éternelle'), (SELECT id_royaume FROM Royaume WHERE nom='Meringuia')),
+('Citronésie-Citadelle', 'Citadelle Saline', 3600, (SELECT id_ressource FROM Ressource WHERE nom='Feuille de basilic sacré'), (SELECT id_royaume FROM Royaume WHERE nom='Citronésie')),
+('Vanillia-Rive', 'Lagune Claire', 3300, (SELECT id_ressource FROM Ressource WHERE nom='Crème éternelle'), (SELECT id_royaume FROM Royaume WHERE nom='Vanillia')),
+('Anethol-Fontaine', 'Sources Parfumées', 1900, (SELECT id_ressource FROM Ressource WHERE nom='Anethor'), (SELECT id_royaume FROM Royaume WHERE nom='Anethol')),
+('Comtédrale-Bas-Cloître', 'Bocage des Cloches', 3700, (SELECT id_ressource FROM Ressource WHERE nom='Fromage sacré'), (SELECT id_royaume FROM Royaume WHERE nom='Comtédrale')),
+('Biscuitbourg-Port', 'Rade Croquante', 2500, (SELECT id_ressource FROM Ressource WHERE nom='Poudre de biscuit'), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg')),
+('Poissarie-Hameaux', 'Récifs aux Voiles', 2900, (SELECT id_ressource FROM Ressource WHERE nom='Poisson fumé'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie')),
+('Sorbeterre-Glacier', 'Roche Blanche', 3100, (SELECT id_ressource FROM Ressource WHERE nom='Glace éternelle'), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre')),
+('Croissantinopie-Est', 'Plaines Feuilletées', 4500, (SELECT id_ressource FROM Ressource WHERE nom='Poudre de levain'), (SELECT id_royaume FROM Royaume WHERE nom='Croissantinopie')),
+('Saucissonie-Forges', 'Chaîne d’Airain', 3900, (SELECT id_ressource FROM Ressource WHERE nom='Fer'), (SELECT id_royaume FROM Royaume WHERE nom='Saucissonie')),
+('Boulangea-Terres-Hautes', 'Coteaux Levants', 3700, (SELECT id_ressource FROM Ressource WHERE nom='Farine'), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea')),
+('Croûtonie-Centre', 'Carrefour des Routes', 5200, (SELECT id_ressource FROM Ressource WHERE nom='Corde'), (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie')),
+('Herbularia-Forêt', 'Forêts Murmurantes', 3000, (SELECT id_ressource FROM Ressource WHERE nom='Herbes'), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia')),
+('Beurropolis-Nord', 'Grandes Dunes', 3900, (SELECT id_ressource FROM Ressource WHERE nom='Beurre'), (SELECT id_royaume FROM Royaume WHERE nom='Beurropolis')),
+('Fromagiville-Citadelle', 'Éperon Roquefort', 2800, (SELECT id_ressource FROM Ressource WHERE nom='Essence de fromage ancien'), (SELECT id_royaume FROM Royaume WHERE nom='Fromagiville')),
+('Marmitonnie-Bocage', 'Bocage des Marmites', 2750, (SELECT id_ressource FROM Ressource WHERE nom='Soupe condensée'), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie')),
+('Tartiflette Prime-Bourg', 'Contreforts Dorés', 3600, (SELECT id_ressource FROM Ressource WHERE nom='Poussière de croissant'), (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime')),
+('Éclairoisie-Phare', 'Cap Lumineux', 2400, (SELECT id_ressource FROM Ressource WHERE nom='Plume d’archange'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie')),
+('Sucralune-Minier', 'Crêtes Étincelantes', 2100, (SELECT id_ressource FROM Ressource WHERE nom='Poudre d’étoile'), (SELECT id_royaume FROM Royaume WHERE nom='Sucralune')),
+('Quichebourg-Sud', 'Vallée du Levain', 3300, (SELECT id_ressource FROM Ressource WHERE nom='Lait'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg')),
+('Dragonflette-Forgebas', 'Chaînes Ardentes', 3100, (SELECT id_ressource FROM Ressource WHERE nom='Acier'), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette')),
+('Banarnia-Hautes-Terres', 'Plateaux Dorés', 4100, (SELECT id_ressource FROM Ressource WHERE nom='Sel de Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia')),
+('Raclettea-Vieille-Ville', 'Écusson Fumé', 3800, (SELECT id_ressource FROM Ressource WHERE nom='Beurre céleste'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea')),
+('Rizotto-Delta', 'Rizières Marécageuses', 3000, (SELECT id_ressource FROM Ressource WHERE nom='Eau pure'), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto')),
+('Soupefroide-Est', 'Fjords Sifflants', 2600, (SELECT id_ressource FROM Ressource WHERE nom='Brume en bouteille'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide')),
+('Choux-Fleurie-Les-Thermes', 'Thermes Floraux', 2200, (SELECT id_ressource FROM Ressource WHERE nom='Herbes'), (SELECT id_royaume FROM Royaume WHERE nom='Choux-Fleurie')),
+('Poissarie-Les-Filets', 'Chaussée aux Harengs', 2400, (SELECT id_ressource FROM Ressource WHERE nom='Poisson fumé'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie')),
+('Citronésie-Canisses', 'Lagune Aux Citrons', 2000, (SELECT id_ressource FROM Ressource WHERE nom='Feuille de basilic sacré'), (SELECT id_royaume FROM Royaume WHERE nom='Citronésie')),
+('Vanillia-Ravin', 'Ravin Parfumé', 1800, (SELECT id_ressource FROM Ressource WHERE nom='Cacao'), (SELECT id_royaume FROM Royaume WHERE nom='Vanillia')),
+('Anethol-Moulins', 'Vents Anisés', 2100, (SELECT id_ressource FROM Ressource WHERE nom='Anethor'), (SELECT id_royaume FROM Royaume WHERE nom='Anethol')),
+('Comtédrale-Clos', 'Vignes Sacrées', 2600, (SELECT id_ressource FROM Ressource WHERE nom='Vin'), (SELECT id_royaume FROM Royaume WHERE nom='Comtédrale')),
+('Biscuitbourg-Remparts', 'Remparts Croquants', 2300, (SELECT id_ressource FROM Ressource WHERE nom='Poudre de biscuit'), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg')),
+('Beurrasie-Les-Prés', 'Prés Argentés', 2500, (SELECT id_ressource FROM Ressource WHERE nom='Beurre'), (SELECT id_royaume FROM Royaume WHERE nom='Beurrasie')),
+('Croissantinopie-Ouest', 'Plaines Levées', 3300, (SELECT id_ressource FROM Ressource WHERE nom='Farine'), (SELECT id_royaume FROM Royaume WHERE nom='Croissantinopie')),
+('Saucissonie-Guet', 'Gorges de Sel', 2800, (SELECT id_ressource FROM Ressource WHERE nom='Sel'), (SELECT id_royaume FROM Royaume WHERE nom='Saucissonie')),
+('Boulangea-Coteau', 'Coteau Levant', 2600, (SELECT id_ressource FROM Ressource WHERE nom='Farine'), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea')),
+('Croûtonie-Gare', 'Carrefour des Graines', 3500, (SELECT id_ressource FROM Ressource WHERE nom='Graines de sésame'), (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie')),
+('Herbularia-Clairière', 'Clairière Sage', 2000, (SELECT id_ressource FROM Ressource WHERE nom='Racines magiques'), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia')),
+('Beurropolis-Digue', 'Digue Onctueuse', 2400, (SELECT id_ressource FROM Ressource WHERE nom='Beurre céleste'), (SELECT id_royaume FROM Royaume WHERE nom='Beurropolis')),
+('Fromagiville-Les-Caves', 'Sous-Bois Affinés', 2100, (SELECT id_ressource FROM Ressource WHERE nom='Essence de fromage ancien'), (SELECT id_royaume FROM Royaume WHERE nom='Fromagiville')),
+('Marmitonnie-Ferme', 'Bocage des Pots', 1800, (SELECT id_ressource FROM Ressource WHERE nom='Soupe condensée'), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie')),
+('Tartiflette Prime-Cols', 'Cols Dorés', 2200, (SELECT id_ressource FROM Ressource WHERE nom='Poussière de croissant'), (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime')),
+('Éclairoisie-Lanterne', 'Cap Éclairé', 1700, (SELECT id_ressource FROM Ressource WHERE nom='Plume d’archange'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie')),
+('Sorbeterre-Aiguilles', 'Aiguilles Blanches', 2600, (SELECT id_ressource FROM Ressource WHERE nom='Glace éternelle'), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre')),
+('Poissarie-Quais', 'Quais des Voiles', 3100, (SELECT id_ressource FROM Ressource WHERE nom='Poisson fumé'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie')),
+('Rizotto-Grand-Canal', 'Grand Canal', 3400, (SELECT id_ressource FROM Ressource WHERE nom='Eau pure'), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto')),
+('Raclettea-Plain-Chaud', 'Plateau Fumé', 3600, (SELECT id_ressource FROM Ressource WHERE nom='Souffle de raclette'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea')),
+('Dragonflette-Roches', 'Roches Incandescentes', 2500, (SELECT id_ressource FROM Ressource WHERE nom='Roche fondue'), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette')),
+('Banarnia-Lagon', 'Lagons Dorés', 2300, (SELECT id_ressource FROM Ressource WHERE nom='Sel de Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia')),
+('Quichebourg-Moulin', 'Moulins Vif-vent', 2900, (SELECT id_ressource FROM Ressource WHERE nom='Poudre de levain'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg')),
+('Choux-Fleurie-Orée', 'Orée Parfumée', 2100, (SELECT id_ressource FROM Ressource WHERE nom='Herbes'), (SELECT id_royaume FROM Royaume WHERE nom='Choux-Fleurie')),
+('Croûtonie-Marais', 'Bas-Fonds Croûtés', 1900, (SELECT id_ressource FROM Ressource WHERE nom='Boue runique'), (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie')),
+('Herbularia-Ruisseau', 'Ruisseau Murmurant', 1700, (SELECT id_ressource FROM Ressource WHERE nom='Herbes'), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia')),
+('Beurrasie-Remous', 'Remous Onctueux', 2000, (SELECT id_ressource FROM Ressource WHERE nom='Beurre'), (SELECT id_royaume FROM Royaume WHERE nom='Beurrasie')),
+('Fromagiville-Ravin', 'Ravin Affiné', 1600, (SELECT id_ressource FROM Ressource WHERE nom='Fromage sacré'), (SELECT id_royaume FROM Royaume WHERE nom='Fromagiville')),
+('Marmitonnie-Forge', 'Forge des Louches', 2200, (SELECT id_ressource FROM Ressource WHERE nom='Corde'), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie')),
+('Tartiflette Prime-Vallon', 'Vallon Doré', 2100, (SELECT id_ressource FROM Ressource WHERE nom='Poudre de biscuit'), (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime')),
+('Éclairoisie-Terrasse', 'Terrasse Lumineuse', 1800, (SELECT id_ressource FROM Ressource WHERE nom='Poudre d’étoile'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie')),
+('Soupefroide-Source', 'Source Des Brumes', 1700, (SELECT id_ressource FROM Ressource WHERE nom='Brume en bouteille'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide')),
+('Rizotto-Rizières-Hautes', 'Rizières Supérieures', 2400, (SELECT id_ressource FROM Ressource WHERE nom='Eau pure'), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto')),
+('Sucralune-Crêtes', 'Crêtes Sucrées', 1500, (SELECT id_ressource FROM Ressource WHERE nom='Miel lunaire'), (SELECT id_royaume FROM Royaume WHERE nom='Sucralune')),
+('Meringuia-Corniche', 'Corniche de Neige', 1600, (SELECT id_ressource FROM Ressource WHERE nom='Crème éternelle'), (SELECT id_royaume FROM Royaume WHERE nom='Meringuia')),
+('Citronésie-Îlot', 'Îlots Clairs', 1400, (SELECT id_ressource FROM Ressource WHERE nom='Feuille de basilic sacré'), (SELECT id_royaume FROM Royaume WHERE nom='Citronésie')),
+('Vanillia-Savane', 'Savane Parfumée', 1500, (SELECT id_ressource FROM Ressource WHERE nom='Cacao'), (SELECT id_royaume FROM Royaume WHERE nom='Vanillia')),
+('Anethol-Coteaux', 'Coteaux Anisés', 1500, (SELECT id_ressource FROM Ressource WHERE nom='Anethor'), (SELECT id_royaume FROM Royaume WHERE nom='Anethol')),
+('Comtédrale-Les-Vignes', 'Coteaux Sacrés', 1700, (SELECT id_ressource FROM Ressource WHERE nom='Vin'), (SELECT id_royaume FROM Royaume WHERE nom='Comtédrale')),
+('Biscuitbourg-Les-Moulins', 'Moulins Croquants', 1600, (SELECT id_ressource FROM Ressource WHERE nom='Poudre de biscuit'), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg')),
+('Beurropolis-Quais', 'Quais Onctueux', 1900, (SELECT id_ressource FROM Ressource WHERE nom='Beurre céleste'), (SELECT id_royaume FROM Royaume WHERE nom='Beurropolis')),
+('Fromagiville-Faubourg', 'Faubourg Affiné', 1600, (SELECT id_ressource FROM Ressource WHERE nom='Essence de fromage ancien'), (SELECT id_royaume FROM Royaume WHERE nom='Fromagiville')),
+('Marmitonnie-Granges', 'Granges des Pots', 1500, (SELECT id_ressource FROM Ressource WHERE nom='Soupe condensée'), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie')),
+('Tartiflette Prime-Les-Ponts', 'Ponts Dorés', 1900, (SELECT id_ressource FROM Ressource WHERE nom='Poussière de croissant'), (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime')),
+('Éclairoisie-Sentinelle', 'Hauteurs Lumineuses', 1400, (SELECT id_ressource FROM Ressource WHERE nom='Plume d’archange'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie')),
+('Soupefroide-Lac', 'Grand Lac Froid', 1800, (SELECT id_ressource FROM Ressource WHERE nom='Glace éternelle'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide')),
+('Rizotto-Écluses', 'Écluses Royales', 2100, (SELECT id_ressource FROM Ressource WHERE nom='Eau pure'), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto')),
+('Sucralune-Aiguilles', 'Aiguilles Douces', 1500, (SELECT id_ressource FROM Ressource WHERE nom='Poudre d’étoile'), (SELECT id_royaume FROM Royaume WHERE nom='Sucralune')),
+('Meringuia-Brises', 'Brises Neigeuses', 1500, (SELECT id_ressource FROM Ressource WHERE nom='Neige en conserve'), (SELECT id_royaume FROM Royaume WHERE nom='Meringuia')),
+('Citronésie-Falaise', 'Falaise Claire', 1400, (SELECT id_ressource FROM Ressource WHERE nom='Feuille de basilic sacré'), (SELECT id_royaume FROM Royaume WHERE nom='Citronésie')),
+('Vanillia-Chenal', 'Chenal Parfumé', 1400, (SELECT id_ressource FROM Ressource WHERE nom='Cacao'), (SELECT id_royaume FROM Royaume WHERE nom='Vanillia')),
+('Anethol-Berges', 'Berges Anisées', 1400, (SELECT id_ressource FROM Ressource WHERE nom='Anethor'), (SELECT id_royaume FROM Royaume WHERE nom='Anethol')),
+('Comtédrale-Prés', 'Prés Sacrés', 1500, (SELECT id_ressource FROM Ressource WHERE nom='Lait'), (SELECT id_royaume FROM Royaume WHERE nom='Comtédrale')),
+('Biscuitbourg-Lavandes', 'Lavandes Croquantes', 1300, (SELECT id_ressource FROM Ressource WHERE nom='Poudre de biscuit'), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg')),
+('Beurrasie-Fontaines', 'Fontaines Onctueuses', 1600, (SELECT id_ressource FROM Ressource WHERE nom='Beurre'), (SELECT id_royaume FROM Royaume WHERE nom='Beurrasie')),
+('Croissantinopie-Charnières', 'Charnières Levées', 1500, (SELECT id_ressource FROM Ressource WHERE nom='Poudre de levain'), (SELECT id_royaume FROM Royaume WHERE nom='Croissantinopie')),
+('Saucissonie-Carrière', 'Carrière Rouge', 1800, (SELECT id_ressource FROM Ressource WHERE nom='Fer'), (SELECT id_royaume FROM Royaume WHERE nom='Saucissonie')),
+('Boulangea-Bastille', 'Bastille Levantine', 1700, (SELECT id_ressource FROM Ressource WHERE nom='Farine'), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea')),
+('Croûtonie-Guinguette', 'Guinguette des Graines', 1500, (SELECT id_ressource FROM Ressource WHERE nom='Graines de sésame'), (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie')),
+('Herbularia-Orée', 'Orée Vivace', 1400, (SELECT id_ressource FROM Ressource WHERE nom='Racines magiques'), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia')),
+('Beurropolis-Citadine', 'Citadelle Onctueuse', 1600, (SELECT id_ressource FROM Ressource WHERE nom='Beurre céleste'), (SELECT id_royaume FROM Royaume WHERE nom='Beurropolis')),
+('Fromagiville-Passerelle', 'Passerelle Affinée', 1300, (SELECT id_ressource FROM Ressource WHERE nom='Essence de fromage ancien'), (SELECT id_royaume FROM Royaume WHERE nom='Fromagiville')),
+('Marmitonnie-Grand-Chaudron', 'Grand Chaudron', 1500, (SELECT id_ressource FROM Ressource WHERE nom='Soupe condensée'), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie')),
+('Tartiflette Prime-Serre', 'Serres Dorées', 1400, (SELECT id_ressource FROM Ressource WHERE nom='Poussière de croissant'), (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime')),
+('Éclairoisie-Belvédère', 'Belvédère Lumineux', 1200, (SELECT id_ressource FROM Ressource WHERE nom='Poudre d’étoile'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie')),
+('Soupefroide-Anse', 'Anse Gelée', 1300, (SELECT id_ressource FROM Ressource WHERE nom='Glace éternelle'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide')),
+('Rizotto-Digue', 'Digue Royale', 1600, (SELECT id_ressource FROM Ressource WHERE nom='Eau pure'), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto')),
+('Sucralune-Pic', 'Pic Sucré', 1100, (SELECT id_ressource FROM Ressource WHERE nom='Miel lunaire'), (SELECT id_royaume FROM Royaume WHERE nom='Sucralune')),
+('Meringuia-Cascade', 'Cascade Blanche', 1200, (SELECT id_ressource FROM Ressource WHERE nom='Crème éternelle'), (SELECT id_royaume FROM Royaume WHERE nom='Meringuia')),
+('Citronésie-Palétuviers', 'Palétuviers Clairs', 1100, (SELECT id_ressource FROM Ressource WHERE nom='Feuille de basilic sacré'), (SELECT id_royaume FROM Royaume WHERE nom='Citronésie')),
+('Vanillia-Lande', 'Lande Parfumée', 1200, (SELECT id_ressource FROM Ressource WHERE nom='Cacao'), (SELECT id_royaume FROM Royaume WHERE nom='Vanillia')),
+('Anethol-Vigne', 'Vignes Anisées', 1200, (SELECT id_ressource FROM Ressource WHERE nom='Anethor'), (SELECT id_royaume FROM Royaume WHERE nom='Anethol')),
+('Comtédrale-Retables', 'Retables Sacrés', 1300, (SELECT id_ressource FROM Ressource WHERE nom='Lait'), (SELECT id_royaume FROM Royaume WHERE nom='Comtédrale')),
+('Biscuitbourg-Fossé', 'Fossé Croquant', 1100, (SELECT id_ressource FROM Ressource WHERE nom='Poudre de biscuit'), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg')),
+('Beurrasie-Étang', 'Étang Onctueux', 1300, (SELECT id_ressource FROM Ressource WHERE nom='Beurre'), (SELECT id_royaume FROM Royaume WHERE nom='Beurrasie')),
+('Croissantinopie-Fontaine', 'Fontaine Levée', 1200, (SELECT id_ressource FROM Ressource WHERE nom='Poudre de levain'), (SELECT id_royaume FROM Royaume WHERE nom='Croissantinopie')),
+('Saucissonie-Forgeon', 'Forge des Monts', 1400, (SELECT id_ressource FROM Ressource WHERE nom='Fer'), (SELECT id_royaume FROM Royaume WHERE nom='Saucissonie')),
+('Boulangea-Quatre-Vents', 'Plateau Levant', 1200, (SELECT id_ressource FROM Ressource WHERE nom='Farine'), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea')),
+('Croûtonie-Chaud-Four', 'Chaud-Four des Graines', 1100, (SELECT id_ressource FROM Ressource WHERE nom='Graines de sésame'), (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie')),
+('Lac-Serein', 'Berge du Lac Bleu', 2500, (SELECT id_ressource FROM Ressource WHERE nom='Eau pure'), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto')),
+('Rochebrune', 'Contreforts Gris', 2700, (SELECT id_ressource FROM Ressource WHERE nom='Pierre'), (SELECT id_royaume FROM Royaume WHERE nom='Saucissonie')),
+('Haute-Clairière', 'Lisière Verte', 2200, (SELECT id_ressource FROM Ressource WHERE nom='Bois'), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia')),
+('Pont-Neuf-des-Marées', 'Estuaire Large', 3000, (SELECT id_ressource FROM Ressource WHERE nom='Sel'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie')),
+('Granit-aux-Songes', 'Carrière des Échos', 2100, (SELECT id_ressource FROM Ressource WHERE nom='Granit chantant'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg')),
+('Aubeclaire', 'Plateau Lumineux', 2600, (SELECT id_ressource FROM Ressource WHERE nom='Essence de lumière'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie')),
+('Val-d’Argile', 'Bassin Ocre', 2300, (SELECT id_ressource FROM Ressource WHERE nom='Argile'), (SELECT id_royaume FROM Royaume WHERE nom='Choux-Fleurie')),
+('Mersal', 'Salines du Sud', 2800, (SELECT id_ressource FROM Ressource WHERE nom='Perles de sel'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie')),
+('Clairval', 'Vallée Claire', 2400, (SELECT id_ressource FROM Ressource WHERE nom='Verre clair'), (SELECT id_royaume FROM Royaume WHERE nom='Vanillia')),
+('Boisjoli', 'Forêt Douce', 2200, (SELECT id_ressource FROM Ressource WHERE nom='Bois'), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia')),
+('Rivage-Noir', 'Côtes de Basalte', 2600, (SELECT id_ressource FROM Ressource WHERE nom='Roche fondue'), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette')),
+('Briselune', 'Pointe des Deux-Lunes', 2100, (SELECT id_ressource FROM Ressource WHERE nom='Éclat de lune'), (SELECT id_royaume FROM Royaume WHERE nom='Sucralune')),
+('Clairmont', 'Hauteurs Claires', 2300, (SELECT id_ressource FROM Ressource WHERE nom='Plumes'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie')),
+('Vallonfroid', 'Cirque Glacé', 2000, (SELECT id_ressource FROM Ressource WHERE nom='Glace éternelle'), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre')),
+('Rocquartz', 'Éperons Cristallins', 2400, (SELECT id_ressource FROM Ressource WHERE nom='Nacre'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg')),
+('Bois-aux-Griffes', 'Massif Griffu', 1900, (SELECT id_ressource FROM Ressource WHERE nom='Peaux de troll'), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia')),
+('Selmer', 'Dunes Salines', 2000, (SELECT id_ressource FROM Ressource WHERE nom='Sel'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie')),
+('Merclaire', 'Côte Claire', 1900, (SELECT id_ressource FROM Ressource WHERE nom='Verre clair'), (SELECT id_royaume FROM Royaume WHERE nom='Vanillia')),
+('Fer-aux-Cols', 'Cols d’Acier', 2300, (SELECT id_ressource FROM Ressource WHERE nom='Fer'), (SELECT id_royaume FROM Royaume WHERE nom='Saucissonie')),
+('Haute-Rivière', 'Hauteurs du Grand Courant', 2100, (SELECT id_ressource FROM Ressource WHERE nom='Eau pure'), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto')),
+('Riremont', 'Colline des Échos', 1800, (SELECT id_ressource FROM Ressource WHERE nom='Poudre d’oubli'), (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie')),
+('Coin-Perdu', 'Broussailles Orientées', 1500, (SELECT id_ressource FROM Ressource WHERE nom='Brindilles de sagesse'), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia')),
+('Pas-de-Bruit', 'Plaine Sans Vent', 1600, (SELECT id_ressource FROM Ressource WHERE nom='Souffle du vent'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide')),
+('Presque-Visible', 'Brouillard Têtu', 1400, (SELECT id_ressource FROM Ressource WHERE nom='Brume en bouteille'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie')),
+('Grand-Hasard', 'Carrefour Probable', 1700, (SELECT id_ressource FROM Ressource WHERE nom='Poudre d’étoile'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia')),
+('Trop-Loin', 'Très Loin', 1200, (SELECT id_ressource FROM Ressource WHERE nom='Corde'), (SELECT id_royaume FROM Royaume WHERE nom='Patateland')),
+('Assez-Haut', 'Plateau Raisonnable', 1300, (SELECT id_ressource FROM Ressource WHERE nom='Pierre'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg')),
+('Pied-de-Page', 'Bas de la Falaise', 1250, (SELECT id_ressource FROM Ressource WHERE nom='Papier runique'), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg')),
+('Chut!Ville', 'Forêt du Silence', 1150, (SELECT id_ressource FROM Ressource WHERE nom='Gemme du sommeil'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie')),
+('Étoile-Filante', 'Corniche des Vœux', 1350, (SELECT id_ressource FROM Ressource WHERE nom='Poudre d’étoile'), (SELECT id_royaume FROM Royaume WHERE nom='Sucralune')),
+('Mineraud', 'Galeries du Levant', 2600, (SELECT id_ressource FROM Ressource WHERE nom='Cuivre'), (SELECT id_royaume FROM Royaume WHERE nom='Saucissonie')),
+('Charbonval', 'Bassin Fumant', 2800, (SELECT id_ressource FROM Ressource WHERE nom='Charbon'), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette')),
+('Orvalon', 'Crêtes Dorées', 2100, (SELECT id_ressource FROM Ressource WHERE nom='Or'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg')),
+('Argentel', 'Vallée d’Argent', 1900, (SELECT id_ressource FROM Ressource WHERE nom='Argent'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg')),
+('Cuiron', 'Tanneries du Marais', 1700, (SELECT id_ressource FROM Ressource WHERE nom='Cuir'), (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie')),
+('Linval', 'Champs Faible-Vent', 1800, (SELECT id_ressource FROM Ressource WHERE nom='Lin'), (SELECT id_royaume FROM Royaume WHERE nom='Croissantinopie')),
+('Laineclaire', 'Bergeries Hautes', 1600, (SELECT id_ressource FROM Ressource WHERE nom='Laine'), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia')),
+('Épiceraie', 'Col des Parfums', 1500, (SELECT id_ressource FROM Ressource WHERE nom='Épices'), (SELECT id_royaume FROM Royaume WHERE nom='Citronésie')),
+('Café-Haut', 'Terrasse Ombreuse', 1700, (SELECT id_ressource FROM Ressource WHERE nom='Café'), (SELECT id_royaume FROM Royaume WHERE nom='Vanillia')),
+('Théval', 'Collines en Terrasse', 1650, (SELECT id_ressource FROM Ressource WHERE nom='Thé'), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia')),
+('Hydromelay', 'Rucher des Brises', 1500, (SELECT id_ressource FROM Ressource WHERE nom='Hydromel'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia')),
+('Vignerac', 'Coteaux Orientés', 1800, (SELECT id_ressource FROM Ressource WHERE nom='Vin'), (SELECT id_royaume FROM Royaume WHERE nom='Comtédrale')),
+('Bièrelune', 'Brasseries Fraîches', 1700, (SELECT id_ressource FROM Ressource WHERE nom='Bière'), (SELECT id_royaume FROM Royaume WHERE nom='Sucralune')),
+('Sucrerie-Basse', 'Sucreries du Delta', 1900, (SELECT id_ressource FROM Ressource WHERE nom='Sucre'), (SELECT id_royaume FROM Royaume WHERE nom='Sucralune')),
+('Pâtur-Long', 'Grands Pâturages', 1750, (SELECT id_ressource FROM Ressource WHERE nom='Lait'), (SELECT id_royaume FROM Royaume WHERE nom='Beurrasie')),
+('Pêche-Lointaine', 'Baie des Pêches', 1650, (SELECT id_ressource FROM Ressource WHERE nom='Noyau de pêche astrale'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie')),
+('Basalte-Noir', 'Dalles Noires', 1850, (SELECT id_ressource FROM Ressource WHERE nom='Roche fondue'), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette')),
+('Runefond', 'Fosses Aux Glyphes', 1600, (SELECT id_ressource FROM Ressource WHERE nom='Papier runique'), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg')),
+('Cristal-Long', 'Aiguilles Claires', 1700, (SELECT id_ressource FROM Ressource WHERE nom='Cristal de mana'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie')),
+('Saugeblanche', 'Sentes Argentées', 1500, (SELECT id_ressource FROM Ressource WHERE nom='Herbes'), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia'));
+
+
+INSERT INTO Equipement (nom, type_equipement, rarete, enchantements, element_affinite_id, description) VALUES
+('Épée du Levain','arme','rare','tranchant+25', (SELECT id_element FROM ElementMagique WHERE nom='feu'), 'Forgée dans les flammes d’un four sacré, elle gonfle d’orgueil après chaque victoire.'),
+('Hallebarde de l’Aube','arme','epique','lumiere+80', (SELECT id_element FROM ElementMagique WHERE nom='lumière'), 'Lame dorée capturant les premiers rayons du jour.'),
+('Marteau du Crépuscule','arme','epique','ombre+80', (SELECT id_element FROM ElementMagique WHERE nom='ténèbres'), 'Résonne au dernier souffle de la lumière.'),
+('Arc des Vents Boréaux','arme','rare','precision+25', (SELECT id_element FROM ElementMagique WHERE nom='vent'), 'Un arc si léger qu’il siffle à chaque tir.'),
+('Dague de Brume','arme','commun',NULL, (SELECT id_element FROM ElementMagique WHERE nom='brume'), 'Arme discrète souvent oubliée après usage.'),
+('Masse d’Airain','arme','rare','brisearmure+25', (SELECT id_element FROM ElementMagique WHERE nom='métal'), 'Brise armures et ego avec la même efficacité.'),
+('Lance des Marées','arme','epique','hydraulique+80', (SELECT id_element FROM ElementMagique WHERE nom='eau'), 'Frappe comme la vague, recule comme la marée.'),
+('Bâton d’Obsidienne','arme','rare','pyro+25', (SELECT id_element FROM ElementMagique WHERE nom='lave'), 'Canalise le feu intérieur des montagnes.'),
+('Couteau des Sables','arme','commun',NULL, (SELECT id_element FROM ElementMagique WHERE nom='sable'), 'Lame simple mais tranchante, forgée dans le désert.'),
+('Épée Solaire','arme','legendaire','lumiere+200', (SELECT id_element FROM ElementMagique WHERE nom='lumière'), 'Brûle d’une flamme qui ne s’éteint jamais.'),
+('Épée Nocturne','arme','legendaire','ombre+200', (SELECT id_element FROM ElementMagique WHERE nom='ténèbres'), 'Une lame d’ombre qui boit la lumière.'),
+('Arc Astral','arme','epique','astral+80', (SELECT id_element FROM ElementMagique WHERE nom='astre'), 'Sa flèche traverse le firmament et parfois le bon sens.'),
+('Faux du Néant','arme','mythique','neant+300', (SELECT id_element FROM ElementMagique WHERE nom='ténèbres'), 'Outil de fin de cycle, manie le vide avec poésie.'),
+('Pique du Zéphyr','arme','rare','vitesse+25', (SELECT id_element FROM ElementMagique WHERE nom='air'), 'Pénétrante comme une brise contrariée.'),
+('Marteau des Forges Hurlantes','arme','epique','choc+80', (SELECT id_element FROM ElementMagique WHERE nom='feu'), 'Fait trembler le métal avant même de le frapper.'),
+('Hache de Givre','arme','rare','gel+25', (SELECT id_element FROM ElementMagique WHERE nom='glace'), 'Sa morsure laisse une trace de cristal gelé.'),
+('Épée Runique','arme','epique','arcane+80', (SELECT id_element FROM ElementMagique WHERE nom='arcane'), 'Les runes gravées s’illuminent à chaque serment tenu.'),
+('Arc de l’Orage','arme','epique','foudre+80', (SELECT id_element FROM ElementMagique WHERE nom='foudre'), 'Tire des flèches chargées d’électricité statique.'),
+('Bâton de l’Astrolithe','arme','legendaire','cosmos+200', (SELECT id_element FROM ElementMagique WHERE nom='astre'), 'Un pilier d’étoiles solidifiées.'),
+('Dague de l’Ombre','arme','rare','furtivite+25', (SELECT id_element FROM ElementMagique WHERE nom='ombre'), 'Invisible à l’œil, visible au dos.'),
+('Épée des Ancêtres','arme','rare','esprit+25', (SELECT id_element FROM ElementMagique WHERE nom='esprit'), 'Transmet les coups et les conseils.'),
+('Sabre Chantant','arme','epique','son+80', (SELECT id_element FROM ElementMagique WHERE nom='chant'), 'Fredonne l’hymne de Solarys à chaque mouvement.'),
+('Masse Sismique','arme','rare','tellurique+25', (SELECT id_element FROM ElementMagique WHERE nom='terre'), 'Un coup déclenche un petit tremblement de terre (et un gros mal de tête).'),
+('Lance de l’Aurore','arme','epique','lumiere+80', (SELECT id_element FROM ElementMagique WHERE nom='lumière'), 'Illumine la victoire d’une douce lumière rosée.'),
+('Bâton du Temps Figé','arme','legendaire','chronos+200', (SELECT id_element FROM ElementMagique WHERE nom='temps'), 'Fige tout sauf les regrets.'),
+('Hache des Abîmes','arme','epique','abysse+80', (SELECT id_element FROM ElementMagique WHERE nom='eau'), 'Forgée au fond des abysses, elle résonne sous l’eau.'),
+('Arc Lunaire','arme','rare','nocturne+25', (SELECT id_element FROM ElementMagique WHERE nom='lune'), 'Favori des archers nocturnes et des poètes insomnieques.'),
+('Épée de Sel','arme','commun','tranchant+1', (SELECT id_element FROM ElementMagique WHERE nom='sel'), 'Éblouissante, mais fond sous la pluie.'),
+('Bâton de Cendre','arme','rare','cendre+25', (SELECT id_element FROM ElementMagique WHERE nom='feu'), 'Se consume lentement, même en plein hiver.'),
+('Fronde du Chaos','arme','epique','entropie+80', (SELECT id_element FROM ElementMagique WHERE nom='arcane'), 'Ses projectiles ignorent la physique et la logique.'),
+('Hallebarde de l’Empire','arme','rare','discipline+25', (SELECT id_element FROM ElementMagique WHERE nom='métal'), 'Standard des gardes royaux les moins imaginatifs.'),
+('Lame d’Azur','arme','rare','aerien+25', (SELECT id_element FROM ElementMagique WHERE nom='air'), 'Fait chanter l’air et pleurer les moustiques.'),
+('Fléau d’Or','arme','epique','eclat+80', (SELECT id_element FROM ElementMagique WHERE nom='lumière'), 'Brille à chaque péché capital.'),
+('Épée des Échos','arme','legendaire','echo+200', (SELECT id_element FROM ElementMagique WHERE nom='chant'), 'Chaque coup résonne dans l’âme de l’adversaire.'),
+('Gantelet Runique','arme','rare','impact+25', (SELECT id_element FROM ElementMagique WHERE nom='arcane'), 'Insuffle la puissance des anciens glyphes.'),
+('Lance des Âmes','arme','epique','spirituel+80', (SELECT id_element FROM ElementMagique WHERE nom='esprit'), 'Chaque blessure délivre une prière.'),
+('Marteau de l’Éclipse','arme','legendaire','astre+200', (SELECT id_element FROM ElementMagique WHERE nom='astre'), 'Se manifeste à la lumière d’une double lune.'),
+('Bâton de Feu Céleste','arme','epique','pyro+80', (SELECT id_element FROM ElementMagique WHERE nom='feu'), 'Canalise les flammes du firmament.'),
+('Arc du Mirage','arme','rare','illusion+25', (SELECT id_element FROM ElementMagique WHERE nom='brume'), 'Crée dix fausses flèches pour chaque vraie.'),
+('Lame des Saisons','arme','mythique','elementium+300', (SELECT id_element FROM ElementMagique WHERE nom='arcane'), 'Change d’élément selon la saison.'),
+('Faux de Minuit','arme','epique','silence+80', (SELECT id_element FROM ElementMagique WHERE nom='ombre'), 'Fauche plus de réputations que de vies.'),
+('Sabre du Rire','arme','rare','euphorie+25', (SELECT id_element FROM ElementMagique WHERE nom='rire'), 'Chaque coup déclenche un fou rire incontrôlable.'),
+('Épée du Beurre Tranchant','arme','commun','tranchant+1', (SELECT id_element FROM ElementMagique WHERE nom='gras'), 'Redoutée des croissants et des diètes.'),
+('Masse à Poivre','arme','commun','perturbation+1', (SELECT id_element FROM ElementMagique WHERE nom='poivre'), 'Assaisonne la douleur.'),
+('Fléau des Miettes','arme','rare','proprete+25', (SELECT id_element FROM ElementMagique WHERE nom='farine'), 'Empêche les rongeurs de s’approcher du porteur.'),
+('Épée du Silence','arme','epique','silence+80', (SELECT id_element FROM ElementMagique WHERE nom='sérénité'), 'Absorbe le son de la victoire.'),
+('Lame de la Raclette','arme','epique','fusion+80', (SELECT id_element FROM ElementMagique WHERE nom='raclette'), 'Fond tout ce qu’elle touche… y compris la neige.'),
+('Trident de la Mer Claire','arme','legendaire','maree+200', (SELECT id_element FROM ElementMagique WHERE nom='eau'), 'Symbole des marins de Poissarie.'),
+('Bâton du Souffle d’Azur','arme','epique','bourrasque+80', (SELECT id_element FROM ElementMagique WHERE nom='air'), 'Lance des bourrasques parfumées.'),
+('Lance du Zénith','arme','legendaire','soleil+200', (SELECT id_element FROM ElementMagique WHERE nom='soleil'), 'Condense la lumière en un faisceau mortel.'),
+('Armure du Levant','armure','rare','defense+25', (SELECT id_element FROM ElementMagique WHERE nom='lumière'), 'Protège mieux le matin.'),
+('Cuirasse du Zénith','armure','epique','reflexion+80', (SELECT id_element FROM ElementMagique WHERE nom='soleil'), 'Réfléchit les rayons du soleil et les critiques.'),
+('Bouclier des Brumes','armure','rare','dissipation+25', (SELECT id_element FROM ElementMagique WHERE nom='brume'), 'Dissipe les flèches comme la rosée.'),
+('Casque des Profondeurs','armure','rare','pression+25', (SELECT id_element FROM ElementMagique WHERE nom='eau'), 'Empêche de réfléchir trop longtemps.'),
+('Plastron de l’Aube','armure','epique','vitalite+80', (SELECT id_element FROM ElementMagique WHERE nom='lumière'), 'Réchauffe le cœur et le torse.'),
+('Gants du Vent Libre','armure','commun',NULL, (SELECT id_element FROM ElementMagique WHERE nom='vent'), 'Parfaits pour applaudir le vent.'),
+('Heaume du Silence','armure','epique','silence+80', (SELECT id_element FROM ElementMagique WHERE nom='sérénité'), 'Étouffe les bruits et les remords.'),
+('Bottes des Neiges Bleues','armure','rare','marchegivre+25', (SELECT id_element FROM ElementMagique WHERE nom='givre'), 'Ne laissent pas de trace sauf dans la poésie.'),
+('Bouclier du Roc','armure','rare','solidite+25', (SELECT id_element FROM ElementMagique WHERE nom='terre'), 'Solide comme les excuses d’un politicien.'),
+('Tunique des Feuilles Vives','armure','rare','nature+25', (SELECT id_element FROM ElementMagique WHERE nom='herbe'), 'Fait respirer la nature autour du porteur.'),
+('Casque du Tonnerre','armure','epique','tonnerre+80', (SELECT id_element FROM ElementMagique WHERE nom='foudre'), 'Résonne avant la tempête.'),
+('Armure de la Lumière Pure','armure','mythique','lumiere+300', (SELECT id_element FROM ElementMagique WHERE nom='lumière'), 'Brille d’une intensité à aveugler la mauvaise foi.'),
+('Armure d’Obsidienne','armure','legendaire','antifeu+200', (SELECT id_element FROM ElementMagique WHERE nom='lave'), 'A résisté à la Guerre des Forges.'),
+('Cotte de Brume','armure','rare','esquive+25', (SELECT id_element FROM ElementMagique WHERE nom='brume'), 'Souple comme un nuage.'),
+('Manteau du Froid Éternel','armure','epique','froid+80', (SELECT id_element FROM ElementMagique WHERE nom='glace'), 'Empêche le froid d’entrer mais pas les ragots.'),
+('Casque du Sablier','armure','epique','temps+80', (SELECT id_element FROM ElementMagique WHERE nom='temps'), 'Rappelle que tout finit par se vider.'),
+('Gants de l’Astral','armure','rare','poussiereetoile+25', (SELECT id_element FROM ElementMagique WHERE nom='astre'), 'Récoltent la poussière d’étoiles.'),
+('Bottes de l’Aurore','armure','rare','acceleration+25', (SELECT id_element FROM ElementMagique WHERE nom='lumière'), 'S’illuminent au premier pas du matin.'),
+('Cape de l’Ombre Déliée','armure','epique','transparence+80', (SELECT id_element FROM ElementMagique WHERE nom='ombre'), 'Permet de marcher entre deux rayons de lumière.'),
+('Casque du Beurre Ferme','armure','commun',NULL, (SELECT id_element FROM ElementMagique WHERE nom='gras'), 'Ne protège que le moral.'),
+('Bottes à Raclette','armure','commun','adherence+1', (SELECT id_element FROM ElementMagique WHERE nom='raclette'), 'Adhérence redoutable sur sol fondu.'),
+('Tunique du Thé Froid','armure','rare','temperance+25', (SELECT id_element FROM ElementMagique WHERE nom='caféine'), 'Maintient une température diplomatique.'),
+('Bouclier de Chantilly','armure','commun',NULL, (SELECT id_element FROM ElementMagique WHERE nom='sucre'), 'Protège des critiques légères.'),
+('Casque du Croissant Doré','armure','rare','feuillete+25', (SELECT id_element FROM ElementMagique WHERE nom='beurre'), 'Offert aux meilleurs boulangers d’élite.'),
+('Plastron des Abysses','armure','epique','respiration+80', (SELECT id_element FROM ElementMagique WHERE nom='eau'), 'Respire sous l’eau (le porteur non).'),
+('Cape de Givre','armure','rare','givre+25', (SELECT id_element FROM ElementMagique WHERE nom='givre'), 'Craque joliment quand on la plie.'),
+('Bouclier Runique','armure','epique','contre+80', (SELECT id_element FROM ElementMagique WHERE nom='arcane'), 'S’adapte à chaque frappe comme un vieux mage grincheux.'),
+('Cuirasse du Temps','armure','legendaire','temps+200', (SELECT id_element FROM ElementMagique WHERE nom='temps'), 'Vieillit le porteur au ralenti.'),
+('Heaume des Orages','armure','epique','orage+80', (SELECT id_element FROM ElementMagique WHERE nom='orage'), 'Capte la foudre comme un paratonnerre enthousiaste.'),
+('Plastron d’Argile','armure','commun','defense+1', (SELECT id_element FROM ElementMagique WHERE nom='terre'), 'Protège jusqu’à la première pluie.'),
+('Gants du Sable','armure','rare','tellurique+25', (SELECT id_element FROM ElementMagique WHERE nom='sable'), 'Filtrent la magie tellurique.'),
+('Bouclier de l’Aube','armure','epique','barriere+80', (SELECT id_element FROM ElementMagique WHERE nom='lumière'), 'Protège les rêves et les matinées.'),
+('Casque du Rire','armure','rare','joie+25', (SELECT id_element FROM ElementMagique WHERE nom='rire'), 'Résonne quand on se moque.'),
+('Cape du Vent','armure','rare','levitation+25', (SELECT id_element FROM ElementMagique WHERE nom='vent'), 'Ne pèse rien mais coûte cher.'),
+('Manteau de Brume','armure','rare','discretion+25', (SELECT id_element FROM ElementMagique WHERE nom='brume'), 'Favori des espions parfumés.'),
+('Bouclier des Astres','armure','legendaire','reflexion+200', (SELECT id_element FROM ElementMagique WHERE nom='astre'), 'Réfléchit les constellations et les sorts.'),
+('Tunique des Échos','armure','epique','resonance+80', (SELECT id_element FROM ElementMagique WHERE nom='chant'), 'Répète les compliments à l’infini.'),
+('Armure des Titans','armure','mythique','titan+300', (SELECT id_element FROM ElementMagique WHERE nom='astre'), 'Créée à partir d’un fragment d’étoile.'),
+('Amulette du Zénith','accessoire','epique','zenith+80', (SELECT id_element FROM ElementMagique WHERE nom='lumière'), 'Renforce le porteur à midi pile.'),
+('Bague de l’Ombre','accessoire','rare','furtivite+25', (SELECT id_element FROM ElementMagique WHERE nom='ombre'), 'Devient invisible en plein jour.'),
+('Anneau du Temps','accessoire','legendaire','chrono+200', (SELECT id_element FROM ElementMagique WHERE nom='temps'), 'Décale les rendez-vous d’un quart d’heure.'),
+('Broche de l’Aube','accessoire','rare','halo+25', (SELECT id_element FROM ElementMagique WHERE nom='lumière'), 'Brille aux compliments sincères.'),
+('Bracelet Runique','accessoire','rare','lecture+25', (SELECT id_element FROM ElementMagique WHERE nom='arcane'), 'Inscrit les émotions du porteur.'),
+('Couronne des Saisons','accessoire','epique','saison+80', (SELECT id_element FROM ElementMagique WHERE nom='herbe'), 'Change de fleurs selon la lune.'),
+('Ceinture du Golem','accessoire','epique','stabilite+80', (SELECT id_element FROM ElementMagique WHERE nom='terre'), 'Augmente la stabilité émotionnelle.'),
+('Cape du Crépuscule','accessoire','legendaire','ombre+200', (SELECT id_element FROM ElementMagique WHERE nom='ténèbres'), 'Camoufle dans la pénombre et dans les soirées mondaines.'),
+('Talisman du Rire','accessoire','rare','bonnehumeur+25', (SELECT id_element FROM ElementMagique WHERE nom='rire'), 'Désamorce les disputes par éclats incontrôlés.'),
+('Pendentif d’Obsidienne','accessoire','rare','loyaute+25', (SELECT id_element FROM ElementMagique WHERE nom='lave'), 'Symbole de loyauté et de migraine.'),
+('Collier du Beurre Divin','accessoire','commun',NULL, (SELECT id_element FROM ElementMagique WHERE nom='gras'), 'Améliore la digestion mystique.'),
+('Bague du Vent','accessoire','rare','suspension+25', (SELECT id_element FROM ElementMagique WHERE nom='vent'), 'Fait flotter les manches trop longues.'),
+('Broche du Feu','accessoire','epique','flamme+80', (SELECT id_element FROM ElementMagique WHERE nom='feu'), 'S’embrase pour exprimer le désaccord.'),
+('Anneau du Sel','accessoire','commun',NULL, (SELECT id_element FROM ElementMagique WHERE nom='sel'), 'Protège du mauvais goût.'),
+('Talisman du Thé','accessoire','rare','apaisement+25', (SELECT id_element FROM ElementMagique WHERE nom='sérénité'), 'Diffuse une odeur apaisante.'),
+('Pendentif des Brumes','accessoire','rare','voile+25', (SELECT id_element FROM ElementMagique WHERE nom='brume'), 'Cache les émotions derrière un voile.'),
+('Couronne de Raclette','accessoire','epique','festin+80', (SELECT id_element FROM ElementMagique WHERE nom='raclette'), 'Chef-d’œuvre de la mode fondue.'),
+('Bague du Courage','accessoire','rare','bravoure+25', (SELECT id_element FROM ElementMagique WHERE nom='lumière'), 'Ne fuit que les responsabilités.'),
+('Bracelet des Étoiles','accessoire','legendaire','etoiles+200', (SELECT id_element FROM ElementMagique WHERE nom='astre'), 'Gravé d’un ciel miniature.'),
+('Amulette du Souvenir','accessoire','epique','souvenir+80', (SELECT id_element FROM ElementMagique WHERE nom='esprit'), 'Contient une image figée du passé.'),
+('Médaillon du Silence','accessoire','epique','silence+80', (SELECT id_element FROM ElementMagique WHERE nom='sérénité'), 'Empêche de dire des bêtises (parfois).'),
+('Pioche de Fer','outil','commun','efficacite+1', (SELECT id_element FROM ElementMagique WHERE nom='métal'), 'Pour creuser plus vite que ses regrets.'),
+('Marteau de Forgeron','outil','commun',NULL, (SELECT id_element FROM ElementMagique WHERE nom='métal'), 'Indispensable, lourd, fidèle.'),
+('Trousse de Soin','consommable','rare','soin+25', (SELECT id_element FROM ElementMagique WHERE nom='lumière'), 'Contient plus de pansements que d’espoir.'),
+('Potion de Mana','consommable','commun',NULL, (SELECT id_element FROM ElementMagique WHERE nom='arcane'), 'Goût myrtille, effet temporaire.'),
+('Potion de Vie','consommable','commun',NULL, (SELECT id_element FROM ElementMagique WHERE nom='lumière'), 'Remonte le moral et les points de vie.'),
+('Élixir de Lune','consommable','rare','vision+25', (SELECT id_element FROM ElementMagique WHERE nom='lune'), 'Illumine les pensées nocturnes.'),
+('Kit de Croissant','outil','commun','cuisine+1', (SELECT id_element FROM ElementMagique WHERE nom='beurre'), 'Pour les artisans du petit-déjeuner.'),
+('Loupe du Savoir','outil','rare','analyse+25', (SELECT id_element FROM ElementMagique WHERE nom='arcane'), 'Révèle les erreurs de grammaire magique.'),
+('Boussole Runique','outil','rare','guidage+25', (SELECT id_element FROM ElementMagique WHERE nom='arcane'), 'Indique la direction la plus dramatique.'),
+('Sac de Brume','outil','rare','evasif+25', (SELECT id_element FROM ElementMagique WHERE nom='brume'), 'Permet de s’évaporer en cas de malaise.'),
+('Encens du Calme','consommable','commun',NULL, (SELECT id_element FROM ElementMagique WHERE nom='sérénité'), 'Éteint la colère (et les bougies).'),
+('Huile de Griffon','consommable','rare','charisme+25', (SELECT id_element FROM ElementMagique WHERE nom='air'), 'Rend les cheveux soyeux et les griffons jaloux.'),
+('Flasque du Courage Liquide','consommable','rare','courage+25', (SELECT id_element FROM ElementMagique WHERE nom='feu'), 'Aide avant les discours.'),
+('Larme de Dragon','consommable','epique','ignition+80', (SELECT id_element FROM ElementMagique WHERE nom='feu'), 'Un ingrédient rare pour des potions puissantes.'),
+('Larme de Sirène','consommable','epique','charme+80', (SELECT id_element FROM ElementMagique WHERE nom='eau'), 'Utilisée dans les élixirs de charme.'),
+('Parchemin améliorant Enchanté','outil','epique','craft+80', (SELECT id_element FROM ElementMagique WHERE nom='arcane'), 'Utilisé pour augmenter la rareté des objets à leur création.'),
+('Plume de Phénix','outil','legendaire','renaissance+200', (SELECT id_element FROM ElementMagique WHERE nom='feu'), 'Indispensable pour les mages écrivains.'),
+('Chaudron de Voyage','outil','commun',NULL, (SELECT id_element FROM ElementMagique WHERE nom='feu'), 'Toujours chaud, jamais propre.'),
+('Torche Infinie','outil','rare','flamme+25', (SELECT id_element FROM ElementMagique WHERE nom='feu'), 'Ne s’éteint qu’en cas de bâillement collectif.'),
+('Pierre de Téléportation','outil','epique','teleportation+80', (SELECT id_element FROM ElementMagique WHERE nom='arcane'), 'Fonctionne, mais rarement vers la bonne destination.'),
+('Livre de Cuisine Runique','outil','rare','recette+25', (SELECT id_element FROM ElementMagique WHERE nom='arcane'), 'Les recettes changent à chaque pleine lune.'),
+('Tente de l’Oubli','outil','epique','sommeil+80', (SELECT id_element FROM ElementMagique WHERE nom='sérénité'), 'Fait dormir quiconque y entre (même debout).'),
+('Corde du Destin','outil','rare','destin+25', (SELECT id_element FROM ElementMagique WHERE nom='arcane'), 'Se noue selon les choix du porteur.'),
+('Poche Dimensionnelle','outil','legendaire','espace+200', (SELECT id_element FROM ElementMagique WHERE nom='arcane'), 'Contient tout sauf ce qu’on cherche.'),
+('Sceptre des Arcanes','magique','legendaire','maitrise+200', (SELECT id_element FROM ElementMagique WHERE nom='arcane'), 'Canalise tous les éléments connus et inconnus.'),
+('Orbe des Étoiles','magique','mythique','cosmique+300', (SELECT id_element FROM ElementMagique WHERE nom='astre'), 'Renferme un fragment de cosmos.'),
+('Grimoire Vivant','magique','legendaire','autolecture+200', (SELECT id_element FROM ElementMagique WHERE nom='arcane'), 'Écrit seul, corrige parfois le lecteur.'),
+('Anneau des Six Éléments','magique','mythique','fusion+300', (SELECT id_element FROM ElementMagique WHERE nom='arcane'), 'Fusionne feu, eau, air, terre, lumière et ténèbres.'),
+('Couronne des Dieux Muets','magique','mythique','autorite+300', (SELECT id_element FROM ElementMagique WHERE nom='sérénité'), 'Silencieusement toute-puissante.'),
+('Diadème du Zénith','magique','legendaire','solaire+200', (SELECT id_element FROM ElementMagique WHERE nom='soleil'), 'Diffuse une aura solaire.'),
+('Cape de Lune','magique','legendaire','lunaire+200', (SELECT id_element FROM ElementMagique WHERE nom='lune'), 'Change de couleur selon les phases.'),
+('Talisman du Néant','magique','epique','antimagie+80', (SELECT id_element FROM ElementMagique WHERE nom='ténèbres'), 'N’existe que quand on le regarde.'),
+('Orbe de Brume','magique','epique','brouillard+80', (SELECT id_element FROM ElementMagique WHERE nom='brume'), 'Libère un voile protecteur.'),
+('Cristal d’Âme','magique','legendaire','memoire+200', (SELECT id_element FROM ElementMagique WHERE nom='esprit'), 'Contient la mémoire d’un ancien héros.'),
+('Pierre de Zéphyr','magique','rare','zephyr+25', (SELECT id_element FROM ElementMagique WHERE nom='air'), 'Souffle un vent d’apaisement.'),
+('Cœur de Raclette','magique','epique','fondant+80', (SELECT id_element FROM ElementMagique WHERE nom='raclette'), 'Chaud, fondant et dangereux.'),
+('Sphère du Temps','magique','legendaire','suspension+200', (SELECT id_element FROM ElementMagique WHERE nom='temps'), 'Permet de suspendre l’instant parfait.'),
+('Lanterne Astrale','magique','epique','guidage+80', (SELECT id_element FROM ElementMagique WHERE nom='astre'), 'Guide les voyageurs du firmament.'),
+('Relique du Premier Mage','magique','mythique','autorite+300', (SELECT id_element FROM ElementMagique WHERE nom='arcane'), 'Son nom seul déclenche la révérence.'),
+('Griffon Mécanique','magique','epique','monture+80', (SELECT id_element FROM ElementMagique WHERE nom='métal'), 'Monture d’acier et d’orgueil.'),
+('Livre des Ombres','magique','epique','secrets+80', (SELECT id_element FROM ElementMagique WHERE nom='ombre'), 'Recueille les secrets chuchotés.'),
+('Miroir de Vérité','magique','legendaire','revelation+200', (SELECT id_element FROM ElementMagique WHERE nom='lumière'), 'Révèle tout, même les mauvaises coupes de cheveux.'),
+('Harpe Céleste','magique','legendaire','melodie+200', (SELECT id_element FROM ElementMagique WHERE nom='chant'), 'Ses notes guérissent les cœurs brisés.'),
+('Ancre du Monde','magique','mythique','stabilite+300', (SELECT id_element FROM ElementMagique WHERE nom='terre'), 'Stabilise et réécrit à souhait la réalité autour d’elle.');
+
+
+INSERT INTO EquipementRessource (equipement_id, ressource_id) VALUES
+((SELECT id_equipement FROM Equipement WHERE nom='Épée du Levain'),            (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Épée du Levain'),            (SELECT id_ressource FROM Ressource WHERE nom='Bois noble')),
+((SELECT id_equipement FROM Equipement WHERE nom='Hallebarde de l’Aube'),      (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Hallebarde de l’Aube'),      (SELECT id_ressource FROM Ressource WHERE nom='Fil d’or')),
+((SELECT id_equipement FROM Equipement WHERE nom='Marteau du Crépuscule'),     (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Marteau du Crépuscule'),     (SELECT id_ressource FROM Ressource WHERE nom='Obsidienne brute')),
+((SELECT id_equipement FROM Equipement WHERE nom='Arc des Vents Boréaux'),     (SELECT id_ressource FROM Ressource WHERE nom='Bois noble')),
+((SELECT id_equipement FROM Equipement WHERE nom='Arc des Vents Boréaux'),     (SELECT id_ressource FROM Ressource WHERE nom='Vent capturé')),
+((SELECT id_equipement FROM Equipement WHERE nom='Dague de Brume'),            (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Dague de Brume'),            (SELECT id_ressource FROM Ressource WHERE nom='Brume condensée')),
+((SELECT id_equipement FROM Equipement WHERE nom='Masse d’Airain'),            (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Masse d’Airain'),            (SELECT id_ressource FROM Ressource WHERE nom='Cuir tanné')),
+((SELECT id_equipement FROM Equipement WHERE nom='Lance des Marées'),          (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Lance des Marées'),          (SELECT id_ressource FROM Ressource WHERE nom='Perle d’eau pure')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bâton d’Obsidienne'),        (SELECT id_ressource FROM Ressource WHERE nom='Obsidienne brute')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bâton d’Obsidienne'),        (SELECT id_ressource FROM Ressource WHERE nom='Cristal de mana')),
+((SELECT id_equipement FROM Equipement WHERE nom='Couteau des Sables'),        (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Couteau des Sables'),        (SELECT id_ressource FROM Ressource WHERE nom='Sable du désert')),
+((SELECT id_equipement FROM Equipement WHERE nom='Épée Solaire'),              (SELECT id_ressource FROM Ressource WHERE nom='Épée Solaire')),
+((SELECT id_equipement FROM Equipement WHERE nom='Épée Nocturne'),             (SELECT id_ressource FROM Ressource WHERE nom='Épée Nocturne')),
+((SELECT id_equipement FROM Equipement WHERE nom='Arc Astral'),                (SELECT id_ressource FROM Ressource WHERE nom='Bois noble')),
+((SELECT id_equipement FROM Equipement WHERE nom='Arc Astral'),                (SELECT id_ressource FROM Ressource WHERE nom='Poussière d’étoile')),
+((SELECT id_equipement FROM Equipement WHERE nom='Faux du Néant'),             (SELECT id_ressource FROM Ressource WHERE nom='Faux du Néant')),
+((SELECT id_equipement FROM Equipement WHERE nom='Pique du Zéphyr'),           (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Pique du Zéphyr'),           (SELECT id_ressource FROM Ressource WHERE nom='Vent capturé')),
+((SELECT id_equipement FROM Equipement WHERE nom='Marteau des Forges Hurlantes'),(SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Marteau des Forges Hurlantes'),(SELECT id_ressource FROM Ressource WHERE nom='Braise éternelle')),
+((SELECT id_equipement FROM Equipement WHERE nom='Hache de Givre'),            (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Hache de Givre'),            (SELECT id_ressource FROM Ressource WHERE nom='Givre pur')),
+((SELECT id_equipement FROM Equipement WHERE nom='Épée Runique'),              (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Épée Runique'),              (SELECT id_ressource FROM Ressource WHERE nom='Cristal de mana')),
+((SELECT id_equipement FROM Equipement WHERE nom='Arc de l’Orage'),            (SELECT id_ressource FROM Ressource WHERE nom='Bois noble')),
+((SELECT id_equipement FROM Equipement WHERE nom='Arc de l’Orage'),            (SELECT id_ressource FROM Ressource WHERE nom='Cœur d’orage')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bâton de l’Astrolithe'),     (SELECT id_ressource FROM Ressource WHERE nom='Bâton de l’Astrolithe')),
+((SELECT id_equipement FROM Equipement WHERE nom='Dague de l’Ombre'),          (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Dague de l’Ombre'),          (SELECT id_ressource FROM Ressource WHERE nom='Essence d’ombre')),
+((SELECT id_equipement FROM Equipement WHERE nom='Épée des Ancêtres'),         (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Épée des Ancêtres'),         (SELECT id_ressource FROM Ressource WHERE nom='Encens ancestral')),
+((SELECT id_equipement FROM Equipement WHERE nom='Sabre Chantant'),            (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Sabre Chantant'),            (SELECT id_ressource FROM Ressource WHERE nom='Chant cristallin')),
+((SELECT id_equipement FROM Equipement WHERE nom='Masse Sismique'),            (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Masse Sismique'),            (SELECT id_ressource FROM Ressource WHERE nom='Pierre tellurique')),
+((SELECT id_equipement FROM Equipement WHERE nom='Lance de l’Aurore'),         (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Lance de l’Aurore'),         (SELECT id_ressource FROM Ressource WHERE nom='Essence de lumière')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bâton du Temps Figé'),       (SELECT id_ressource FROM Ressource WHERE nom='Bâton du Temps Figé')),
+((SELECT id_equipement FROM Equipement WHERE nom='Hache des Abîmes'),          (SELECT id_ressource FROM Ressource WHERE nom='Acier trempé')),
+((SELECT id_equipement FROM Equipement WHERE nom='Hache des Abîmes'),          (SELECT id_ressource FROM Ressource WHERE nom='Corail noir')),
+((SELECT id_equipement FROM Equipement WHERE nom='Arc Lunaire'),               (SELECT id_ressource FROM Ressource WHERE nom='Bois lunaire')),
+((SELECT id_equipement FROM Equipement WHERE nom='Arc Lunaire'),               (SELECT id_ressource FROM Ressource WHERE nom='Poudre sélène')),
+((SELECT id_equipement FROM Equipement WHERE nom='Épée de Sel'),               (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Épée de Sel'),               (SELECT id_ressource FROM Ressource WHERE nom='Sel marin')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bâton de Cendre'),           (SELECT id_ressource FROM Ressource WHERE nom='Bois calciné')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bâton de Cendre'),           (SELECT id_ressource FROM Ressource WHERE nom='Cendre ardente')),
+((SELECT id_equipement FROM Equipement WHERE nom='Fronde du Chaos'),           (SELECT id_ressource FROM Ressource WHERE nom='Cuir tanné')),
+((SELECT id_equipement FROM Equipement WHERE nom='Fronde du Chaos'),           (SELECT id_ressource FROM Ressource WHERE nom='Cristal chaotique')),
+((SELECT id_equipement FROM Equipement WHERE nom='Hallebarde de l’Empire'),    (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Hallebarde de l’Empire'),    (SELECT id_ressource FROM Ressource WHERE nom='Bois noble')),
+((SELECT id_equipement FROM Equipement WHERE nom='Lame d’Azur'),               (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Lame d’Azur'),               (SELECT id_ressource FROM Ressource WHERE nom='Plume d’azur')),
+((SELECT id_equipement FROM Equipement WHERE nom='Fléau d’Or'),                (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Fléau d’Or'),                (SELECT id_ressource FROM Ressource WHERE nom='Lingot d’or')),
+((SELECT id_equipement FROM Equipement WHERE nom='Épée des Échos'),            (SELECT id_ressource FROM Ressource WHERE nom='Épée des Échos')),
+((SELECT id_equipement FROM Equipement WHERE nom='Gantelet Runique'),          (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Gantelet Runique'),          (SELECT id_ressource FROM Ressource WHERE nom='Rune gravée')),
+((SELECT id_equipement FROM Equipement WHERE nom='Lance des Âmes'),            (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Lance des Âmes'),            (SELECT id_ressource FROM Ressource WHERE nom='Encens ancestral')),
+((SELECT id_equipement FROM Equipement WHERE nom='Marteau de l’Éclipse'),      (SELECT id_ressource FROM Ressource WHERE nom='Marteau de l’Éclipse')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bâton de Feu Céleste'),      (SELECT id_ressource FROM Ressource WHERE nom='Bois sacré')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bâton de Feu Céleste'),      (SELECT id_ressource FROM Ressource WHERE nom='Braise éternelle')),
+((SELECT id_equipement FROM Equipement WHERE nom='Arc du Mirage'),             (SELECT id_ressource FROM Ressource WHERE nom='Bois noble')),
+((SELECT id_equipement FROM Equipement WHERE nom='Arc du Mirage'),             (SELECT id_ressource FROM Ressource WHERE nom='Brume condensée')),
+((SELECT id_equipement FROM Equipement WHERE nom='Lame des Saisons'),          (SELECT id_ressource FROM Ressource WHERE nom='Lame des Saisons')),
+((SELECT id_equipement FROM Equipement WHERE nom='Faux de Minuit'),            (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Faux de Minuit'),            (SELECT id_ressource FROM Ressource WHERE nom='Essence d’ombre')),
+((SELECT id_equipement FROM Equipement WHERE nom='Sabre du Rire'),             (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Sabre du Rire'),             (SELECT id_ressource FROM Ressource WHERE nom='Clochette joyeuse')),
+((SELECT id_equipement FROM Equipement WHERE nom='Épée du Beurre Tranchant'),  (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Épée du Beurre Tranchant'),  (SELECT id_ressource FROM Ressource WHERE nom='Beurre fin')),
+((SELECT id_equipement FROM Equipement WHERE nom='Masse à Poivre'),            (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Masse à Poivre'),            (SELECT id_ressource FROM Ressource WHERE nom='Poivre noir')),
+((SELECT id_equipement FROM Equipement WHERE nom='Fléau des Miettes'),         (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Fléau des Miettes'),         (SELECT id_ressource FROM Ressource WHERE nom='Farine blanche')),
+((SELECT id_equipement FROM Equipement WHERE nom='Épée du Silence'),           (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Épée du Silence'),           (SELECT id_ressource FROM Ressource WHERE nom='Voile de sérénité')),
+((SELECT id_equipement FROM Equipement WHERE nom='Lame de la Raclette'),       (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Lame de la Raclette'),       (SELECT id_ressource FROM Ressource WHERE nom='Raclette affinée')),
+((SELECT id_equipement FROM Equipement WHERE nom='Trident de la Mer Claire'),  (SELECT id_ressource FROM Ressource WHERE nom='Trident de la Mer Claire')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bâton du Souffle d’Azur'),   (SELECT id_ressource FROM Ressource WHERE nom='Bois sacré')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bâton du Souffle d’Azur'),   (SELECT id_ressource FROM Ressource WHERE nom='Vent capturé')),
+((SELECT id_equipement FROM Equipement WHERE nom='Lance du Zénith'),           (SELECT id_ressource FROM Ressource WHERE nom='Lance du Zénith')),
+((SELECT id_equipement FROM Equipement WHERE nom='Armure du Levant'),          (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Armure du Levant'),          (SELECT id_ressource FROM Ressource WHERE nom='Cuir tanné')),
+((SELECT id_equipement FROM Equipement WHERE nom='Cuirasse du Zénith'),        (SELECT id_ressource FROM Ressource WHERE nom='Acier trempé')),
+((SELECT id_equipement FROM Equipement WHERE nom='Cuirasse du Zénith'),        (SELECT id_ressource FROM Ressource WHERE nom='Fil d’or')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bouclier des Brumes'),       (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bouclier des Brumes'),       (SELECT id_ressource FROM Ressource WHERE nom='Brume condensée')),
+((SELECT id_equipement FROM Equipement WHERE nom='Casque des Profondeurs'),    (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Casque des Profondeurs'),    (SELECT id_ressource FROM Ressource WHERE nom='Corail noir')),
+((SELECT id_equipement FROM Equipement WHERE nom='Plastron de l’Aube'),        (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Plastron de l’Aube'),        (SELECT id_ressource FROM Ressource WHERE nom='Essence de lumière')),
+((SELECT id_equipement FROM Equipement WHERE nom='Gants du Vent Libre'),       (SELECT id_ressource FROM Ressource WHERE nom='Tissu runique')),
+((SELECT id_equipement FROM Equipement WHERE nom='Gants du Vent Libre'),       (SELECT id_ressource FROM Ressource WHERE nom='Vent capturé')),
+((SELECT id_equipement FROM Equipement WHERE nom='Heaume du Silence'),         (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Heaume du Silence'),         (SELECT id_ressource FROM Ressource WHERE nom='Voile de sérénité')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bottes des Neiges Bleues'),  (SELECT id_ressource FROM Ressource WHERE nom='Cuir tanné')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bottes des Neiges Bleues'),  (SELECT id_ressource FROM Ressource WHERE nom='Givre pur')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bouclier du Roc'),           (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bouclier du Roc'),           (SELECT id_ressource FROM Ressource WHERE nom='Pierre brute')),
+((SELECT id_equipement FROM Equipement WHERE nom='Tunique des Feuilles Vives'),(SELECT id_ressource FROM Ressource WHERE nom='Tissu runique')),
+((SELECT id_equipement FROM Equipement WHERE nom='Tunique des Feuilles Vives'),(SELECT id_ressource FROM Ressource WHERE nom='Herbes vives')),
+((SELECT id_equipement FROM Equipement WHERE nom='Casque du Tonnerre'),        (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Casque du Tonnerre'),        (SELECT id_ressource FROM Ressource WHERE nom='Cœur d’orage')),
+((SELECT id_equipement FROM Equipement WHERE nom='Armure de la Lumière Pure'), (SELECT id_ressource FROM Ressource WHERE nom='Armure de la Lumière Pure')),
+((SELECT id_equipement FROM Equipement WHERE nom='Armure d’Obsidienne'),       (SELECT id_ressource FROM Ressource WHERE nom='Armure d’Obsidienne')),
+((SELECT id_equipement FROM Equipement WHERE nom='Cotte de Brume'),            (SELECT id_ressource FROM Ressource WHERE nom='Tissu runique')),
+((SELECT id_equipement FROM Equipement WHERE nom='Cotte de Brume'),            (SELECT id_ressource FROM Ressource WHERE nom='Brume condensée')),
+((SELECT id_equipement FROM Equipement WHERE nom='Manteau du Froid Éternel'),  (SELECT id_ressource FROM Ressource WHERE nom='Tissu runique')),
+((SELECT id_equipement FROM Equipement WHERE nom='Manteau du Froid Éternel'),  (SELECT id_ressource FROM Ressource WHERE nom='Givre pur')),
+((SELECT id_equipement FROM Equipement WHERE nom='Casque du Sablier'),         (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Casque du Sablier'),         (SELECT id_ressource FROM Ressource WHERE nom='Sable du temps')),
+((SELECT id_equipement FROM Equipement WHERE nom='Gants de l’Astral'),         (SELECT id_ressource FROM Ressource WHERE nom='Tissu runique')),
+((SELECT id_equipement FROM Equipement WHERE nom='Gants de l’Astral'),         (SELECT id_ressource FROM Ressource WHERE nom='Poussière d’étoile')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bottes de l’Aurore'),        (SELECT id_ressource FROM Ressource WHERE nom='Cuir tanné')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bottes de l’Aurore'),        (SELECT id_ressource FROM Ressource WHERE nom='Essence de lumière')),
+((SELECT id_equipement FROM Equipement WHERE nom='Cape de l’Ombre Déliée'),    (SELECT id_ressource FROM Ressource WHERE nom='Tissu runique')),
+((SELECT id_equipement FROM Equipement WHERE nom='Cape de l’Ombre Déliée'),    (SELECT id_ressource FROM Ressource WHERE nom='Essence d’ombre')),
+((SELECT id_equipement FROM Equipement WHERE nom='Casque du Beurre Ferme'),    (SELECT id_ressource FROM Ressource WHERE nom='Cuir tanné')),
+((SELECT id_equipement FROM Equipement WHERE nom='Casque du Beurre Ferme'),    (SELECT id_ressource FROM Ressource WHERE nom='Beurre fin')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bottes à Raclette'),         (SELECT id_ressource FROM Ressource WHERE nom='Cuir tanné')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bottes à Raclette'),         (SELECT id_ressource FROM Ressource WHERE nom='Raclette affinée')),
+((SELECT id_equipement FROM Equipement WHERE nom='Tunique du Thé Froid'),      (SELECT id_ressource FROM Ressource WHERE nom='Tissu runique')),
+((SELECT id_equipement FROM Equipement WHERE nom='Tunique du Thé Froid'),      (SELECT id_ressource FROM Ressource WHERE nom='Feuille de thé')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bouclier de Chantilly'),     (SELECT id_ressource FROM Ressource WHERE nom='Bois noble')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bouclier de Chantilly'),     (SELECT id_ressource FROM Ressource WHERE nom='Chantilly ferme')),
+((SELECT id_equipement FROM Equipement WHERE nom='Casque du Croissant Doré'),  (SELECT id_ressource FROM Ressource WHERE nom='Cuir tanné')),
+((SELECT id_equipement FROM Equipement WHERE nom='Casque du Croissant Doré'),  (SELECT id_ressource FROM Ressource WHERE nom='Beurre fin')),
+((SELECT id_equipement FROM Equipement WHERE nom='Plastron des Abysses'),      (SELECT id_ressource FROM Ressource WHERE nom='Acier trempé')),
+((SELECT id_equipement FROM Equipement WHERE nom='Plastron des Abysses'),      (SELECT id_ressource FROM Ressource WHERE nom='Perle d’eau pure')),
+((SELECT id_equipement FROM Equipement WHERE nom='Cape de Givre'),             (SELECT id_ressource FROM Ressource WHERE nom='Tissu runique')),
+((SELECT id_equipement FROM Equipement WHERE nom='Cape de Givre'),             (SELECT id_ressource FROM Ressource WHERE nom='Givre pur')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bouclier Runique'),          (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bouclier Runique'),          (SELECT id_ressource FROM Ressource WHERE nom='Rune gravée')),
+((SELECT id_equipement FROM Equipement WHERE nom='Cuirasse du Temps'),         (SELECT id_ressource FROM Ressource WHERE nom='Cuirasse du Temps')),
+((SELECT id_equipement FROM Equipement WHERE nom='Heaume des Orages'),         (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Heaume des Orages'),         (SELECT id_ressource FROM Ressource WHERE nom='Cœur d’orage')),
+((SELECT id_equipement FROM Equipement WHERE nom='Plastron d’Argile'),         (SELECT id_ressource FROM Ressource WHERE nom='Argile rouge')),
+((SELECT id_equipement FROM Equipement WHERE nom='Plastron d’Argile'),         (SELECT id_ressource FROM Ressource WHERE nom='Bois noble')),
+((SELECT id_equipement FROM Equipement WHERE nom='Gants du Sable'),            (SELECT id_ressource FROM Ressource WHERE nom='Tissu runique')),
+((SELECT id_equipement FROM Equipement WHERE nom='Gants du Sable'),            (SELECT id_ressource FROM Ressource WHERE nom='Sable du désert')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bouclier de l’Aube'),        (SELECT id_ressource FROM Ressource WHERE nom='Acier sacré')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bouclier de l’Aube'),        (SELECT id_ressource FROM Ressource WHERE nom='Essence de lumière')),
+((SELECT id_equipement FROM Equipement WHERE nom='Casque du Rire'),            (SELECT id_ressource FROM Ressource WHERE nom='Cuir tanné')),
+((SELECT id_equipement FROM Equipement WHERE nom='Casque du Rire'),            (SELECT id_ressource FROM Ressource WHERE nom='Clochette joyeuse')),
+((SELECT id_equipement FROM Equipement WHERE nom='Cape du Vent'),              (SELECT id_ressource FROM Ressource WHERE nom='Tissu runique')),
+((SELECT id_equipement FROM Equipement WHERE nom='Cape du Vent'),              (SELECT id_ressource FROM Ressource WHERE nom='Vent capturé')),
+((SELECT id_equipement FROM Equipement WHERE nom='Manteau de Brume'),          (SELECT id_ressource FROM Ressource WHERE nom='Tissu runique')),
+((SELECT id_equipement FROM Equipement WHERE nom='Manteau de Brume'),          (SELECT id_ressource FROM Ressource WHERE nom='Brume condensée')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bouclier des Astres'),       (SELECT id_ressource FROM Ressource WHERE nom='Bouclier des Astres')),
+((SELECT id_equipement FROM Equipement WHERE nom='Tunique des Échos'),         (SELECT id_ressource FROM Ressource WHERE nom='Tissu runique')),
+((SELECT id_equipement FROM Equipement WHERE nom='Tunique des Échos'),         (SELECT id_ressource FROM Ressource WHERE nom='Chant cristallin')),
+((SELECT id_equipement FROM Equipement WHERE nom='Armure des Titans'),         (SELECT id_ressource FROM Ressource WHERE nom='Armure des Titans')),
+((SELECT id_equipement FROM Equipement WHERE nom='Amulette du Zénith'),        (SELECT id_ressource FROM Ressource WHERE nom='Fil d’or')),
+((SELECT id_equipement FROM Equipement WHERE nom='Amulette du Zénith'),        (SELECT id_ressource FROM Ressource WHERE nom='Essence de lumière')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bague de l’Ombre'),          (SELECT id_ressource FROM Ressource WHERE nom='Argent pur')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bague de l’Ombre'),          (SELECT id_ressource FROM Ressource WHERE nom='Essence d’ombre')),
+((SELECT id_equipement FROM Equipement WHERE nom='Anneau du Temps'),           (SELECT id_ressource FROM Ressource WHERE nom='Anneau du Temps')),
+((SELECT id_equipement FROM Equipement WHERE nom='Broche de l’Aube'),          (SELECT id_ressource FROM Ressource WHERE nom='Fil d’or')),
+((SELECT id_equipement FROM Equipement WHERE nom='Broche de l’Aube'),          (SELECT id_ressource FROM Ressource WHERE nom='Perle d’aube')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bracelet Runique'),          (SELECT id_ressource FROM Ressource WHERE nom='Argent pur')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bracelet Runique'),          (SELECT id_ressource FROM Ressource WHERE nom='Rune gravée')),
+((SELECT id_equipement FROM Equipement WHERE nom='Couronne des Saisons'),      (SELECT id_ressource FROM Ressource WHERE nom='Fil d’or')),
+((SELECT id_equipement FROM Equipement WHERE nom='Couronne des Saisons'),      (SELECT id_ressource FROM Ressource WHERE nom='Herbes vives')),
+((SELECT id_equipement FROM Equipement WHERE nom='Ceinture du Golem'),         (SELECT id_ressource FROM Ressource WHERE nom='Cuir tanné')),
+((SELECT id_equipement FROM Equipement WHERE nom='Ceinture du Golem'),         (SELECT id_ressource FROM Ressource WHERE nom='Pierre brute')),
+((SELECT id_equipement FROM Equipement WHERE nom='Cape du Crépuscule'),        (SELECT id_ressource FROM Ressource WHERE nom='Cape du Crépuscule')),
+((SELECT id_equipement FROM Equipement WHERE nom='Talisman du Rire'),          (SELECT id_ressource FROM Ressource WHERE nom='Fil d’argent')),
+((SELECT id_equipement FROM Equipement WHERE nom='Talisman du Rire'),          (SELECT id_ressource FROM Ressource WHERE nom='Clochette joyeuse')),
+((SELECT id_equipement FROM Equipement WHERE nom='Pendentif d’Obsidienne'),    (SELECT id_ressource FROM Ressource WHERE nom='Fil d’argent')),
+((SELECT id_equipement FROM Equipement WHERE nom='Pendentif d’Obsidienne'),    (SELECT id_ressource FROM Ressource WHERE nom='Obsidienne brute')),
+((SELECT id_equipement FROM Equipement WHERE nom='Collier du Beurre Divin'),   (SELECT id_ressource FROM Ressource WHERE nom='Fil de lin')),
+((SELECT id_equipement FROM Equipement WHERE nom='Collier du Beurre Divin'),   (SELECT id_ressource FROM Ressource WHERE nom='Beurre fin')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bague du Vent'),             (SELECT id_ressource FROM Ressource WHERE nom='Argent pur')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bague du Vent'),             (SELECT id_ressource FROM Ressource WHERE nom='Vent capturé')),
+((SELECT id_equipement FROM Equipement WHERE nom='Broche du Feu'),             (SELECT id_ressource FROM Ressource WHERE nom='Fil d’or')),
+((SELECT id_equipement FROM Equipement WHERE nom='Broche du Feu'),             (SELECT id_ressource FROM Ressource WHERE nom='Braise éternelle')),
+((SELECT id_equipement FROM Equipement WHERE nom='Anneau du Sel'),             (SELECT id_ressource FROM Ressource WHERE nom='Argent pur')),
+((SELECT id_equipement FROM Equipement WHERE nom='Anneau du Sel'),             (SELECT id_ressource FROM Ressource WHERE nom='Sel marin')),
+((SELECT id_equipement FROM Equipement WHERE nom='Talisman du Thé'),           (SELECT id_ressource FROM Ressource WHERE nom='Fil de lin')),
+((SELECT id_equipement FROM Equipement WHERE nom='Talisman du Thé'),           (SELECT id_ressource FROM Ressource WHERE nom='Feuille de thé')),
+((SELECT id_equipement FROM Equipement WHERE nom='Pendentif des Brumes'),      (SELECT id_ressource FROM Ressource WHERE nom='Fil d’argent')),
+((SELECT id_equipement FROM Equipement WHERE nom='Pendentif des Brumes'),      (SELECT id_ressource FROM Ressource WHERE nom='Brume condensée')),
+((SELECT id_equipement FROM Equipement WHERE nom='Couronne de Raclette'),      (SELECT id_ressource FROM Ressource WHERE nom='Fil d’or')),
+((SELECT id_equipement FROM Equipement WHERE nom='Couronne de Raclette'),      (SELECT id_ressource FROM Ressource WHERE nom='Raclette affinée')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bague du Courage'),          (SELECT id_ressource FROM Ressource WHERE nom='Argent pur')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bague du Courage'),          (SELECT id_ressource FROM Ressource WHERE nom='Essence de lumière')),
+((SELECT id_equipement FROM Equipement WHERE nom='Bracelet des Étoiles'),      (SELECT id_ressource FROM Ressource WHERE nom='Bracelet des Étoiles')),
+((SELECT id_equipement FROM Equipement WHERE nom='Amulette du Souvenir'),      (SELECT id_ressource FROM Ressource WHERE nom='Fil d’or')),
+((SELECT id_equipement FROM Equipement WHERE nom='Amulette du Souvenir'),      (SELECT id_ressource FROM Ressource WHERE nom='Encens ancestral')),
+((SELECT id_equipement FROM Equipement WHERE nom='Médaillon du Silence'),      (SELECT id_ressource FROM Ressource WHERE nom='Fil d’argent')),
+((SELECT id_equipement FROM Equipement WHERE nom='Médaillon du Silence'),      (SELECT id_ressource FROM Ressource WHERE nom='Voile de sérénité')),
+((SELECT id_equipement FROM Equipement WHERE nom='Pioche de Fer'),             (SELECT id_ressource FROM Ressource WHERE nom='Fer')),
+((SELECT id_equipement FROM Equipement WHERE nom='Pioche de Fer'),             (SELECT id_ressource FROM Ressource WHERE nom='Bois noble')),
+((SELECT id_equipement FROM Equipement WHERE nom='Marteau de Forgeron'),       (SELECT id_ressource FROM Ressource WHERE nom='Fer')),
+((SELECT id_equipement FROM Equipement WHERE nom='Marteau de Forgeron'),       (SELECT id_ressource FROM Ressource WHERE nom='Cuir tanné')),
+((SELECT id_equipement FROM Equipement WHERE nom='Trousse de Soin'),           (SELECT id_ressource FROM Ressource WHERE nom='Tissu runique')),
+((SELECT id_equipement FROM Equipement WHERE nom='Trousse de Soin'),           (SELECT id_ressource FROM Ressource WHERE nom='Herbes vives')),
+((SELECT id_equipement FROM Equipement WHERE nom='Potion de Mana'),            (SELECT id_ressource FROM Ressource WHERE nom='Eau pure')),
+((SELECT id_equipement FROM Equipement WHERE nom='Potion de Mana'),            (SELECT id_ressource FROM Ressource WHERE nom='Cristal de mana')),
+((SELECT id_equipement FROM Equipement WHERE nom='Potion de Vie'),             (SELECT id_ressource FROM Ressource WHERE nom='Eau pure')),
+((SELECT id_equipement FROM Equipement WHERE nom='Potion de Vie'),             (SELECT id_ressource FROM Ressource WHERE nom='Herbes vives')),
+((SELECT id_equipement FROM Equipement WHERE nom='Élixir de Lune'),            (SELECT id_ressource FROM Ressource WHERE nom='Eau pure')),
+((SELECT id_equipement FROM Equipement WHERE nom='Élixir de Lune'),            (SELECT id_ressource FROM Ressource WHERE nom='Poudre sélène')),
+((SELECT id_equipement FROM Equipement WHERE nom='Kit de Croissant'),          (SELECT id_ressource FROM Ressource WHERE nom='Farine blanche')),
+((SELECT id_equipement FROM Equipement WHERE nom='Kit de Croissant'),          (SELECT id_ressource FROM Ressource WHERE nom='Beurre fin')),
+((SELECT id_equipement FROM Equipement WHERE nom='Loupe du Savoir'),           (SELECT id_ressource FROM Ressource WHERE nom='Verre poli')),
+((SELECT id_equipement FROM Equipement WHERE nom='Loupe du Savoir'),           (SELECT id_ressource FROM Ressource WHERE nom='Argent pur')),
+((SELECT id_equipement FROM Equipement WHERE nom='Boussole Runique'),          (SELECT id_ressource FROM Ressource WHERE nom='Acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Boussole Runique'),          (SELECT id_ressource FROM Ressource WHERE nom='Rune gravée')),
+((SELECT id_equipement FROM Equipement WHERE nom='Sac de Brume'),              (SELECT id_ressource FROM Ressource WHERE nom='Tissu runique')),
+((SELECT id_equipement FROM Equipement WHERE nom='Sac de Brume'),              (SELECT id_ressource FROM Ressource WHERE nom='Brume condensée')),
+((SELECT id_equipement FROM Equipement WHERE nom='Encens du Calme'),           (SELECT id_ressource FROM Ressource WHERE nom='Résine odorante')),
+((SELECT id_equipement FROM Equipement WHERE nom='Encens du Calme'),           (SELECT id_ressource FROM Ressource WHERE nom='Herbes vives')),
+((SELECT id_equipement FROM Equipement WHERE nom='Huile de Griffon'),          (SELECT id_ressource FROM Ressource WHERE nom='Huile fine')),
+((SELECT id_equipement FROM Equipement WHERE nom='Huile de Griffon'),          (SELECT id_ressource FROM Ressource WHERE nom='Plume de griffon')),
+((SELECT id_equipement FROM Equipement WHERE nom='Flasque du Courage Liquide'),(SELECT id_ressource FROM Ressource WHERE nom='Verre poli')),
+((SELECT id_equipement FROM Equipement WHERE nom='Flasque du Courage Liquide'),(SELECT id_ressource FROM Ressource WHERE nom='Épices fortes')),
+((SELECT id_equipement FROM Equipement WHERE nom='Larme de Dragon'),           (SELECT id_ressource FROM Ressource WHERE nom='Larme de Dragon')),
+((SELECT id_equipement FROM Equipement WHERE nom='Larme de Sirène'),           (SELECT id_ressource FROM Ressource WHERE nom='Larme de Sirène')),
+((SELECT id_equipement FROM Equipement WHERE nom='Parchemin améliorant Enchanté'),(SELECT id_ressource FROM Ressource WHERE nom='Peau parcheminée')),
+((SELECT id_equipement FROM Equipement WHERE nom='Parchemin améliorant Enchanté'),(SELECT id_ressource FROM Ressource WHERE nom='Encre runique')),
+((SELECT id_equipement FROM Equipement WHERE nom='Plume de Phénix'),           (SELECT id_ressource FROM Ressource WHERE nom='Plume de Phénix')),
+((SELECT id_equipement FROM Equipement WHERE nom='Chaudron de Voyage'),        (SELECT id_ressource FROM Ressource WHERE nom='Fonte')),
+((SELECT id_equipement FROM Equipement WHERE nom='Chaudron de Voyage'),        (SELECT id_ressource FROM Ressource WHERE nom='Bois noble')),
+((SELECT id_equipement FROM Equipement WHERE nom='Torche Infinie'),            (SELECT id_ressource FROM Ressource WHERE nom='Bois résineux')),
+((SELECT id_equipement FROM Equipement WHERE nom='Torche Infinie'),            (SELECT id_ressource FROM Ressource WHERE nom='Braise éternelle')),
+((SELECT id_equipement FROM Equipement WHERE nom='Pierre de Téléportation'),   (SELECT id_ressource FROM Ressource WHERE nom='Gemme astrale')),
+((SELECT id_equipement FROM Equipement WHERE nom='Pierre de Téléportation'),   (SELECT id_ressource FROM Ressource WHERE nom='Cristal de mana')),
+((SELECT id_equipement FROM Equipement WHERE nom='Livre de Cuisine Runique'),  (SELECT id_ressource FROM Ressource WHERE nom='Peau parcheminée')),
+((SELECT id_equipement FROM Equipement WHERE nom='Livre de Cuisine Runique'),  (SELECT id_ressource FROM Ressource WHERE nom='Encre runique')),
+((SELECT id_equipement FROM Equipement WHERE nom='Tente de l’Oubli'),          (SELECT id_ressource FROM Ressource WHERE nom='Tissu runique')),
+((SELECT id_equipement FROM Equipement WHERE nom='Tente de l’Oubli'),          (SELECT id_ressource FROM Ressource WHERE nom='Onguent soporifique')),
+((SELECT id_equipement FROM Equipement WHERE nom='Corde du Destin'),           (SELECT id_ressource FROM Ressource WHERE nom='Corde runique')),
+((SELECT id_equipement FROM Equipement WHERE nom='Corde du Destin'),           (SELECT id_ressource FROM Ressource WHERE nom='Fil d’argent')),
+((SELECT id_equipement FROM Equipement WHERE nom='Poche Dimensionnelle'),      (SELECT id_ressource FROM Ressource WHERE nom='Poche Dimensionnelle')),
+((SELECT id_equipement FROM Equipement WHERE nom='Sceptre des Arcanes'),       (SELECT id_ressource FROM Ressource WHERE nom='Sceptre des Arcanes')),
+((SELECT id_equipement FROM Equipement WHERE nom='Orbe des Étoiles'),          (SELECT id_ressource FROM Ressource WHERE nom='Orbe des Étoiles')),
+((SELECT id_equipement FROM Equipement WHERE nom='Grimoire Vivant'),           (SELECT id_ressource FROM Ressource WHERE nom='Grimoire Vivant')),
+((SELECT id_equipement FROM Equipement WHERE nom='Anneau des Six Éléments'),   (SELECT id_ressource FROM Ressource WHERE nom='Anneau des Six Éléments')),
+((SELECT id_equipement FROM Equipement WHERE nom='Couronne des Dieux Muets'),  (SELECT id_ressource FROM Ressource WHERE nom='Couronne des Dieux Muets')),
+((SELECT id_equipement FROM Equipement WHERE nom='Diadème du Zénith'),         (SELECT id_ressource FROM Ressource WHERE nom='Diadème du Zénith')),
+((SELECT id_equipement FROM Equipement WHERE nom='Cape de Lune'),              (SELECT id_ressource FROM Ressource WHERE nom='Cape de Lune')),
+((SELECT id_equipement FROM Equipement WHERE nom='Talisman du Néant'),         (SELECT id_ressource FROM Ressource WHERE nom='Fil d’argent')),
+((SELECT id_equipement FROM Equipement WHERE nom='Talisman du Néant'),         (SELECT id_ressource FROM Ressource WHERE nom='Fragment de néant')),
+((SELECT id_equipement FROM Equipement WHERE nom='Orbe de Brume'),             (SELECT id_ressource FROM Ressource WHERE nom='Verre poli')),
+((SELECT id_equipement FROM Equipement WHERE nom='Orbe de Brume'),             (SELECT id_ressource FROM Ressource WHERE nom='Brume condensée')),
+((SELECT id_equipement FROM Equipement WHERE nom='Cristal d’Âme'),             (SELECT id_ressource FROM Ressource WHERE nom='Cristal d’Âme')),
+((SELECT id_equipement FROM Equipement WHERE nom='Pierre de Zéphyr'),          (SELECT id_ressource FROM Ressource WHERE nom='Gemme astrale')),
+((SELECT id_equipement FROM Equipement WHERE nom='Pierre de Zéphyr'),          (SELECT id_ressource FROM Ressource WHERE nom='Vent capturé')),
+((SELECT id_equipement FROM Equipement WHERE nom='Cœur de Raclette'),          (SELECT id_ressource FROM Ressource WHERE nom='Fromage ancien')),
+((SELECT id_equipement FROM Equipement WHERE nom='Cœur de Raclette'),          (SELECT id_ressource FROM Ressource WHERE nom='Braise éternelle')),
+((SELECT id_equipement FROM Equipement WHERE nom='Sphère du Temps'),           (SELECT id_ressource FROM Ressource WHERE nom='Sphère du Temps')),
+((SELECT id_equipement FROM Equipement WHERE nom='Lanterne Astrale'),          (SELECT id_ressource FROM Ressource WHERE nom='Verre poli')),
+((SELECT id_equipement FROM Equipement WHERE nom='Lanterne Astrale'),          (SELECT id_ressource FROM Ressource WHERE nom='Poussière d’étoile')),
+((SELECT id_equipement FROM Equipement WHERE nom='Relique du Premier Mage'),   (SELECT id_ressource FROM Ressource WHERE nom='Relique du Premier Mage')),
+((SELECT id_equipement FROM Equipement WHERE nom='Griffon Mécanique'),         (SELECT id_ressource FROM Ressource WHERE nom='Rouages d’acier')),
+((SELECT id_equipement FROM Equipement WHERE nom='Griffon Mécanique'),         (SELECT id_ressource FROM Ressource WHERE nom='Cuir tanné')),
+((SELECT id_equipement FROM Equipement WHERE nom='Livre des Ombres'),          (SELECT id_ressource FROM Ressource WHERE nom='Peau parcheminée')),
+((SELECT id_equipement FROM Equipement WHERE nom='Livre des Ombres'),          (SELECT id_ressource FROM Ressource WHERE nom='Encre d’ombre')),
+((SELECT id_equipement FROM Equipement WHERE nom='Miroir de Vérité'),          (SELECT id_ressource FROM Ressource WHERE nom='Miroir de Vérité')),
+((SELECT id_equipement FROM Equipement WHERE nom='Harpe Céleste'),             (SELECT id_ressource FROM Ressource WHERE nom='Harpe Céleste')),
+((SELECT id_equipement FROM Equipement WHERE nom='Ancre du Monde'),            (SELECT id_ressource FROM Ressource WHERE nom='Ancre du Monde'));
+
+
+INSERT INTO Marchand (nom, guilde_id) VALUES
+('Bastien Roulecharrette', (SELECT id_guilde FROM Guilde WHERE nom='Guilde des Émissaires')),
+('Maëlle Pied-Léger', (SELECT id_guilde FROM Guilde WHERE nom='Guilde des Émissaires')),
+('Gaspard Sans-Frontière', (SELECT id_guilde FROM Guilde WHERE nom='Guilde des Émissaires')),
+('Ysolda Trois-Comptes', (SELECT id_guilde FROM Guilde WHERE nom='Guilde des Émissaires')),
+('Hector Long-Chemin', (SELECT id_guilde FROM Guilde WHERE nom='Guilde des Émissaires')),
+('Silas Vent-Dos', (SELECT id_guilde FROM Guilde WHERE nom='Guilde des Émissaires')),
+('Agnès du Balluchon', (SELECT id_guilde FROM Guilde WHERE nom='Guilde des Émissaires')),
+('Timéo Clair-Change', (SELECT id_guilde FROM Guilde WHERE nom='Guilde des Émissaires')),
+('Véra Troc-en-Main', (SELECT id_guilde FROM Guilde WHERE nom='Guilde des Émissaires')),
+('Otto Mille-Milles', (SELECT id_guilde FROM Guilde WHERE nom='Guilde des Émissaires')),
+('Nora Tirelaines', (SELECT id_guilde FROM Guilde WHERE nom='Guilde des Émissaires')),
+('Éloi Courta-Voie', (SELECT id_guilde FROM Guilde WHERE nom='Guilde des Émissaires')),
+('Aude Marchande', (SELECT id_guilde FROM Guilde WHERE nom='Guilde des Émissaires')),
+('Jules Bourlingueur', (SELECT id_guilde FROM Guilde WHERE nom='Guilde des Émissaires')),
+('Isolde Belle-Bourse', (SELECT id_guilde FROM Guilde WHERE nom='Guilde des Émissaires')),
+('Nadir Route-Sûre', (SELECT id_guilde FROM Guilde WHERE nom='Guilde des Émissaires')),
+('Liv Raisonnable', (SELECT id_guilde FROM Guilde WHERE nom='Chambre des Courtiers d’Arcanes')),
+('Émile Colis', (SELECT id_guilde FROM Guilde WHERE nom='Chambre des Courtiers d’Arcanes')),
+('Dora l’Export', (SELECT id_guilde FROM Guilde WHERE nom='Chambre des Courtiers d’Arcanes')),
+('Patrice Tarif', (SELECT id_guilde FROM Guilde WHERE nom='Chambre des Courtiers d’Arcanes')),
+('Irène Bon-Échange', (SELECT id_guilde FROM Guilde WHERE nom='Chambre des Courtiers d’Arcanes')),
+('Clovis du Convoi', (SELECT id_guilde FROM Guilde WHERE nom='Chambre des Courtiers d’Arcanes')),
+('Séraphin Portefaix', (SELECT id_guilde FROM Guilde WHERE nom='Chambre des Courtiers d’Arcanes')),
+('Faustine de l’Etal', (SELECT id_guilde FROM Guilde WHERE nom='Chambre des Courtiers d’Arcanes')),
+('Amaury d’Échange', (SELECT id_guilde FROM Guilde WHERE nom='Chambre des Courtiers d’Arcanes')),
+('Gwen Largesse', (SELECT id_guilde FROM Guilde WHERE nom='Chambre des Courtiers d’Arcanes')),
+('Robin Desbons', (SELECT id_guilde FROM Guilde WHERE nom='Chambre des Courtiers d’Arcanes')),
+('Hermine Clair-Contrat', (SELECT id_guilde FROM Guilde WHERE nom='Chambre des Courtiers d’Arcanes')),
+('Sacha Main-Franche', (SELECT id_guilde FROM Guilde WHERE nom='Chambre des Courtiers d’Arcanes')),
+('Roxane Trois-Poids', (SELECT id_guilde FROM Guilde WHERE nom='Chambre des Courtiers d’Arcanes')),
+('Malo Sans-Détour', (SELECT id_guilde FROM Guilde WHERE nom='Chambre des Courtiers d’Arcanes')),
+('Théa Compte-Droit', (SELECT id_guilde FROM Guilde WHERE nom='Chambre des Courtiers d’Arcanes')),
+('Gaël Coursier', (SELECT id_guilde FROM Guilde WHERE nom='Chambre des Courtiers d’Arcanes')),
+('Salomé Belle-Route', (SELECT id_guilde FROM Guilde WHERE nom='Chambre des Courtiers d’Arcanes')),
+('Lazare Tire-Sac', (SELECT id_guilde FROM Guilde WHERE nom='Chambre des Courtiers d’Arcanes')),
+('Nina Méli-Marchés', (SELECT id_guilde FROM Guilde WHERE nom='Chambre des Courtiers d’Arcanes')),
+('Hector du Denier', (SELECT id_guilde FROM Guilde WHERE nom='Chambre des Courtiers d’Arcanes')),
+('Oriane Pas-Lents', (SELECT id_guilde FROM Guilde WHERE nom='Chambre des Courtiers d’Arcanes')),
+('Tao de l’Aubade', (SELECT id_guilde FROM Guilde WHERE nom='Chambre des Courtiers d’Arcanes')),
+('Lina Clair-Prix', (SELECT id_guilde FROM Guilde WHERE nom='Chambre des Courtiers d’Arcanes')),
+('Ismaël Mille-Offres', (SELECT id_guilde FROM Guilde WHERE nom='Syndicat des Courants')),
+('Paula Barème', (SELECT id_guilde FROM Guilde WHERE nom='Syndicat des Courants')),
+('Ewen Clair-Sceau', (SELECT id_guilde FROM Guilde WHERE nom='Syndicat des Courants')),
+('Myrtil Honesta', (SELECT id_guilde FROM Guilde WHERE nom='Syndicat des Courants')),
+('Noam Baroud', (SELECT id_guilde FROM Guilde WHERE nom='Syndicat des Courants')),
+('Zélie Long-Parcours', (SELECT id_guilde FROM Guilde WHERE nom='Syndicat des Courants')),
+('Ilyas Patience', (SELECT id_guilde FROM Guilde WHERE nom='Syndicat des Courants')),
+('Mina Main-Leste', (SELECT id_guilde FROM Guilde WHERE nom='Syndicat des Courants')),
+('Cléa Rance', (SELECT id_guilde FROM Guilde WHERE nom='Syndicat des Courants')),
+('Marin Tisan', (SELECT id_guilde FROM Guilde WHERE nom='Syndicat des Courants')),
+('Rémi Comptère', (SELECT id_guilde FROM Guilde WHERE nom='Chariots de Fer')),
+('Ambre Tiroir', (SELECT id_guilde FROM Guilde WHERE nom='Chariots de Fer')),
+('Nils Le Tarif', (SELECT id_guilde FROM Guilde WHERE nom='Chariots de Fer')),
+('Violette Belle-Voilure', (SELECT id_guilde FROM Guilde WHERE nom='Chariots de Fer')),
+('Ruben Chariot', (SELECT id_guilde FROM Guilde WHERE nom='Chariots de Fer')),
+('Hanae Clair-Cargo', (SELECT id_guilde FROM Guilde WHERE nom='Chariots de Fer')),
+('Oscar Détaxe', (SELECT id_guilde FROM Guilde WHERE nom='Courtiers du Crépuscule')),
+('Livia Tout-Venant', (SELECT id_guilde FROM Guilde WHERE nom='Courtiers du Crépuscule')),
+('Béranger Juste-Poids', (SELECT id_guilde FROM Guilde WHERE nom='Courtiers du Crépuscule')),
+('Soline Sans-Rabais', (SELECT id_guilde FROM Guilde WHERE nom='Courtiers du Crépuscule')),
+('Thibault Lève-Tôt', (SELECT id_guilde FROM Guilde WHERE nom='Courtiers du Crépuscule')),
+('Ariane Tracé-Fin', (SELECT id_guilde FROM Guilde WHERE nom='Courtiers du Crépuscule')),
+('Idriss Bon-Scellé', (SELECT id_guilde FROM Guilde WHERE nom='Les Alibis Variables')),
+('Capucine des Escales', (SELECT id_guilde FROM Guilde WHERE nom='Les Alibis Variables')),
+('Maelenn Sans-Perte', (SELECT id_guilde FROM Guilde WHERE nom='Les Alibis Variables')),
+('Cyprien Porte-Roulotte', (SELECT id_guilde FROM Guilde WHERE nom='Les Alibis Variables')),
+('Ophélie Doux-Transit', (SELECT id_guilde FROM Guilde WHERE nom='Les Alibis Variables')),
+('Lorenzo Franc-Étal', (SELECT id_guilde FROM Guilde WHERE nom='Les Alibis Variables')),
+('Maya Clair-Troc', (SELECT id_guilde FROM Guilde WHERE nom='Compagnie des Fins de Mois')),
+('Yann Hémi-Route', (SELECT id_guilde FROM Guilde WHERE nom='Compagnie des Fins de Mois')),
+('Daphné Chiffrage', (SELECT id_guilde FROM Guilde WHERE nom='Compagnie des Fins de Mois')),
+('Elias Joie-de-Foire', (SELECT id_guilde FROM Guilde WHERE nom='Compagnie des Fins de Mois')),
+('Prune Long-Marché', (SELECT id_guilde FROM Guilde WHERE nom='Compagnie des Fins de Mois')),
+('Nadir Clair-Dédale', (SELECT id_guilde FROM Guilde WHERE nom='Compagnie des Fins de Mois')),
+('Séréna Pèse-Nette', (SELECT id_guilde FROM Guilde WHERE nom='Brasseurs des Orages')),
+('Titouan des Caravans', (SELECT id_guilde FROM Guilde WHERE nom='Brasseurs des Orages')),
+('Léonie Bon-Qui-Pro-Quo', (SELECT id_guilde FROM Guilde WHERE nom='Brasseurs des Orages')),
+('Kilian Sans-Usure', (SELECT id_guilde FROM Guilde WHERE nom='Brasseurs des Orages')),
+('Olympe Droit-d’Octroi', (SELECT id_guilde FROM Guilde WHERE nom='Brasseurs des Orages')),
+('Victor Clair-Itinéraire', (SELECT id_guilde FROM Guilde WHERE nom='Brasseurs des Orages')),
+('Tess Sans-Contrefaçon', (SELECT id_guilde FROM Guilde WHERE nom='Brasseurs des Orages'));
+
+
+INSERT INTO MarchandTrajet (marchand_id, royaume_depart_id, royaume_arrivee_id, date_depart_lore, date_arrivee_lore) VALUES
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 0), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Ricotte'), 'An 421, Lune 1, Jour 3', 'An 421, Lune 1, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 0), (SELECT id_royaume FROM Royaume WHERE nom='Ricotte'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 1, Jour 17', 'An 421, Lune 1, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 0), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Ricotte'), 'An 421, Lune 2, Jour 4', 'An 421, Lune 2, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 0), (SELECT id_royaume FROM Royaume WHERE nom='Ricotte'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 2, Jour 18', 'An 421, Lune 2, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 1), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'An 421, Lune 2, Jour 3', 'An 421, Lune 2, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 1), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 2, Jour 17', 'An 421, Lune 2, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 1), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'An 421, Lune 3, Jour 4', 'An 421, Lune 3, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 1), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 3, Jour 18', 'An 421, Lune 3, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 1), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'An 421, Lune 4, Jour 5', 'An 421, Lune 4, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 1), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 4, Jour 19', 'An 421, Lune 4, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 1), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'An 421, Lune 5, Jour 6', 'An 421, Lune 5, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 1), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 5, Jour 20', 'An 421, Lune 5, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 1), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'An 421, Lune 6, Jour 3', 'An 421, Lune 6, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 1), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 6, Jour 17', 'An 421, Lune 6, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 2), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), 'An 421, Lune 3, Jour 3', 'An 421, Lune 3, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 2), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 3, Jour 17', 'An 421, Lune 3, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 3), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Beurropolis'), 'An 421, Lune 4, Jour 3', 'An 421, Lune 4, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 3), (SELECT id_royaume FROM Royaume WHERE nom='Beurropolis'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 4, Jour 17', 'An 421, Lune 4, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 3), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Beurropolis'), 'An 421, Lune 5, Jour 4', 'An 421, Lune 5, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 3), (SELECT id_royaume FROM Royaume WHERE nom='Beurropolis'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 5, Jour 18', 'An 421, Lune 5, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 3), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Beurropolis'), 'An 421, Lune 6, Jour 5', 'An 421, Lune 6, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 3), (SELECT id_royaume FROM Royaume WHERE nom='Beurropolis'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 6, Jour 19', 'An 421, Lune 6, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 3), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Beurropolis'), 'An 421, Lune 7, Jour 6', 'An 421, Lune 7, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 3), (SELECT id_royaume FROM Royaume WHERE nom='Beurropolis'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 7, Jour 20', 'An 421, Lune 7, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 3), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Beurropolis'), 'An 421, Lune 8, Jour 3', 'An 421, Lune 8, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 3), (SELECT id_royaume FROM Royaume WHERE nom='Beurropolis'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 8, Jour 17', 'An 421, Lune 8, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 4), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Mascarponie'), 'An 421, Lune 5, Jour 3', 'An 421, Lune 5, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 4), (SELECT id_royaume FROM Royaume WHERE nom='Mascarponie'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 5, Jour 17', 'An 421, Lune 5, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 4), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Mascarponie'), 'An 421, Lune 6, Jour 4', 'An 421, Lune 6, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 4), (SELECT id_royaume FROM Royaume WHERE nom='Mascarponie'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 6, Jour 18', 'An 421, Lune 6, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 4), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Mascarponie'), 'An 421, Lune 7, Jour 5', 'An 421, Lune 7, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 4), (SELECT id_royaume FROM Royaume WHERE nom='Mascarponie'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 7, Jour 19', 'An 421, Lune 7, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 4), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Mascarponie'), 'An 421, Lune 8, Jour 6', 'An 421, Lune 8, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 4), (SELECT id_royaume FROM Royaume WHERE nom='Mascarponie'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 8, Jour 20', 'An 421, Lune 8, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 4), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Mascarponie'), 'An 421, Lune 1, Jour 3', 'An 421, Lune 1, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 4), (SELECT id_royaume FROM Royaume WHERE nom='Mascarponie'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 1, Jour 17', 'An 421, Lune 1, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 5), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia'), 'An 421, Lune 6, Jour 3', 'An 421, Lune 6, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 5), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 6, Jour 17', 'An 421, Lune 6, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 5), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia'), 'An 421, Lune 7, Jour 4', 'An 421, Lune 7, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 5), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 7, Jour 18', 'An 421, Lune 7, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 5), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia'), 'An 421, Lune 8, Jour 5', 'An 421, Lune 8, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 5), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 8, Jour 19', 'An 421, Lune 8, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 5), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia'), 'An 421, Lune 1, Jour 6', 'An 421, Lune 1, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 5), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 1, Jour 20', 'An 421, Lune 1, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 6), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime'), 'An 421, Lune 7, Jour 3', 'An 421, Lune 7, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 6), (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 7, Jour 17', 'An 421, Lune 7, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 7), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'), 'An 421, Lune 8, Jour 3', 'An 421, Lune 8, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 7), (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 8, Jour 17', 'An 421, Lune 8, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 7), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'), 'An 421, Lune 1, Jour 4', 'An 421, Lune 1, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 7), (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 1, Jour 18', 'An 421, Lune 1, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 8), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Burraton'), 'An 421, Lune 1, Jour 3', 'An 421, Lune 1, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 8), (SELECT id_royaume FROM Royaume WHERE nom='Burraton'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 1, Jour 17', 'An 421, Lune 1, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 9), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), 'An 421, Lune 2, Jour 3', 'An 421, Lune 2, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 9), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 2, Jour 17', 'An 421, Lune 2, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 9), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), 'An 421, Lune 3, Jour 4', 'An 421, Lune 3, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 9), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 3, Jour 18', 'An 421, Lune 3, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 9), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), 'An 421, Lune 4, Jour 5', 'An 421, Lune 4, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 9), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 4, Jour 19', 'An 421, Lune 4, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 9), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), 'An 421, Lune 5, Jour 6', 'An 421, Lune 5, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 9), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 5, Jour 20', 'An 421, Lune 5, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 9), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), 'An 421, Lune 6, Jour 3', 'An 421, Lune 6, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 9), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 6, Jour 17', 'An 421, Lune 6, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 10), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), 'An 421, Lune 3, Jour 3', 'An 421, Lune 3, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 10), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 3, Jour 17', 'An 421, Lune 3, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 10), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), 'An 421, Lune 4, Jour 4', 'An 421, Lune 4, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 10), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 4, Jour 18', 'An 421, Lune 4, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 11), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), 'An 421, Lune 4, Jour 3', 'An 421, Lune 4, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 11), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 4, Jour 17', 'An 421, Lune 4, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 11), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), 'An 421, Lune 5, Jour 4', 'An 421, Lune 5, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 11), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 5, Jour 18', 'An 421, Lune 5, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 11), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), 'An 421, Lune 6, Jour 5', 'An 421, Lune 6, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 11), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 6, Jour 19', 'An 421, Lune 6, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 12), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Chantillys'), 'An 422, Lune 5, Jour 3', 'An 422, Lune 5, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 12), (SELECT id_royaume FROM Royaume WHERE nom='Chantillys'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 422, Lune 5, Jour 17', 'An 422, Lune 5, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 12), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Chantillys'), 'An 422, Lune 6, Jour 4', 'An 422, Lune 6, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 12), (SELECT id_royaume FROM Royaume WHERE nom='Chantillys'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 422, Lune 6, Jour 18', 'An 422, Lune 6, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 12), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Chantillys'), 'An 422, Lune 7, Jour 5', 'An 422, Lune 7, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 12), (SELECT id_royaume FROM Royaume WHERE nom='Chantillys'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 422, Lune 7, Jour 19', 'An 422, Lune 7, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 12), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Chantillys'), 'An 422, Lune 8, Jour 6', 'An 422, Lune 8, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 12), (SELECT id_royaume FROM Royaume WHERE nom='Chantillys'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 422, Lune 8, Jour 20', 'An 422, Lune 8, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 13), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 422, Lune 6, Jour 3', 'An 422, Lune 6, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 13), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 422, Lune 6, Jour 17', 'An 422, Lune 6, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 13), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 422, Lune 7, Jour 4', 'An 422, Lune 7, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 13), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 422, Lune 7, Jour 18', 'An 422, Lune 7, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 14), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Pralinie'), 'An 422, Lune 7, Jour 3', 'An 422, Lune 7, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 14), (SELECT id_royaume FROM Royaume WHERE nom='Pralinie'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 422, Lune 7, Jour 17', 'An 422, Lune 7, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 14), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Pralinie'), 'An 422, Lune 8, Jour 4', 'An 422, Lune 8, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 14), (SELECT id_royaume FROM Royaume WHERE nom='Pralinie'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 422, Lune 8, Jour 18', 'An 422, Lune 8, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 14), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Pralinie'), 'An 422, Lune 1, Jour 5', 'An 422, Lune 1, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 14), (SELECT id_royaume FROM Royaume WHERE nom='Pralinie'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 422, Lune 1, Jour 19', 'An 422, Lune 1, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 14), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Pralinie'), 'An 422, Lune 2, Jour 6', 'An 422, Lune 2, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 14), (SELECT id_royaume FROM Royaume WHERE nom='Pralinie'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 422, Lune 2, Jour 20', 'An 422, Lune 2, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 14), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Pralinie'), 'An 422, Lune 3, Jour 3', 'An 422, Lune 3, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 14), (SELECT id_royaume FROM Royaume WHERE nom='Pralinie'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 422, Lune 3, Jour 17', 'An 422, Lune 3, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 15), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg'), 'An 422, Lune 8, Jour 3', 'An 422, Lune 8, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 15), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 422, Lune 8, Jour 17', 'An 422, Lune 8, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 16), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Caramellum'), 'An 422, Lune 1, Jour 3', 'An 422, Lune 1, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 16), (SELECT id_royaume FROM Royaume WHERE nom='Caramellum'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 422, Lune 1, Jour 17', 'An 422, Lune 1, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 16), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Caramellum'), 'An 422, Lune 2, Jour 4', 'An 422, Lune 2, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 16), (SELECT id_royaume FROM Royaume WHERE nom='Caramellum'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 422, Lune 2, Jour 18', 'An 422, Lune 2, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 16), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Caramellum'), 'An 422, Lune 3, Jour 5', 'An 422, Lune 3, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 16), (SELECT id_royaume FROM Royaume WHERE nom='Caramellum'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 422, Lune 3, Jour 19', 'An 422, Lune 3, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 17), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'), 'An 422, Lune 2, Jour 3', 'An 422, Lune 2, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 17), (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 422, Lune 2, Jour 17', 'An 422, Lune 2, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 17), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'), 'An 422, Lune 3, Jour 4', 'An 422, Lune 3, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 17), (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 422, Lune 3, Jour 18', 'An 422, Lune 3, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 17), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'), 'An 422, Lune 4, Jour 5', 'An 422, Lune 4, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 17), (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 422, Lune 4, Jour 19', 'An 422, Lune 4, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 18), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Gélatine'), 'An 422, Lune 3, Jour 3', 'An 422, Lune 3, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 18), (SELECT id_royaume FROM Royaume WHERE nom='Gélatine'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 422, Lune 3, Jour 17', 'An 422, Lune 3, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 18), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Gélatine'), 'An 422, Lune 4, Jour 4', 'An 422, Lune 4, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 18), (SELECT id_royaume FROM Royaume WHERE nom='Gélatine'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 422, Lune 4, Jour 18', 'An 422, Lune 4, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 19), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 422, Lune 4, Jour 3', 'An 422, Lune 4, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 19), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 422, Lune 4, Jour 17', 'An 422, Lune 4, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 19), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 422, Lune 5, Jour 4', 'An 422, Lune 5, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 19), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 422, Lune 5, Jour 18', 'An 422, Lune 5, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 20), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia'), 'An 422, Lune 5, Jour 3', 'An 422, Lune 5, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 20), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 422, Lune 5, Jour 17', 'An 422, Lune 5, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 20), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia'), 'An 422, Lune 6, Jour 4', 'An 422, Lune 6, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 20), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 422, Lune 6, Jour 18', 'An 422, Lune 6, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 21), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Parmésia'), 'An 422, Lune 6, Jour 3', 'An 422, Lune 6, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 21), (SELECT id_royaume FROM Royaume WHERE nom='Parmésia'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 422, Lune 6, Jour 17', 'An 422, Lune 6, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 22), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Patateland'), 'An 422, Lune 7, Jour 3', 'An 422, Lune 7, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 22), (SELECT id_royaume FROM Royaume WHERE nom='Patateland'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 422, Lune 7, Jour 17', 'An 422, Lune 7, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 22), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Patateland'), 'An 422, Lune 8, Jour 4', 'An 422, Lune 8, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 22), (SELECT id_royaume FROM Royaume WHERE nom='Patateland'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 422, Lune 8, Jour 18', 'An 422, Lune 8, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 22), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Patateland'), 'An 422, Lune 1, Jour 5', 'An 422, Lune 1, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 22), (SELECT id_royaume FROM Royaume WHERE nom='Patateland'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 422, Lune 1, Jour 19', 'An 422, Lune 1, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 22), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Patateland'), 'An 422, Lune 2, Jour 6', 'An 422, Lune 2, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 22), (SELECT id_royaume FROM Royaume WHERE nom='Patateland'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 422, Lune 2, Jour 20', 'An 422, Lune 2, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 22), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Patateland'), 'An 422, Lune 3, Jour 3', 'An 422, Lune 3, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 22), (SELECT id_royaume FROM Royaume WHERE nom='Patateland'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 422, Lune 3, Jour 17', 'An 422, Lune 3, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 23), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Mascarponie'), 'An 422, Lune 8, Jour 3', 'An 422, Lune 8, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 23), (SELECT id_royaume FROM Royaume WHERE nom='Mascarponie'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 422, Lune 8, Jour 17', 'An 422, Lune 8, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 23), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Mascarponie'), 'An 422, Lune 1, Jour 4', 'An 422, Lune 1, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 23), (SELECT id_royaume FROM Royaume WHERE nom='Mascarponie'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 422, Lune 1, Jour 18', 'An 422, Lune 1, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 23), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Mascarponie'), 'An 422, Lune 2, Jour 5', 'An 422, Lune 2, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 23), (SELECT id_royaume FROM Royaume WHERE nom='Mascarponie'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 422, Lune 2, Jour 19', 'An 422, Lune 2, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 24), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Beurropolis'), 'An 423, Lune 1, Jour 3', 'An 423, Lune 1, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 24), (SELECT id_royaume FROM Royaume WHERE nom='Beurropolis'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 1, Jour 17', 'An 423, Lune 1, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 24), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Beurropolis'), 'An 423, Lune 2, Jour 4', 'An 423, Lune 2, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 24), (SELECT id_royaume FROM Royaume WHERE nom='Beurropolis'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 2, Jour 18', 'An 423, Lune 2, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 24), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Beurropolis'), 'An 423, Lune 3, Jour 5', 'An 423, Lune 3, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 24), (SELECT id_royaume FROM Royaume WHERE nom='Beurropolis'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 3, Jour 19', 'An 423, Lune 3, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 24), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Beurropolis'), 'An 423, Lune 4, Jour 6', 'An 423, Lune 4, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 24), (SELECT id_royaume FROM Royaume WHERE nom='Beurropolis'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 4, Jour 20', 'An 423, Lune 4, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 24), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Beurropolis'), 'An 423, Lune 5, Jour 3', 'An 423, Lune 5, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 24), (SELECT id_royaume FROM Royaume WHERE nom='Beurropolis'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 5, Jour 17', 'An 423, Lune 5, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 25), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), 'An 423, Lune 2, Jour 3', 'An 423, Lune 2, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 25), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 2, Jour 17', 'An 423, Lune 2, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 25), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), 'An 423, Lune 3, Jour 4', 'An 423, Lune 3, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 25), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 3, Jour 18', 'An 423, Lune 3, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 25), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), 'An 423, Lune 4, Jour 5', 'An 423, Lune 4, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 25), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 4, Jour 19', 'An 423, Lune 4, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 25), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), 'An 423, Lune 5, Jour 6', 'An 423, Lune 5, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 25), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 5, Jour 20', 'An 423, Lune 5, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 26), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), 'An 423, Lune 3, Jour 3', 'An 423, Lune 3, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 26), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 3, Jour 17', 'An 423, Lune 3, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 26), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), 'An 423, Lune 4, Jour 4', 'An 423, Lune 4, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 26), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 4, Jour 18', 'An 423, Lune 4, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 26), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), 'An 423, Lune 5, Jour 5', 'An 423, Lune 5, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 26), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 5, Jour 19', 'An 423, Lune 5, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 27), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), 'An 423, Lune 4, Jour 3', 'An 423, Lune 4, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 27), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 4, Jour 17', 'An 423, Lune 4, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 27), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), 'An 423, Lune 5, Jour 4', 'An 423, Lune 5, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 27), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 5, Jour 18', 'An 423, Lune 5, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 27), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), 'An 423, Lune 6, Jour 5', 'An 423, Lune 6, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 27), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 6, Jour 19', 'An 423, Lune 6, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 27), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), 'An 423, Lune 7, Jour 6', 'An 423, Lune 7, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 27), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 7, Jour 20', 'An 423, Lune 7, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 28), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 423, Lune 5, Jour 3', 'An 423, Lune 5, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 28), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 5, Jour 17', 'An 423, Lune 5, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 28), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 423, Lune 6, Jour 4', 'An 423, Lune 6, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 28), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 6, Jour 18', 'An 423, Lune 6, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 28), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 423, Lune 7, Jour 5', 'An 423, Lune 7, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 28), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 7, Jour 19', 'An 423, Lune 7, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 29), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), 'An 423, Lune 6, Jour 3', 'An 423, Lune 6, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 29), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 6, Jour 17', 'An 423, Lune 6, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 29), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), 'An 423, Lune 7, Jour 4', 'An 423, Lune 7, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 29), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 7, Jour 18', 'An 423, Lune 7, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 29), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), 'An 423, Lune 8, Jour 5', 'An 423, Lune 8, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 29), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 8, Jour 19', 'An 423, Lune 8, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 29), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), 'An 423, Lune 1, Jour 6', 'An 423, Lune 1, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 29), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 1, Jour 20', 'An 423, Lune 1, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 29), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), 'An 423, Lune 2, Jour 3', 'An 423, Lune 2, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 29), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 2, Jour 17', 'An 423, Lune 2, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 30), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Chantillys'), 'An 423, Lune 7, Jour 3', 'An 423, Lune 7, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 30), (SELECT id_royaume FROM Royaume WHERE nom='Chantillys'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 7, Jour 17', 'An 423, Lune 7, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 31), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), 'An 423, Lune 8, Jour 3', 'An 423, Lune 8, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 31), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 8, Jour 17', 'An 423, Lune 8, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 32), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg'), 'An 423, Lune 1, Jour 3', 'An 423, Lune 1, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 32), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 1, Jour 17', 'An 423, Lune 1, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 32), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg'), 'An 423, Lune 2, Jour 4', 'An 423, Lune 2, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 32), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 2, Jour 18', 'An 423, Lune 2, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 32), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg'), 'An 423, Lune 3, Jour 5', 'An 423, Lune 3, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 32), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 3, Jour 19', 'An 423, Lune 3, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 32), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg'), 'An 423, Lune 4, Jour 6', 'An 423, Lune 4, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 32), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 4, Jour 20', 'An 423, Lune 4, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 32), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg'), 'An 423, Lune 5, Jour 3', 'An 423, Lune 5, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 32), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 5, Jour 17', 'An 423, Lune 5, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 33), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Burraton'), 'An 423, Lune 2, Jour 3', 'An 423, Lune 2, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 33), (SELECT id_royaume FROM Royaume WHERE nom='Burraton'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 2, Jour 17', 'An 423, Lune 2, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 33), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Burraton'), 'An 423, Lune 3, Jour 4', 'An 423, Lune 3, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 33), (SELECT id_royaume FROM Royaume WHERE nom='Burraton'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 3, Jour 18', 'An 423, Lune 3, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 33), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Burraton'), 'An 423, Lune 4, Jour 5', 'An 423, Lune 4, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 33), (SELECT id_royaume FROM Royaume WHERE nom='Burraton'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 4, Jour 19', 'An 423, Lune 4, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 33), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Burraton'), 'An 423, Lune 5, Jour 6', 'An 423, Lune 5, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 33), (SELECT id_royaume FROM Royaume WHERE nom='Burraton'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 5, Jour 20', 'An 423, Lune 5, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 34), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime'), 'An 423, Lune 3, Jour 3', 'An 423, Lune 3, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 34), (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 3, Jour 17', 'An 423, Lune 3, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 34), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime'), 'An 423, Lune 4, Jour 4', 'An 423, Lune 4, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 34), (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 4, Jour 18', 'An 423, Lune 4, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 35), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Mozzarellia'), 'An 423, Lune 4, Jour 3', 'An 423, Lune 4, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 35), (SELECT id_royaume FROM Royaume WHERE nom='Mozzarellia'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 4, Jour 17', 'An 423, Lune 4, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 35), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Mozzarellia'), 'An 423, Lune 5, Jour 4', 'An 423, Lune 5, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 35), (SELECT id_royaume FROM Royaume WHERE nom='Mozzarellia'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 5, Jour 18', 'An 423, Lune 5, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 35), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Mozzarellia'), 'An 423, Lune 6, Jour 5', 'An 423, Lune 6, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 35), (SELECT id_royaume FROM Royaume WHERE nom='Mozzarellia'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 423, Lune 6, Jour 19', 'An 423, Lune 6, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 36), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Ricotte'), 'An 424, Lune 5, Jour 3', 'An 424, Lune 5, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 36), (SELECT id_royaume FROM Royaume WHERE nom='Ricotte'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 424, Lune 5, Jour 17', 'An 424, Lune 5, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 36), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Ricotte'), 'An 424, Lune 6, Jour 4', 'An 424, Lune 6, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 36), (SELECT id_royaume FROM Royaume WHERE nom='Ricotte'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 424, Lune 6, Jour 18', 'An 424, Lune 6, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 37), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), 'An 424, Lune 6, Jour 3', 'An 424, Lune 6, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 37), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 424, Lune 6, Jour 17', 'An 424, Lune 6, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 37), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), 'An 424, Lune 7, Jour 4', 'An 424, Lune 7, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 37), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 424, Lune 7, Jour 18', 'An 424, Lune 7, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 37), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), 'An 424, Lune 8, Jour 5', 'An 424, Lune 8, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 37), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 424, Lune 8, Jour 19', 'An 424, Lune 8, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 37), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), 'An 424, Lune 1, Jour 6', 'An 424, Lune 1, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 37), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 424, Lune 1, Jour 20', 'An 424, Lune 1, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 38), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Pralinie'), 'An 424, Lune 7, Jour 3', 'An 424, Lune 7, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 38), (SELECT id_royaume FROM Royaume WHERE nom='Pralinie'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 424, Lune 7, Jour 17', 'An 424, Lune 7, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 38), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Pralinie'), 'An 424, Lune 8, Jour 4', 'An 424, Lune 8, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 38), (SELECT id_royaume FROM Royaume WHERE nom='Pralinie'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 424, Lune 8, Jour 18', 'An 424, Lune 8, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 38), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Pralinie'), 'An 424, Lune 1, Jour 5', 'An 424, Lune 1, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 38), (SELECT id_royaume FROM Royaume WHERE nom='Pralinie'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 424, Lune 1, Jour 19', 'An 424, Lune 1, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 38), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Pralinie'), 'An 424, Lune 2, Jour 6', 'An 424, Lune 2, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 38), (SELECT id_royaume FROM Royaume WHERE nom='Pralinie'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 424, Lune 2, Jour 20', 'An 424, Lune 2, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 39), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'An 424, Lune 8, Jour 3', 'An 424, Lune 8, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 39), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 424, Lune 8, Jour 17', 'An 424, Lune 8, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 40), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), (SELECT id_royaume FROM Royaume WHERE nom='Chantillys'), 'An 424, Lune 1, Jour 3', 'An 424, Lune 1, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 40), (SELECT id_royaume FROM Royaume WHERE nom='Chantillys'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 424, Lune 1, Jour 17', 'An 424, Lune 1, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 40), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), (SELECT id_royaume FROM Royaume WHERE nom='Chantillys'), 'An 424, Lune 2, Jour 4', 'An 424, Lune 2, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 40), (SELECT id_royaume FROM Royaume WHERE nom='Chantillys'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 424, Lune 2, Jour 18', 'An 424, Lune 2, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 40), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), (SELECT id_royaume FROM Royaume WHERE nom='Chantillys'), 'An 424, Lune 3, Jour 5', 'An 424, Lune 3, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 40), (SELECT id_royaume FROM Royaume WHERE nom='Chantillys'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 424, Lune 3, Jour 19', 'An 424, Lune 3, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 41), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), (SELECT id_royaume FROM Royaume WHERE nom='Pralinie'), 'An 424, Lune 2, Jour 3', 'An 424, Lune 2, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 41), (SELECT id_royaume FROM Royaume WHERE nom='Pralinie'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 424, Lune 2, Jour 17', 'An 424, Lune 2, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 42), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), (SELECT id_royaume FROM Royaume WHERE nom='Burraton'), 'An 424, Lune 3, Jour 3', 'An 424, Lune 3, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 42), (SELECT id_royaume FROM Royaume WHERE nom='Burraton'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 424, Lune 3, Jour 17', 'An 424, Lune 3, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 42), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), (SELECT id_royaume FROM Royaume WHERE nom='Burraton'), 'An 424, Lune 4, Jour 4', 'An 424, Lune 4, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 42), (SELECT id_royaume FROM Royaume WHERE nom='Burraton'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 424, Lune 4, Jour 18', 'An 424, Lune 4, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 42), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), (SELECT id_royaume FROM Royaume WHERE nom='Burraton'), 'An 424, Lune 5, Jour 5', 'An 424, Lune 5, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 42), (SELECT id_royaume FROM Royaume WHERE nom='Burraton'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 424, Lune 5, Jour 19', 'An 424, Lune 5, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 42), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), (SELECT id_royaume FROM Royaume WHERE nom='Burraton'), 'An 424, Lune 6, Jour 6', 'An 424, Lune 6, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 42), (SELECT id_royaume FROM Royaume WHERE nom='Burraton'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 424, Lune 6, Jour 20', 'An 424, Lune 6, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 43), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), 'An 424, Lune 4, Jour 3', 'An 424, Lune 4, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 43), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 424, Lune 4, Jour 17', 'An 424, Lune 4, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 43), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), 'An 424, Lune 5, Jour 4', 'An 424, Lune 5, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 43), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 424, Lune 5, Jour 18', 'An 424, Lune 5, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 43), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), 'An 424, Lune 6, Jour 5', 'An 424, Lune 6, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 43), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 424, Lune 6, Jour 19', 'An 424, Lune 6, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 44), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), (SELECT id_royaume FROM Royaume WHERE nom='Mozzarellia'), 'An 424, Lune 5, Jour 3', 'An 424, Lune 5, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 44), (SELECT id_royaume FROM Royaume WHERE nom='Mozzarellia'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 424, Lune 5, Jour 17', 'An 424, Lune 5, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 44), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), (SELECT id_royaume FROM Royaume WHERE nom='Mozzarellia'), 'An 424, Lune 6, Jour 4', 'An 424, Lune 6, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 44), (SELECT id_royaume FROM Royaume WHERE nom='Mozzarellia'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 424, Lune 6, Jour 18', 'An 424, Lune 6, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 45), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), (SELECT id_royaume FROM Royaume WHERE nom='Patateland'), 'An 424, Lune 6, Jour 3', 'An 424, Lune 6, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 45), (SELECT id_royaume FROM Royaume WHERE nom='Patateland'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 424, Lune 6, Jour 17', 'An 424, Lune 6, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 45), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), (SELECT id_royaume FROM Royaume WHERE nom='Patateland'), 'An 424, Lune 7, Jour 4', 'An 424, Lune 7, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 45), (SELECT id_royaume FROM Royaume WHERE nom='Patateland'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 424, Lune 7, Jour 18', 'An 424, Lune 7, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 45), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), (SELECT id_royaume FROM Royaume WHERE nom='Patateland'), 'An 424, Lune 8, Jour 5', 'An 424, Lune 8, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 45), (SELECT id_royaume FROM Royaume WHERE nom='Patateland'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 424, Lune 8, Jour 19', 'An 424, Lune 8, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 45), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), (SELECT id_royaume FROM Royaume WHERE nom='Patateland'), 'An 424, Lune 1, Jour 6', 'An 424, Lune 1, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 45), (SELECT id_royaume FROM Royaume WHERE nom='Patateland'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 424, Lune 1, Jour 20', 'An 424, Lune 1, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 45), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), (SELECT id_royaume FROM Royaume WHERE nom='Patateland'), 'An 424, Lune 2, Jour 3', 'An 424, Lune 2, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 45), (SELECT id_royaume FROM Royaume WHERE nom='Patateland'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 424, Lune 2, Jour 17', 'An 424, Lune 2, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 46), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), (SELECT id_royaume FROM Royaume WHERE nom='Ricotte'), 'An 424, Lune 7, Jour 3', 'An 424, Lune 7, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 46), (SELECT id_royaume FROM Royaume WHERE nom='Ricotte'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 424, Lune 7, Jour 17', 'An 424, Lune 7, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 47), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime'), 'An 424, Lune 8, Jour 3', 'An 424, Lune 8, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 47), (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 424, Lune 8, Jour 17', 'An 424, Lune 8, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 47), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime'), 'An 424, Lune 1, Jour 4', 'An 424, Lune 1, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 47), (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 424, Lune 1, Jour 18', 'An 424, Lune 1, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 47), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime'), 'An 424, Lune 2, Jour 5', 'An 424, Lune 2, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 47), (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 424, Lune 2, Jour 19', 'An 424, Lune 2, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 47), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime'), 'An 424, Lune 3, Jour 6', 'An 424, Lune 3, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 47), (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 424, Lune 3, Jour 20', 'An 424, Lune 3, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 48), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 425, Lune 1, Jour 3', 'An 425, Lune 1, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 48), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 425, Lune 1, Jour 17', 'An 425, Lune 1, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 49), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), (SELECT id_royaume FROM Royaume WHERE nom='Gélatine'), 'An 425, Lune 2, Jour 3', 'An 425, Lune 2, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 49), (SELECT id_royaume FROM Royaume WHERE nom='Gélatine'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 425, Lune 2, Jour 17', 'An 425, Lune 2, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 49), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), (SELECT id_royaume FROM Royaume WHERE nom='Gélatine'), 'An 425, Lune 3, Jour 4', 'An 425, Lune 3, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 49), (SELECT id_royaume FROM Royaume WHERE nom='Gélatine'), (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 425, Lune 3, Jour 18', 'An 425, Lune 3, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 50), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime'), 'An 425, Lune 1, Jour 3', 'An 425, Lune 1, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 50), (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime'), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), 'An 425, Lune 1, Jour 17', 'An 425, Lune 1, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 50), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime'), 'An 425, Lune 2, Jour 4', 'An 425, Lune 2, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 50), (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime'), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), 'An 425, Lune 2, Jour 18', 'An 425, Lune 2, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 51), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'), 'An 425, Lune 2, Jour 3', 'An 425, Lune 2, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 51), (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), 'An 425, Lune 2, Jour 17', 'An 425, Lune 2, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 51), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'), 'An 425, Lune 3, Jour 4', 'An 425, Lune 3, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 51), (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), 'An 425, Lune 3, Jour 18', 'An 425, Lune 3, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 52), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 425, Lune 3, Jour 3', 'An 425, Lune 3, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 52), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), 'An 425, Lune 3, Jour 17', 'An 425, Lune 3, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 52), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'An 425, Lune 4, Jour 4', 'An 425, Lune 4, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 52), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), 'An 425, Lune 4, Jour 18', 'An 425, Lune 4, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 53), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 425, Lune 4, Jour 3', 'An 425, Lune 4, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 53), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), 'An 425, Lune 4, Jour 17', 'An 425, Lune 4, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 53), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 425, Lune 5, Jour 4', 'An 425, Lune 5, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 53), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), 'An 425, Lune 5, Jour 18', 'An 425, Lune 5, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 54), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), (SELECT id_royaume FROM Royaume WHERE nom='Mozzarellia'), 'An 425, Lune 5, Jour 3', 'An 425, Lune 5, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 54), (SELECT id_royaume FROM Royaume WHERE nom='Mozzarellia'), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), 'An 425, Lune 5, Jour 17', 'An 425, Lune 5, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 55), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), 'An 425, Lune 6, Jour 3', 'An 425, Lune 6, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 55), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), 'An 425, Lune 6, Jour 17', 'An 425, Lune 6, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 55), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), 'An 425, Lune 7, Jour 4', 'An 425, Lune 7, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 55), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), 'An 425, Lune 7, Jour 18', 'An 425, Lune 7, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 55), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), 'An 425, Lune 8, Jour 5', 'An 425, Lune 8, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 55), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), 'An 425, Lune 8, Jour 19', 'An 425, Lune 8, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 55), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), 'An 425, Lune 1, Jour 6', 'An 425, Lune 1, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 55), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), 'An 425, Lune 1, Jour 20', 'An 425, Lune 1, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 56), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime'), 'An 425, Lune 1, Jour 3', 'An 425, Lune 1, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 56), (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), 'An 425, Lune 1, Jour 17', 'An 425, Lune 1, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 57), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), 'An 425, Lune 2, Jour 3', 'An 425, Lune 2, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 57), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), 'An 425, Lune 2, Jour 17', 'An 425, Lune 2, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 57), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), 'An 425, Lune 3, Jour 4', 'An 425, Lune 3, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 57), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), 'An 425, Lune 3, Jour 18', 'An 425, Lune 3, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 58), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), 'An 425, Lune 3, Jour 3', 'An 425, Lune 3, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 58), (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), 'An 425, Lune 3, Jour 17', 'An 425, Lune 3, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 59), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), 'An 425, Lune 4, Jour 3', 'An 425, Lune 4, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 59), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), 'An 425, Lune 4, Jour 17', 'An 425, Lune 4, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 59), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), 'An 425, Lune 5, Jour 4', 'An 425, Lune 5, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 59), (SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), 'An 425, Lune 5, Jour 18', 'An 425, Lune 5, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 60), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), 'An 426, Lune 5, Jour 3', 'An 426, Lune 5, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 60), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), 'An 426, Lune 5, Jour 17', 'An 426, Lune 5, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 60), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), 'An 426, Lune 6, Jour 4', 'An 426, Lune 6, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 60), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), 'An 426, Lune 6, Jour 18', 'An 426, Lune 6, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 60), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), 'An 426, Lune 7, Jour 5', 'An 426, Lune 7, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 60), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), 'An 426, Lune 7, Jour 19', 'An 426, Lune 7, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 60), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), 'An 426, Lune 8, Jour 6', 'An 426, Lune 8, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 60), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), 'An 426, Lune 8, Jour 20', 'An 426, Lune 8, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 61), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg'), 'An 426, Lune 6, Jour 3', 'An 426, Lune 6, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 61), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), 'An 426, Lune 6, Jour 17', 'An 426, Lune 6, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 61), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg'), 'An 426, Lune 7, Jour 4', 'An 426, Lune 7, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 61), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), 'An 426, Lune 7, Jour 18', 'An 426, Lune 7, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 62), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg'), 'An 426, Lune 1, Jour 3', 'An 426, Lune 1, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 62), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'An 426, Lune 1, Jour 17', 'An 426, Lune 1, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 62), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg'), 'An 426, Lune 2, Jour 4', 'An 426, Lune 2, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 62), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'An 426, Lune 2, Jour 18', 'An 426, Lune 2, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 62), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg'), 'An 426, Lune 3, Jour 5', 'An 426, Lune 3, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 62), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'An 426, Lune 3, Jour 19', 'An 426, Lune 3, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 62), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg'), 'An 426, Lune 4, Jour 6', 'An 426, Lune 4, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 62), (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'An 426, Lune 4, Jour 20', 'An 426, Lune 4, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 63), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), (SELECT id_royaume FROM Royaume WHERE nom='Parmésia'), 'An 426, Lune 2, Jour 3', 'An 426, Lune 2, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 63), (SELECT id_royaume FROM Royaume WHERE nom='Parmésia'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'An 426, Lune 2, Jour 17', 'An 426, Lune 2, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 63), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), (SELECT id_royaume FROM Royaume WHERE nom='Parmésia'), 'An 426, Lune 3, Jour 4', 'An 426, Lune 3, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 63), (SELECT id_royaume FROM Royaume WHERE nom='Parmésia'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'An 426, Lune 3, Jour 18', 'An 426, Lune 3, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 63), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), (SELECT id_royaume FROM Royaume WHERE nom='Parmésia'), 'An 426, Lune 4, Jour 5', 'An 426, Lune 4, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 63), (SELECT id_royaume FROM Royaume WHERE nom='Parmésia'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'An 426, Lune 4, Jour 19', 'An 426, Lune 4, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 63), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), (SELECT id_royaume FROM Royaume WHERE nom='Parmésia'), 'An 426, Lune 5, Jour 6', 'An 426, Lune 5, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 63), (SELECT id_royaume FROM Royaume WHERE nom='Parmésia'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'An 426, Lune 5, Jour 20', 'An 426, Lune 5, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 64), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), (SELECT id_royaume FROM Royaume WHERE nom='Gélatine'), 'An 426, Lune 3, Jour 3', 'An 426, Lune 3, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 64), (SELECT id_royaume FROM Royaume WHERE nom='Gélatine'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'An 426, Lune 3, Jour 17', 'An 426, Lune 3, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 64), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), (SELECT id_royaume FROM Royaume WHERE nom='Gélatine'), 'An 426, Lune 4, Jour 4', 'An 426, Lune 4, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 64), (SELECT id_royaume FROM Royaume WHERE nom='Gélatine'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'An 426, Lune 4, Jour 18', 'An 426, Lune 4, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 64), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), (SELECT id_royaume FROM Royaume WHERE nom='Gélatine'), 'An 426, Lune 5, Jour 5', 'An 426, Lune 5, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 64), (SELECT id_royaume FROM Royaume WHERE nom='Gélatine'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'An 426, Lune 5, Jour 19', 'An 426, Lune 5, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 64), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), (SELECT id_royaume FROM Royaume WHERE nom='Gélatine'), 'An 426, Lune 6, Jour 6', 'An 426, Lune 6, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 64), (SELECT id_royaume FROM Royaume WHERE nom='Gélatine'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'An 426, Lune 6, Jour 20', 'An 426, Lune 6, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 65), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia'), 'An 426, Lune 4, Jour 3', 'An 426, Lune 4, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 65), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'An 426, Lune 4, Jour 17', 'An 426, Lune 4, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 65), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia'), 'An 426, Lune 5, Jour 4', 'An 426, Lune 5, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 65), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'An 426, Lune 5, Jour 18', 'An 426, Lune 5, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 65), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia'), 'An 426, Lune 6, Jour 5', 'An 426, Lune 6, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 65), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'An 426, Lune 6, Jour 19', 'An 426, Lune 6, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 65), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia'), 'An 426, Lune 7, Jour 6', 'An 426, Lune 7, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 65), (SELECT id_royaume FROM Royaume WHERE nom='Herbularia'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'An 426, Lune 7, Jour 20', 'An 426, Lune 7, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 66), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), 'An 426, Lune 5, Jour 3', 'An 426, Lune 5, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 66), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'An 426, Lune 5, Jour 17', 'An 426, Lune 5, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 66), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), 'An 426, Lune 6, Jour 4', 'An 426, Lune 6, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 66), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'An 426, Lune 6, Jour 18', 'An 426, Lune 6, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 66), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), 'An 426, Lune 7, Jour 5', 'An 426, Lune 7, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 66), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'An 426, Lune 7, Jour 19', 'An 426, Lune 7, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 67), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), (SELECT id_royaume FROM Royaume WHERE nom='Burraton'), 'An 426, Lune 6, Jour 3', 'An 426, Lune 6, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 67), (SELECT id_royaume FROM Royaume WHERE nom='Burraton'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'An 426, Lune 6, Jour 17', 'An 426, Lune 6, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 68), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), 'An 426, Lune 1, Jour 3', 'An 426, Lune 1, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 68), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), 'An 426, Lune 1, Jour 17', 'An 426, Lune 1, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 68), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), 'An 426, Lune 2, Jour 4', 'An 426, Lune 2, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 68), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), 'An 426, Lune 2, Jour 18', 'An 426, Lune 2, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 69), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), 'An 426, Lune 2, Jour 3', 'An 426, Lune 2, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 69), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), 'An 426, Lune 2, Jour 17', 'An 426, Lune 2, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 69), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), 'An 426, Lune 3, Jour 4', 'An 426, Lune 3, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 69), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), 'An 426, Lune 3, Jour 18', 'An 426, Lune 3, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 69), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), 'An 426, Lune 4, Jour 5', 'An 426, Lune 4, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 69), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), 'An 426, Lune 4, Jour 19', 'An 426, Lune 4, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 69), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), 'An 426, Lune 5, Jour 6', 'An 426, Lune 5, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 69), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), 'An 426, Lune 5, Jour 20', 'An 426, Lune 5, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 69), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), 'An 426, Lune 6, Jour 3', 'An 426, Lune 6, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 69), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), 'An 426, Lune 6, Jour 17', 'An 426, Lune 6, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 70), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), (SELECT id_royaume FROM Royaume WHERE nom='Gélatine'), 'An 426, Lune 3, Jour 3', 'An 426, Lune 3, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 70), (SELECT id_royaume FROM Royaume WHERE nom='Gélatine'), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), 'An 426, Lune 3, Jour 17', 'An 426, Lune 3, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 70), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), (SELECT id_royaume FROM Royaume WHERE nom='Gélatine'), 'An 426, Lune 4, Jour 4', 'An 426, Lune 4, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 70), (SELECT id_royaume FROM Royaume WHERE nom='Gélatine'), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), 'An 426, Lune 4, Jour 18', 'An 426, Lune 4, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 71), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'An 426, Lune 4, Jour 3', 'An 426, Lune 4, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 71), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), 'An 426, Lune 4, Jour 17', 'An 426, Lune 4, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 71), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'An 426, Lune 5, Jour 4', 'An 426, Lune 5, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 71), (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), 'An 426, Lune 5, Jour 18', 'An 426, Lune 5, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 72), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'), 'An 427, Lune 5, Jour 3', 'An 427, Lune 5, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 72), (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), 'An 427, Lune 5, Jour 17', 'An 427, Lune 5, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 72), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'), 'An 427, Lune 6, Jour 4', 'An 427, Lune 6, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 72), (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), 'An 427, Lune 6, Jour 18', 'An 427, Lune 6, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 72), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'), 'An 427, Lune 7, Jour 5', 'An 427, Lune 7, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 72), (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), 'An 427, Lune 7, Jour 19', 'An 427, Lune 7, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 72), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'), 'An 427, Lune 8, Jour 6', 'An 427, Lune 8, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 72), (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), 'An 427, Lune 8, Jour 20', 'An 427, Lune 8, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 73), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), 'An 427, Lune 6, Jour 3', 'An 427, Lune 6, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 73), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), 'An 427, Lune 6, Jour 17', 'An 427, Lune 6, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 73), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), 'An 427, Lune 7, Jour 4', 'An 427, Lune 7, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 73), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), 'An 427, Lune 7, Jour 18', 'An 427, Lune 7, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 74), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 427, Lune 1, Jour 3', 'An 427, Lune 1, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 74), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), 'An 427, Lune 1, Jour 17', 'An 427, Lune 1, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 74), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 427, Lune 2, Jour 4', 'An 427, Lune 2, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 74), (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), 'An 427, Lune 2, Jour 18', 'An 427, Lune 2, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 75), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), (SELECT id_royaume FROM Royaume WHERE nom='Mozzarellia'), 'An 427, Lune 2, Jour 3', 'An 427, Lune 2, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 75), (SELECT id_royaume FROM Royaume WHERE nom='Mozzarellia'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), 'An 427, Lune 2, Jour 17', 'An 427, Lune 2, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 75), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), (SELECT id_royaume FROM Royaume WHERE nom='Mozzarellia'), 'An 427, Lune 3, Jour 4', 'An 427, Lune 3, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 75), (SELECT id_royaume FROM Royaume WHERE nom='Mozzarellia'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), 'An 427, Lune 3, Jour 18', 'An 427, Lune 3, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 75), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), (SELECT id_royaume FROM Royaume WHERE nom='Mozzarellia'), 'An 427, Lune 4, Jour 5', 'An 427, Lune 4, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 75), (SELECT id_royaume FROM Royaume WHERE nom='Mozzarellia'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), 'An 427, Lune 4, Jour 19', 'An 427, Lune 4, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 75), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), (SELECT id_royaume FROM Royaume WHERE nom='Mozzarellia'), 'An 427, Lune 5, Jour 6', 'An 427, Lune 5, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 75), (SELECT id_royaume FROM Royaume WHERE nom='Mozzarellia'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), 'An 427, Lune 5, Jour 20', 'An 427, Lune 5, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 76), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), 'An 427, Lune 3, Jour 3', 'An 427, Lune 3, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 76), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), 'An 427, Lune 3, Jour 17', 'An 427, Lune 3, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 76), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), 'An 427, Lune 4, Jour 4', 'An 427, Lune 4, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 76), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), 'An 427, Lune 4, Jour 18', 'An 427, Lune 4, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 76), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), 'An 427, Lune 5, Jour 5', 'An 427, Lune 5, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 76), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), 'An 427, Lune 5, Jour 19', 'An 427, Lune 5, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 76), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), 'An 427, Lune 6, Jour 6', 'An 427, Lune 6, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 76), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), 'An 427, Lune 6, Jour 20', 'An 427, Lune 6, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 76), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), 'An 427, Lune 7, Jour 3', 'An 427, Lune 7, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 76), (SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), 'An 427, Lune 7, Jour 17', 'An 427, Lune 7, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 77), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), 'An 427, Lune 4, Jour 3', 'An 427, Lune 4, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 77), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), 'An 427, Lune 4, Jour 17', 'An 427, Lune 4, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 77), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), 'An 427, Lune 5, Jour 4', 'An 427, Lune 5, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 77), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), 'An 427, Lune 5, Jour 18', 'An 427, Lune 5, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 77), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), 'An 427, Lune 6, Jour 5', 'An 427, Lune 6, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 77), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), 'An 427, Lune 6, Jour 19', 'An 427, Lune 6, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 77), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), 'An 427, Lune 7, Jour 6', 'An 427, Lune 7, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 77), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), 'An 427, Lune 7, Jour 20', 'An 427, Lune 7, Jour 28'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 77), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), 'An 427, Lune 8, Jour 3', 'An 427, Lune 8, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 77), (SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), 'An 427, Lune 8, Jour 17', 'An 427, Lune 8, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 78), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime'), 'An 427, Lune 5, Jour 3', 'An 427, Lune 5, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 78), (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), 'An 427, Lune 5, Jour 17', 'An 427, Lune 5, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 79), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), 'An 427, Lune 6, Jour 3', 'An 427, Lune 6, Jour 11'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 79), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), 'An 427, Lune 6, Jour 17', 'An 427, Lune 6, Jour 25'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 79), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), 'An 427, Lune 7, Jour 4', 'An 427, Lune 7, Jour 12'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 79), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), 'An 427, Lune 7, Jour 18', 'An 427, Lune 7, Jour 26'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 79), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), 'An 427, Lune 8, Jour 5', 'An 427, Lune 8, Jour 13'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 79), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), 'An 427, Lune 8, Jour 19', 'An 427, Lune 8, Jour 27'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 79), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), 'An 427, Lune 1, Jour 6', 'An 427, Lune 1, Jour 14'),
+((SELECT id_marchand FROM Marchand ORDER BY id_marchand LIMIT 1 OFFSET 79), (SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), 'An 427, Lune 1, Jour 20', 'An 427, Lune 1, Jour 28');
+
+
+-- Spécialité locale (dates étalées pendant le voyage) : Raclettea → Fromage sacré
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Fromage sacré' LIMIT 1),
+  36,
+  3240.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 6'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Raclettea';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Raclettea → Beurre céleste
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Beurre céleste' LIMIT 1),
+  26,
+  2860.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 9'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Raclettea';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Raclettea → Souffle de raclette
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Souffle de raclette' LIMIT 1),
+  18,
+  2700.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 12'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Raclettea';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Banarnia → Sel de Banarnia
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Sel de Banarnia' LIMIT 1),
+  64,
+  1920.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 6'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Banarnia';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Banarnia → Fruits confits
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Fruits confits' LIMIT 1),
+  36,
+  2160.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 9'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Banarnia';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Banarnia → Feuilles d’or
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Feuilles d’or' LIMIT 1),
+  6,
+  5400.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 12'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Banarnia';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Poissarie → Poisson fumé
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Poisson fumé' LIMIT 1),
+  55,
+  2750.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 6'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Poissarie';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Poissarie → Nacre
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Nacre' LIMIT 1),
+  20,
+  3000.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 9'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Poissarie';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Poissarie → Perles de sel
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Perles de sel' LIMIT 1),
+  28,
+  1680.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 12'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Poissarie';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Dragonflette → Cendre draconique
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Cendre draconique' LIMIT 1),
+  18,
+  5400.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 6'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Dragonflette';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Dragonflette → Os de dragonnet
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Os de dragonnet' LIMIT 1),
+  8,
+  4800.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 8'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Dragonflette';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Dragonflette → Roche fondue
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Roche fondue' LIMIT 1),
+  22,
+  3080.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 10'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Dragonflette';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Dragonflette → Cendres de phoenix
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Cendres de phoenix' LIMIT 1),
+  6,
+  6000.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 12'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Dragonflette';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Soupefroide → Soupe condensée
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Soupe condensée' LIMIT 1),
+  90,
+  1350.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 6'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Soupefroide';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Soupefroide → Brume en bouteille
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Brume en bouteille' LIMIT 1),
+  26,
+  2080.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 9'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Soupefroide';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Soupefroide → Neige en conserve
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Neige en conserve' LIMIT 1),
+  14,
+  2100.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 12'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Soupefroide';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Quichebourg → Farine
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Farine' LIMIT 1),
+  100,
+  1000.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 6'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Quichebourg';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Quichebourg → Beurre
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Beurre' LIMIT 1),
+  70,
+  2100.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 9'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Quichebourg';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Quichebourg → Poudre de levain
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Poudre de levain' LIMIT 1),
+  30,
+  1650.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 12'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Quichebourg';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Éclairoisie → Éclat de lune
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Éclat de lune' LIMIT 1),
+  28,
+  4200.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 6'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Éclairoisie';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Éclairoisie → Feuilles d’or
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Feuilles d’or' LIMIT 1),
+  6,
+  5400.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 9'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Éclairoisie';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Éclairoisie → Verre clair
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Verre clair' LIMIT 1),
+  40,
+  2000.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 12'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Éclairoisie';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Boulangea → Farine
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Farine' LIMIT 1),
+  100,
+  1000.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 6'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Boulangea';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Boulangea → Beurre
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Beurre' LIMIT 1),
+  70,
+  2100.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 9'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Boulangea';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Boulangea → Poudre de levain
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Poudre de levain' LIMIT 1),
+  30,
+  1650.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 12'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Boulangea';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Mozzarellia → Fromage sacré
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Fromage sacré' LIMIT 1),
+  36,
+  3240.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 6'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Mozzarellia';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Mozzarellia → Lait
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Lait' LIMIT 1),
+  90,
+  900.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 9'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Mozzarellia';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Mozzarellia → Herbes
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Herbes' LIMIT 1),
+  80,
+  800.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 12'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Mozzarellia';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Parmésia → Fromage sacré
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Fromage sacré' LIMIT 1),
+  36,
+  3240.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 6'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Parmésia';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Parmésia → Lait
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Lait' LIMIT 1),
+  90,
+  900.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 9'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Parmésia';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Parmésia → Herbes
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Herbes' LIMIT 1),
+  80,
+  800.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 12'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Parmésia';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Ricotte → Fromage sacré
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Fromage sacré' LIMIT 1),
+  36,
+  3240.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 6'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Ricotte';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Ricotte → Lait
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Lait' LIMIT 1),
+  90,
+  900.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 9'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Ricotte';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Ricotte → Lin
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Lin' LIMIT 1),
+  30,
+  1200.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 12'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Ricotte';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Burraton → Fromage sacré
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Fromage sacré' LIMIT 1),
+  36,
+  3240.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 6'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Burraton';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Burraton → Lait
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Lait' LIMIT 1),
+  90,
+  900.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 9'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Burraton';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Burraton → Huile d’olive antique
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Huile d’olive antique' LIMIT 1),
+  18,
+  2700.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 12'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Burraton';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Mascarponie → Fromage sacré
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Fromage sacré' LIMIT 1),
+  36,
+  3240.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 6'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Mascarponie';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Mascarponie → Crème éternelle
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Crème éternelle' LIMIT 1),
+  20,
+  4000.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 9'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Mascarponie';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Mascarponie → Lait
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Lait' LIMIT 1),
+  90,
+  900.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 12'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Mascarponie';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Chantillys → Crème éternelle
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Crème éternelle' LIMIT 1),
+  20,
+  4000.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 6'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Chantillys';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Chantillys → Sucre
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Sucre' LIMIT 1),
+  80,
+  1600.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 9'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Chantillys';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Chantillys → Gelée royale lunaire
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Gelée royale lunaire' LIMIT 1),
+  8,
+  3600.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 12'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Chantillys';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Pralinie → Cacao
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Cacao' LIMIT 1),
+  60,
+  3000.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 6'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Pralinie';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Pralinie → Sucre
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Sucre' LIMIT 1),
+  80,
+  1600.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 9'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Pralinie';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Pralinie → Fruits confits
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Fruits confits' LIMIT 1),
+  36,
+  2160.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 12'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Pralinie';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Caramellum → Sucre
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Sucre' LIMIT 1),
+  80,
+  1600.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 6'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Caramellum';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Caramellum → Beurre
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Beurre' LIMIT 1),
+  70,
+  2100.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 9'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Caramellum';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Caramellum → Épices
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Épices' LIMIT 1),
+  55,
+  2750.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 12'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Caramellum';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Biscuitbourg → Poudre de biscuit
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Poudre de biscuit' LIMIT 1),
+  70,
+  2100.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 6'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Biscuitbourg';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Biscuitbourg → Farine
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Farine' LIMIT 1),
+  100,
+  1000.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 9'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Biscuitbourg';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Biscuitbourg → Beurre
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Beurre' LIMIT 1),
+  70,
+  2100.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 12'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Biscuitbourg';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Gélatine → Gelée de mana
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Gelée de mana' LIMIT 1),
+  24,
+  4320.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 6'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Gélatine';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Gélatine → Fibre de champignon
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Fibre de champignon' LIMIT 1),
+  50,
+  1250.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 9'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Gélatine';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Gélatine → Eau pure
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Eau pure' LIMIT 1),
+  70,
+  1400.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 12'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Gélatine';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Sorbeterre → Glace éternelle
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Glace éternelle' LIMIT 1),
+  12,
+  6000.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 6'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Sorbeterre';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Sorbeterre → Eau pure
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Eau pure' LIMIT 1),
+  70,
+  1400.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 9'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Sorbeterre';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Sorbeterre → Neige en conserve
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Neige en conserve' LIMIT 1),
+  14,
+  2100.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 12'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Sorbeterre';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Herbularia → Herbes
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Herbes' LIMIT 1),
+  80,
+  800.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 6'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Herbularia';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Herbularia → Racines magiques
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Racines magiques' LIMIT 1),
+  80,
+  1600.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 9'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Herbularia';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Herbularia → Brindilles de sagesse
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Brindilles de sagesse' LIMIT 1),
+  40,
+  1000.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 12'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Herbularia';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Beurropolis → Beurre céleste
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Beurre céleste' LIMIT 1),
+  26,
+  2860.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 6'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Beurropolis';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Beurropolis → Beurre
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Beurre' LIMIT 1),
+  70,
+  2100.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 9'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Beurropolis';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Beurropolis → Lait
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Lait' LIMIT 1),
+  90,
+  900.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 12'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Beurropolis';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Rizotto → Eau pure
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Eau pure' LIMIT 1),
+  70,
+  1400.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 6'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Rizotto';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Rizotto → Herbes
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Herbes' LIMIT 1),
+  80,
+  800.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 9'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Rizotto';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Rizotto → Lin
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Lin' LIMIT 1),
+  30,
+  1200.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 12'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Rizotto';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Patateland → Racines magiques
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Racines magiques' LIMIT 1),
+  80,
+  1600.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 6'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Patateland';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Patateland → Argile
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Argile' LIMIT 1),
+  60,
+  900.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 9'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Patateland';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Patateland → Sel
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Sel' LIMIT 1),
+  60,
+  600.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 12'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Patateland';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Croûtonie → Farine
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Farine' LIMIT 1),
+  100,
+  1000.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 6'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Croûtonie';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Croûtonie → Beurre
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Beurre' LIMIT 1),
+  70,
+  2100.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 9'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Croûtonie';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Croûtonie → Sel
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Sel' LIMIT 1),
+  60,
+  600.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 12'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Croûtonie';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Marmitonnie → Épices
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Épices' LIMIT 1),
+  55,
+  2750.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 6'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Marmitonnie';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Marmitonnie → Soupe condensée
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Soupe condensée' LIMIT 1),
+  90,
+  1350.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 9'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Marmitonnie';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Marmitonnie → Miel
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Miel' LIMIT 1),
+  50,
+  1500.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 12'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Marmitonnie';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Tartiflette Prime → Fromage sacré
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Fromage sacré' LIMIT 1),
+  36,
+  3240.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 6'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Tartiflette Prime';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Tartiflette Prime → Beurre
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Beurre' LIMIT 1),
+  70,
+  2100.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 9'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Tartiflette Prime';
+
+-- Spécialité locale (dates étalées pendant le voyage) : Tartiflette Prime → Poivre
+INSERT INTO MarchandAchat (trajet_id, royaume_id, ressource_id, quantite, prix_total, date_achat_lore)
+SELECT 
+  t.id_trajet,
+  t.royaume_arrivee_id,
+  (SELECT id_ressource FROM Ressource WHERE nom='Poivre' LIMIT 1),
+  30,
+  900.00,
+  CONCAT(
+    SUBSTRING_INDEX(t.date_depart_lore, ',', 1), ', ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(t.date_depart_lore, ',', 2), ',', -1), ', Jour 12'
+  )
+FROM MarchandTrajet t
+JOIN Royaume r ON r.id_royaume = t.royaume_arrivee_id
+WHERE r.nom = 'Tartiflette Prime';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
