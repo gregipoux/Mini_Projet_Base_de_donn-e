@@ -3997,6 +3997,17 @@ INSERT INTO Competence (nom, exigence_espece_id, exigence_formation) VALUES
 ('Bouclier tour',                              NULL,                                   'Garde royale — formation initiale'),
 ('Cavalier lancier',                           NULL,                                   'Académie des éperons'),
 ('Ambidextrie martiale',                       NULL,                                   'Programme “Mains Jumelles”'),
+('Soins',                                      NULL,                                   'Infirmier de bataille'),
+('Maîtrise de l’épée',                         NULL,                                   'Escrime — tronc commun'),
+('Bouclier & parade',                          NULL,                                   'Défense active — module 1'),
+('Cartographie',                               NULL,                                   'Académie des arpenteurs — base'),
+('Chasse',                                     NULL,                                   'Survie — pistage et tir'),
+('Routier',                                    NULL,                                   'Logistique de campagne'),
+('Navigation',                                 NULL,                                   'Navigation générale'),
+('Musicien',                                   NULL,                                   'Conservatoire — solfège & scène'),
+('Orfèvrerie',                                 NULL,                                   'Atelier des métaux précieux'),
+('Tailleur de pierre',                         NULL,                                   'Compagnons bâtisseurs'),
+('Arcanes',                                    NULL,                                   'Introduction aux arcanes'),
 ('Tir réflexe',                                (SELECT id_espece FROM Espece WHERE libelle='Elfe'),     'Chasse sylvestre'),
 ('Maîtrise du fléau',                          NULL,                                   'Guilde des armes exotiques'),
 ('Combat à deux lames',                        NULL,                                   'Dojo des Méandres'),
@@ -4004,6 +4015,8 @@ INSERT INTO Competence (nom, exigence_espece_id, exigence_formation) VALUES
 ('Riposte éclair',                             NULL,                                   'Escrime — perfectionnement'),
 ('Défense contre lances',                      NULL,                                   'Phalange — tactiques'),
 ('Maîtrise du bâton long',                     NULL,                                   'École monastique du Vent'),
+('Pistage',                                    NULL,                                   'Survie — niveau I'),
+('Furtivité',                                  NULL,                                   'Marche silencieuse'),
 ('Pistage en milieu forestier',                (SELECT id_espece FROM Espece WHERE libelle='Elfe'),     'Rite des Trois Traces'),
 ('Orientation sans astres',                    NULL,                                   'Survie — niveau avancé'),
 ('Herboristerie médicinale',                   NULL,                                   'Apothicairerie'),
@@ -4011,6 +4024,7 @@ INSERT INTO Competence (nom, exigence_espece_id, exigence_formation) VALUES
 ('Tannage express',                            (SELECT id_espece FROM Espece WHERE libelle='Nain'),     'Atelier du Cuir-Rond'),
 ('Cuisine de bivouac',                         NULL,                                   'Corvée de camp'),
 ('Pêche en eaux froides',                      NULL,                                   'Guilde des filets'),
+('Élevage',                                    NULL,                                   'Techniques d’élevage rural'),
 ('Escalade sans pitons',                       NULL,                                   'Ropes & Rocks'),
 ('Trappeur des hautes plaines',                NULL,                                   'Permis de piégeage'),
 ('Cartographie à main levée',                  NULL,                                   'Académie des arpenteurs'),
@@ -4019,6 +4033,7 @@ INSERT INTO Competence (nom, exigence_espece_id, exigence_formation) VALUES
 ('Soufflage de verre',                         NULL,                                   'Atelier des verriers'),
 ('Tissage runique',                            NULL,                                   'Métier à glyphes — base'),
 ('Braise durable',                             NULL,                                   'Forge — thermie appliquée'),
+('Artifice',                                   NULL,                                   'Atelier des feux d’artifice'),
 ('Étiquette de cour',                          NULL,                                   'Précis de bienséance'),
 ('Négociation commerciale',                    NULL,                                   'Chambre des marchands — module 2'),
 ('Détection du mensonge (comportement)',       NULL,                                   'Rhétorique & microexpressions'),
@@ -4060,12 +4075,14 @@ INSERT INTO Competence (nom, exigence_espece_id, exigence_formation) VALUES
 ('Géographie économique',                      NULL,                                   'Chambre des cartographes'),
 ('Économie marchande',                         NULL,                                   'Chambre des Courtiers'),
 ('Chant liturgique',                           NULL,                                   'Cloître des Voix'),
+('Chant bardique',                             NULL,                                   'Taverne du Voyageur'),
 ('Bénédictions mineures',                      NULL,                                   'Séminaire du Matin'),
 ('Harpe céleste — technique',                  NULL,                                   'Conservatoire Astral'),
 ('Peinture d’icônes',                          NULL,                                   'Atelier doré'),
 ('Calligraphie de combat',                     NULL,                                   'Encriers & Estocs'),
 ('Danse des voiles',                           NULL,                                   'Académie du Mouvement'),
 ('Théâtre d’improvisation',                    NULL,                                   'Scène ouverte'),
+('Brassage',                                   NULL,                                   'Atelier du maître brasseur'),
 ('Ingénierie de ponts',                        NULL,                                   'Bureau des ouvrages'),
 ('Balistique de trébuchet',                    NULL,                                   'École des machines'),
 ('Sape & contresape',                          NULL,                                   'Corps des mineurs'),
@@ -4106,7 +4123,10 @@ INSERT INTO Competence (nom, exigence_espece_id, exigence_formation) VALUES
 ('Affinité infernale',                         (SELECT id_espece FROM Espece WHERE libelle='Tieffelin'),'Héritage infernal'),
 ('Tir elfique',                                (SELECT id_espece FROM Espece WHERE libelle='Elfe'),     'Écoles sylvestres'),
 ('Chant ancien',                               (SELECT id_espece FROM Espece WHERE libelle='Elfe'),     'Chœur des bois'),
+('Enchantement',                               NULL,                                                    'Discussion avec l’arbre monde'),
 ('Maîtrise de la forge naine',                 (SELECT id_espece FROM Espece WHERE libelle='Nain'),     'Guildes profondes'),
+('Armurerie',                                  (SELECT id_espece FROM Espece WHERE libelle='Nain'),     'Ateliers de la forge'),
+('Minage',                                     NULL,                                                    'Exploitation minière'),
 ('Rage disciplinée',                           (SELECT id_espece FROM Espece WHERE libelle='Orc'),      'Maîtres d’armes orcs'),
 ('Astuce gnome',                               (SELECT id_espece FROM Espece WHERE libelle='Gnome'),    'Ateliers farfouilles'),
 ('Grâce sylphide',                             (SELECT id_espece FROM Espece WHERE libelle='Sylphe'),   'Courants aériens'),
@@ -4122,9 +4142,11 @@ INSERT INTO Competence (nom, exigence_espece_id, exigence_formation) VALUES
 ('Souffle d’ifrit',                            (SELECT id_espece FROM Espece WHERE libelle='Ifrit'),    'Feux mouvants'),
 ('Tourbillon du djinn',                        (SELECT id_espece FROM Espece WHERE libelle='Djinn'),    'Rites des sables'),
 ('Chatoiement vampirique',                     (SELECT id_espece FROM Espece WHERE libelle='Vampire'),  'Nuit tenue'),
+('Ombres voilées',                             (SELECT id_espece FROM Espece WHERE libelle='Vampire'),  'Arts des ombres'),
 ('Glyphes des liches',                         (SELECT id_espece FROM Espece WHERE libelle='Liche'),    'Clavicules secrètes'),
 ('Muse fée',                                   (SELECT id_espece FROM Espece WHERE libelle='Fée'),      'Conservatoire sylvain'),
 ('Percée drakéide',                            (SELECT id_espece FROM Espece WHERE libelle='Drakéide'), 'Voies des écailles'),
+('Lumière sacrée',                             (SELECT id_espece FROM Espece WHERE libelle='Aasimar'),  'Liturgie de la lumière'),
 ('Clarté aasimar',                             (SELECT id_espece FROM Espece WHERE libelle='Aasimar'),  'Chœur céleste');
 
 
@@ -6786,5 +6808,368 @@ INSERT INTO PersonnageMetier (personnage_id, metier_id, niveau)
 SELECT p.id_personnage,(SELECT id_metier FROM Metier WHERE libelle='Maître d’armes'),4
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece
 WHERE e.libelle IN ('Minotaure') AND (p.id_personnage % 3)=2;
+
+
+/* ===========================
+   COMPÉTENCES GÉNÉRIQUES (base)
+   =========================== */
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage, (SELECT id_competence FROM Competence WHERE nom='Soins'),
+       CASE WHEN p.mana_max>=300 THEN 3 ELSE 1 END
+FROM Personnage p
+WHERE (p.id_personnage % 5)=0;
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage, (SELECT id_competence FROM Competence WHERE nom='Chasse'),
+       CASE WHEN p.mana_max>=500 THEN 5 WHEN p.mana_max>=200 THEN 3 ELSE 1 END
+FROM Personnage p
+WHERE (p.id_personnage % 5)=1;
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage, (SELECT id_competence FROM Competence WHERE nom='Pistage'),
+       CASE WHEN p.mana_max>=200 THEN 3 ELSE 2 END
+FROM Personnage p
+WHERE (p.id_personnage % 5)=2;
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage, (SELECT id_competence FROM Competence WHERE nom='Furtivité'),
+       CASE WHEN p.mana_max>=200 THEN 3 ELSE 2 END
+FROM Personnage p
+WHERE (p.id_personnage % 5)=3;
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage, (SELECT id_competence FROM Competence WHERE nom='Cuisine de bivouac'),
+       2
+FROM Personnage p
+WHERE (p.id_personnage % 5)=4;
+
+/* ===========================
+   PAR ESPÈCE
+   =========================== */
+
+-- HUMAIN : Maîtrise de l’épée, Bouclier & parade, Cartographie
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Maîtrise de l’épée'),
+       CASE WHEN p.mana_max>=300 THEN 4 ELSE 3 END
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Humain';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Bouclier & parade'),3
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Humain';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Cartographie'),
+       CASE WHEN p.mana_max>=300 THEN 4 ELSE 2 END
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Humain';
+
+-- ELFE : Tir elfique, Chant ancien, Enchantement
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Tir elfique'),
+       CASE WHEN p.mana_max>=500 THEN 5 ELSE 4 END
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Elfe';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Chant ancien'),4
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Elfe';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Enchantement'),
+       CASE WHEN p.mana_max>=300 THEN 4 ELSE 3 END
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Elfe';
+
+-- NAIN : Maîtrise de la forge naine, Armurerie, Minage
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Maîtrise de la forge naine'),5
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Nain';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Armurerie'),4
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Nain';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Minage'),4
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Nain';
+
+-- ORC : Rage disciplinée, Intimidation non létale, Tailleur de pierre
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Rage disciplinée'),4
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Orc';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Intimidation non létale'),3
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Orc';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Tailleur de pierre'),3
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Orc';
+
+-- GNOME : Astuce gnome, Ingénierie, Artifice
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Astuce gnome'),4
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Gnome';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Ingénierie de ponts'),4
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Gnome';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Artifice'),3
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Gnome';
+
+-- DEMI-ELFE : Chant bardique, Arcanes, Pistage
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Chant bardique'),3
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Demi-elfe';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Arcanes'),
+       CASE WHEN p.mana_max>=240 THEN 4 ELSE 2 END
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Demi-elfe';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Détection du mensonge (comportement)'),3
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Demi-elfe';
+
+-- DEMI-ORC : Maîtrise de l’épée, Bouclier & parade, Chasse
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Maîtrise de l’épée'),3
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Demi-orc';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Bouclier & parade'),3
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Demi-orc';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Intimidation non létale'),3
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Demi-orc';
+
+-- HOBELIN : Cuisine, Élevage, Tissage
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Cartographie'),3
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Hobelin';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Élevage'),2
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Hobelin';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Tissage runique'),2
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Hobelin';
+
+-- TIEFFELIN : Affinité infernale, Arcanes, Enchantement
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Affinité infernale'),5
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Tieffelin';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Arcanes'),
+       CASE WHEN p.mana_max>=600 THEN 5 ELSE 4 END
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Tieffelin';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Enchantement'),4
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Tieffelin';
+
+-- DRAKÉIDE : Percée drakéide, Maîtrise de l’épée, Lévitation courte
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Percée drakéide'),4
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Drakéide';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Maîtrise de l’épée'),4
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Drakéide';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Lévitation courte'),3
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Drakéide';
+
+-- SATYRE : Chant bardique, Brassage, Musicien
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Chant bardique'),4
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Satyre';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Brassage'),3
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Satyre';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Musicien'),4
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Satyre';
+
+-- AASIMAR : Bénédiction astrale, Lumière sacrée, Soins (bonus haut mana)
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Bénédiction astrale'),5
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Aasimar';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Lumière sacrée'),5
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Aasimar';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Riposte éclair'),
+       CASE WHEN p.mana_max>=900 THEN 5 ELSE 4 END
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Aasimar';
+
+-- KOBOLD : Minage, Ingénierie, Artifice
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Minage'),3
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Kobold';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Ingénierie de ponts'),3
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Kobold';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Artifice'),3
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Kobold';
+
+-- GOBELIN : Furtivité, Orfèvrerie
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Combat à deux lames'),3
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Gobelin';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Orfèvrerie'),2
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Gobelin';
+
+-- VAMPIRE : Chatoiement vampirique, Ombres voilées, Arcanes
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Chatoiement vampirique'),5
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Vampire';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Ombres voilées'),4
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Vampire';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Arcanes'),4
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Vampire';
+
+-- LICHE : Glyphes des liches, Runes, Enchantement
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Glyphes des liches'),5
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Liche';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Canalisation de mana'),5
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Liche';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Enchantement'),5
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Liche';
+
+-- DRAGON : Souffle draconique, Maîtrise de l’épée, Cartographie
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Souffle draconique'),5
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Dragon';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Maîtrise de l’épée'),4
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Dragon';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Cartographie'),5
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Dragon';
+
+-- DJINN / IFRIT : Tourbillon du djinn / Souffle d’ifrit + Navigation
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Tourbillon du djinn'),5
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Djinn';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Souffle d’ifrit'),5
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Ifrit';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,
+       (SELECT id_competence FROM Competence WHERE nom='Navigation'),
+       CASE WHEN p.mana_max>=780 THEN 5 ELSE 4 END
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece
+WHERE e.libelle IN ('Djinn','Ifrit');
+
+-- FÉE / SYLPHE / SPRITE : Muse fée / Grâce sylphide + Chant bardique
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Muse fée'),5
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Fée';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Grâce sylphide'),5
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Sylphe';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Chant bardique'),4
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece
+WHERE e.libelle IN ('Fée','Sylphe','Sprite étincelant');
+
+-- MARINS (Sirène / Néréide / Ondine / Naga) : Appel des marées + Navigation + Pêche en eaux froides
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Appel des marées'),5
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece
+WHERE e.libelle IN ('Sirène','Néréide','Ondine','Naga');
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Navigation'),4
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece
+WHERE e.libelle IN ('Sirène','Néréide','Ondine','Naga');
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Pêche en eaux froides'),4
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece
+WHERE e.libelle IN ('Sirène','Néréide','Ondine','Naga');
+
+-- GÉANTS / PIERRE / GLACES : Tailleur de pierre + Routier
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Tailleur de pierre'),5
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece
+WHERE e.libelle IN ('Géant','Géant de pierre','Géant des glaces');
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Routier'),4
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece
+WHERE e.libelle IN ('Géant','Géant de pierre','Géant des glaces');
+
+-- DRYADES / CENTAURES / MINOTAURES / SPHINX : Faveur dryadique / Équilibre centaure / Maîtrise de l’épée / Énigme éternelle
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Faveur dryadique'),5
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Dryade';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Équilibre centaure'),4
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Centaure';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Maîtrise de l’épée'),4
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Minotaure';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Énigme éternelle'),5
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Sphinx';
+
+-- KITSUNE / TANUKI / ONI / RAKSHASA : compétences dédiées
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Métamorphose kitsune'),5
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Kitsune';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Ingéniosité tanuki'),4
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Tanuki';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Frappe oni'),5
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Oni';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Ruse rakshasa'),5
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Rakshasa';
+
+-- WYVERNE / PHÉNIX : Vol majestueux / Renaissance embrasée
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Vol majestueux'),5
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Wyverne';
+
+INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
+SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Renaissance embrasée'),5
+FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Phénix';
 
 
