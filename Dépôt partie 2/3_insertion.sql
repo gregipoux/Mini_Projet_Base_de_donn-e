@@ -8445,3 +8445,417 @@ INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
 INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
 ((SELECT id_village FROM Village WHERE nom='Rizotto-Grand-Canal'), 'village', 'Grand canal et barques à riz rapides');
 
+
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Solarius Max'),
+ (SELECT id_titre FROM Titre WHERE libelle='Roi de Solarys'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'),
+ NULL, 'An 420, Lune 1, Jour 1', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Lara Tatouille'),
+ (SELECT id_titre FROM Titre WHERE libelle='Alchimiste du Savoir'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'),
+ NULL, 'An 421, Lune 3, Jour 12', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Jean Bonparleur'),
+ (SELECT id_titre FROM Titre WHERE libelle='Héraut du Royaume'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'),
+ NULL, 'An 420, Lune 9, Jour 2', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Borin Picacier'),
+ (SELECT id_titre FROM Titre WHERE libelle='Gardien de l’Obsidienne'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'),
+ NULL, 'An 419, Lune 7, Jour 18', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Luthien Tisselune'),
+ (SELECT id_titre FROM Titre WHERE libelle='Conjurateur de Lune'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Sucralune'),
+ NULL, 'An 420, Lune 11, Jour 7', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Corga Ombrebrave'),
+ (SELECT id_titre FROM Titre WHERE libelle='Maître des Ombres'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'),
+ NULL, 'An 421, Lune 4, Jour 26', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Armelle Armure'),
+ (SELECT id_titre FROM Titre WHERE libelle='Capitaine de la Garde Royale'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'),
+ NULL, 'An 420, Lune 2, Jour 15', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Guy D’armes'),
+ (SELECT id_titre FROM Titre WHERE libelle='Chevalier Écarlate'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'),
+ NULL, 'An 419, Lune 10, Jour 9', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Mireille Mirador'),
+ (SELECT id_titre FROM Titre WHERE libelle='Sentinelle de l’Aube'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'),
+ NULL, 'An 421, Lune 5, Jour 1', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Zoé Zéphyr'),
+ (SELECT id_titre FROM Titre WHERE libelle='Arcaniste du Vent'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'),
+ NULL, 'An 420, Lune 8, Jour 20', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Eärwen Feuilledor'),
+ (SELECT id_titre FROM Titre WHERE libelle='Érudit du Zéphyr'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Herbularia'),
+ NULL, 'An 422, Lune 1, Jour 13', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Calen Dorélys'),
+ (SELECT id_titre FROM Titre WHERE libelle='Maître des Portails'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'),
+ NULL, 'An 421, Lune 6, Jour 6', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Sirilas Clairchant'),
+ (SELECT id_titre FROM Titre WHERE libelle='Héraut des Éclats de Rire'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'),
+ NULL, 'An 420, Lune 12, Jour 9', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Maeriel Aubevive'),
+ (SELECT id_titre FROM Titre WHERE libelle='Prêtre du Soleil'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'),
+ NULL, 'An 418, Lune 9, Jour 3', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Hildi Rochefine'),
+ (SELECT id_titre FROM Titre WHERE libelle='Seigneur des Marches'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'),
+ NULL, 'An 420, Lune 7, Jour 14', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Korin Martelembrun'),
+ (SELECT id_titre FROM Titre WHERE libelle='Gardien du Sceau Royal'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'),
+ NULL, 'An 419, Lune 3, Jour 22', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Nora Cuvelier'),
+ (SELECT id_titre FROM Titre WHERE libelle='Vigile des Flammes'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'),
+ NULL, 'An 421, Lune 2, Jour 28', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Anvil Mainforte'),
+ (SELECT id_titre FROM Titre WHERE libelle='Épéiste Runique'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'),
+ NULL, 'An 420, Lune 10, Jour 11', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Bruna Brasero'),
+ (SELECT id_titre FROM Titre WHERE libelle='Champion des Flammes'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg'),
+ NULL, 'An 420, Lune 6, Jour 30', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Crog Silex'),
+ (SELECT id_titre FROM Titre WHERE libelle='Gardien du Nexus'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'),
+ NULL, 'An 419, Lune 8, Jour 5', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Dunda Cervoise'),
+ (SELECT id_titre FROM Titre WHERE libelle='Champion du Thé Glacé'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'),
+ NULL, 'An 421, Lune 9, Jour 10', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Bibi Brioche'),
+ (SELECT id_titre FROM Titre WHERE libelle='Protecteur du Peuple'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'),
+ NULL, 'An 420, Lune 4, Jour 14', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Lalie Briochette'),
+ (SELECT id_titre FROM Titre WHERE libelle='Chevalier Écarlate'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'),
+ NULL, 'An 421, Lune 1, Jour 21', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Erik Étau'),
+ (SELECT id_titre FROM Titre WHERE libelle='Préfet de la Connaissance'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Beurropolis'),
+ NULL, 'An 420, Lune 3, Jour 3', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Géraldine Belleplume'),
+ (SELECT id_titre FROM Titre WHERE libelle='Voyant du Crépuscule'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'),
+ NULL, 'An 421, Lune 7, Jour 8', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Démo Niak'),
+ (SELECT id_titre FROM Titre WHERE libelle='Sorcier du Beurre Volant'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Mascarponie'),
+ NULL, 'An 420, Lune 8, Jour 28', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Durim Brindacier'),
+ (SELECT id_titre FROM Titre WHERE libelle='Commandant des Armées'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime'),
+ NULL, 'An 418, Lune 6, Jour 4', 'An 422, Lune 6, Jour 4', FALSE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Zyrith Foudre-Serment'),
+ (SELECT id_titre FROM Titre WHERE libelle='Sorcier des Tempêtes'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'),
+ NULL, 'An 422, Lune 2, Jour 2', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Eliara Nitescence'),
+ (SELECT id_titre FROM Titre WHERE libelle='Mage des Rêves'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Sucralune'),
+ NULL, 'An 421, Lune 10, Jour 16', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Séraphine Rivage'),
+ (SELECT id_titre FROM Titre WHERE libelle='Capitaine des Voiles Blanches'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'),
+ NULL, 'An 420, Lune 9, Jour 27', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Basile le Subtil'),
+ (SELECT id_titre FROM Titre WHERE libelle='Émissaire des Ombres'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'),
+ NULL, 'An 421, Lune 2, Jour 9', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Félix Fineplume'),
+ (SELECT id_titre FROM Titre WHERE libelle='Archiviste Impérial'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'),
+ NULL, 'An 420, Lune 1, Jour 23', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Azazel Courtepointe'),
+ (SELECT id_titre FROM Titre WHERE libelle='Scribe du Néant'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'),
+ NULL, 'An 420, Lune 5, Jour 19', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Amber Écaillefeu'),
+ (SELECT id_titre FROM Titre WHERE libelle='Maître du Feu Céleste'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'),
+ NULL, 'An 421, Lune 12, Jour 1', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Bébert Tambour-Major'),
+ (SELECT id_titre FROM Titre WHERE libelle='Diplomate de la Couronne'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'),
+ NULL, 'An 420, Lune 11, Jour 21', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Gaspard Sanspeur'),
+ (SELECT id_titre FROM Titre WHERE libelle='Champion du Royaume'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'),
+ NULL, 'An 421, Lune 3, Jour 8', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Élo Die'),
+ (SELECT id_titre FROM Titre WHERE libelle='Seigneur des Marches'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'),
+ NULL, 'An 420, Lune 8, Jour 28', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Erga Dosdroit'),
+ (SELECT id_titre FROM Titre WHERE libelle='Veilleur des Portes'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'),
+ NULL, 'An 421, Lune 6, Jour 12', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Ghor Letranchant'),
+ (SELECT id_titre FROM Titre WHERE libelle='Chasseur de Dragons'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'),
+ NULL, 'An 418, Lune 10, Jour 10', 'An 421, Lune 10, Jour 10', FALSE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Urga Tapisdos'),
+ (SELECT id_titre FROM Titre WHERE libelle='Champion des Cieux'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'),
+ NULL, 'An 421, Lune 9, Jour 6', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Fenduil Lierreclair'),
+ (SELECT id_titre FROM Titre WHERE libelle='Élémentaliste d’Azur'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'),
+ NULL, 'An 420, Lune 2, Jour 5', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Ulysse Jaloux'),
+ (SELECT id_titre FROM Titre WHERE libelle='Rôdeur des Ruines'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'),
+ NULL, 'An 421, Lune 4, Jour 2', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Goma Rondpain'),
+ (SELECT id_titre FROM Titre WHERE libelle='Gardien du Sceau Royal'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'),
+ NULL, 'An 420, Lune 7, Jour 1', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Camille Cambriole'),
+ (SELECT id_titre FROM Titre WHERE libelle='Brise-Serment'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'),
+ NULL, 'An 421, Lune 8, Jour 13', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Noé Milleplans'),
+ (SELECT id_titre FROM Titre WHERE libelle='Maître du Temps'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'),
+ NULL, 'An 420, Lune 5, Jour 20', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Phénix Retex'),
+ (SELECT id_titre FROM Titre WHERE libelle='Alchimiste du Savoir'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'),
+ NULL, 'An 421, Lune 11, Jour 5', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Milo Briochette'),
+ (SELECT id_titre FROM Titre WHERE libelle='Chevalier du Crépuscule'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'),
+ NULL, 'An 420, Lune 9, Jour 18', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Alaric Douxmiel'),
+ (SELECT id_titre FROM Titre WHERE libelle='Exorciste des Âmes'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'),
+ NULL, 'An 420, Lune 12, Jour 6', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Tilda Croquenoisette'),
+ (SELECT id_titre FROM Titre WHERE libelle='Chasseur d’Abominations'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Patateland'),
+ NULL, 'An 421, Lune 3, Jour 15', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Morgane Brumelune'),
+ (SELECT id_titre FROM Titre WHERE libelle='Maître des Esprits Anciens'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Sucralune'),
+ NULL, 'An 420, Lune 10, Jour 8', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Frida Foreuse'),
+ (SELECT id_titre FROM Titre WHERE libelle='Chevalier du Crépuscule'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Patateland'),
+ NULL, 'An 420, Lune 8, Jour 14', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Ghor Letranchant'),
+ (SELECT id_titre FROM Titre WHERE libelle='Commandant du Néant'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'),
+ NULL, 'An 418, Lune 9, Jour 8', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Fenduil Lierreclair'),
+ (SELECT id_titre FROM Titre WHERE libelle='Archimage de Solarys'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'),
+ NULL, 'An 421, Lune 2, Jour 17', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Ulysse Jaloux'),
+ (SELECT id_titre FROM Titre WHERE libelle='Explorateur des Sables'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'),
+ NULL, 'An 421, Lune 9, Jour 9', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Camille Cambriole'),
+ (SELECT id_titre FROM Titre WHERE libelle='Maître des Ombres'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'),
+ NULL, 'An 420, Lune 8, Jour 25', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Noé Milleplans'),
+ (SELECT id_titre FROM Titre WHERE libelle='Oracle du Temps'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'),
+ NULL, 'An 421, Lune 4, Jour 2', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Hildi Rochefine'),
+ (SELECT id_titre FROM Titre WHERE libelle='Gardien du Sceau Royal'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'),
+ NULL, 'An 421, Lune 2, Jour 27', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Korin Martelembrun'),
+ (SELECT id_titre FROM Titre WHERE libelle='Protecteur du Peuple'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'),
+ NULL, 'An 421, Lune 1, Jour 15', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Nora Cuvelier'),
+ (SELECT id_titre FROM Titre WHERE libelle='Sentinelle des Abysses'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'),
+ NULL, 'An 420, Lune 12, Jour 9', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Anvil Mainforte'),
+ (SELECT id_titre FROM Titre WHERE libelle='Vigile des Flammes'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'),
+ NULL, 'An 420, Lune 10, Jour 11', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Crog Silex'),
+ (SELECT id_titre FROM Titre WHERE libelle='Maître du Feu Céleste'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'),
+ NULL, 'An 420, Lune 11, Jour 18', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Dunda Cervoise'),
+ (SELECT id_titre FROM Titre WHERE libelle='Élue de la Taverne'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'),
+ NULL, 'An 421, Lune 8, Jour 19', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Bibi Brioche'),
+ (SELECT id_titre FROM Titre WHERE libelle='Paladin de la Bêtise Noble'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Boulangea'),
+ NULL, 'An 421, Lune 4, Jour 13', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Lalie Briochette'),
+ (SELECT id_titre FROM Titre WHERE libelle='Champion du Rire'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'),
+ NULL, 'An 420, Lune 11, Jour 6', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Erik Étau'),
+ (SELECT id_titre FROM Titre WHERE libelle='Grand Stratège du Nord'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Beurropolis'),
+ NULL, 'An 420, Lune 10, Jour 3', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Géraldine Belleplume'),
+ (SELECT id_titre FROM Titre WHERE libelle='Archidruide des Saisons'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'),
+ NULL, 'An 421, Lune 5, Jour 24', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Démo Niak'),
+ (SELECT id_titre FROM Titre WHERE libelle='Héraut des Cendres'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Mascarponie'),
+ NULL, 'An 421, Lune 6, Jour 8', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Durim Brindacier'),
+ (SELECT id_titre FROM Titre WHERE libelle='Gardien de l’Obsidienne'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime'),
+ NULL, 'An 418, Lune 5, Jour 15', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Zyrith Foudre-Serment'),
+ (SELECT id_titre FROM Titre WHERE libelle='Maître du Feu Céleste'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'),
+ NULL, 'An 421, Lune 3, Jour 2', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Séraphine Rivage'),
+ (SELECT id_titre FROM Titre WHERE libelle='Mage des Marées'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'),
+ NULL, 'An 420, Lune 10, Jour 8', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Basile le Subtil'),
+ (SELECT id_titre FROM Titre WHERE libelle='Rôdeur des Ruines'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'),
+ NULL, 'An 421, Lune 7, Jour 4', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Amber Écaillefeu'),
+ (SELECT id_titre FROM Titre WHERE libelle='Champion des Flammes'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'),
+ NULL, 'An 421, Lune 4, Jour 3', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Gaspard Sanspeur'),
+ (SELECT id_titre FROM Titre WHERE libelle='Chevalier Écarlate'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'),
+ NULL, 'An 421, Lune 6, Jour 9', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Milo Briochette'),
+ (SELECT id_titre FROM Titre WHERE libelle='Paladin de l’Équilibre'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Raclettea'),
+ NULL, 'An 421, Lune 3, Jour 22', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Alaric Douxmiel'),
+ (SELECT id_titre FROM Titre WHERE libelle='Grand Druide des Landes'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Herbularia'),
+ NULL, 'An 420, Lune 9, Jour 4', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Tilda Croquenoisette'),
+ (SELECT id_titre FROM Titre WHERE libelle='Champion des Terres Brisées'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Patateland'),
+ NULL, 'An 421, Lune 8, Jour 28', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Morgane Brumelune'),
+ (SELECT id_titre FROM Titre WHERE libelle='Prophète des Étoiles'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Sucralune'),
+ NULL, 'An 420, Lune 7, Jour 6', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Rufus Ferchaud'),
+ (SELECT id_titre FROM Titre WHERE libelle='Sentinelle des Abysses'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'),
+ NULL, 'An 421, Lune 2, Jour 11', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Naelis Vifvent'),
+ (SELECT id_titre FROM Titre WHERE libelle='Arcaniste du Vent'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'),
+ NULL, 'An 421, Lune 4, Jour 14', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Pavel Poivrecroc'),
+ (SELECT id_titre FROM Titre WHERE libelle='Champion du Royaume'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Saucissonie'),
+ NULL, 'An 421, Lune 6, Jour 3', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Isolde Clairsonge'),
+ (SELECT id_titre FROM Titre WHERE libelle='Mage des Rêves'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Sucralune'),
+ NULL, 'An 421, Lune 8, Jour 9', NULL, TRUE);
+INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, date_debut_lore, date_fin_lore, est_actif) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Philibert Salaison'),
+ (SELECT id_titre FROM Titre WHERE libelle='Maître des Lois'),
+ (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'),
+ NULL, 'An 420, Lune 7, Jour 29', NULL, TRUE);
+
+
+ 
