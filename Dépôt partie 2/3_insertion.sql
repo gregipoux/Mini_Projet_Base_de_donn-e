@@ -643,6 +643,7 @@ INSERT INTO Metier (libelle, type_metier) VALUES
 ('Ranger des confins', 'autre'),
 ('Chrono-érudit', 'autre'),
 ('Géomancien', 'autre'),
+('Professeur', 'service'),
 ('Dompteur de wyvernes', 'autre'),
 ('Nécromancien repenti', 'autre'),
 ('Voyageur planaire', 'autre'),
@@ -6231,12 +6232,6 @@ INSERT INTO Personnage (nom, espece_id, lignee_id, royaume_origine_id, date_nais
  (SELECT id_royaume FROM Royaume WHERE nom='Choux-Fleurie'),
  'An 391, Lune 2, Jour 2','vivant',NULL,NULL,520,
  'Fait tourner des mobiles de feuilles.'),
-('Hêtre Rieur',
- (SELECT id_espece FROM Espece WHERE libelle='Dryade'),
- (SELECT id_lignee FROM Lignee WHERE nom='Inconnu'),
- (SELECT id_royaume FROM Royaume WHERE nom='Choux-Fleurie'),
- 'An 389, Lune 4, Jour 14','vivant',NULL,NULL,500,
- 'Claque des branches pour applaudir.'),
 ('Galop Droit',
  (SELECT id_espece FROM Espece WHERE libelle='Centaure'),
  (SELECT id_lignee FROM Lignee WHERE nom='Inconnu'),
@@ -6255,12 +6250,6 @@ INSERT INTO Personnage (nom, espece_id, lignee_id, royaume_origine_id, date_nais
  (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'),
  'An 368, Lune 7, Jour 7','vivant',NULL,NULL,160,
  'Dessine des plans carrés et s’y perd rarement.'),
-('Riddle Claire',
- (SELECT id_espece FROM Espece WHERE libelle='Sphinx'),
- (SELECT id_lignee FROM Lignee WHERE nom='Inconnu'),
- (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'),
- 'An 250, Lune 5, Jour 5','vivant',NULL,NULL,900,
- 'Pose des énigmes sur les places publiques.'),
 /* =========================
    SPHINX / KITSUNE / TANUKI / ONI / RAKSHASA
    ========================= */
@@ -6808,6 +6797,27 @@ INSERT INTO PersonnageMetier (personnage_id, metier_id, niveau)
 SELECT p.id_personnage,(SELECT id_metier FROM Metier WHERE libelle='Maître d’armes'),4
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece
 WHERE e.libelle IN ('Minotaure') AND (p.id_personnage % 3)=2;
+
+INSERT INTO PersonnageMetier (personnage_id, metier_id, niveau)
+SELECT (SELECT id_personnage FROM Personnage WHERE nom='Lara Tatouille'),(SELECT id_metier FROM Metier WHERE libelle='Professeur'),5;
+INSERT INTO PersonnageMetier (personnage_id, metier_id, niveau)
+SELECT (SELECT id_personnage FROM Personnage WHERE nom='Hêtre Rieur'),(SELECT id_metier FROM Metier WHERE libelle='Professeur'),5;
+INSERT INTO PersonnageMetier (personnage_id, metier_id, niveau)
+SELECT (SELECT id_personnage FROM Personnage WHERE nom='Riddle Claire'),(SELECT id_metier FROM Metier WHERE libelle='Professeur'),5;
+INSERT INTO PersonnageMetier (personnage_id, metier_id, niveau)
+SELECT (SELECT id_personnage FROM Personnage WHERE nom='Riddleux'),(SELECT id_metier FROM Metier WHERE libelle='Professeur'),5;
+INSERT INTO PersonnageMetier (personnage_id, metier_id, niveau)
+SELECT (SELECT id_personnage FROM Personnage WHERE nom='Oni Ramen'),(SELECT id_metier FROM Metier WHERE libelle='Professeur'),5;
+INSERT INTO PersonnageMetier (personnage_id, metier_id, niveau)
+SELECT (SELECT id_personnage FROM Personnage WHERE nom='Raksha Rature'),(SELECT id_metier FROM Metier WHERE libelle='Professeur'),5;
+INSERT INTO PersonnageMetier (personnage_id, metier_id, niveau)
+SELECT (SELECT id_personnage FROM Personnage WHERE nom='Kitsu Blague'),(SELECT id_metier FROM Metier WHERE libelle='Professeur'),5;
+INSERT INTO PersonnageMetier (personnage_id, metier_id, niveau)
+SELECT (SELECT id_personnage FROM Personnage WHERE nom='Phœbus Reviens'),(SELECT id_metier FROM Metier WHERE libelle='Professeur'),5;
+INSERT INTO PersonnageMetier (personnage_id, metier_id, niveau)
+SELECT (SELECT id_personnage FROM Personnage WHERE nom='Mireille Mirador'),(SELECT id_metier FROM Metier WHERE libelle='Professeur'),5;
+INSERT INTO PersonnageMetier (personnage_id, metier_id, niveau)
+SELECT (SELECT id_personnage FROM Personnage WHERE nom='Roxane Rapière'),(SELECT id_metier FROM Metier WHERE libelle='Professeur'),5;
 
 
 /* ===========================
@@ -9099,4 +9109,165 @@ INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date
  (SELECT id_guilde FROM Guilde WHERE nom='Conclave des Sept Sceaux'),
  'Ritualiste d’orage', 'An 418, Lune 2, Jour 2', 'An 419, Lune 2, Jour 2');
 
- 
+
+INSERT INTO EcoleCours (ecole_id, professeur_id, sort_id) VALUES
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Académie Royale des Arcanes'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Lara Tatouille'),
+ (SELECT id_sort FROM Sort WHERE nom='Boule de Feu')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Académie Royale des Arcanes'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Lara Tatouille'),
+ (SELECT id_sort FROM Sort WHERE nom='Cantique des Étoiles')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Académie Royale des Arcanes'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Lara Tatouille'),
+ (SELECT id_sort FROM Sort WHERE nom='Blason de Veille')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Académie Royale des Arcanes'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Lara Tatouille'),
+ (SELECT id_sort FROM Sort WHERE nom='Marche des Esprits')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Académie Royale des Arcanes'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Lara Tatouille'),
+ (SELECT id_sort FROM Sort WHERE nom='Regard de Méduse'));
+INSERT INTO EcoleCours (ecole_id, professeur_id, sort_id) VALUES
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Tour de l’Obsidienne'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Hêtre Rieur'),
+ (SELECT id_sort FROM Sort WHERE nom='Rayon Solaire')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Tour de l’Obsidienne'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Hêtre Rieur'),
+ (SELECT id_sort FROM Sort WHERE nom='Fanal des Profondeurs')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Tour de l’Obsidienne'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Hêtre Rieur'),
+ (SELECT id_sort FROM Sort WHERE nom='Linceul des Ombres')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Tour de l’Obsidienne'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Hêtre Rieur'),
+ (SELECT id_sort FROM Sort WHERE nom='Choc Tellurique')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Tour de l’Obsidienne'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Hêtre Rieur'),
+ (SELECT id_sort FROM Sort WHERE nom='Plume d’Arcane'));
+INSERT INTO EcoleCours (ecole_id, professeur_id, sort_id) VALUES
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Cercle des Quatre Vents'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Riddle Claire'),
+ (SELECT id_sort FROM Sort WHERE nom='Lame Astrale')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Cercle des Quatre Vents'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Riddle Claire'),
+ (SELECT id_sort FROM Sort WHERE nom='Marche-Temps')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Cercle des Quatre Vents'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Riddle Claire'),
+ (SELECT id_sort FROM Sort WHERE nom='Arc de Tempête')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Cercle des Quatre Vents'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Riddle Claire'),
+ (SELECT id_sort FROM Sort WHERE nom='Épieu de Tonnerre')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Cercle des Quatre Vents'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Riddle Claire'),
+ (SELECT id_sort FROM Sort WHERE nom='Couronne de Braises'));
+INSERT INTO EcoleCours (ecole_id, professeur_id, sort_id) VALUES
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Collège des Études Astrales'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Riddleux'),
+ (SELECT id_sort FROM Sort WHERE nom='Voile de Brume')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Collège des Études Astrales'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Riddleux'),
+ (SELECT id_sort FROM Sort WHERE nom='Souffle d’Azur')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Collège des Études Astrales'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Riddleux'),
+ (SELECT id_sort FROM Sort WHERE nom='Point de Stase')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Collège des Études Astrales'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Riddleux'),
+ (SELECT id_sort FROM Sort WHERE nom='Voix des Anciens')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Collège des Études Astrales'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Riddleux'),
+ (SELECT id_sort FROM Sort WHERE nom='Panache d’Éclairs'));
+INSERT INTO EcoleCours (ecole_id, professeur_id, sort_id) VALUES
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Institut de Géomancie du Nord'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Oni Ramen'),
+ (SELECT id_sort FROM Sort WHERE nom='Mur d’Aegis')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Institut de Géomancie du Nord'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Oni Ramen'),
+ (SELECT id_sort FROM Sort WHERE nom='Étreinte de Givre')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Institut de Géomancie du Nord'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Oni Ramen'),
+ (SELECT id_sort FROM Sort WHERE nom='Arc de Tempête')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Institut de Géomancie du Nord'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Oni Ramen'),
+ (SELECT id_sort FROM Sort WHERE nom='Astre Captif')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Institut de Géomancie du Nord'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Oni Ramen'),
+ (SELECT id_sort FROM Sort WHERE nom='Altération'));
+INSERT INTO EcoleCours (ecole_id, professeur_id, sort_id) VALUES
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Ordre des Veilleurs de l’Aube'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Raksha Rature'),
+ (SELECT id_sort FROM Sort WHERE nom='Flèche de Foudre')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Ordre des Veilleurs de l’Aube'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Raksha Rature'),
+ (SELECT id_sort FROM Sort WHERE nom='Rune de Garde')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Ordre des Veilleurs de l’Aube'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Raksha Rature'),
+ (SELECT id_sort FROM Sort WHERE nom='Brèche Planariste')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Ordre des Veilleurs de l’Aube'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Raksha Rature'),
+ (SELECT id_sort FROM Sort WHERE nom='Éclat Obsidien')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Ordre des Veilleurs de l’Aube'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Raksha Rature'),
+ (SELECT id_sort FROM Sort WHERE nom='Flèche de Lune'));
+INSERT INTO EcoleCours (ecole_id, professeur_id, sort_id) VALUES
+((SELECT id_ecole FROM EcoleMagie WHERE nom='École Militaire d’Arcanomécanique'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Kitsu Blague'),
+ (SELECT id_sort FROM Sort WHERE nom='Chant de l’Aube')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='École Militaire d’Arcanomécanique'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Kitsu Blague'),
+ (SELECT id_sort FROM Sort WHERE nom='Sceau de Contrainte')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='École Militaire d’Arcanomécanique'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Kitsu Blague'),
+ (SELECT id_sort FROM Sort WHERE nom='Rappel Astral')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='École Militaire d’Arcanomécanique'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Kitsu Blague'),
+ (SELECT id_sort FROM Sort WHERE nom='Main du Crépuscule')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='École Militaire d’Arcanomécanique'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Kitsu Blague'),
+ (SELECT id_sort FROM Sort WHERE nom='Magnétisme'));
+INSERT INTO EcoleCours (ecole_id, professeur_id, sort_id) VALUES
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Sanctuaire des Voiles Blanches'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Phœbus Reviens'),
+ (SELECT id_sort FROM Sort WHERE nom='Étreinte Sylvestre')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Sanctuaire des Voiles Blanches'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Phœbus Reviens'),
+ (SELECT id_sort FROM Sort WHERE nom='Clôture d’Anathème')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Sanctuaire des Voiles Blanches'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Phœbus Reviens'),
+ (SELECT id_sort FROM Sort WHERE nom='Aspersion Lumineuse')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Sanctuaire des Voiles Blanches'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Phœbus Reviens'),
+ (SELECT id_sort FROM Sort WHERE nom='Anneau de Contention')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Sanctuaire des Voiles Blanches'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Phœbus Reviens'),
+ (SELECT id_sort FROM Sort WHERE nom='Vigilance de l’Aurore'));
+INSERT INTO EcoleCours (ecole_id, professeur_id, sort_id) VALUES
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Bibliothèque du Crépuscule'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Mireille Mirador'),
+ (SELECT id_sort FROM Sort WHERE nom='Œil du Zéphyr')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Bibliothèque du Crépuscule'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Mireille Mirador'),
+ (SELECT id_sort FROM Sort WHERE nom='Décret Arcanique')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Bibliothèque du Crépuscule'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Mireille Mirador'),
+ (SELECT id_sort FROM Sort WHERE nom='Aiguillon d’Orage')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Bibliothèque du Crépuscule'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Mireille Mirador'),
+ (SELECT id_sort FROM Sort WHERE nom='Onde d’Impact')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Bibliothèque du Crépuscule'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Mireille Mirador'),
+ (SELECT id_sort FROM Sort WHERE nom='Ancre de Gravité'));
+INSERT INTO EcoleCours (ecole_id, professeur_id, sort_id) VALUES
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Conservatoire de l’Art Runique'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Roxane Rapière'),
+ (SELECT id_sort FROM Sort WHERE nom='Pilier de Terre')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Conservatoire de l’Art Runique'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Roxane Rapière'),
+ (SELECT id_sort FROM Sort WHERE nom='Serment d’Airain')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Conservatoire de l’Art Runique'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Roxane Rapière'),
+ (SELECT id_sort FROM Sort WHERE nom='Faille Éthérée')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Conservatoire de l’Art Runique'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Roxane Rapière'),
+ (SELECT id_sort FROM Sort WHERE nom='Rappel à la Vie')),
+((SELECT id_ecole FROM EcoleMagie WHERE nom='Conservatoire de l’Art Runique'),
+ (SELECT id_personnage FROM Personnage WHERE nom='Roxane Rapière'),
+ (SELECT id_sort FROM Sort WHERE nom='Étendard Radieux'));
+
