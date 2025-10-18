@@ -8858,4 +8858,245 @@ INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, dat
  NULL, 'An 420, Lune 7, Jour 29', NULL, TRUE);
 
 
+ INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Lara Tatouille'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Loge des Artificiers Discrets'),
+ 'Artificière pâtissière en chef', 'An 420, Lune 5, Jour 12', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Jean Bonparleur'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Guilde des Émissaires'),
+ 'Émissaire & héraut des bons mots', 'An 419, Lune 9, Jour 3', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Borin Picacier'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Compagnie du Roc Obsidien'),
+ 'Porte-bouclier principal', 'An 418, Lune 11, Jour 7', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Luthien Tisselune'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Conclave des Sept Sceaux'),
+ 'Tisseuse de sceaux', 'An 421, Lune 2, Jour 18', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Corga Ombrebrave'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Compagnie des Ombres Liées'),
+ 'Éclaireur discret', 'An 420, Lune 8, Jour 21', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Armelle Armure'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Ordre des Lames Grises'),
+ 'Capitaine d’escorte', 'An 420, Lune 10, Jour 5', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Guy D’armes'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Lanciers de l’Éperon'),
+ 'Lancier vétéran', 'An 419, Lune 6, Jour 14', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Mireille Mirador'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Brigade des Sentinelles Boréales'),
+ 'Guetteuse des cols', 'An 420, Lune 3, Jour 9', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Zoé Zéphyr'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Fraternité des Flèches Vives'),
+ 'Archère de pointe', 'An 421, Lune 4, Jour 6', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Eärwen Feuilledor'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Cercle des Cartographes Libres'),
+ 'Cartographe arcanique', 'An 419, Lune 12, Jour 2', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Calen Dorélys'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Conclave des Sept Sceaux'),
+ 'Ritualiste des portails', 'An 420, Lune 6, Jour 11', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Sirilas Clairchant'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Chœur des Harmonistes'),
+ 'Premier chantre', 'An 419, Lune 12, Jour 6', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Maeriel Aubevive'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Cercle de la Source Claire'),
+ 'Veilleuse arcanique', 'An 420, Lune 2, Jour 18', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Hildi Rochefine'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Boucliers Beurrés Modérés'),
+ 'Bouclier des convois', 'An 421, Lune 1, Jour 20', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Korin Martelembrun'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Ordre des Lames Grises'),
+ 'Chevalier-louche adjoint', 'An 420, Lune 4, Jour 8', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Nora Cuvelier'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Forges de l’Aegis'),
+ 'Mécanicienne d’arbalestres', 'An 420, Lune 7, Jour 25', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Anvil Mainforte'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Boucliers Beurrés Modérés'),
+ 'Maître d’atelier et sparring', 'An 419, Lune 10, Jour 10', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Bruna Brasero'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Tour des Éclats d’Orage'),
+ 'Brasero de service', 'An 421, Lune 5, Jour 3', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Crog Silex'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Conclave des Sept Sceaux'),
+ 'Graveur de runes', 'An 420, Lune 6, Jour 2', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Dunda Cervoise'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Guilde des Émissaires'),
+ 'Médiateur mousseux', 'An 421, Lune 8, Jour 15', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Bibi Brioche'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Chœur des Harmonistes'),
+ 'Acolyte choriste', 'An 420, Lune 9, Jour 18', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Lalie Briochette'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Fraternité des Flèches Vives'),
+ 'Danse-lames éclaireuse', 'An 421, Lune 2, Jour 7', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Erik Étau'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Loge des Artificiers Discrets'),
+ 'Maître artificier', 'An 420, Lune 5, Jour 21', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Géraldine Belleplume'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Cercle des Cartographes Libres'),
+ 'Guetteuse nocturne', 'An 421, Lune 3, Jour 12', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Démo Niak'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Loge des Artificiers Discrets'),
+ 'Ensorceleur de test', 'An 420, Lune 8, Jour 9', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Durim Brindacier'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Compagnie du Roc Obsidien'),
+ 'Mur de mêlée', 'An 419, Lune 6, Jour 30', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Zyrith Foudre-Serment'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Tour des Éclats d’Orage'),
+ 'Conjurateur de bourrasques', 'An 421, Lune 7, Jour 3', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Eliara Nitescence'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Veilleurs de l’Étoile Fixe'),
+ 'Garde-rêves', 'An 420, Lune 10, Jour 10', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Séraphine Rivage'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Marins des Voiles Blanches'),
+ 'Officier de quart', 'An 420, Lune 9, Jour 29', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Basile le Subtil'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Compagnie des Ombres Liées'),
+ 'Infiltrateur de marché', 'An 421, Lune 4, Jour 5', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Félix Fineplume'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Guilde des Archivistes Impériaux'),
+ 'Annotateur tactique', 'An 420, Lune 5, Jour 18', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Azazel Courtepointe'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Arcanistes du Prisme'),
+ 'Tisseur de mirages', 'An 421, Lune 1, Jour 26', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Amber Écaillefeu'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Tour des Éclats d’Orage'),
+ 'Pyromage de ligne', 'An 421, Lune 12, Jour 2', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Gaspard Sanspeur'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Ordre des Lames Grises'),
+ 'Chevalier souriant', 'An 421, Lune 6, Jour 4', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Élo Die'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Fraternité des Flèches Vives'),
+ 'Tireur de pointe', 'An 420, Lune 8, Jour 27', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Erga Dosdroit'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Brigade des Sentinelles Boréales'),
+ 'Piquier des cols', 'An 421, Lune 6, Jour 11', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Phénix Retex'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Loge des Artificiers Discrets'),
+ 'Alchimiste d’essais', 'An 421, Lune 11, Jour 7', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Dunda Cervoise'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Boucliers Beurrés Modérés'),
+ 'Écuyer blindé', 'An 420, Lune 9, Jour 20', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Cliquetis Rouille'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Guilde des Émissaires'),
+ 'Intercesseur des cloîtres', 'An 420, Lune 12, Jour 10', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Orfeu Clairjour'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Fraternité des Flèches Vives'),
+ 'Yeux d’écureuil', 'An 421, Lune 3, Jour 19', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Darg Illico'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Arcanistes du Prisme'),
+ 'Tisseuse de brumes', 'An 420, Lune 10, Jour 9', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Tobin Pépins'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Compagnie du Roc Obsidien'),
+ 'Avant-choc', 'An 421, Lune 6, Jour 20', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Amon Souffre'),
+ (SELECT id_guilde FROM Guilde WHERE nom='La Confrérie du Zéphyr'),
+ 'Guetteuse des courants', 'An 421, Lune 4, Jour 10', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Velka Givrequeue'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Lanciers de l’Éperon'),
+ 'Chef de lance', 'An 421, Lune 6, Jour 2', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Arion Chanteclair'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Cercle de la Source Claire'),
+ 'Veilleuse de salle', 'An 421, Lune 8, Jour 8', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Éloi Photôn'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Guilde des Archivistes Impériaux'),
+ 'Intendant des vivres', 'An 420, Lune 7, Jour 8', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Kra Kra'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Chœur des Harmonistes'),
+ 'Cantatrice guérisseuse', 'An 421, Lune 5, Jour 17', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Zik Zag'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Boucliers Beurrés Modérés'),
+ 'Rempart mobile', 'An 420, Lune 7, Jour 13', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Érèbe Velours'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Compagnie des Ombres Liées'),
+ 'Dague poétique', 'An 421, Lune 9, Jour 5', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Morgane Memento'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Guilde des Archivistes Impériaux'),
+ 'Stratège narrateur', 'An 420, Lune 6, Jour 16', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Fenduil Lierreclair'),
+ (SELECT id_guilde FROM Guilde WHERE nom='La Confrérie du Zéphyr'),
+ 'Aéromancien senior', 'An 420, Lune 2, Jour 6', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Ulysse Jaloux'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Cercle des Cartographes Libres'),
+ 'Traceur d’itinéraires', 'An 421, Lune 4, Jour 4', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Goma Rondpain'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Boucliers Beurrés Modérés'),
+ 'Gardien croustillant', 'An 420, Lune 7, Jour 2', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Camille Cambriole'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Compagnie des Ombres Liées'),
+ 'Main légère', 'An 421, Lune 8, Jour 11', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Noé Milleplans'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Conclave des Sept Sceaux'),
+ 'Chrono-archiviste', 'An 420, Lune 5, Jour 22', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Solarius Max'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Les Étendards Radieux'),
+ 'Grand éclaireur', 'An 420, Lune 1, Jour 1', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Ghor Letranchant'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Lanciers de l’Éperon'),
+ 'Commandant de lance', 'An 419, Lune 9, Jour 6', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Urga Tapisdos'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Compagnie des Trois Voiles'),
+ 'Lancier de bastingage', 'An 421, Lune 5, Jour 6', NULL);
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Ghor Letranchant'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Compagnie du Roc Obsidien'),
+ 'Chef de choc', 'An 418, Lune 10, Jour 7', 'An 420, Lune 10, Jour 7');
+INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Fenduil Lierreclair'),
+ (SELECT id_guilde FROM Guilde WHERE nom='Conclave des Sept Sceaux'),
+ 'Ritualiste d’orage', 'An 418, Lune 2, Jour 2', 'An 419, Lune 2, Jour 2');
+
  
