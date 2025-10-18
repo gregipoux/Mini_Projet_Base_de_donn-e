@@ -7173,3 +7173,1275 @@ SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Renaissa
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Phénix';
 
 
+
+
+
+/* ===========================
+   PERSONNAGES SPÉCIFIQUES - MALADIES
+   =========================== */
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage, (SELECT id_maladie FROM Maladie WHERE nom='Grippe du Griffon'),
+       'An 842, Lune 2, Jour 11','An 842, Lune 2, Jour 17','guéri'
+FROM Personnage p WHERE p.nom='Lara Tatouille';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage, (SELECT id_maladie FROM Maladie WHERE nom='Gorge de Braise'),
+       'An 843, Lune 5, Jour 8','An 843, Lune 5, Jour 14','guéri'
+FROM Personnage p WHERE p.nom='Lara Tatouille';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage, (SELECT id_maladie FROM Maladie WHERE nom='Folie du Croissant'),
+       'An 844, Lune 1, Jour 26','An 844, Lune 2, Jour 2','rémission'
+FROM Personnage p WHERE p.nom='Lara Tatouille';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Fièvre de la Trêve'),
+       'An 845, Lune 6, Jour 10','An 845, Lune 6, Jour 12','guéri'
+FROM Personnage p WHERE p.nom='Jean Bonparleur';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Syndrome du Héros'),
+       'An 845, Lune 8, Jour 3','An 845, Lune 8, Jour 9','récidive'
+FROM Personnage p WHERE p.nom='Jean Bonparleur';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Rhume du Zénith'),
+       'An 846, Lune 1, Jour 7','An 846, Lune 1, Jour 10','guéri'
+FROM Personnage p WHERE p.nom='Jean Bonparleur';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Fièvre des Mines'),
+       'An 839, Lune 9, Jour 15','An 839, Lune 10, Jour 1','guéri'
+FROM Personnage p WHERE p.nom='Borin Picacier';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Rouille du Sang'),
+       'An 840, Lune 4, Jour 12','An 840, Lune 4, Jour 20','guéri'
+FROM Personnage p WHERE p.nom='Borin Picacier';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Goutte de Roc'),
+       'An 842, Lune 7, Jour 9','An 842, Lune 7, Jour 18','stable'
+FROM Personnage p WHERE p.nom='Borin Picacier';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Mal de Lune'),
+       'An 841, Lune 11, Jour 22','An 841, Lune 12, Jour 3','guéri'
+FROM Personnage p WHERE p.nom='Luthien Tisselune';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Coquelune'),
+       'An 843, Lune 3, Jour 3','An 843, Lune 3, Jour 8','guéri'
+FROM Personnage p WHERE p.nom='Luthien Tisselune';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Migraine Runique'),
+       'An 844, Lune 9, Jour 12','An 844, Lune 9, Jour 13','rémission'
+FROM Personnage p WHERE p.nom='Luthien Tisselune';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Mal de l’Ombre'),
+       'An 842, Lune 10, Jour 6','An 842, Lune 10, Jour 11','guéri'
+FROM Personnage p WHERE p.nom='Corga Ombrebrave';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Toux Chantilly'),
+       'An 843, Lune 12, Jour 19','An 843, Lune 12, Jour 22','guéri'
+FROM Personnage p WHERE p.nom='Corga Ombrebrave';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Tétanie du Trébuchet'),
+       'An 840, Lune 6, Jour 4','An 840, Lune 6, Jour 9','guéri'
+FROM Personnage p WHERE p.nom='Armelle Armure';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Crampes de Lames'),
+       'An 841, Lune 3, Jour 13','An 841, Lune 3, Jour 17','guéri'
+FROM Personnage p WHERE p.nom='Guy D’armes';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Lenteur Temporelle'),
+       'An 845, Lune 2, Jour 20','An 845, Lune 2, Jour 27','guéri'
+FROM Personnage p WHERE p.nom='Mireille Mirador';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Rire Hystérique'),
+       'An 842, Lune 4, Jour 4','An 842, Lune 4, Jour 9','guéri'
+FROM Personnage p WHERE p.nom='Basile le Subtil';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Fièvre de l’Encre'),
+       'An 841, Lune 7, Jour 2','An 841, Lune 7, Jour 6','guéri'
+FROM Personnage p WHERE p.nom='Félix Fineplume';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Poitrine d’Ancre'),
+       'An 844, Lune 5, Jour 21','An 844, Lune 5, Jour 28','guéri'
+FROM Personnage p WHERE p.nom='Séraphine Rivage';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Gelure Astrale'),
+       'An 840, Lune 12, Jour 11','An 841, Lune 1, Jour 5','guéri'
+FROM Personnage p WHERE p.nom='Azazel Courtepointe';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Bave Draconique'),
+       'An 842, Lune 8, Jour 1','An 842, Lune 8, Jour 6','guéri'
+FROM Personnage p WHERE p.nom='Amber Écaillefeu';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Peste des Brumes'),
+       'An 839, Lune 10, Jour 9','An 839, Lune 10, Jour 25','rémission'
+FROM Personnage p WHERE p.nom='Eliara Nitescence';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Fièvre des Souterrains'),
+       'An 840, Lune 2, Jour 6','An 840, Lune 2, Jour 14','guéri'
+FROM Personnage p WHERE p.nom='Durim Brindacier';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Main de Pierre'),
+       'An 843, Lune 6, Jour 19','An 843, Lune 7, Jour 2','guéri'
+FROM Personnage p WHERE p.nom='Durim Brindacier';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Dermite d’Obsidienne'),
+       'An 842, Lune 9, Jour 7','An 842, Lune 9, Jour 13','guéri'
+FROM Personnage p WHERE p.nom='Crog Silex';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Brûlure de Foudre'),
+       'An 841, Lune 5, Jour 12','An 841, Lune 5, Jour 20','séquelles'
+FROM Personnage p WHERE p.nom='Zyrith Foudre-Serment';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Moisson de Spores'),
+       'An 843, Lune 4, Jour 16','An 843, Lune 4, Jour 23','guéri'
+FROM Personnage p WHERE p.nom='Mimi Microcosme';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Lueur Aveuglante'),
+       'An 840, Lune 9, Jour 3','An 840, Lune 9, Jour 7','guéri'
+FROM Personnage p WHERE p.nom='Calen Dorélys';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Sel dans les Veines'),
+       'An 845, Lune 8, Jour 14','An 845, Lune 8, Jour 21','guéri'
+FROM Personnage p WHERE p.nom='Séraphine Rivage';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Goutte d’Or'),
+       'An 844, Lune 7, Jour 2','An 844, Lune 7, Jour 9','stable'
+FROM Personnage p WHERE p.nom='Bibi Brioche';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Froid du Zéphyr'),
+       'An 842, Lune 3, Jour 18','An 842, Lune 3, Jour 24','guéri'
+FROM Personnage p WHERE p.nom='Wandrille Méandres';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Mal de Mana'),
+       'An 843, Lune 10, Jour 2','An 843, Lune 10, Jour 12','guéri'
+FROM Personnage p WHERE p.nom='Démo Niak';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Fièvre d’Argile'),
+       'An 841, Lune 8, Jour 6','An 841, Lune 8, Jour 10','guéri'
+FROM Personnage p WHERE p.nom='Martin d’Eau Douce';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Épine de Basilic'),
+       'An 842, Lune 6, Jour 9','An 842, Lune 6, Jour 16','guéri'
+FROM Personnage p WHERE p.nom='Solène Lumière';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Peste du Néant'),
+       'An 844, Lune 2, Jour 3','An 844, Lune 2, Jour 17','rémission'
+FROM Personnage p WHERE p.nom='Corga Ombrebrave';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Fièvre des Mines'),
+       'An 838, Lune 11, Jour 20','An 838, Lune 12, Jour 2','guéri'
+FROM Personnage p WHERE p.nom='Durim Brindacier';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Rouge-Moine'),
+       'An 843, Lune 9, Jour 1','An 843, Lune 9, Jour 6','guéri'
+FROM Personnage p WHERE p.nom='Bébert Tambour-Major';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Rire Hystérique'),
+       'An 845, Lune 5, Jour 3','An 845, Lune 5, Jour 7','guéri'
+FROM Personnage p WHERE p.nom='Gaspard Sanspeur';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Toux Chantilly'),
+       'An 846, Lune 1, Jour 13','An 846, Lune 1, Jour 16','guéri'
+FROM Personnage p WHERE p.nom='Lalie Briochette';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Blafardise'),
+       'An 840, Lune 3, Jour 7','An 840, Lune 3, Jour 15','stable'
+FROM Personnage p WHERE p.nom='Élo Die';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Lombalgie du Porteur'),
+       'An 842, Lune 6, Jour 2','An 842, Lune 6, Jour 5','guéri'
+FROM Personnage p WHERE p.nom='Erga Dosdroit';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Vertige des Cimes'),
+       'An 843, Lune 7, Jour 21','An 843, Lune 7, Jour 25','guéri'
+FROM Personnage p WHERE p.nom='Zoé Zéphyr';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Tremblote Runique'),
+       'An 841, Lune 10, Jour 10','An 841, Lune 10, Jour 12','guéri'
+FROM Personnage p WHERE p.nom='Anvil Mainforte';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Bouche de Sel'),
+       'An 845, Lune 9, Jour 8','An 845, Lune 9, Jour 11','guéri'
+FROM Personnage p WHERE p.nom='Ulysse Jaloux';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Peau de Raclette'),
+       'An 844, Lune 10, Jour 14','An 844, Lune 10, Jour 16','guéri'
+FROM Personnage p WHERE p.nom='Goma Rondpain';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Sommeil des Titans'),
+       'An 843, Lune 12, Jour 4','An 844, Lune 1, Jour 1','réveil'
+FROM Personnage p WHERE p.nom='Solarius Max';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Piqûre d’Hydre'),
+       'An 842, Lune 7, Jour 5','An 842, Lune 7, Jour 8','guéri'
+FROM Personnage p WHERE p.nom='Camille Cambriole';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Mélancolie des Ports'),
+       'An 845, Lune 10, Jour 2','An 845, Lune 10, Jour 12','rémission'
+FROM Personnage p WHERE p.nom='Ulysse Jaloux';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Flux Inversé'),
+       'An 843, Lune 9, Jour 9','An 843, Lune 9, Jour 10','guéri'
+FROM Personnage p WHERE p.nom='Noé Milleplans';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Fièvre des Mines'),
+       'An 842, Lune 3, Jour 12','An 842, Lune 3, Jour 18','guéri'
+FROM Personnage p WHERE p.nom='Borin Picacier';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Rouge-Moine'),
+       'An 845, Lune 1, Jour 5','An 845, Lune 1, Jour 10','guéri'
+FROM Personnage p WHERE p.nom='Géraldine Belleplume';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Rire Hystérique'),
+       'An 846, Lune 1, Jour 2','An 846, Lune 1, Jour 4','guéri'
+FROM Personnage p WHERE p.nom='Démo Niak';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Toux Chantilly'),
+       'An 844, Lune 8, Jour 28','An 844, Lune 9, Jour 3','guéri'
+FROM Personnage p WHERE p.nom='Bibi Brioche';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Fièvre des Souterrains'),
+       'An 841, Lune 1, Jour 16','An 841, Lune 1, Jour 23','guéri'
+FROM Personnage p WHERE p.nom='Durim Brindacier';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Goutte d’Or'),
+       'An 846, Lune 1, Jour 18','An 846, Lune 1, Jour 25','stable'
+FROM Personnage p WHERE p.nom='Lalie Briochette';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Fièvre d’Argile'),
+       'An 843, Lune 6, Jour 1','An 843, Lune 6, Jour 6','guéri'
+FROM Personnage p WHERE p.nom='Erik Étau';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Lueur Aveuglante'),
+       'An 842, Lune 2, Jour 4','An 842, Lune 2, Jour 9','guéri'
+FROM Personnage p WHERE p.nom='Calen Dorélys';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Brûlure de Foudre'),
+       'An 842, Lune 8, Jour 18','An 842, Lune 8, Jour 24','séquelles'
+FROM Personnage p WHERE p.nom='Zyrith Foudre-Serment';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Peste des Brumes'),
+       'An 841, Lune 11, Jour 10','An 841, Lune 11, Jour 20','rémission'
+FROM Personnage p WHERE p.nom='Eliara Nitescence';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Narcolepsie des Sirènes'),
+       'An 845, Lune 4, Jour 9','An 845, Lune 4, Jour 13','guéri'
+FROM Personnage p WHERE p.nom='Séraphine Rivage';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Furoncles de Banshee'),
+       'An 842, Lune 11, Jour 6','An 842, Lune 11, Jour 12','guéri'
+FROM Personnage p WHERE p.nom='Ghor Letranchant';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Rouge-Moine'),
+       'An 846, Lune 1, Jour 3','An 846, Lune 1, Jour 7','guéri'
+FROM Personnage p WHERE p.nom='Bébert Tambour-Major';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Fièvre d’Argile'),
+       'An 843, Lune 1, Jour 8','An 843, Lune 1, Jour 13','guéri'
+FROM Personnage p WHERE p.nom='Martin d’Eau Douce';
+
+INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
+SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Fièvre des Souterrains'),
+       'An 843, Lune 11, Jour 5','An 843, Lune 11, Jour 11','guéri'
+FROM Personnage p WHERE p.nom='Borin Picacier';
+
+
+-- à retravailler, pas tous les personnages inclus ici
+/* =========================================
+   PERSONNAGECLASSE
+   ========================================= */
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Lara Tatouille'),
+ (SELECT id_classe FROM Classe WHERE libelle='Artificier pâtissier'), 5);
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Lara Tatouille'),
+ (SELECT id_classe FROM Classe WHERE libelle='Archer de la brioche'), 3);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Jean Bonparleur'),
+ (SELECT id_classe FROM Classe WHERE libelle='Barde fouetté'), 6);
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Jean Bonparleur'),
+ (SELECT id_classe FROM Classe WHERE libelle='Chantre du sucre'), 3);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Borin Picacier'),
+ (SELECT id_classe FROM Classe WHERE libelle='Bouclier battu'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Luthien Tisselune'),
+ (SELECT id_classe FROM Classe WHERE libelle='Illusionniste sablé'), 7);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Corga Ombrebrave'),
+ (SELECT id_classe FROM Classe WHERE libelle='Voleur d’épices'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Armelle Armure'),
+ (SELECT id_classe FROM Classe WHERE libelle='Chevalier-louche'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Guy D’armes'),
+ (SELECT id_classe FROM Classe WHERE libelle='Épéiste mousseux'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Mireille Mirador'),
+ (SELECT id_classe FROM Classe WHERE libelle='Sentinelle du sel'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Zoé Zéphyr'),
+ (SELECT id_classe FROM Classe WHERE libelle='Aéromancien feuilleté'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Eärwen Feuilledor'),
+ (SELECT id_classe FROM Classe WHERE libelle='Arbalétrier beurré'), 4);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Calen Dorélys'),
+ (SELECT id_classe FROM Classe WHERE libelle='Traqueur de truffes'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Sirilas Clairchant'),
+ (SELECT id_classe FROM Classe WHERE libelle='Ménestrel carbonara'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Maeriel Aubevive'),
+ (SELECT id_classe FROM Classe WHERE libelle='Luminarque'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Hildi Rochefine'),
+ (SELECT id_classe FROM Classe WHERE libelle='Gardien croûton'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Korin Martelembrun'),
+ (SELECT id_classe FROM Classe WHERE libelle='Chevalier-louche'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Nora Cuvelier'),
+ (SELECT id_classe FROM Classe WHERE libelle='Catapultier'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Anvil Mainforte'),
+ (SELECT id_classe FROM Classe WHERE libelle='Sentinelle du sel'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Bruna Brasero'),
+ (SELECT id_classe FROM Classe WHERE libelle='Pyromancien gratiné'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Crog Silex'),
+ (SELECT id_classe FROM Classe WHERE libelle='Brise-Croûte'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Dunda Cervoise'),
+ (SELECT id_classe FROM Classe WHERE libelle='Tambour-major chantilly'), 4);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Bibi Brioche'),
+ (SELECT id_classe FROM Classe WHERE libelle='Acolyte du brunch'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Lalie Briochette'),
+ (SELECT id_classe FROM Classe WHERE libelle='Danse-lames'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Erik Étau'),
+ (SELECT id_classe FROM Classe WHERE libelle='Bretteur à deux lames'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Géraldine Belleplume'),
+ (SELECT id_classe FROM Classe WHERE libelle='Domptelune'), 4);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Démo Niak'),
+ (SELECT id_classe FROM Classe WHERE libelle='Ensorceleur caramélisé'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Durim Brindacier'),
+ (SELECT id_classe FROM Classe WHERE libelle='Mur de meringue'), 6);
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Durim Brindacier'),
+ (SELECT id_classe FROM Classe WHERE libelle='Gardien croûton'), 3);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Lalie Briochette'),
+ (SELECT id_classe FROM Classe WHERE libelle='Ménestrel carbonara'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Erik Étau'),
+ (SELECT id_classe FROM Classe WHERE libelle='Artificier pâtissier'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Calen Dorélys'),
+ (SELECT id_classe FROM Classe WHERE libelle='Luminarque'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Zyrith Foudre-Serment'),
+ (SELECT id_classe FROM Classe WHERE libelle='Aéromancien feuilleté'), 6);
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Zyrith Foudre-Serment'),
+ (SELECT id_classe FROM Classe WHERE libelle='Arbalétrier beurré'), 2);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Eliara Nitescence'),
+ (SELECT id_classe FROM Classe WHERE libelle='Domptelune'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Séraphine Rivage'),
+ (SELECT id_classe FROM Classe WHERE libelle='Aquamancien infusé'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Basile le Subtil'),
+ (SELECT id_classe FROM Classe WHERE libelle='Rodeur de marché'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Félix Fineplume'),
+ (SELECT id_classe FROM Classe WHERE libelle='Scribe de bataille'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Azazel Courtepointe'),
+ (SELECT id_classe FROM Classe WHERE libelle='Illusionniste sablé'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Amber Écaillefeu'),
+ (SELECT id_classe FROM Classe WHERE libelle='Pyromancien gratiné'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Corga Ombrebrave'),
+ (SELECT id_classe FROM Classe WHERE libelle='Bouclier battu'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Bébert Tambour-Major'),
+ (SELECT id_classe FROM Classe WHERE libelle='Tambour-major chantilly'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Gaspard Sanspeur'),
+ (SELECT id_classe FROM Classe WHERE libelle='Chevalier-louche'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Élo Die'),
+ (SELECT id_classe FROM Classe WHERE libelle='Arbalétrier beurré'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Erga Dosdroit'),
+ (SELECT id_classe FROM Classe WHERE libelle='Gardien croûton'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Mimi Microcosme'),
+ (SELECT id_classe FROM Classe WHERE libelle='Illusionniste sablé'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Géraldine Belleplume'),
+ (SELECT id_classe FROM Classe WHERE libelle='Ménestrel carbonara'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Hildi Rochefine'),
+ (SELECT id_classe FROM Classe WHERE libelle='Géomancien croquant'), 7);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Korin Martelembrun'),
+ (SELECT id_classe FROM Classe WHERE libelle='Bouclier battu'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Nora Cuvelier'),
+ (SELECT id_classe FROM Classe WHERE libelle='Arbalétrier beurré'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Anvil Mainforte'),
+ (SELECT id_classe FROM Classe WHERE libelle='Épéiste mousseux'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Crog Silex'),
+ (SELECT id_classe FROM Classe WHERE libelle='Tisseur de runes'), 7);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Dunda Cervoise'),
+ (SELECT id_classe FROM Classe WHERE libelle='Barde fouetté'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Frida Foreuse'),
+ (SELECT id_classe FROM Classe WHERE libelle='Catapultier'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Ghor Letranchant'),
+ (SELECT id_classe FROM Classe WHERE libelle='Guerrier-panier'), 8);
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Ghor Letranchant'),
+ (SELECT id_classe FROM Classe WHERE libelle='Hurleur poivré'), 7);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Urga Tapisdos'),
+ (SELECT id_classe FROM Classe WHERE libelle='Lancier au sirop'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Fenduil Lierreclair'),
+ (SELECT id_classe FROM Classe WHERE libelle='Aéromancien feuilleté'), 9);
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Fenduil Lierreclair'),
+ (SELECT id_classe FROM Classe WHERE libelle='Électromage citronné'), 8);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Ulysse Jaloux'),
+ (SELECT id_classe FROM Classe WHERE libelle='Rodeur de marché'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Goma Rondpain'),
+ (SELECT id_classe FROM Classe WHERE libelle='Gardien croûton'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Solarius Max'),
+ (SELECT id_classe FROM Classe WHERE libelle='Luminarque'), 10);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Camille Cambriole'),
+ (SELECT id_classe FROM Classe WHERE libelle='Voleur d’épices'), 7);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Noé Milleplans'),
+ (SELECT id_classe FROM Classe WHERE libelle='Chronomage'), 8);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Aasimar Rayban'),
+ (SELECT id_classe FROM Classe WHERE libelle='Luminarque'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Aasimar Toutfeu'),
+ (SELECT id_classe FROM Classe WHERE libelle='Pyromancien gratiné'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Alucard Vespéral'),
+ (SELECT id_classe FROM Classe WHERE libelle='Illusionniste sablé'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Archiliche Cartonne'),
+ (SELECT id_classe FROM Classe WHERE libelle='Ensorceleur caramélisé'), 7);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Brak Tournevis'),
+ (SELECT id_classe FROM Classe WHERE libelle='Artificier pâtissier'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Bork Hauteroche'),
+ (SELECT id_classe FROM Classe WHERE libelle='Bouclier battu'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Brisa Ombrelune'),
+ (SELECT id_classe FROM Classe WHERE libelle='Domptelune'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Draga Vinyle'),
+ (SELECT id_classe FROM Classe WHERE libelle='Brise-Croûte'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Dulcinea Zing'),
+ (SELECT id_classe FROM Classe WHERE libelle='Ménestrel carbonara'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Sylpha Carillon'),
+ (SELECT id_classe FROM Classe WHERE libelle='Domptelune'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Zéphyrion'),
+ (SELECT id_classe FROM Classe WHERE libelle='Aéromancien feuilleté'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Pix Prisme'),
+ (SELECT id_classe FROM Classe WHERE libelle='Illusionniste sablé'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Glim Glim'),
+ (SELECT id_classe FROM Classe WHERE libelle='Illusionniste sablé'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Ondine Claironde'),
+ (SELECT id_classe FROM Classe WHERE libelle='Aquamancien infusé'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Méra Ligne'),
+ (SELECT id_classe FROM Classe WHERE libelle='Aquamancien infusé'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Siréna Doucehoule'),
+ (SELECT id_classe FROM Classe WHERE libelle='Aquamancien infusé'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Nerida Courantfin'),
+ (SELECT id_classe FROM Classe WHERE libelle='Aquamancien infusé'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Murelle Écailldor'),
+ (SELECT id_classe FROM Classe WHERE libelle='Aquamancien infusé'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Nérée D’alguefine'),
+ (SELECT id_classe FROM Classe WHERE libelle='Aquamancien infusé'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Nérée Panaché'),
+ (SELECT id_classe FROM Classe WHERE libelle='Aquamancien infusé'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Ondin Relais'),
+ (SELECT id_classe FROM Classe WHERE libelle='Aquamancien infusé'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Ondriel Sucrenac'),
+ (SELECT id_classe FROM Classe WHERE libelle='Aquamancien infusé'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Alga Vagues'),
+ (SELECT id_classe FROM Classe WHERE libelle='Aquamancien infusé'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Atlas Coupdœil'),
+ (SELECT id_classe FROM Classe WHERE libelle='Arbalétrier beurré'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Granit Fendrelief'),
+ (SELECT id_classe FROM Classe WHERE libelle='Gardien croûton'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Givre Longsoif'),
+ (SELECT id_classe FROM Classe WHERE libelle='Bouclier battu'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Dolmen Table'),
+ (SELECT id_classe FROM Classe WHERE libelle='Bouclier battu'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Silva Feuillemère'),
+ (SELECT id_classe FROM Classe WHERE libelle='Traqueur de truffes'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Drya Racinette'),
+ (SELECT id_classe FROM Classe WHERE libelle='Traqueur de truffes'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Drya Clairebois'),
+ (SELECT id_classe FROM Classe WHERE libelle='Traqueur de truffes'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Kheiron Droiteligne'),
+ (SELECT id_classe FROM Classe WHERE libelle='Lancier au sirop'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Aster Crinière'),
+ (SELECT id_classe FROM Classe WHERE libelle='Lancier au sirop'), 4);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Via Rapida'),
+ (SELECT id_classe FROM Classe WHERE libelle='Rodeur de marché'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Centaure Atempo'),
+ (SELECT id_classe FROM Classe WHERE libelle='Lancier au sirop'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Xanthos Grande-Voie'),
+ (SELECT id_classe FROM Classe WHERE libelle='Lancier au sirop'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Taurus Pavé'),
+ (SELECT id_classe FROM Classe WHERE libelle='Brise-Croûte'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Toro Pilier'),
+ (SELECT id_classe FROM Classe WHERE libelle='Bouclier battu'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Minotaure Béton'),
+ (SELECT id_classe FROM Classe WHERE libelle='Brise-Croûte'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Riddleux'),
+ (SELECT id_classe FROM Classe WHERE libelle='Scribe de bataille'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Sphinxa Claire-Énigme'),
+ (SELECT id_classe FROM Classe WHERE libelle='Illusionniste sablé'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Kitsu Nari'),
+ (SELECT id_classe FROM Classe WHERE libelle='Rodeur de marché'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Renardeau Lapsus'),
+ (SELECT id_classe FROM Classe WHERE libelle='Voleur d’épices'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Bellona Houle'),
+ (SELECT id_classe FROM Classe WHERE libelle='Aquamancien infusé'), 7);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Gala Montjoie'),
+ (SELECT id_classe FROM Classe WHERE libelle='Ménestrel carbonara'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Goran Plancher'),
+ (SELECT id_classe FROM Classe WHERE libelle='Brise-Croûte'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Naga Pearl'),
+ (SELECT id_classe FROM Classe WHERE libelle='Aquamancien infusé'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Nagal Sinue'),
+ (SELECT id_classe FROM Classe WHERE libelle='Rodeur de marché'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Nerine Corail'),
+ (SELECT id_classe FROM Classe WHERE libelle='Aquamancien infusé'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Ondra Mélodie'),
+ (SELECT id_classe FROM Classe WHERE libelle='Domptelune'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Talos Grandpas'),
+ (SELECT id_classe FROM Classe WHERE libelle='Gardien croûton'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Yska Longfrimas'),
+ (SELECT id_classe FROM Classe WHERE libelle='Sentinelle du sel'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Ada Clic'),
+ (SELECT id_classe FROM Classe WHERE libelle='Artificier pâtissier'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Ailefine Brisecoeur'),
+ (SELECT id_classe FROM Classe WHERE libelle='Aéromancien feuilleté'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Alio Farandole'),
+ (SELECT id_classe FROM Classe WHERE libelle='Ménestrel carbonara'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Althaea Roselière'),
+ (SELECT id_classe FROM Classe WHERE libelle='Clerc chantilly'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Amarel Croquejour'),
+ (SELECT id_classe FROM Classe WHERE libelle='Bretteur à deux lames'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Amon Souffre'),
+ (SELECT id_classe FROM Classe WHERE libelle='Pyromancien gratiné'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Arga Franchepoigne'),
+ (SELECT id_classe FROM Classe WHERE libelle='Brise-Croûte'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Argon Dorévent'),
+ (SELECT id_classe FROM Classe WHERE libelle='Aéromancien feuilleté'), 6);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Arion Chanteclair'),
+ (SELECT id_classe FROM Classe WHERE libelle='Ménestrel carbonara'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Barka Politesse'),
+ (SELECT id_classe FROM Classe WHERE libelle='Chevalier-louche'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Belanor Muscadet'),
+ (SELECT id_classe FROM Classe WHERE libelle='Scribe de bataille'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Bella Chatoiement'),
+ (SELECT id_classe FROM Classe WHERE libelle='Domptelune'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Bento Masqué'),
+ (SELECT id_classe FROM Classe WHERE libelle='Voleur d’épices'), 4);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Beryl Dosfoudre'),
+ (SELECT id_classe FROM Classe WHERE libelle='Électromage citronné'), 7);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Bof Bof'),
+ (SELECT id_classe FROM Classe WHERE libelle='Guerrier-panier'), 4);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Bora Fildevent'),
+ (SELECT id_classe FROM Classe WHERE libelle='Aéromancien feuilleté'), 5);
+
+INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Borg Urdent'),
+ (SELECT id_classe FROM Classe WHERE libelle='Brise-Croûte'), 6);
+
+
+-- =========================================
+-- RENOMMEE — 50 personnages (majorité village/royaume, rares solarys)
+-- =========================================
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Mireille Mirador'), 'village', 'Œil des remparts de son bourg');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Nora Cuvelier'), 'village', 'Maitre-étrier de la ruelle des Tonneliers');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Anvil Mainforte'), 'village', 'Lame de la ruelle des Forgerons');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Dunda Cervoise'), 'village', 'Voix mousseuse de la Taverne Haute');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Bibi Brioche'), 'village', 'Bienfaiteur·rice du four communal');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Lalie Briochette'), 'village', 'Danseuse d’acier de la place du Levain');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Géraldine Belleplume'), 'village', 'Veilleuse de la nuit claire');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Élo Die'), 'village', 'Œil beurre-noisette des remparts bas');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Erga Dosdroit'), 'village', 'Poste droit du pont-levis');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Camille Cambriole'), 'village', 'Main légère… qui rend la bourse après');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Korin Martelembrun'), 'village', 'Bouclier de la halle aux marteaux');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Crog Silex'), 'village', 'Graveur de bornes millénaires');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Bruna Brasero'), 'village', 'Gardienne des braises bénies du fournil');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Goma Rondpain'), 'village', 'Rempart croustillant de la porte Ouest');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Bébert Tambour-Major'), 'village', 'Maître du roulement des fêtes du pain');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Eärwen Feuilledor'), 'village', 'Plume d’or de la galerie des Archers');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Éliara Nitescence'), 'village', 'Dompteuse de lune de la clairière haute');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Ulysse Jaloux'), 'village', 'Guide des venelles du port bas');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Guy D’armes'), 'royaume', 'Chevalier du bon mot couronné');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Armelle Armure'), 'royaume', 'Dame au bouclier irréprochable');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Calen Dorélys'), 'royaume', 'Pourfendeur des truffes sacrées');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Sirilas Clairchant'), 'royaume', 'Ménestrel aux accords limpides');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Zoé Zéphyr'), 'royaume', 'Souffle favorable des caravelles royales');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Mireille Mirador'), 'royaume', 'Sentinelle que nul orage ne surprend');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Basile le Subtil'), 'royaume', 'Furet des marchés princiers');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Félix Fineplume'), 'royaume', 'Stratège à l’encre froide');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Azazel Courtepointe'), 'royaume', 'Tisserand d’illusions feutrées');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Amber Écaillefeu'), 'royaume', 'Garde-flammes des halls draconiques');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Gaspard Sanspeur'), 'royaume', 'Louche au cœur vaillant');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Erik Étau'), 'royaume', 'Maître des mécaniques de cour');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Durim Brindacier'), 'royaume', 'Mur de sucre de Brindacier');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Korin Martelembrun'), 'royaume', 'Égide de la Forge Royale');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Nora Cuvelier'), 'royaume', 'Main ferme des engins de siège doux');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Anvil Mainforte'), 'royaume', 'Lame trempée au sceau royal');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Crog Silex'), 'royaume', 'Runes de frontière indélébiles');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Dunda Cervoise'), 'royaume', 'Tambour de campagne et de cantine');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Bibi Brioche'), 'royaume', 'Bienfaiteur·rice du Grand Levain');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Lalie Briochette'), 'royaume', 'Pas de velours — lames de fête');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Éliara Nitescence'), 'royaume', 'Veilleuse des nuits royales');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Ulysse Jaloux'), 'royaume', 'Renard des docks couronnés');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Solarius Max'), 'solarys', 'Phare de la lumière scintillante');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Fenduil Lierreclair'), 'solarys', 'Orage chantant des hautes canopées');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Lara Tatouille'), 'solarys', 'Alchimiste à la louche d’or (certifiée)');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Jean Bonparleur'), 'solarys', 'Négociateur en chef des banquets de paix');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Luthien Tisselune'), 'solarys', 'Tisseuse de songes et d’aurores calmes');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Noé Milleplans'), 'solarys', 'Horloger des chemins improbables');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Ghor Letranchant'), 'solarys', 'Seigneur des cris et des paniers d’acier');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Zyrith Foudre-Serment'), 'solarys', 'Serment aux rafales azurées');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Maeriel Aubevive'), 'solarys', 'Lueur souveraine de l’aube éternelle');
+INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Calen Dorélys'), 'solarys', 'Traqueur des truffes invincibles');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Conclave des Sept Sceaux'), 'solarys', 'Gardefrontières arcaniques de Solarys');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Chambre des Courtiers d’Arcanes'), 'solarys', 'Banque des grimoires et traités majeurs');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Ordre des Clercs du Zénith'), 'solarys', 'Liturgie solaire reconnue sur tout Solarys');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Les Veilleurs de l’Aube'), 'royaume', 'Éclaireurs officiels des routes royales');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Compagnie du Roc Obsidien'), 'royaume', 'Mur de boucliers frontaliers');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Ordre des Lames Grises'), 'royaume', 'Escortes et lames du protocole royal');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Cercle des Cartographes Libres'), 'royaume', 'Cartes exactes (et parfois drôles) garanties');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Guilde des Émissaires'), 'royaume', 'Négociateurs assermentés du Trône');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Fraternité des Flèches Vives'), 'royaume', 'Pluie de traits longue portée “sans courants d’air”');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Loge des Artificiers Discrets'), 'royaume', 'Dispositifs arcanotech homologués (silencieux-ish)');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Marins des Voiles Blanches'), 'royaume', 'Navigation hauturière sans mal de mer (presque)');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Compagnie des Pèlerins Gris'), 'royaume', 'Caravanes lointaines, retour garanti ou remboursé*');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Guilde des Archivistes Impériaux'), 'royaume', 'Mémoires et sceaux de l’État en ordre');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Brigade des Sentinelles Boréales'), 'royaume', 'Gardes des cols et antigels humains');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Lanciers de l’Éperon'), 'royaume', 'Cavalerie lourde et fines moustaches');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Compagnie des Ombres Liées'), 'royaume', 'Infiltration “avec reçu et discrétion”');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Chœur des Harmonistes'), 'royaume', 'Magies sonores accordées à 432 Hz mystiques');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Cercle de la Source Claire'), 'royaume', 'Rituels d’eau bénite et spa officiel des croisades');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Ateliers du Silex'), 'royaume', 'Armurerie minérale trempée dans la blague');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Les Détourneurs de Catastrophes'), 'royaume', 'Crises reroutées, drames décalés ailleurs');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Boucliers Beurrés Modérés'), 'royaume', 'Défense glissante mais polie');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Confrérie du Thé Très Sérieux'), 'royaume', 'Méditation par infusion (feuille 3 minutes max)');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Brasseurs des Orages'), 'royaume', 'Festivités météo sous contrôle (parfois)');  -- déjà référencée ailleurs
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='École de la Brioche Stoïque'), 'royaume', 'Résilience douce et croûte impeccable');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Gardiens du Sel Cosmique'), 'royaume', 'Protection gravitationnelle (saupoudrée)'); -- aussi digne d’un rare “solarys”, on reste modérés
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Tisserands de Nappes Stellaires'), 'royaume', 'Textiles astraux certifiés anti-miettes');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Ordre du Poivre Diplomatique'), 'royaume', 'Pimente sans fâcher (sauf allergiques)');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Chariots de Fer'), 'royaume', 'Logistique de choc sur rails et jurons');      -- vu dans GuildeMembre
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Courtiers du Crépuscule'), 'royaume', 'Affaires conclues à l’heure dorée');        -- vu dans GuildeMembre
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Les Alibis Variables'), 'royaume', 'Couvertures impeccables, histoires crédibles'); -- vu dans GuildeMembre
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Compagnie des Fins de Mois'), 'royaume', 'Marchés serrés, comptes justes');        -- vu dans GuildeMembre
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Ordre des Clercs du Zénith'), 'royaume', 'Chapelles solaires de province alignées');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Guilde des Archivistes Impériaux'), 'royaume', 'Registres des fiefs et dépôts scellés');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Lanciers de l’Éperon'), 'royaume', 'Tournois et charges d’apparat');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Compagnie du Roc Obsidien'), 'royaume', 'Garnisons contractuelles aux frontières');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Compagnie du Pain Sec'), 'village', 'Secours minimaliste des gardes-bouches');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Guilde des Cuillères Mesurées'), 'village', 'Ustensiles au quart de cuillère près');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Marins de la Soupe Claire'), 'village', 'Navettes du fjord sans grumeaux');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Ligue des Élastiques'), 'village', 'Retraite tactique express locale');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Cercle des Chuchoteurs Forts'), 'village', 'Confession bruyante… à voix basse');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Compagnie des Pèlerins Gris'), 'royaume', 'Routes lointaines, relais sûrs');
+INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Fraternité des Flèches Vives'), 'royaume', 'Compétitions d’archerie ducalement approuvées');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), 'solarys', 'Fournaise draconique gardienne des cols');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Raclettea'), 'solarys', 'Creuset des monts fondants et des traités tièdes');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'solarys', 'Archipel de la paix sucrée et des routes laitières');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), 'solarys', 'Couronne des éclairs bénins et des portails sages');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Choux-Fleurie'), 'solarys', 'Cap d’aïoli et falaises sous bonne vapeur');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Patateland'), 'solarys', 'Plateaux gratinés, mines salées, purée diplomatique');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Carotte-sur-Mer'), 'solarys', 'Baies croquantes et chenal potager sécurisés');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Fromagiville'), 'solarys', 'Vallon camembert : défense coulante, cœur fondant');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Navet-les-Oies'), 'solarys', 'Marais velouté et étangs Coin-Coin sous protection');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Soupefroide'), 'solarys', 'Gazpacho des glaces : fjords basilic bien gardés');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime'), 'royaume', 'Nœud des routes des alpages et du rift beurré');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'royaume', 'Maîtres des havres, tarifs de ports exemplaires');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'royaume', 'Remparts dorés, appareil diplomatique au point');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Marmitonnie'), 'royaume', 'Grande loge des brassins et foyers régulés');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Herbularia'), 'royaume', 'Forêts sacrées et tisanes sous sceau royal');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), 'royaume', 'Grandes routes rizicoles et archives bien tenues');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Gélatine'), 'royaume', 'Administration souple, sceaux qui ne collent pas');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Chantillys'), 'royaume', 'Cour des crèmes légères et paix intérieure fouettée');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'), 'royaume', 'Ligne croustillante aux frontières et tournois carrés');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg'), 'royaume', 'Arènes émoussées et paris licenciés bien croustis');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Pralinie'), 'royaume', 'Décrets runiques et noix bien caramélisées');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Beurropolis'), 'royaume', 'Portails fluides et voirie au beurre demi-sel');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Caramellum'), 'royaume', 'Urbanisme magique : presque pas collant, promis');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Boulangea'), 'royaume', 'Paix des marchés et levain des traités');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Mascarponie'), 'royaume', 'Banques crémeuses et tarifs raisonnés');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Parmésia'), 'royaume', 'Ponts, chaussées et râpes d’État alignées');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Burraton'), 'royaume', 'Brasseries sûres et anti-contrefaçon exemplaire');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Croissantinopie'), 'royaume', 'Amirauté beurrée et phares à la confiture');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Saucissonie'), 'royaume', 'Charte des salaisons et comptoirs poivrés unifiés');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Sucralune'), 'royaume', 'Liturgie des lunes meringuées et marais de sirop');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Meringuia'), 'royaume', 'Escadres aériennes et corniches sucre-neige');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Beurrasie'), 'royaume', 'Réseau routier clarifié, glisse contrôlée');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Confitar'), 'royaume', 'Conserves stratégiques et traités en pot scellé');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Levainor'), 'royaume', 'Guilde des boulangers d’État et levées publiques');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Tisanelle'), 'royaume', 'Apaisement national par infusion réglementée');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Saucelande'), 'royaume', 'Ministère des réductions et nappages officiels');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Citronésie'), 'royaume', 'Navigation acide et ports zestés standardisés');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Vanillia'), 'royaume', 'Culte des gousses et parfums d’État harmonisés');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Anethol'), 'royaume', 'Neutralité anisée et routes caravanières sûres');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Pâtonnie'), 'royaume', 'Réserves stratégiques de pâte et moulins royaux');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Friturie'), 'royaume', 'Bastions tempura et escouades anti-éclaboussures');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Rôtisserie Royale'), 'royaume', 'Grand Tour de Broche et jus sous AOP royale');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Pâtisserie Haute'), 'royaume', 'Éperons millefeuille et nappage protocolaire');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Fondueval'), 'royaume', 'Concordat des fromages et ponts thermiques sûrs');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Ragoût-du-Nord'), 'royaume', 'Bouillons d’hiver et routes de la louche tiède');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Bouillonie'), 'royaume', 'Estuaire mirepoix et doctrine des feux doux');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Saladière'), 'royaume', 'Mesclun des plaines et accords vinaigrette');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Épiceria'), 'royaume', 'Routes des épices et tribunaux du cumin équitable');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Fromagora'), 'royaume', 'Citadelles d’affinage et marchés à la meule franche');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Camemberrie'), 'royaume', 'Buttes coulantes surveillées par la Milice de Crème');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Goudaïka'), 'royaume', 'Ports saumure et ligue des pêcheurs au lait d’or');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Comtédrale'), 'royaume', 'Nef affinée et processions de meules sacrées');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Rocquefortin'), 'royaume', 'Chartes des grottes persillées et douanes bleues');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Munsterre'), 'royaume', 'Garde fumée des vallons et jurandes des braises');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Rebloche'), 'royaume', 'Cols savoyards et transhumance sous bonne garde');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Brie-lande'), 'royaume', 'Plaine paille et traités à croûte fleurie');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Cancoillottie'), 'royaume', 'Tourbières lactées et chancellerie des cuillers');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Cheddarmont'), 'royaume', 'Éboulis d’or et ponts croûteux brevetés');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Mozzarellia'), 'royaume', 'Lagunes de perles et cordages en filata d’État');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Ricotte'), 'royaume', 'Îlots caillés et fiscalité lactosérum transparente');
+INSERT INTO Renommee (royaume_id, echelle, titre_reconnu) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Sorbeterre'), 'royaume', 'Glaciers fruités et vents limonade chartés');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Fromagiville-les-Bains'), 'solarys', 'Capitale des alliances fondues');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Carotte-sur-Mer'), 'solarys', 'Port mythique des marins potagers');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Patate-sur-Mer'), 'royaume', 'Grenier salé des côtes et bastion des gratins');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Choux-Fleur-les-Bains'), 'royaume', 'Station vapeur officielle du royaume Choux-Fleurie');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Navet-les-Oies'), 'royaume', 'Marais en majesté et concours d’oies homologués');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Quichebourg-aux-Trois-Ponts'), 'royaume', 'Garde des ponts et appareil diplomatique local');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Dragonflette-Haute'), 'royaume', 'Foyers draconiques et tournois de braise');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Éclair-sur-Rivage'), 'royaume', 'Phare des routes lumineuses et ateliers d’éclairs');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Soupefroide-Vieux-Port'), 'royaume', 'Havre des fjords basilic et bouillons du nord');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Rizotto-Bas'), 'royaume', 'Clef des canaux dorés et digues de rizières');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Sucralune-Vigie'), 'royaume', 'Haute-garde des lunes meringuées');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Meringuia-Plateau'), 'royaume', 'Escadre des corniches sucre-neige');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Citronésie-Citadelle'), 'royaume', 'Citadelle saline et ports zestés normés');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Vanillia-Rive'), 'royaume', 'Lagune parfumée et parfumeries d’État');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Croissantinopie-Est'), 'royaume', 'Carrefour feuilleté et levains officiels');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Beurropolis-Nord'), 'royaume', 'Digue onctueuse et archives clarifiées');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Croûteville'), 'village', 'Cité aux murailles qui croustillent encore');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Beurresac'), 'village', 'Plaine onctueuse et concours de barattes vives');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Banarny'), 'village', 'Archipel des filets dorés et sel de Banarnia AOP');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Poissarie-Hameaux'), 'village', 'Hameaux aux récifs chantants et fumoirs côtiers');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Sorbeterre-Glacier'), 'village', 'Glaces éternelles et sirops du dimanche');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Saucissonie-Forges'), 'village', 'Forge d’airain et salaisons fumantes de quartier');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Boulangea-Terres-Hautes'), 'village', 'Levées hautes et fêtes du pétrin');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Croûtonie-Centre'), 'village', 'Carrefour des routes et pain de garde');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Herbularia-Forêt'), 'village', 'Forêts murmurantes et racines savantes');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Fromagiville-Citadelle'), 'village', 'Éperon roquefort et caves disciplinées');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Marmitonnie-Bocage'), 'village', 'Bocage des marmites et louche cérémonielle');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Tartiflette Prime-Bourg'), 'village', 'Bourg aux contreforts dorés et concours d’oignons');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Éclairoisie-Phare'), 'village', 'Cap lumineux et éclairs presque à l’heure');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Sucralune-Minier'), 'village', 'Crêtes étincelantes et poussière d’étoile locale');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Quichebourg-Sud'), 'village', 'Vallée du levain et moulins bien huilés');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Dragonflette-Forgebas'), 'village', 'Chaînes ardentes et enclumes qui fredonnent');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Banarnia-Hautes-Terres'), 'village', 'Plateaux dorés et rhum-banane (avec modération)');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Raclettea-Vieille-Ville'), 'village', 'Écusson fumé et raclettes d’apparat');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Rizotto-Delta'), 'village', 'Rizières marécageuses et écluses bienveillantes');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Soupefroide-Est'), 'village', 'Fjords sifflants et brumes en bouteille');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Choux-Fleurie-Les-Thermes'), 'village', 'Thermes floraux et bain à l’aïoli léger');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Poissarie-Les-Filets'), 'village', 'Chaussée aux harengs et marchés du matin');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Citronésie-Canisses'), 'village', 'Lagune claire et canisses citronnées');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Vanillia-Ravin'), 'village', 'Ravin parfumé et cacao des berges');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Anethol-Moulins'), 'village', 'Vents anisés et moulins entêtants');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Comtédrale-Clos'), 'village', 'Vignes sacrées et fromages en retraite spirituelle');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Biscuitbourg-Remparts'), 'village', 'Remparts croquants et farine de défense');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Beurropolis-Digue'), 'village', 'Digue onctueuse et paperasse beurrée');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Fromagiville-Les-Caves'), 'village', 'Sous-bois affinés et meules qui murmurent');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Marmitonnie-Ferme'), 'village', 'Ferme des pots et soupe condensée maison');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Tartiflette Prime-Cols'), 'village', 'Cols dorés et poussière de croissant sur les cols');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Éclairoisie-Lanterne'), 'village', 'Cap éclairé et lanternes d’apparat');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Sorbeterre-Aiguilles'), 'village', 'Aiguilles blanches et sorbets d’altitude');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Poissarie-Quais'), 'village', 'Quais des voiles et criées rieuses');
+INSERT INTO Renommee (village_id, echelle, titre_reconnu) VALUES
+((SELECT id_village FROM Village WHERE nom='Rizotto-Grand-Canal'), 'village', 'Grand canal et barques à riz rapides');
+
