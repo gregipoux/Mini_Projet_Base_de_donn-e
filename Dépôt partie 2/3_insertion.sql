@@ -10324,3 +10324,224 @@ INSERT INTO PersonnageEquipement (personnage_id, equipement_id, qualite, date_ac
 ((SELECT id_ressource FROM Ressource WHERE nom='Pierre'), 616, 102, NULL, NULL, NULL, 50, 'An 421, Lune 4, Jour 6'),
 ((SELECT id_ressource FROM Ressource WHERE nom='Cuir'), 168, 48, NULL, NULL, NULL, 50, 'An 421, Lune 5, Jour 4');
 
+
+INSERT INTO Bataille (nom, date_bataille_lore, lieu, pertesA, pertesB, vainqueur_texte) VALUES
+('Accrochage de la Crique Banane', 'An 129, Lune 4, Jour 2', 'Crique Banane (Banarnia)', 3200, 2900, 'Camp A'),
+('Affrontement du Détroit des Écailles', 'An 133, Lune 2, Jour 11', 'Détroit des Écailles (Poissarie)', 5400, 6100, 'Camp B'),
+('Affaire du Nexus des Cimes', 'An 138, Lune 3, Jour 9', 'Cols frontaliers (Croûtonie/Dragonflette)', 2800, 2600, 'Camp A'),
+('Escarmouche des Lanternes', 'An 139, Lune 5, Jour 6', 'Route des Luminaires (Éclairoisie/Patateland)', 4200, 3900, 'Camp A'),
+('Ponts et Parapets du Levain Noir', 'An 130, Lune 1, Jour 14', 'Ponts de Beurropolis', 2600, 3100, 'Camp B'),
+('Bois Profonds des Canopées', 'An 132, Lune 6, Jour 4', 'Lisière des Canopées (Herbularia/Biscuitbourg)', 2400, 2200, 'Match nul'),
+('Bataille des Caves Dorées', 'An 131, Lune 3, Jour 21', 'Caves communes (Camemberrie/Comtédrale)', 3600, 4100, 'Camp B'),
+('Conflit des Meules Unies', 'An 134, Lune 2, Jour 8', 'Plaine des Meules (Fromagora/Goudaïka)', 3000, 3400, 'Camp B'),
+('Choc des Zestes Caramélisés', 'An 128, Lune 5, Jour 12', 'Rade sucrée (Caramelia/Citronésie)', 2700, 2500, 'Camp A'),
+('Levain contre Halles', 'An 125, Lune 2, Jour 17', 'Marches frontières (Levainor/Boulangea)', 3300, 2900, 'Camp A'),
+('Escarmouche du Gué des Rizières', 'An 126, Lune 6, Jour 3', 'Gué des Rizières (Rizotto)', 2200, 2300, 'Camp B'),
+('Passe du Lait Cuit', 'An 135, Lune 4, Jour 10', 'Cols laitiers (Brie-lande/Fondueval)', 2800, 2600, 'Camp A');
+
+
+INSERT INTO ArmeeBataille (armee_id, bataille_id, cote, pertes) VALUES
+((SELECT id_armee FROM Armee WHERE nom='Flotte des Îlots Dorés'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Accrochage de la Crique Banane'), 'A', 1200),
+((SELECT id_armee FROM Armee WHERE nom='Brigade des Îlots'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Accrochage de la Crique Banane'), 'A', 900),
+((SELECT id_armee FROM Armee WHERE nom='Lanciers Dorés du Quiche'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Accrochage de la Crique Banane'), 'B', 1100),
+((SELECT id_armee FROM Armee WHERE nom='Vigiles des Abysses'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Accrochage de la Crique Banane'), 'B', 900);
+INSERT INTO ArmeeBataille (armee_id, bataille_id, cote, pertes) VALUES
+((SELECT id_armee FROM Armee WHERE nom='Escadre des Voiles Blanches'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Affrontement du Détroit des Écailles'), 'A', 1800),
+((SELECT id_armee FROM Armee WHERE nom='Garde des Sables et des Docks'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Affrontement du Détroit des Écailles'), 'A', 1400),
+((SELECT id_armee FROM Armee WHERE nom='Cohortes Draconiques'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Affrontement du Détroit des Écailles'), 'B', 2200),
+((SELECT id_armee FROM Armee WHERE nom='Ailes des Cieux'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Affrontement du Détroit des Écailles'), 'B', 1500);
+INSERT INTO ArmeeBataille (armee_id, bataille_id, cote, pertes) VALUES
+((SELECT id_armee FROM Armee WHERE nom='Veilleurs Brasefer du Sud'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Affaire du Nexus des Cimes'), 'A', 900),
+((SELECT id_armee FROM Armee WHERE nom='Cohortes Draconiques'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Affaire du Nexus des Cimes'), 'A', 1100),
+((SELECT id_armee FROM Armee WHERE nom='Garde du Nexus'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Affaire du Nexus des Cimes'), 'B', 1000),
+((SELECT id_armee FROM Armee WHERE nom='Escouades de l’Ombre'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Affaire du Nexus des Cimes'), 'B', 700);
+INSERT INTO ArmeeBataille (armee_id, bataille_id, cote, pertes) VALUES
+((SELECT id_armee FROM Armee WHERE nom='Garde des Portails d’Éclairoisie'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Escarmouche des Lanternes'), 'A', 1600),
+((SELECT id_armee FROM Armee WHERE nom='Gardes de l’Aurore'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Escarmouche des Lanternes'), 'A', 1400),
+((SELECT id_armee FROM Armee WHERE nom='Bataillons Gratinés'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Escarmouche des Lanternes'), 'B', 1200),
+((SELECT id_armee FROM Armee WHERE nom='Sapeurs de Grès'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Escarmouche des Lanternes'), 'B', 900);
+INSERT INTO ArmeeBataille (armee_id, bataille_id, cote, pertes) VALUES
+((SELECT id_armee FROM Armee WHERE nom='Légion des Plans et Ponts'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Ponts et Parapets du Levain Noir'), 'A', 900),
+((SELECT id_armee FROM Armee WHERE nom='Corps des Ponts et Portails'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Ponts et Parapets du Levain Noir'), 'A', 700),
+((SELECT id_armee FROM Armee WHERE nom='Bannerets de la Crème'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Ponts et Parapets du Levain Noir'), 'B', 900);
+INSERT INTO ArmeeBataille (armee_id, bataille_id, cote, pertes) VALUES
+((SELECT id_armee FROM Armee WHERE nom='Rangers des Forêts Sacrées'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Bois Profonds des Canopées'), 'A', 1000),
+((SELECT id_armee FROM Armee WHERE nom='Garde des Canopées'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Bois Profonds des Canopées'), 'A', 700),
+((SELECT id_armee FROM Armee WHERE nom='Gardes Croquants des Remparts'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Bois Profonds des Canopées'), 'B', 900),
+((SELECT id_armee FROM Armee WHERE nom='Cohorte des Moulins Croquants'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Bois Profonds des Canopées'), 'B', 600);
+INSERT INTO ArmeeBataille (armee_id, bataille_id, cote, pertes) VALUES
+((SELECT id_armee FROM Armee WHERE nom='Gardes Crémeux'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Bataille des Caves Dorées'), 'A', 1300),
+((SELECT id_armee FROM Armee WHERE nom='Garde du Comté Doré'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Bataille des Caves Dorées'), 'B', 1700);
+INSERT INTO ArmeeBataille (armee_id, bataille_id, cote, pertes) VALUES
+((SELECT id_armee FROM Armee WHERE nom='Légion des Meules Unies'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Conflit des Meules Unies'), 'A', 1200),
+((SELECT id_armee FROM Armee WHERE nom='Compagnie des Meules Dorées'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Conflit des Meules Unies'), 'B', 1600);
+INSERT INTO ArmeeBataille (armee_id, bataille_id, cote, pertes) VALUES
+((SELECT id_armee FROM Armee WHERE nom='Légion Sucrée'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Choc des Zestes Caramélisés'), 'A', 900),
+((SELECT id_armee FROM Armee WHERE nom='Brigade des Zestes'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Choc des Zestes Caramélisés'), 'B', 1100);
+INSERT INTO ArmeeBataille (armee_id, bataille_id, cote, pertes) VALUES
+((SELECT id_armee FROM Armee WHERE nom='Gardes du Levain Éternel'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Levain contre Halles'), 'A', 1400),
+((SELECT id_armee FROM Armee WHERE nom='Compagnie du Grand Levain'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Levain contre Halles'), 'B', 1200);
+INSERT INTO ArmeeBataille (armee_id, bataille_id, cote, pertes) VALUES
+((SELECT id_armee FROM Armee WHERE nom='Régiment des Riz d’Argent'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Escarmouche du Gué des Rizières'), 'A', 900),
+((SELECT id_armee FROM Armee WHERE nom='Brigade des Îlots'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Escarmouche du Gué des Rizières'), 'B', 1100);
+INSERT INTO ArmeeBataille (armee_id, bataille_id, cote, pertes) VALUES
+((SELECT id_armee FROM Armee WHERE nom='Bataillon des Brises Blanches'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Passe du Lait Cuit'), 'A', 1100),
+((SELECT id_armee FROM Armee WHERE nom='Gardes du Fromage Sacré'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Passe du Lait Cuit'), 'B', 900);
+
+
+INSERT INTO GuildeBataille (guilde_id, bataille_id, role) VALUES
+((SELECT id_guilde FROM Guilde WHERE nom='Marins des Voiles Blanches'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Accrochage de la Crique Banane'), 'pilotes & ravitaillement'),
+((SELECT id_guilde FROM Guilde WHERE nom='Loge des Artificiers Discrets'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Accrochage de la Crique Banane'), 'artificiers navals'),
+((SELECT id_guilde FROM Guilde WHERE nom='Fraternité des Flèches Vives'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Affrontement du Détroit des Écailles'), 'tireurs d’élite'),
+((SELECT id_guilde FROM Guilde WHERE nom='Cercle de la Source Claire'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Affrontement du Détroit des Écailles'), 'soins & purification'),
+((SELECT id_guilde FROM Guilde WHERE nom='Compagnie du Roc Obsidien'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Affaire du Nexus des Cimes'), 'mur de boucliers'),
+((SELECT id_guilde FROM Guilde WHERE nom='Guilde des Archivistes Impériaux'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Escarmouche des Lanternes'), 'logistique & intendance'),
+((SELECT id_guilde FROM Guilde WHERE nom='Chariots de Fer'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Ponts et Parapets du Levain Noir'), 'transport lourd'),
+((SELECT id_guilde FROM Guilde WHERE nom='Les Détourneurs de Catastrophes'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Ponts et Parapets du Levain Noir'), 'gestion de crise'),
+((SELECT id_guilde FROM Guilde WHERE nom='Les Veilleurs de l’Aube'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Bois Profonds des Canopées'), 'éclaireurs'),
+((SELECT id_guilde FROM Guilde WHERE nom='Ateliers du Silex'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Bataille des Caves Dorées'), 'armurerie & réparation'),
+((SELECT id_guilde FROM Guilde WHERE nom='Cercle des Cartographes Libres'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Conflit des Meules Unies'), 'reconnaissance carto'),
+((SELECT id_guilde FROM Guilde WHERE nom='Ordre du Poivre Diplomatique'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Choc des Zestes Caramélisés'), 'médiation épicée'),
+((SELECT id_guilde FROM Guilde WHERE nom='École de la Brioche Stoïque'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Levain contre Halles'), 'discipline & moral'),
+((SELECT id_guilde FROM Guilde WHERE nom='Compagnie des Pèlerins Gris'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Escarmouche du Gué des Rizières'), 'ravitaillement caravanier'),
+((SELECT id_guilde FROM Guilde WHERE nom='Guilde des Émissaires'),
+ (SELECT id_bataille FROM Bataille WHERE nom='Passe du Lait Cuit'), 'négociation de cessez-le-feu');
+
+
+INSERT INTO CreatureBataille (creature_id, bataille_id, nombre, role) VALUES
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Squelette' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Accrochage de la Crique Banane'), 60, 'ligne de boucliers'),
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Goule' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Accrochage de la Crique Banane'), 35, 'harcèlement nocturne'),
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Golem' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Accrochage de la Crique Banane'), 5, 'portage & brèche'),
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Chauve-souris géante' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Accrochage de la Crique Banane'), 40, 'reco aérienne');
+INSERT INTO CreatureBataille (creature_id, bataille_id, nombre, role) VALUES
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Serpent de mer' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Affrontement du Détroit des Écailles'), 6, 'choc naval'),
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='kraken' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Affrontement du Détroit des Écailles'), 1, 'démâtage & remous'),
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Crocodilion' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Affrontement du Détroit des Écailles'), 18, 'abordage littoral');
+INSERT INTO CreatureBataille (creature_id, bataille_id, nombre, role) VALUES
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Gardien runique' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Affaire du Nexus des Cimes'), 4, 'mur de boucliers'),
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Gargouille' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Affaire du Nexus des Cimes'), 12, 'piquets de falaise'),
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Colosse d’obsidienne' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Affaire du Nexus des Cimes'), 2, 'bélier vivant');
+INSERT INTO CreatureBataille (creature_id, bataille_id, nombre, role) VALUES
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Carcasse animée' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Escarmouche des Lanternes'), 50, 'écran'),
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Ombre' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Escarmouche des Lanternes'), 30, 'infiltration'),
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Golem' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Escarmouche des Lanternes'), 6, 'barrage & portage');
+INSERT INTO CreatureBataille (creature_id, bataille_id, nombre, role) VALUES
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Golem' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Ponts et Parapets du Levain Noir'), 7, 'ponts mobiles'),
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Mimique' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Ponts et Parapets du Levain Noir'), 9, 'pièges de coffres'),
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Squelette' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Ponts et Parapets du Levain Noir'), 80, 'garnison');
+INSERT INTO CreatureBataille (creature_id, bataille_id, nombre, role) VALUES
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Auroch ancestral' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Bois Profonds des Canopées'), 24, 'charges en clairière'),
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Tigre prismatique' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Bois Profonds des Canopées'), 11, 'flancs'),
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Sanglier runique' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Bois Profonds des Canopées'), 37, 'percées sous-bois');
+INSERT INTO CreatureBataille (creature_id, bataille_id, nombre, role) VALUES
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Squelette' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Bataille des Caves Dorées'), 120, 'lignes serrées'),
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Gargouille' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Bataille des Caves Dorées'), 10, 'surplombs'),
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Golem' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Bataille des Caves Dorées'), 4, 'sapes & étançons');
+INSERT INTO CreatureBataille (creature_id, bataille_id, nombre, role) VALUES
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Basilic' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Conflit des Meules Unies'), 3, 'pétrification'),
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Chimère' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Conflit des Meules Unies'), 5, 'percées de choc'),
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Loup alpha' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Conflit des Meules Unies'), 22, 'meutes rapides');
+INSERT INTO CreatureBataille (creature_id, bataille_id, nombre, role) VALUES
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Crocodilion' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Choc des Zestes Caramélisés'), 14, 'abordage de rives'),
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Serpent de mer' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Choc des Zestes Caramélisés'), 4, 'remous portuaires'),
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Chauve-souris géante' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Choc des Zestes Caramélisés'), 25, 'repérage nocturne');
+INSERT INTO CreatureBataille (creature_id, bataille_id, nombre, role) VALUES
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Golem' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Levain contre Halles'), 6, 'train de siège'),
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Mimique' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Levain contre Halles'), 12, 'pièges d’entrepôts'),
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Loup alpha' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Levain contre Halles'), 18, 'flanqueurs');
+INSERT INTO CreatureBataille (creature_id, bataille_id, nombre, role) VALUES
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Ver des sables' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Escarmouche du Gué des Rizières'), 2, 'rupture de gué'),
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Cheval des brumes' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Escarmouche du Gué des Rizières'), 20, 'messagerie rapide'),
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Sanglier runique' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Escarmouche du Gué des Rizières'), 30, 'percées de digue');
+INSERT INTO CreatureBataille (creature_id, bataille_id, nombre, role) VALUES
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Hydre' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Passe du Lait Cuit'), 1, 'blocage de col'),
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Gargouille' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Passe du Lait Cuit'), 8, 'surplombs rocheux'),
+((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Basilic' LIMIT 1),
+ (SELECT id_bataille FROM Bataille WHERE nom='Passe du Lait Cuit'), 2, 'pétrification de sentiers');
+
+ 
