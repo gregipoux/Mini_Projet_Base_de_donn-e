@@ -9,7 +9,7 @@
 
 -- 🕯️ Ordre du Roi :
 -- « Dis-moi quels royaumes pacifiques regorgent d’or… que je voie où lever l’impôt. »
--- Q1 : Royaumes pacifiques les plus riches
+-- Royaumes pacifiques les plus riches
 SELECT nom, richesses_or
 FROM Royaume
 WHERE orientation_paix = 'paix'
@@ -18,28 +18,28 @@ LIMIT 10;
 
 -- 🕯️ Ordre du Roi :
 -- « Quels métiers sentent la magie ? Qu’on surveille leurs pratiques. »
--- Q2 : Métiers contenant "mage"
+-- Métiers contenant "mage"
 SELECT libelle
 FROM Metier
 WHERE libelle LIKE '%mage%';
 
 -- 🕯️ Ordre du Roi :
 -- « Combien d’espèces pensantes hantent nos terres ? Dresse-m’en la liste. »
--- Q3 : Espèces sapientes
+-- Liste des espèces sapientes
 SELECT libelle
 FROM Espece
 WHERE est_sapiente = 1;
 
 -- 🕯️ Ordre du Roi :
 -- « Quelles ressources ont une aura mystique ? Les alchimistes s’y intéresseront. »
--- Q4 : Ressources dont la description contient "magique"
+-- Ressources dont la description contient "magique"
 SELECT nom, description
 FROM Ressource
 WHERE description LIKE '%magique%';
 
 -- 🕯️ Ordre du Roi :
 -- « Parmi les royaumes d’aisance moyenne, lesquels brillent le plus ? »
--- Q5 : Richesse entre 50 000 et 80 000
+-- Richesse située entre 50 000 et 80 000
 SELECT nom, richesses_or
 FROM Royaume
 WHERE richesses_or BETWEEN 50000 AND 80000
@@ -52,28 +52,26 @@ SELECT DISTINCT role_combat
 FROM Classe
 ORDER BY role_combat;
 
-
-
 /* ==============================
    2) FONCTIONS D’AGRÉGATION
    ============================== */
 
 -- 🕯️ Ordre du Roi :
 -- « Quelle est la fortune moyenne de mes domaines ? »
--- Q6 : Richesse moyenne des royaumes
+-- Richesse moyenne des royaumes
 SELECT AVG(richesses_or) AS richesse_moyenne
 FROM Royaume;
 
 -- 🕯️ Ordre du Roi :
 -- « Compte toutes les espèces sapientes : autant de sujets à ménager… ou à taxer. »
--- Q7 : Nombre d’espèces sapientes
+-- Nombre d’espèces sapientes
 SELECT COUNT(*) AS nb_especes_sapientes
 FROM Espece
 WHERE est_sapiente = 1;
 
 -- 🕯️ Ordre du Roi :
 -- « Par initiale, quelles ressources foisonnent au-delà du raisonnable ? »
--- Q8 : Nombre de ressources par initiale (variante 1)
+-- Nombre de ressources par initiale
 SELECT LEFT(nom, 1) AS initiale, COUNT(*) AS total
 FROM Ressource
 GROUP BY initiale
@@ -82,14 +80,14 @@ ORDER BY initiale ASC;
 
 -- 🕯️ Ordre du Roi :
 -- « Les nobles “de la” foisonnent-ils ? Compte leurs lignées. »
--- Q9 : Lignées dont le nom contient “de la”
+-- Nombre de lignées dont le nom contient “de la”
 SELECT COUNT(*) AS nb_lignees_de_la
 FROM Lignee
 WHERE nom LIKE '%de la%';
 
 -- 🕯️ Ordre du Roi :
--- « Additionne l’or des royaumes pacifiques : j’aime savoir combien dort en paix. »
--- Q10 : Richesse totale des royaumes en paix
+-- « Additionne l’or des royaumes pacifiques : j’aime savoir combien d'or dort en paix. »
+-- Richesse totale des royaumes en paix
 SELECT SUM(richesses_or) AS total_or_paix
 FROM Royaume
 WHERE orientation_paix = 'paix';
@@ -112,14 +110,13 @@ FROM Classe
 GROUP BY role_combat
 ORDER BY nb_classes DESC, role_combat;
 
-
 /* ================
    3) JOINTURES
    ================ */
 
 -- 🕯️ Ordre du Roi :
--- « D’où viennent mes sujets ? Associe chaque nom à son royaume. »
--- Q11 : Personnages avec leur royaume d’origine
+-- « D’où viennent mes sujets ? Associe chaque nom à son royaume d'origine. »
+-- Personnages avec leur royaume d’origine
 SELECT p.nom AS personnage, r.nom AS royaume
 FROM Personnage p
 JOIN Royaume r ON p.royaume_origine_id = r.id_royaume
@@ -127,7 +124,7 @@ ORDER BY royaume, personnage;
 
 -- 🕯️ Ordre du Roi :
 -- « Qui porte un nom de lignée, et qui n’en porte point ? »
--- Q12 : Lignées et personnages (left join)
+-- Lignées et personnages
 SELECT p.nom AS personnage, l.nom AS lignee
 FROM Personnage p
 LEFT JOIN Lignee l ON l.id_lignee = p.lignee_id
@@ -135,11 +132,11 @@ ORDER BY personnage;
 
 -- 🕯️ Ordre du Roi :
 -- « Fais parler les sols : quelles ressources chaque royaume revendique ? »
--- Q13 : Ressources et royaumes d’origine
+-- Ressources et royaumes d’origine
 SELECT r.nom AS ressource, ro.nom AS royaume, importance
 FROM RoyaumeRessource rr
-JOIN Ressource r ON rr.ressource_id = r.id_ressource
-JOIN Royaume ro ON rr.royaume_id = ro.id_royaume
+LEFT JOIN Ressource r ON rr.ressource_id = r.id_ressource
+LEFT JOIN Royaume ro ON rr.royaume_id = ro.id_royaume
 ORDER BY ro.nom, r.nom;
 
 -- 🕯️ Ordre du Roi :
@@ -152,15 +149,15 @@ ORDER BY ro.nom, r.nom;
 
 -- 🕯️ Ordre du Roi :
 -- « Quelles classes manient quels arts, et à quel niveau ? »
--- Q14 : Personnages, classes et niveau
+-- Personnages, classes et niveau
 SELECT p.nom, c.libelle, pc.niveau
 FROM PersonnageClasse pc
 JOIN Personnage p ON pc.personnage_id = p.id_personnage
 JOIN Classe c ON pc.classe_id = c.id_classe;
 
 -- 🕯️ Ordre du Roi :
--- « Ouvre le registre des guildes et nomme-moi leurs membres. »
--- Q15 : Guildes et membres
+-- « Ouvre le registre des guildes et nomme-moi leurs membres ainsi que leur utilité. »
+-- Guildes, membres et rôle
 SELECT g.nom AS guilde, p.nom AS membre, gm.role
 FROM GuildeMembre gm
 JOIN Guilde g ON gm.guilde_id = g.id_guilde
@@ -176,7 +173,7 @@ ORDER BY c.role_combat, m.type_metier;
 
 -- 🕯️ Ordre du Roi :
 -- « Je veux la vue la plus complète des guildes et de ceux qui les peuplent (ou non). »
--- Tableau complet guildes/membres (LEFT/RIGHT + UNION)
+-- Tableau complet guildes/membres
 SELECT g.nom AS guilde, p.nom AS membre, gm.role
 FROM Guilde g
 LEFT JOIN GuildeMembre gm ON gm.guilde_id = g.id_guilde
@@ -188,14 +185,13 @@ RIGHT JOIN GuildeMembre gm ON gm.personnage_id = p.id_personnage
 RIGHT JOIN Guilde g        ON g.id_guilde = gm.guilde_id
 ORDER BY guilde, membre;
 
-
 /* =======================
    4) REQUÊTES IMBRIQUÉES
    ======================= */
 
 -- 🕯️ Ordre du Roi :
 -- « Qui dépasse la moyenne d’or ? Mes collecteurs partiront là d’abord. »
--- Q16 : Royaumes plus riches que la moyenne
+-- Royaumes plus riches que la moyenne
 SELECT nom, richesses_or
 FROM Royaume
 WHERE richesses_or > (SELECT AVG(richesses_or) FROM Royaume)
@@ -203,17 +199,17 @@ ORDER BY richesses_or DESC, nom;
 
 -- 🕯️ Ordre du Roi :
 -- « Montre-moi les lignées orphelines de descendants. »
--- Q17 : Lignées sans personnage
+-- Lignées sans personnage
 SELECT nom
 FROM Lignee
 WHERE id_lignee NOT IN (
   SELECT lignee_id FROM Personnage WHERE lignee_id IS NOT NULL
 )
-ORDER BY l.nom;
+ORDER BY nom;
 
 -- 🕯️ Ordre du Roi :
 -- « Quels métiers n’ont point d’apprentis ? Qu’on y envoie des recruteurs. »
--- Q18 : Métiers non attribués
+-- Métiers non attribués
 SELECT libelle
 FROM Metier
 WHERE id_metier NOT IN (SELECT metier_id FROM PersonnageMetier)
@@ -221,7 +217,7 @@ ORDER BY libelle;
 
 -- 🕯️ Ordre du Roi :
 -- « Quels royaumes n’affichent aucune ressource “principale” ? »
--- Q19 : Royaumes sans ressource “principale”
+-- Royaumes sans ressource “principale”
 SELECT nom
 FROM Royaume
 WHERE id_royaume NOT IN (
@@ -230,7 +226,7 @@ WHERE id_royaume NOT IN (
 
 -- 🕯️ Ordre du Roi :
 -- « Et lesquels possèdent au moins une rareté ? Qu’on en apporte un échantillon. »
--- Q20 : Royaumes ayant au moins une ressource rare
+-- Royaumes ayant au moins une ressource rare
 SELECT nom
 FROM Royaume
 WHERE EXISTS (
@@ -243,7 +239,7 @@ ORDER BY nom;
 
 -- 🕯️ Ordre du Roi :
 -- « Je veux les héros dont le mana dépasse la moyenne de leur espèce. »
--- Personnages au mana ≥ moyenne d’espèce
+-- Personnages au mana supérieur à la moyenne de son espèce
 SELECT p.nom, p.mana_max
 FROM Personnage p
 WHERE p.mana_max IS NOT NULL
@@ -279,7 +275,7 @@ ORDER BY maladie, personnage;
 
 -- 🕯️ Ordre du Roi :
 -- « Les guildes qui n’ont jamais combattu… qu’on leur rafraîchisse la mémoire. »
--- Guildes sans bataille
+-- Guildes sans bataille à leur actif
 SELECT g.nom
 FROM Guilde g
 WHERE NOT EXISTS (
@@ -289,9 +285,10 @@ ORDER BY g.nom;
 
 -- 🕯️ Ordre du Roi :
 -- « Quelles armées dépassent la moyenne d’effectif de leur royaume ? »
--- Armées avec effectif > moyenne de leur royaume
-SELECT a.id_armee, a.royaume_id, a.effectif
+-- Armées avec effectif supérieur à la moyenne de leur royaume
+SELECT a.id_armee, a.nom, a.royaume_id, r.nom, a.effectif
 FROM Armee a
+JOIN Royaume r ON a.royaume_id = r.id_royaume
 WHERE a.effectif IS NOT NULL
   AND a.effectif > ANY (
     SELECT AVG(a2.effectif)
