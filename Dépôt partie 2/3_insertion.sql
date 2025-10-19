@@ -665,7 +665,7 @@ INSERT INTO Metier (libelle, type_metier) VALUES
 ('Souffleur de verre', 'artisan'),
 ('Charpentier naval', 'artisan');
 
--- ajouter quelques classes normales, à refaire
+
 INSERT INTO Classe (libelle, role_combat) VALUES
 ('Mage à raclette', 'dps'),
 ('Guerrier-panier', 'tank'),
