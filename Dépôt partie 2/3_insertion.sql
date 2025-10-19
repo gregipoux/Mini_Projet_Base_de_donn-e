@@ -32,69 +32,69 @@
 
 
 -- ==================================================================================================================
--- changer les frontières pour respecter FN
+
 INSERT INTO Royaume (nom, frontieres, richesses_or, orientation_paix) VALUES
-('Raclettea','Monts Fondants ; Gorges de Gruyère ; Col de la Croûte',120000.00,'paix'),
-('Dragonflette','Dents de Drac ; Plaines Laitières ; Rift Brûlé',94000.50,'neutre'),
-('Banarnia','Rivières Milk-shake ; Dunes Céréales ; Archipel Banane',150500.00,'paix'),
-('Choux-Fleurie','Falaises Vapeur ; Champs Trempette ; Cap Aïoli',60500.00,'paix'),
-('Patateland','Plateaux Gratins ; Mines de Sel ; Bassin Purée',88000.00,'neutre'),
-('Carotte-sur-Mer','Baie Croquante ; Cap Jus d’Orange ; Chenal Potager',72000.00,'paix'),
-('Fromagiville','Roc Bleu ; Vallon Camembert ; Lisière Coulante',65000.00,'neutre'),
-('Navet-les-Oies','Marais Velouté ; Étangs Coin-Coin ; Saulaie Grasse',41000.00,'paix'),
-('Soupefroide','Glaciers Gazpacho ; Fjords Basilic ; Banquise Tomate',56000.00,'belligerant'),
-('Tartiflette Prime','Couronnes Pommes ; Muraille Oignon ; Combe Lardon',133700.00,'neutre'),
-('Croissantinopie','Récifs Beurrés ; Mer de Confiture ; Pointe Amande',99000.00,'paix'),
-('Éclairoisie','Chaînes Pâtissières ; Col Chantilly ; Gorge Vanille',57500.00,'neutre'),
-('Boulangea','Grands Fournils ; Dorsales Levain ; Fourneau Royal',84500.00,'paix'),
-('Marmitonnie','Îlots Spatule ; Deltas Mironton ; Baie Ragoût',43210.00,'neutre'),
-('Saucissonie','Coteaux Secs ; Bois Poivrés ; Fosse Pasté',77300.00,'paix'),
-('Herbularia','Forêts Infusées ; Sources Verveine ; Prairie Thym',50100.00,'paix'),
-('Poissarie','Rades Citron ; Eaux Aneth ; Bancs Scintillants',62000.00,'neutre'),
-('Sucralune','Crêtes Sucrées ; Lacs Sirop ; Mare Guimauve',88888.00,'paix'),
-('Rizotto','Rizières Brillantes ; Marais Safran ; Levées Curry',54000.00,'paix'),
-('Quichebourg','Cols Lardon ; Vallées Crème ; Plateau Gruyère',71234.00,'neutre'),
-('Meringuia','Cirques Aériens ; Corniches Sucre-Neige',48500.00,'paix'),
-('Beurrasie','Dorsale Laitière ; Falaises Clarifiées',70200.00,'neutre'),
-('Confitar','Lagunes Confit ; Récifs Marmelade',55900.00,'paix'),
-('Croûtonie','Désert Grillé ; Oasis Ail ; Dune Croustillante',44700.00,'belligerant'),
-('Levainor','Failles Levées ; Dôme Pâteux ; Grotte Boulange',63100.00,'paix'),
-('Tisanelle','Bas-pays Menthe ; Collines Camomille',39800.00,'paix'),
-('Saucelande','Estuaire Poivre ; Vasières Crème',52010.00,'neutre'),
-('Citronésie','Atolls Zestes ; Courants Acidulés',57400.00,'paix'),
-('Vanillia','Plaines Gousses ; Gorge Suave',46200.00,'paix'),
-('Anethol','Cols Réglisse ; Steppe Anisée',43150.00,'neutre'),
-('Pâtonnie','Buttes Farine ; Fondrières Levure',51600.00,'paix'),
-('Friturie','Ravin Tempura ; Savane Beignets',38990.00,'belligerant'),
-('Rôtisserie Royale','Chaîne Broche ; Vallon Jus','77000.00','neutre'),
-('Pâtisserie Haute','Éperons Millefeuille ; Crête Nappage',68420.00,'paix'),
-('Fondueval','Cuvette Gruyère ; Strates Vin Blanc',73333.00,'paix'),
-('Ragoût-du-Nord','Toundra Bouillon ; Caps Potage',51200.00,'neutre'),
-('Bouillonie','Estuaire Mirepoix ; Bancs Écume',40110.00,'paix'),
-('Saladière','Plateaux Mesclun ; Canyon Vinaigrette',45550.00,'paix'),
-('Épiceria','Monts Curcuma ; Vallée Cumin ; Dôme Cardamome',62500.00,'neutre'),
-('Fromagora','Citadelle Croûte ; Falaises Affinage',81200.00,'paix'),
-('Beurropolis','Avenue Clarifiée ; Parcelles Dorées',59000.00,'neutre'),
-('Camemberrie','Buttes Coulantes ; Fossés Crayeux',54800.00,'paix'),
-('Goudaïka','Pins Saumure ; Baie Laiton',57320.00,'paix'),
-('Comtédrale','Nef Affinée ; Contreforts Pâturins',79200.00,'neutre'),
-('Rocquefortin','Grottes Persillées ; Cirque Bleu',61250.00,'paix'),
-('Munsterre','Coteaux Lave ; Ruisseaux Fumés',56660.00,'paix'),
-('Rebloche','Col Savoyard ; Pâturage Rebloch',52100.00,'neutre'),
-('Brie-lande','Plaine Paille ; Rives Coulants',64010.00,'paix'),
-('Cancoillottie','Marais Beurrés ; Tourbières Lactées',43330.00,'paix'),
-('Cheddarmont','Éboulis Or ; Ponts Croûteux',70500.00,'neutre'),
-('Mozzarellia','Lagune Saumure ; Bancs Perle',58880.00,'paix'),
-('Parmésia','Plateaux Granités ; Gorges Râpées',73500.00,'paix'),
-('Ricotte','Rivières Lactosérum ; Îlots Caillé',47100.00,'neutre'),
-('Burraton','Marais Burrata ; Digue Crème',50990.00,'paix'),
-('Mascarponie','Terres Onctueuses ; Vallon Dessert',68000.00,'paix'),
-('Chantillys','Crêtes Fouettées ; Nuages Vanille',52120.00,'paix'),
-('Pralinie','Rochers Crousti ; Rade Noisette',56330.00,'neutre'),
-('Caramellum','Lac Ambré ; Torrent Suif',54440.00,'paix'),
-('Biscuitbourg','Remparts Sablés ; Fossé Sucré',49990.00,'paix'),
-('Gélatine','Marécages Tremblotants ; Baie Pectine',38220.00,'neutre'),
-('Sorbeterre','Glaciers Fruités ; Vent Limonade',47270.00,'paix');
+('Raclettea','Des Monts Fondants aux Gorges de Gruyère puis au Col de la Croûte, et retour aux Monts Fondants',120000.00,'paix'),
+('Dragonflette','Des Dents de Drac aux Plaines Laitières puis au Rift Brûlé, et retour aux Dents de Drac',94000.50,'neutre'),
+('Banarnia','Des Rivières Milk-shake aux Dunes Céréales puis à l’Archipel Banane, et retour aux Rivières Milk-shake',150500.00,'paix'),
+('Choux-Fleurie','Des Falaises Vapeur aux Champs Trempette puis au Cap Aïoli, et retour aux Falaises Vapeur',60500.00,'paix'),
+('Patateland','Des Plateaux Gratins aux Mines de Sel puis au Bassin Purée, et retour aux Plateaux Gratins',88000.00,'neutre'),
+('Carotte-sur-Mer','De la Baie Croquante au Cap Jus d’Orange puis au Chenal Potager, puis retour à la Baie Croquante',72000.00,'paix'),
+('Fromagiville','Du Roc Bleu au Vallon Camembert puis à la Lisière Coulante, et retour au Roc Bleu',65000.00,'neutre'),
+('Navet-les-Oies','Des Marais Velouté aux Étangs Coin-Coin puis à la Saulaie Grasse, et retour aux Marais Velouté',41000.00,'paix'),
+('Soupefroide','Des Glaciers Gazpacho aux Fjords Basilic puis à la Banquise Tomate, et retour aux Glaciers Gazpacho',56000.00,'belligerant'),
+('Tartiflette Prime','Des Couronnes Pommes à la Muraille Oignon puis à la Combe Lardon, et retour aux Couronnes Pommes',133700.00,'neutre'),
+('Croissantinopie','Des Récifs Beurrés à la Mer de Confiture puis à la Pointe Amande, et retour aux Récifs Beurrés',99000.00,'paix'),
+('Éclairoisie','Des Chaînes Pâtissières au Col Chantilly puis à la Gorge Vanille, et retour aux Chaînes Pâtissières',57500.00,'neutre'),
+('Boulangea','Des Grands Fournils aux Dorsales Levain puis au Fourneau Royal, et retour aux Grands Fournils',84500.00,'paix'),
+('Marmitonnie','Des Îlots Spatule aux Deltas Mironton puis à la Baie Ragoût, et retour aux Îlots Spatule',43210.00,'neutre'),
+('Saucissonie','Des Coteaux Secs aux Bois Poivrés puis à la Fosse Pasté, et retour aux Coteaux Secs',77300.00,'paix'),
+('Herbularia','Des Forêts Infusées aux Sources Verveine puis à la Prairie Thym, et retour aux Forêts Infusées',50100.00,'paix'),
+('Poissarie','Des Rades Citron aux Eaux Aneth puis aux Bancs Scintillants, et retour aux Rades Citron',62000.00,'neutre'),
+('Sucralune','Des Crêtes Sucrées aux Lacs Sirop puis à la Mare Guimauve, et retour aux Crêtes Sucrées',88888.00,'paix'),
+('Rizotto','Des Rizières Brillantes aux Marais Safran puis aux Levées Curry, et retour aux Rizières Brillantes',54000.00,'paix'),
+('Quichebourg','Des Cols Lardon aux Vallées Crème puis au Plateau Gruyère, et retour aux Cols Lardon',71234.00,'neutre'),
+('Meringuia','Des Cirques Aériens aux Corniches Sucre-Neige, puis retour aux Cirques Aériens',48500.00,'paix'),
+('Beurrasie','De la Dorsale Laitière aux Falaises Clarifiées, puis retour à la Dorsale Laitière',70200.00,'neutre'),
+('Confitar','Des Lagunes Confit aux Récifs Marmelade, puis retour aux Lagunes Confit',55900.00,'paix'),
+('Croûtonie','Du Désert Grillé à l’Oasis Ail puis à la Dune Croustillante, et retour au Désert Grillé',44700.00,'belligerant'),
+('Levainor','Des Failles Levées au Dôme Pâteux puis à la Grotte Boulange, et retour aux Failles Levées',63100.00,'paix'),
+('Tisanelle','Du Bas-pays Menthe aux Collines Camomille, puis retour au Bas-pays Menthe',39800.00,'paix'),
+('Saucelande','De l’Estuaire Poivre aux Vasières Crème, puis retour à l’Estuaire Poivre',52010.00,'neutre'),
+('Citronésie','Des Atolls Zestes aux Courants Acidulés, puis retour aux Atolls Zestes',57400.00,'paix'),
+('Vanillia','Des Plaines Gousses à la Gorge Suave, puis retour aux Plaines Gousses',46200.00,'paix'),
+('Anethol','Des Cols Réglisse à la Steppe Anisée, puis retour aux Cols Réglisse',43150.00,'neutre'),
+('Pâtonnie','Des Buttes Farine aux Fondrières Levure, puis retour aux Buttes Farine',51600.00,'paix'),
+('Friturie','Du Ravin Tempura à la Savane Beignets, puis retour au Ravin Tempura',38990.00,'belligerant'),
+('Rôtisserie Royale','De la Chaîne Broche au Vallon Jus, puis retour à la Chaîne Broche',77000.00,'neutre'),
+('Pâtisserie Haute','Des Éperons Millefeuille à la Crête Nappage, puis retour aux Éperons Millefeuille',68420.00,'paix'),
+('Fondueval','De la Cuvette Gruyère aux Strates Vin Blanc, puis retour à la Cuvette Gruyère',73333.00,'paix'),
+('Ragoût-du-Nord','De la Toundra Bouillon aux Caps Potage, puis retour à la Toundra Bouillon',51200.00,'neutre'),
+('Bouillonie','De l’Estuaire Mirepoix aux Bancs Écume, puis retour à l’Estuaire Mirepoix',40110.00,'paix'),
+('Saladière','Des Plateaux Mesclun au Canyon Vinaigrette, puis retour aux Plateaux Mesclun',45550.00,'paix'),
+('Épiceria','Des Monts Curcuma à la Vallée Cumin puis au Dôme Cardamome, et retour aux Monts Curcuma',62500.00,'neutre'),
+('Fromagora','De la Citadelle Croûte aux Falaises Affinage, puis retour à la Citadelle Croûte',81200.00,'paix'),
+('Beurropolis','De l’Avenue Clarifiée aux Parcelles Dorées, puis retour à l’Avenue Clarifiée',59000.00,'neutre'),
+('Camemberrie','Des Buttes Coulantes aux Fossés Crayeux, puis retour aux Buttes Coulantes',54800.00,'paix'),
+('Goudaïka','Des Pins Saumure à la Baie Laiton, puis retour aux Pins Saumure',57320.00,'paix'),
+('Comtédrale','De la Nef Affinée aux Contreforts Pâturins, puis retour à la Nef Affinée',79200.00,'neutre'),
+('Rocquefortin','Des Grottes Persillées au Cirque Bleu, puis retour aux Grottes Persillées',61250.00,'paix'),
+('Munsterre','Des Coteaux Lave aux Ruisseaux Fumés, puis retour aux Coteaux Lave',56660.00,'paix'),
+('Rebloche','Du Col Savoyard au Pâturage Rebloch, puis retour au Col Savoyard',52100.00,'neutre'),
+('Brie-lande','De la Plaine Paille aux Rives Coulants, puis retour à la Plaine Paille',64010.00,'paix'),
+('Cancoillottie','Des Marais Beurrés aux Tourbières Lactées, puis retour aux Marais Beurrés',43330.00,'paix'),
+('Cheddarmont','Des Éboulis Or aux Ponts Croûteux, puis retour aux Éboulis Or',70500.00,'neutre'),
+('Mozzarellia','De la Lagune Saumure aux Bancs Perle, puis retour à la Lagune Saumure',58880.00,'paix'),
+('Parmésia','Des Plateaux Granités aux Gorges Râpées, puis retour aux Plateaux Granités',73500.00,'paix'),
+('Ricotte','Des Rivières Lactosérum aux Îlots Caillé, puis retour aux Rivières Lactosérum',47100.00,'neutre'),
+('Burraton','Des Marais Burrata à la Digue Crème, puis retour aux Marais Burrata',50990.00,'paix'),
+('Mascarponie','Des Terres Onctueuses au Vallon Dessert, puis retour aux Terres Onctueuses',68000.00,'paix'),
+('Chantillys','Des Crêtes Fouettées aux Nuages Vanille, puis retour aux Crêtes Fouettées',52120.00,'paix'),
+('Pralinie','Des Rochers Crousti à la Rade Noisette, puis retour aux Rochers Crousti',56330.00,'neutre'),
+('Caramellum','Du Lac Ambré au Torrent Suif, puis retour au Lac Ambré',54440.00,'paix'),
+('Biscuitbourg','Des Remparts Sablés au Fossé Sucré, puis retour aux Remparts Sablés',49990.00,'paix'),
+('Gélatine','Des Marécages Tremblotants à la Baie Pectine, puis retour aux Marécages Tremblotants',38220.00,'neutre'),
+('Sorbeterre','Des Glaciers Fruités au Vent Limonade, puis retour aux Glaciers Fruités',47270.00,'paix');
 
 
 INSERT INTO Espece (libelle, est_sapiente) VALUES
@@ -496,7 +496,11 @@ INSERT INTO Ressource (nom, description) VALUES
 ('Relique du Premier Mage', 'Son nom seul déclenche la révérence.'),
 ('Miroir de Vérité', 'Révèle tout, même les mauvaises coupes de cheveux.'),
 ('Harpe Céleste', 'Ses notes guérissent les cœurs brisés.'),
-('Ancre du Monde', 'Stabilise et réécrit à souhait la réalité autour d’elle.');
+('Ancre du Monde', 'Stabilise et réécrit à souhait la réalité autour d’elle.'),
+('Pomdeterreux','Tubercule rustique des plateaux'),
+('Carottien','Racine orange prisée des marchés'),
+('Navetien','Racine pâle des marais'),
+('Anethor','Ombellifère anisée des coteaux');
 
 INSERT INTO Metier (libelle, type_metier) VALUES
 ('Forgeron', 'artisan'),
@@ -732,7 +736,67 @@ INSERT INTO Classe (libelle, role_combat) VALUES
 ('Alchimiste des sauces', 'hybride'),
 ('Cuisinomancien', 'hybride'),
 ('Troubadour des tavernes', 'support'),
-('Ambassadeur flamboyant', 'support');
+('Ambassadeur flamboyant', 'support'),
+('Guerrier', 'tank'),
+('Barbare', 'dps'),
+('Chevalier', 'tank'),
+('Paladin', 'tank'),
+('Moine', 'dps'),
+('Rôdeur', 'dps'),
+('Archer', 'dps'),
+('Voleur', 'dps'),
+('Assassin', 'dps'),
+('Barde', 'support'),
+('Clerc', 'soin'),
+('Prêtre', 'soin'),
+('Druide', 'soin'),
+('Chaman', 'hybride'),
+('Sorcier', 'dps'),
+('Mage', 'dps'),
+('Ensorceleur', 'dps'),
+('Nécromancien', 'dps'),
+('Invocateur', 'hybride'),
+('Élémentaliste', 'dps'),
+('Illusionniste', 'support'),
+('Chronomancien', 'support'),
+('Runemaster', 'hybride'),
+('Alchimiste', 'hybride'),
+('Templier', 'tank'),
+('Sentinelle', 'tank'),
+('Garde royal', 'tank'),
+('Capitaine', 'support'),
+('Champion', 'dps'),
+('Valkyrie', 'dps'),
+('Sage', 'support'),
+('Mystique', 'hybride'),
+('Occultiste', 'dps'),
+('Moissonneur', 'dps'),
+('Thaumaturge', 'support'),
+('Hiérophante', 'soin'),
+('Prédicateur', 'support'),
+('Chasseur', 'dps'),
+('Pisteur', 'dps'),
+('Saboteur', 'dps'),
+('Technomage', 'hybride'),
+('Arcaniste', 'dps'),
+('Écuyer', 'tank'),
+('Héraut', 'support'),
+('Messager', 'support'),
+('Alchimiste royal', 'soin'),
+('Sculpteur de runes', 'hybride'),
+('Marcheur des vents', 'support'),
+('Forgeron runique', 'tank'),
+('Briseur de sorts', 'dps'),
+('Inquisiteur', 'dps'),
+('Protecteur', 'tank'),
+('Gardien des flammes', 'tank'),
+('Ermite', 'soin'),
+('Émissaire', 'support'),
+('Tacticien', 'support'),
+('Oracle', 'soin'),
+('Voyant', 'support'),
+('Champion sacré', 'tank'),
+('Archange', 'soin');
 
 
 INSERT INTO ElementMagique (nom) VALUES
@@ -1414,7 +1478,6 @@ INSERT INTO Guilde (nom, type_guilde, specialite, reputation) VALUES
 ('Marins de la Soupe Claire',            'marins',      'mer calme & discipline', 'B');
 
 
--- Manque des ressources dans la table ressources -> null en base
 INSERT INTO Village (nom, localisation, population, ressource_principale_id, royaume_id) VALUES
 ('Fromagiville-les-Bains', 'Côte Brumeuse', 4200, (SELECT id_ressource FROM Ressource WHERE nom='Fromage sacré'), (SELECT id_royaume FROM Royaume WHERE nom='Raclettea')),
 ('Patate-sur-Mer', 'Estuaire des Marées', 3100, (SELECT id_ressource FROM Ressource WHERE nom='Pomdeterreux'), (SELECT id_royaume FROM Royaume WHERE nom='Patateland')),
@@ -4383,7 +4446,6 @@ INSERT INTO Creature (espece_id, forces, faiblesses, dangerosite) VALUES
 ((SELECT id_espece FROM Espece WHERE libelle='Roc'),                'Rafales, transport d’éléphants',                     'Chaînes lourdes, fumées',                          'elevee');
 
 
--- Ajouter les lignées
 INSERT INTO Personnage (nom, espece_id, lignee_id, royaume_origine_id, date_naissance_lore, statut_vie, date_deces_lore, cause_deces, mana_max, bio_courte) VALUES
 /* =========================
    HUMAINS
@@ -6854,11 +6916,7 @@ SELECT p.id_personnage, (SELECT id_competence FROM Competence WHERE nom='Cuisine
 FROM Personnage p
 WHERE (p.id_personnage % 5)=4;
 
-/* ===========================
-   PAR ESPÈCE
-   =========================== */
 
--- HUMAIN : Maîtrise de l’épée, Bouclier & parade, Cartographie
 INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Maîtrise de l’épée'),
        CASE WHEN p.mana_max>=300 THEN 4 ELSE 3 END
@@ -6873,7 +6931,6 @@ SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Cartogra
        CASE WHEN p.mana_max>=300 THEN 4 ELSE 2 END
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Humain';
 
--- ELFE : Tir elfique, Chant ancien, Enchantement
 INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Tir elfique'),
        CASE WHEN p.mana_max>=500 THEN 5 ELSE 4 END
@@ -6888,7 +6945,6 @@ SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Enchante
        CASE WHEN p.mana_max>=300 THEN 4 ELSE 3 END
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Elfe';
 
--- NAIN : Maîtrise de la forge naine, Armurerie, Minage
 INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Maîtrise de la forge naine'),5
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Nain';
@@ -6901,7 +6957,6 @@ INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Minage'),4
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Nain';
 
--- ORC : Rage disciplinée, Intimidation non létale, Tailleur de pierre
 INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Rage disciplinée'),4
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Orc';
@@ -6914,7 +6969,6 @@ INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Tailleur de pierre'),3
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Orc';
 
--- GNOME : Astuce gnome, Ingénierie, Artifice
 INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Astuce gnome'),4
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Gnome';
@@ -6927,7 +6981,6 @@ INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Artifice'),3
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Gnome';
 
--- DEMI-ELFE : Chant bardique, Arcanes, Pistage
 INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Chant bardique'),3
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Demi-elfe';
@@ -6941,7 +6994,6 @@ INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Détection du mensonge (comportement)'),3
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Demi-elfe';
 
--- DEMI-ORC : Maîtrise de l’épée, Bouclier & parade, Chasse
 INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Maîtrise de l’épée'),3
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Demi-orc';
@@ -6954,7 +7006,6 @@ INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Intimidation non létale'),3
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Demi-orc';
 
--- HOBELIN : Cuisine, Élevage, Tissage
 INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Cartographie'),3
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Hobelin';
@@ -6967,7 +7018,6 @@ INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Tissage runique'),2
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Hobelin';
 
--- TIEFFELIN : Affinité infernale, Arcanes, Enchantement
 INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Affinité infernale'),5
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Tieffelin';
@@ -6981,7 +7031,6 @@ INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Enchantement'),4
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Tieffelin';
 
--- DRAKÉIDE : Percée drakéide, Maîtrise de l’épée, Lévitation courte
 INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Percée drakéide'),4
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Drakéide';
@@ -6994,7 +7043,6 @@ INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Lévitation courte'),3
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Drakéide';
 
--- SATYRE : Chant bardique, Brassage, Musicien
 INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Chant bardique'),4
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Satyre';
@@ -7007,7 +7055,6 @@ INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Musicien'),4
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Satyre';
 
--- AASIMAR : Bénédiction astrale, Lumière sacrée, Soins (bonus haut mana)
 INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Bénédiction astrale'),5
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Aasimar';
@@ -7021,7 +7068,6 @@ SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Riposte 
        CASE WHEN p.mana_max>=900 THEN 5 ELSE 4 END
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Aasimar';
 
--- KOBOLD : Minage, Ingénierie, Artifice
 INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Minage'),3
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Kobold';
@@ -7034,7 +7080,6 @@ INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Artifice'),3
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Kobold';
 
--- GOBELIN : Furtivité, Orfèvrerie
 INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Combat à deux lames'),3
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Gobelin';
@@ -7043,7 +7088,6 @@ INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Orfèvrerie'),2
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Gobelin';
 
--- VAMPIRE : Chatoiement vampirique, Ombres voilées, Arcanes
 INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Chatoiement vampirique'),5
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Vampire';
@@ -7056,7 +7100,6 @@ INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Arcanes'),4
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Vampire';
 
--- LICHE : Glyphes des liches, Runes, Enchantement
 INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Glyphes des liches'),5
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Liche';
@@ -7069,7 +7112,6 @@ INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Enchantement'),5
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Liche';
 
--- DRAGON : Souffle draconique, Maîtrise de l’épée, Cartographie
 INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Souffle draconique'),5
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Dragon';
@@ -7082,7 +7124,6 @@ INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Cartographie'),5
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Dragon';
 
--- DJINN / IFRIT : Tourbillon du djinn / Souffle d’ifrit + Navigation
 INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Tourbillon du djinn'),5
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Djinn';
@@ -7098,7 +7139,6 @@ SELECT p.id_personnage,
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece
 WHERE e.libelle IN ('Djinn','Ifrit');
 
--- FÉE / SYLPHE / SPRITE : Muse fée / Grâce sylphide + Chant bardique
 INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Muse fée'),5
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Fée';
@@ -7112,7 +7152,6 @@ SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Chant ba
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece
 WHERE e.libelle IN ('Fée','Sylphe','Sprite étincelant');
 
--- MARINS (Sirène / Néréide / Ondine / Naga) : Appel des marées + Navigation + Pêche en eaux froides
 INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Appel des marées'),5
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece
@@ -7128,7 +7167,6 @@ SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Pêche e
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece
 WHERE e.libelle IN ('Sirène','Néréide','Ondine','Naga');
 
--- GÉANTS / PIERRE / GLACES : Tailleur de pierre + Routier
 INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Tailleur de pierre'),5
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece
@@ -7139,7 +7177,6 @@ SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Routier'
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece
 WHERE e.libelle IN ('Géant','Géant de pierre','Géant des glaces');
 
--- DRYADES / CENTAURES / MINOTAURES / SPHINX : Faveur dryadique / Équilibre centaure / Maîtrise de l’épée / Énigme éternelle
 INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Faveur dryadique'),5
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Dryade';
@@ -7156,7 +7193,6 @@ INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Énigme éternelle'),5
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Sphinx';
 
--- KITSUNE / TANUKI / ONI / RAKSHASA : compétences dédiées
 INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Métamorphose kitsune'),5
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Kitsune';
@@ -7173,7 +7209,6 @@ INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Ruse rakshasa'),5
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Rakshasa';
 
--- WYVERNE / PHÉNIX : Vol majestueux / Renaissance embrasée
 INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Vol majestueux'),5
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Wyverne';
@@ -7182,13 +7217,6 @@ INSERT INTO PersonnageCompetence (personnage_id, competence_id, niveau)
 SELECT p.id_personnage,(SELECT id_competence FROM Competence WHERE nom='Renaissance embrasée'),5
 FROM Personnage p JOIN Espece e ON p.espece_id=e.id_espece WHERE e.libelle='Phénix';
 
-
-
-
-
-/* ===========================
-   PERSONNAGES SPÉCIFIQUES - MALADIES
-   =========================== */
 
 INSERT INTO PersonnageMaladie (personnage_id, maladie_id, date_debut_lore, date_fin_lore, issue)
 SELECT p.id_personnage, (SELECT id_maladie FROM Maladie WHERE nom='Grippe du Griffon'),
@@ -7516,10 +7544,6 @@ SELECT p.id_personnage,(SELECT id_maladie FROM Maladie WHERE nom='Fièvre des So
 FROM Personnage p WHERE p.nom='Borin Picacier';
 
 
--- à retravailler, pas tous les personnages inclus ici
-/* =========================================
-   PERSONNAGECLASSE
-   ========================================= */
 INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
 ((SELECT id_personnage FROM Personnage WHERE nom='Lara Tatouille'),
  (SELECT id_classe FROM Classe WHERE libelle='Artificier pâtissier'), 5);
@@ -8043,9 +8067,6 @@ INSERT INTO PersonnageClasse (personnage_id, classe_id, niveau) VALUES
  (SELECT id_classe FROM Classe WHERE libelle='Brise-Croûte'), 6);
 
 
--- =========================================
--- RENOMMEE — 50 personnages (majorité village/royaume, rares solarys)
--- =========================================
 INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
 ((SELECT id_personnage FROM Personnage WHERE nom='Mireille Mirador'), 'village', 'Œil des remparts de son bourg');
 INSERT INTO Renommee (personnage_id, echelle, titre_reconnu) VALUES
@@ -8191,23 +8212,23 @@ INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
 INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
 ((SELECT id_guilde FROM Guilde WHERE nom='Confrérie du Thé Très Sérieux'), 'royaume', 'Méditation par infusion (feuille 3 minutes max)');
 INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
-((SELECT id_guilde FROM Guilde WHERE nom='Brasseurs des Orages'), 'royaume', 'Festivités météo sous contrôle (parfois)');  -- déjà référencée ailleurs
+((SELECT id_guilde FROM Guilde WHERE nom='Brasseurs des Orages'), 'royaume', 'Festivités météo sous contrôle (parfois)');
 INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
 ((SELECT id_guilde FROM Guilde WHERE nom='École de la Brioche Stoïque'), 'royaume', 'Résilience douce et croûte impeccable');
 INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
-((SELECT id_guilde FROM Guilde WHERE nom='Gardiens du Sel Cosmique'), 'royaume', 'Protection gravitationnelle (saupoudrée)'); -- aussi digne d’un rare “solarys”, on reste modérés
+((SELECT id_guilde FROM Guilde WHERE nom='Gardiens du Sel Cosmique'), 'royaume', 'Protection gravitationnelle (saupoudrée)');
 INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
 ((SELECT id_guilde FROM Guilde WHERE nom='Tisserands de Nappes Stellaires'), 'royaume', 'Textiles astraux certifiés anti-miettes');
 INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
 ((SELECT id_guilde FROM Guilde WHERE nom='Ordre du Poivre Diplomatique'), 'royaume', 'Pimente sans fâcher (sauf allergiques)');
 INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
-((SELECT id_guilde FROM Guilde WHERE nom='Chariots de Fer'), 'royaume', 'Logistique de choc sur rails et jurons');      -- vu dans GuildeMembre
+((SELECT id_guilde FROM Guilde WHERE nom='Chariots de Fer'), 'royaume', 'Logistique de choc sur rails et jurons');
 INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
-((SELECT id_guilde FROM Guilde WHERE nom='Courtiers du Crépuscule'), 'royaume', 'Affaires conclues à l’heure dorée');        -- vu dans GuildeMembre
+((SELECT id_guilde FROM Guilde WHERE nom='Courtiers du Crépuscule'), 'royaume', 'Affaires conclues à l’heure dorée');
 INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
-((SELECT id_guilde FROM Guilde WHERE nom='Les Alibis Variables'), 'royaume', 'Couvertures impeccables, histoires crédibles'); -- vu dans GuildeMembre
+((SELECT id_guilde FROM Guilde WHERE nom='Les Alibis Variables'), 'royaume', 'Couvertures impeccables, histoires crédibles');
 INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
-((SELECT id_guilde FROM Guilde WHERE nom='Compagnie des Fins de Mois'), 'royaume', 'Marchés serrés, comptes justes');        -- vu dans GuildeMembre
+((SELECT id_guilde FROM Guilde WHERE nom='Compagnie des Fins de Mois'), 'royaume', 'Marchés serrés, comptes justes');
 INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
 ((SELECT id_guilde FROM Guilde WHERE nom='Ordre des Clercs du Zénith'), 'royaume', 'Chapelles solaires de province alignées');
 INSERT INTO Renommee (guilde_id, echelle, titre_reconnu) VALUES
@@ -10544,4 +10565,390 @@ INSERT INTO CreatureBataille (creature_id, bataille_id, nombre, role) VALUES
 ((SELECT id_creature FROM Creature JOIN Espece e ON e.id_espece=Creature.espece_id WHERE e.libelle='Basilic' LIMIT 1),
  (SELECT id_bataille FROM Bataille WHERE nom='Passe du Lait Cuit'), 2, 'pétrification de sentiers');
 
- 
+
+INSERT INTO Expedition (nom, objectif, royaume_id, date_debut_lore, date_fin_lore) VALUES
+('Reconnaissance du Col des Ailes', 'Cartographier des passages sûrs pour les patrouilles', (SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'), 'An 421, Lune 2, Jour 5',  'An 421, Lune 2, Jour 11'),
+('Escorte des Riziers', 'Sécuriser une caravane de greniers et de riz', (SELECT id_royaume FROM Royaume WHERE nom='Rizotto'), 'An 421, Lune 3, Jour 1', 'An 421, Lune 3, Jour 9'),
+('Récupération de Relique des Caves', 'Extraire un artefact scellé dans les caves communes', (SELECT id_royaume FROM Royaume WHERE nom='Comtédrale'), 'An 421, Lune 4, Jour 3', 'An 421, Lune 4, Jour 10'),
+('Repérage côtier des Îlots', 'Tracer des routes maritimes sûres autour des îlots', (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 421, Lune 3, Jour 7', 'An 421, Lune 3, Jour 12'),
+('Déminage runique des Crêtes', 'Neutraliser des sceaux instables sur les arêtes', (SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'), 'An 421, Lune 5, Jour 2', 'An 421, Lune 5, Jour 8'),
+('Négociation & Carto des Meules', 'Négocier des bornes et mettre à jour la cartographie', (SELECT id_royaume FROM Royaume WHERE nom='Fromagora'), 'An 421, Lune 2, Jour 14', 'An 421, Lune 2, Jour 20'),
+('Secours forestier des Canopées', 'Porter assistance aux hameaux forestiers', (SELECT id_royaume FROM Royaume WHERE nom='Herbularia'), 'An 421, Lune 4, Jour 5', 'An 421, Lune 4, Jour 9'),
+('Intendance glaciale des Cols', 'Ravitaillement d’avant-postes en haute montagne', (SELECT id_royaume FROM Royaume WHERE nom='Brie-lande'), 'An 421, Lune 6, Jour 1', 'An 421, Lune 6, Jour 8'),
+('Réparation des Ponts de Levain', 'Inspection et réparation de ponts structurants', (SELECT id_royaume FROM Royaume WHERE nom='Beurropolis'), 'An 421, Lune 3, Jour 4', 'An 421, Lune 3, Jour 11'),
+('Cure des Sources de Tisanelle', 'Assainir les sources et circuits des bains', (SELECT id_royaume FROM Royaume WHERE nom='Tisanelle'), 'An 421, Lune 4, Jour 1', 'An 421, Lune 4, Jour 6'),
+('Dérivation des Crues Douces', 'Aménager des dérivations et bermes', (SELECT id_royaume FROM Royaume WHERE nom='Navet-les-Oies'), 'An 421, Lune 5, Jour 10', 'An 421, Lune 5, Jour 16'),
+('Pèlerinage sécurisé des Caves', 'Sécuriser un itinéraire de pèlerinage souterrain', (SELECT id_royaume FROM Royaume WHERE nom='Comtédrale'), 'An 421, Lune 3, Jour 2', 'An 421, Lune 3, Jour 7'),
+('Fouille ordonnée des Caves', 'Inventorier des salles annexes et sécuriser les accès', (SELECT id_royaume FROM Royaume WHERE nom='Camemberrie'), 'An 421, Lune 3, Jour 10', 'An 421, Lune 3, Jour 15'),
+('Surveillance des Dunes Salées', 'Installer des bornes et balises côtières', (SELECT id_royaume FROM Royaume WHERE nom='Poissarie'), 'An 421, Lune 2, Jour 18', 'An 421, Lune 2, Jour 24'),
+('Ambassade au Quiche Doré', 'Négociations et échange de serments', (SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'), 'An 421, Lune 5, Jour 4', 'An 421, Lune 5, Jour 9'),
+('Route des Cols sécurisée', 'Baliser et dégager des Corniches à risque', (SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'), 'An 421, Lune 2, Jour 8', 'An 421, Lune 2, Jour 13'),
+('Cartographie des Grandes Meules', 'Mettre à jour cartes et toponymie des plateaux', (SELECT id_royaume FROM Royaume WHERE nom='Fromagora'), 'An 421, Lune 4, Jour 12', 'An 421, Lune 4, Jour 18'),
+('Veille maritime des Îlots', 'Surveillance anti-piraterie et balisage', (SELECT id_royaume FROM Royaume WHERE nom='Banarnia'), 'An 421, Lune 3, Jour 11', 'An 421, Lune 3, Jour 16'),
+('Mines sous garde de Patateland', 'Inspection de galeries et consolidation', (SELECT id_royaume FROM Royaume WHERE nom='Patateland'), 'An 421, Lune 5, Jour 1', 'An 421, Lune 5, Jour 6'),
+('Ravitaillement meringué', 'Acheminer vivres et onguents vers les sanctuaires', (SELECT id_royaume FROM Royaume WHERE nom='Sucralune'), 'An 421, Lune 6, Jour 3', 'An 421, Lune 6, Jour 9');
+
+
+INSERT INTO ExpeditionMembre (expedition_id, personnage_id, role_mission) VALUES
+((SELECT id_expedition FROM Expedition WHERE nom='Reconnaissance du Col des Ailes'), (SELECT id_personnage FROM Personnage WHERE nom='Fenduil Lierreclair'), 'Chef d’expédition'),
+((SELECT id_expedition FROM Expedition WHERE nom='Reconnaissance du Col des Ailes'), (SELECT id_personnage FROM Personnage WHERE nom='Via Rapida'), 'Éclaireur'),
+((SELECT id_expedition FROM Expedition WHERE nom='Reconnaissance du Col des Ailes'), (SELECT id_personnage FROM Personnage WHERE nom='Calen Dorélys'), 'Topographe'),
+((SELECT id_expedition FROM Expedition WHERE nom='Reconnaissance du Col des Ailes'), (SELECT id_personnage FROM Personnage WHERE nom='Noé Milleplans'), 'Chronomètre & itinéraires'),
+((SELECT id_expedition FROM Expedition WHERE nom='Reconnaissance du Col des Ailes'), (SELECT id_personnage FROM Personnage WHERE nom='Eärwen Feuilledor'), 'Soutien arcanique');
+INSERT INTO ExpeditionMembre (expedition_id, personnage_id, role_mission) VALUES
+((SELECT id_expedition FROM Expedition WHERE nom='Escorte des Riziers'), (SELECT id_personnage FROM Personnage WHERE nom='Gaspard Sanspeur'), 'Chef d’escorte'),
+((SELECT id_expedition FROM Expedition WHERE nom='Escorte des Riziers'), (SELECT id_personnage FROM Personnage WHERE nom='Ulysse Jaloux'), 'Éclaireur côtier'),
+((SELECT id_expedition FROM Expedition WHERE nom='Escorte des Riziers'), (SELECT id_personnage FROM Personnage WHERE nom='Silva Feuillemère'), 'Tir d’appui'),
+((SELECT id_expedition FROM Expedition WHERE nom='Escorte des Riziers'), (SELECT id_personnage FROM Personnage WHERE nom='Goran Plancher'), 'Intendance');
+INSERT INTO ExpeditionMembre (expedition_id, personnage_id, role_mission) VALUES
+((SELECT id_expedition FROM Expedition WHERE nom='Récupération de Relique des Caves'), (SELECT id_personnage FROM Personnage WHERE nom='Frida Foreuse'), 'Chef d’expédition'),
+((SELECT id_expedition FROM Expedition WHERE nom='Récupération de Relique des Caves'), (SELECT id_personnage FROM Personnage WHERE nom='Borin Picacier'), 'Briseur & manutention'),
+((SELECT id_expedition FROM Expedition WHERE nom='Récupération de Relique des Caves'), (SELECT id_personnage FROM Personnage WHERE nom='Mimi Microcosme'), 'Archiviste & scribe'),
+((SELECT id_expedition FROM Expedition WHERE nom='Récupération de Relique des Caves'), (SELECT id_personnage FROM Personnage WHERE nom='Nora Cuvelier'), 'Religieuse & rituels');
+INSERT INTO ExpeditionMembre (expedition_id, personnage_id, role_mission) VALUES
+((SELECT id_expedition FROM Expedition WHERE nom='Repérage côtier des Îlots'), (SELECT id_personnage FROM Personnage WHERE nom='Séraphine Rivage'), 'Chef nautique'),
+((SELECT id_expedition FROM Expedition WHERE nom='Repérage côtier des Îlots'), (SELECT id_personnage FROM Personnage WHERE nom='Naga Pearl'), 'Maitre-filet'),
+((SELECT id_expedition FROM Expedition WHERE nom='Repérage côtier des Îlots'), (SELECT id_personnage FROM Personnage WHERE nom='Nerine Corail'), 'Grappin & amarres'),
+((SELECT id_expedition FROM Expedition WHERE nom='Repérage côtier des Îlots'), (SELECT id_personnage FROM Personnage WHERE nom='Ondra Mélodie'), 'Veille & chants');
+INSERT INTO ExpeditionMembre (expedition_id, personnage_id, role_mission) VALUES
+((SELECT id_expedition FROM Expedition WHERE nom='Déminage runique des Crêtes'), (SELECT id_personnage FROM Personnage WHERE nom='Amber Écaillefeu'), 'Chef démineur'),
+((SELECT id_expedition FROM Expedition WHERE nom='Déminage runique des Crêtes'), (SELECT id_personnage FROM Personnage WHERE nom='Anvil Mainforte'), 'Marteaux & scellements'),
+((SELECT id_expedition FROM Expedition WHERE nom='Déminage runique des Crêtes'), (SELECT id_personnage FROM Personnage WHERE nom='Zoé Zéphyr'), 'Guet aérien'),
+((SELECT id_expedition FROM Expedition WHERE nom='Déminage runique des Crêtes'), (SELECT id_personnage FROM Personnage WHERE nom='Givre Longsoif'), 'Focalisation d’obsidienne');
+INSERT INTO ExpeditionMembre (expedition_id, personnage_id, role_mission) VALUES
+((SELECT id_expedition FROM Expedition WHERE nom='Négociation & Carto des Meules'), (SELECT id_personnage FROM Personnage WHERE nom='Félix Fineplume'), 'Chef & scribe'),
+((SELECT id_expedition FROM Expedition WHERE nom='Négociation & Carto des Meules'), (SELECT id_personnage FROM Personnage WHERE nom='Gaspard Sanspeur'), 'Protecteur'),
+((SELECT id_expedition FROM Expedition WHERE nom='Négociation & Carto des Meules'), (SELECT id_personnage FROM Personnage WHERE nom='Ada Clic'), 'Cartographe'),
+((SELECT id_expedition FROM Expedition WHERE nom='Négociation & Carto des Meules'), (SELECT id_personnage FROM Personnage WHERE nom='Calen Dorélys'), 'Signaux & relais');
+INSERT INTO ExpeditionMembre (expedition_id, personnage_id, role_mission) VALUES
+((SELECT id_expedition FROM Expedition WHERE nom='Secours forestier des Canopées'), (SELECT id_personnage FROM Personnage WHERE nom='Eärwen Feuilledor'), 'Chef forestier'),
+((SELECT id_expedition FROM Expedition WHERE nom='Secours forestier des Canopées'), (SELECT id_personnage FROM Personnage WHERE nom='Silva Feuillemère'), 'Éclaireuse'),
+((SELECT id_expedition FROM Expedition WHERE nom='Secours forestier des Canopées'), (SELECT id_personnage FROM Personnage WHERE nom='Drya Racinette'), 'Cordages & brancards'),
+((SELECT id_expedition FROM Expedition WHERE nom='Secours forestier des Canopées'), (SELECT id_personnage FROM Personnage WHERE nom='Drya Clairebois'), 'Outils & coupe');
+INSERT INTO ExpeditionMembre (expedition_id, personnage_id, role_mission) VALUES
+((SELECT id_expedition FROM Expedition WHERE nom='Intendance glaciale des Cols'), (SELECT id_personnage FROM Personnage WHERE nom='Morgane Memento'), 'Cheffe intendance'),
+((SELECT id_expedition FROM Expedition WHERE nom='Intendance glaciale des Cols'), (SELECT id_personnage FROM Personnage WHERE nom='Mireille Mirador'), 'Bénédictions'),
+((SELECT id_expedition FROM Expedition WHERE nom='Intendance glaciale des Cols'), (SELECT id_personnage FROM Personnage WHERE nom='Givre Longsoif'), 'Feux & braises'),
+((SELECT id_expedition FROM Expedition WHERE nom='Intendance glaciale des Cols'), (SELECT id_personnage FROM Personnage WHERE nom='Yska Longfrimas'), 'Montage & haubans');
+INSERT INTO ExpeditionMembre (expedition_id, personnage_id, role_mission) VALUES
+((SELECT id_expedition FROM Expedition WHERE nom='Réparation des Ponts de Levain'), (SELECT id_personnage FROM Personnage WHERE nom='Erik Étau'), 'Chef bâtisseur'),
+((SELECT id_expedition FROM Expedition WHERE nom='Réparation des Ponts de Levain'), (SELECT id_personnage FROM Personnage WHERE nom='Goma Rondpain'), 'Maçonnerie'),
+((SELECT id_expedition FROM Expedition WHERE nom='Réparation des Ponts de Levain'), (SELECT id_personnage FROM Personnage WHERE nom='Bibi Brioche'), 'Cordages & poulies'),
+((SELECT id_expedition FROM Expedition WHERE nom='Réparation des Ponts de Levain'), (SELECT id_personnage FROM Personnage WHERE nom='Atlas Coupdœil'), 'Contrôle visuel');
+INSERT INTO ExpeditionMembre (expedition_id, personnage_id, role_mission) VALUES
+((SELECT id_expedition FROM Expedition WHERE nom='Cure des Sources de Tisanelle'), (SELECT id_personnage FROM Personnage WHERE nom='Éliara Nitescence'), 'Cheffe guérisseuse'),
+((SELECT id_expedition FROM Expedition WHERE nom='Cure des Sources de Tisanelle'), (SELECT id_personnage FROM Personnage WHERE nom='Basile le Subtil'), 'Encens & onguents'),
+((SELECT id_expedition FROM Expedition WHERE nom='Cure des Sources de Tisanelle'), (SELECT id_personnage FROM Personnage WHERE nom='Silva Feuillemère'), 'Éclaireuse'),
+((SELECT id_expedition FROM Expedition WHERE nom='Cure des Sources de Tisanelle'), (SELECT id_personnage FROM Personnage WHERE nom='Aster Crinière'), 'Guet & relais');
+INSERT INTO ExpeditionMembre (expedition_id, personnage_id, role_mission) VALUES
+((SELECT id_expedition FROM Expedition WHERE nom='Dérivation des Crues Douces'), (SELECT id_personnage FROM Personnage WHERE nom='Erik Étau'), 'Chef de chantier'),
+((SELECT id_expedition FROM Expedition WHERE nom='Dérivation des Crues Douces'), (SELECT id_personnage FROM Personnage WHERE nom='Korin Martelembrun'), 'Terrassement'),
+((SELECT id_expedition FROM Expedition WHERE nom='Dérivation des Crues Douces'), (SELECT id_personnage FROM Personnage WHERE nom='Corga Ombrebrave'), 'Cordages & pieux'),
+((SELECT id_expedition FROM Expedition WHERE nom='Dérivation des Crues Douces'), (SELECT id_personnage FROM Personnage WHERE nom='Goran Plancher'), 'Manutention');
+INSERT INTO ExpeditionMembre (expedition_id, personnage_id, role_mission) VALUES
+((SELECT id_expedition FROM Expedition WHERE nom='Pèlerinage sécurisé des Caves'), (SELECT id_personnage FROM Personnage WHERE nom='Mireille Mirador'), 'Cheffe du convoi'),
+((SELECT id_expedition FROM Expedition WHERE nom='Pèlerinage sécurisé des Caves'), (SELECT id_personnage FROM Personnage WHERE nom='Gala Montjoie'), 'Soins'),
+((SELECT id_expedition FROM Expedition WHERE nom='Pèlerinage sécurisé des Caves'), (SELECT id_personnage FROM Personnage WHERE nom='Via Rapida'), 'Éclaireur'),
+((SELECT id_expedition FROM Expedition WHERE nom='Pèlerinage sécurisé des Caves'), (SELECT id_personnage FROM Personnage WHERE nom='Camille Cambriole'), 'Arrière-garde');
+INSERT INTO ExpeditionMembre (expedition_id, personnage_id, role_mission) VALUES
+((SELECT id_expedition FROM Expedition WHERE nom='Fouille ordonnée des Caves'), (SELECT id_personnage FROM Personnage WHERE nom='Erik Étau'), 'Chef de fouille'),
+((SELECT id_expedition FROM Expedition WHERE nom='Fouille ordonnée des Caves'), (SELECT id_personnage FROM Personnage WHERE nom='Mimi Microcosme'), 'Enregistrement'),
+((SELECT id_expedition FROM Expedition WHERE nom='Fouille ordonnée des Caves'), (SELECT id_personnage FROM Personnage WHERE nom='Ada Clic'), 'Cartographie'),
+((SELECT id_expedition FROM Expedition WHERE nom='Fouille ordonnée des Caves'), (SELECT id_personnage FROM Personnage WHERE nom='Élo Die'), 'Éclairage');
+INSERT INTO ExpeditionMembre (expedition_id, personnage_id, role_mission) VALUES
+((SELECT id_expedition FROM Expedition WHERE nom='Surveillance des Dunes Salées'), (SELECT id_personnage FROM Personnage WHERE nom='Ulysse Jaloux'), 'Chef de patrouille'),
+((SELECT id_expedition FROM Expedition WHERE nom='Surveillance des Dunes Salées'), (SELECT id_personnage FROM Personnage WHERE nom='Via Rapida'), 'Balises'),
+((SELECT id_expedition FROM Expedition WHERE nom='Surveillance des Dunes Salées'), (SELECT id_personnage FROM Personnage WHERE nom='Atlas Coupdœil'), 'Repérage'),
+((SELECT id_expedition FROM Expedition WHERE nom='Surveillance des Dunes Salées'), (SELECT id_personnage FROM Personnage WHERE nom='Yska Longfrimas'), 'Feux & logistique');
+INSERT INTO ExpeditionMembre (expedition_id, personnage_id, role_mission) VALUES
+((SELECT id_expedition FROM Expedition WHERE nom='Ambassade au Quiche Doré'), (SELECT id_personnage FROM Personnage WHERE nom='Gaspard Sanspeur'), 'Ambassadeur'),
+((SELECT id_expedition FROM Expedition WHERE nom='Ambassade au Quiche Doré'), (SELECT id_personnage FROM Personnage WHERE nom='Nora Cuvelier'), 'Garde'),
+((SELECT id_expedition FROM Expedition WHERE nom='Ambassade au Quiche Doré'), (SELECT id_personnage FROM Personnage WHERE nom='Félix Fineplume'), 'Scribe & cachets'),
+((SELECT id_expedition FROM Expedition WHERE nom='Ambassade au Quiche Doré'), (SELECT id_personnage FROM Personnage WHERE nom='Jean Bonparleur'), 'Orateur');
+INSERT INTO ExpeditionMembre (expedition_id, personnage_id, role_mission) VALUES
+((SELECT id_expedition FROM Expedition WHERE nom='Route des Cols sécurisée'), (SELECT id_personnage FROM Personnage WHERE nom='Crog Silex'), 'Chef de cordée'),
+((SELECT id_expedition FROM Expedition WHERE nom='Route des Cols sécurisée'), (SELECT id_personnage FROM Personnage WHERE nom='Camille Cambriole'), 'Piquets & verrous'),
+((SELECT id_expedition FROM Expedition WHERE nom='Route des Cols sécurisée'), (SELECT id_personnage FROM Personnage WHERE nom='Ailefine Brisecoeur'), 'Éclaireuse'),
+((SELECT id_expedition FROM Expedition WHERE nom='Route des Cols sécurisée'), (SELECT id_personnage FROM Personnage WHERE nom='Talos Grandpas'), 'Force & portage');
+INSERT INTO ExpeditionMembre (expedition_id, personnage_id, role_mission) VALUES
+((SELECT id_expedition FROM Expedition WHERE nom='Cartographie des Grandes Meules'), (SELECT id_personnage FROM Personnage WHERE nom='Félix Fineplume'), 'Chef cartographe'),
+((SELECT id_expedition FROM Expedition WHERE nom='Cartographie des Grandes Meules'), (SELECT id_personnage FROM Personnage WHERE nom='Gaspard Sanspeur'), 'Guidage'),
+((SELECT id_expedition FROM Expedition WHERE nom='Cartographie des Grandes Meules'), (SELECT id_personnage FROM Personnage WHERE nom='Calen Dorélys'), 'Signaux'),
+((SELECT id_expedition FROM Expedition WHERE nom='Cartographie des Grandes Meules'), (SELECT id_personnage FROM Personnage WHERE nom='Noé Milleplans'), 'Chronologie');
+INSERT INTO ExpeditionMembre (expedition_id, personnage_id, role_mission) VALUES
+((SELECT id_expedition FROM Expedition WHERE nom='Veille maritime des Îlots'), (SELECT id_personnage FROM Personnage WHERE nom='Phénix Retex'), 'Chef de quart'),
+((SELECT id_expedition FROM Expedition WHERE nom='Veille maritime des Îlots'), (SELECT id_personnage FROM Personnage WHERE nom='Naga Pearl'), 'Filets'),
+((SELECT id_expedition FROM Expedition WHERE nom='Veille maritime des Îlots'), (SELECT id_personnage FROM Personnage WHERE nom='Ulysse Jaloux'), 'Guet'),
+((SELECT id_expedition FROM Expedition WHERE nom='Veille maritime des Îlots'), (SELECT id_personnage FROM Personnage WHERE nom='Nerine Corail'), 'Manœuvres');
+INSERT INTO ExpeditionMembre (expedition_id, personnage_id, role_mission) VALUES
+((SELECT id_expedition FROM Expedition WHERE nom='Mines sous garde de Patateland'), (SELECT id_personnage FROM Personnage WHERE nom='Frida Foreuse'), 'Cheffe de chantier'),
+((SELECT id_expedition FROM Expedition WHERE nom='Mines sous garde de Patateland'), (SELECT id_personnage FROM Personnage WHERE nom='Goma Rondpain'), 'Surveillance des puits'),
+((SELECT id_expedition FROM Expedition WHERE nom='Mines sous garde de Patateland'), (SELECT id_personnage FROM Personnage WHERE nom='Korin Martelembrun'), 'Renforts'),
+((SELECT id_expedition FROM Expedition WHERE nom='Mines sous garde de Patateland'), (SELECT id_personnage FROM Personnage WHERE nom='Goran Plancher'), 'Manutention');
+INSERT INTO ExpeditionMembre (expedition_id, personnage_id, role_mission) VALUES
+((SELECT id_expedition FROM Expedition WHERE nom='Ravitaillement meringué'), (SELECT id_personnage FROM Personnage WHERE nom='Mireille Mirador'), 'Cheffe de convoi'),
+((SELECT id_expedition FROM Expedition WHERE nom='Ravitaillement meringué'), (SELECT id_personnage FROM Personnage WHERE nom='Eliara Nitescence'), 'Soins & onguents'),
+((SELECT id_expedition FROM Expedition WHERE nom='Ravitaillement meringué'), (SELECT id_personnage FROM Personnage WHERE nom='Bellona Houle'), 'Garde'),
+((SELECT id_expedition FROM Expedition WHERE nom='Ravitaillement meringué'), (SELECT id_personnage FROM Personnage WHERE nom='Ondra Mélodie'), 'Signaux & chants');
+
+
+INSERT INTO ExpeditionStock (expedition_id, equipement_id, personnage_id, quantite) VALUES
+((SELECT id_expedition FROM Expedition WHERE nom='Reconnaissance du Col des Ailes'), (SELECT id_equipement FROM Equipement WHERE nom='Boussole Runique'), (SELECT id_personnage FROM Personnage WHERE nom='Fenduil Lierreclair'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Reconnaissance du Col des Ailes'), (SELECT id_equipement FROM Equipement WHERE nom='Potion de Mana'), (SELECT id_personnage FROM Personnage WHERE nom='Fenduil Lierreclair'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Reconnaissance du Col des Ailes'), (SELECT id_equipement FROM Equipement WHERE nom='Loupe du Savoir'), (SELECT id_personnage FROM Personnage WHERE nom='Fenduil Lierreclair'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Reconnaissance du Col des Ailes'), (SELECT id_equipement FROM Equipement WHERE nom='Torche Infinie'), (SELECT id_personnage FROM Personnage WHERE nom='Fenduil Lierreclair'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Reconnaissance du Col des Ailes'), (SELECT id_equipement FROM Equipement WHERE nom='Corde du Destin'), (SELECT id_personnage FROM Personnage WHERE nom='Fenduil Lierreclair'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Reconnaissance du Col des Ailes'), (SELECT id_equipement FROM Equipement WHERE nom='Trousse de Soin'), (SELECT id_personnage FROM Personnage WHERE nom='Via Rapida'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Reconnaissance du Col des Ailes'), (SELECT id_equipement FROM Equipement WHERE nom='Pioche de Fer'), (SELECT id_personnage FROM Personnage WHERE nom='Via Rapida'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Reconnaissance du Col des Ailes'), (SELECT id_equipement FROM Equipement WHERE nom='Marteau de Forgeron'), (SELECT id_personnage FROM Personnage WHERE nom='Calen Dorélys'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Reconnaissance du Col des Ailes'), (SELECT id_equipement FROM Equipement WHERE nom='Chaudron de Voyage'), (SELECT id_personnage FROM Personnage WHERE nom='Calen Dorélys'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Reconnaissance du Col des Ailes'), (SELECT id_equipement FROM Equipement WHERE nom='Sac de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Calen Dorélys'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Reconnaissance du Col des Ailes'), (SELECT id_equipement FROM Equipement WHERE nom='Encens du Calme'), (SELECT id_personnage FROM Personnage WHERE nom='Noé Milleplans'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Reconnaissance du Col des Ailes'), (SELECT id_equipement FROM Equipement WHERE nom='Orbe de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Noé Milleplans'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Reconnaissance du Col des Ailes'), (SELECT id_equipement FROM Equipement WHERE nom='Tente de l’Oubli'), (SELECT id_personnage FROM Personnage WHERE nom='Noé Milleplans'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Reconnaissance du Col des Ailes'), (SELECT id_equipement FROM Equipement WHERE nom='Élixir de Lune'), (SELECT id_personnage FROM Personnage WHERE nom='Eärwen Feuilledor'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Reconnaissance du Col des Ailes'), (SELECT id_equipement FROM Equipement WHERE nom='Flasque du Courage Liquide'), (SELECT id_personnage FROM Personnage WHERE nom='Eärwen Feuilledor'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Escorte des Riziers'), (SELECT id_equipement FROM Equipement WHERE nom='Trousse de Soin'), (SELECT id_personnage FROM Personnage WHERE nom='Gaspard Sanspeur'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Escorte des Riziers'), (SELECT id_equipement FROM Equipement WHERE nom='Boussole Runique'), (SELECT id_personnage FROM Personnage WHERE nom='Gaspard Sanspeur'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Escorte des Riziers'), (SELECT id_equipement FROM Equipement WHERE nom='Torche Infinie'), (SELECT id_personnage FROM Personnage WHERE nom='Gaspard Sanspeur'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Escorte des Riziers'), (SELECT id_equipement FROM Equipement WHERE nom='Chaudron de Voyage'), (SELECT id_personnage FROM Personnage WHERE nom='Gaspard Sanspeur'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Escorte des Riziers'), (SELECT id_equipement FROM Equipement WHERE nom='Corde du Destin'), (SELECT id_personnage FROM Personnage WHERE nom='Gaspard Sanspeur'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Escorte des Riziers'), (SELECT id_equipement FROM Equipement WHERE nom='Pioche de Fer'), (SELECT id_personnage FROM Personnage WHERE nom='Ulysse Jaloux'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Escorte des Riziers'), (SELECT id_equipement FROM Equipement WHERE nom='Marteau de Forgeron'), (SELECT id_personnage FROM Personnage WHERE nom='Ulysse Jaloux'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Escorte des Riziers'), (SELECT id_equipement FROM Equipement WHERE nom='Sac de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Silva Feuillemère'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Escorte des Riziers'), (SELECT id_equipement FROM Equipement WHERE nom='Loupe du Savoir'), (SELECT id_personnage FROM Personnage WHERE nom='Silva Feuillemère'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Escorte des Riziers'), (SELECT id_equipement FROM Equipement WHERE nom='Encens du Calme'), (SELECT id_personnage FROM Personnage WHERE nom='Silva Feuillemère'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Escorte des Riziers'), (SELECT id_equipement FROM Equipement WHERE nom='Orbe de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Goran Plancher'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Escorte des Riziers'), (SELECT id_equipement FROM Equipement WHERE nom='Tente de l’Oubli'), (SELECT id_personnage FROM Personnage WHERE nom='Goran Plancher'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Récupération de Relique des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Torche Infinie'), (SELECT id_personnage FROM Personnage WHERE nom='Frida Foreuse'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Récupération de Relique des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Encens du Calme'), (SELECT id_personnage FROM Personnage WHERE nom='Frida Foreuse'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Récupération de Relique des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Pioche de Fer'), (SELECT id_personnage FROM Personnage WHERE nom='Frida Foreuse'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Récupération de Relique des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Marteau de Forgeron'), (SELECT id_personnage FROM Personnage WHERE nom='Frida Foreuse'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Récupération de Relique des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Loupe du Savoir'), (SELECT id_personnage FROM Personnage WHERE nom='Frida Foreuse'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Récupération de Relique des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Boussole Runique'), (SELECT id_personnage FROM Personnage WHERE nom='Borin Picacier'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Récupération de Relique des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Trousse de Soin'), (SELECT id_personnage FROM Personnage WHERE nom='Borin Picacier'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Récupération de Relique des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Corde du Destin'), (SELECT id_personnage FROM Personnage WHERE nom='Borin Picacier'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Récupération de Relique des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Chaudron de Voyage'), (SELECT id_personnage FROM Personnage WHERE nom='Mimi Microcosme'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Récupération de Relique des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Sac de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Mimi Microcosme'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Récupération de Relique des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Orbe de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Nora Cuvelier'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Récupération de Relique des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Tente de l’Oubli'), (SELECT id_personnage FROM Personnage WHERE nom='Nora Cuvelier'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Repérage côtier des Îlots'), (SELECT id_equipement FROM Equipement WHERE nom='Boussole Runique'), (SELECT id_personnage FROM Personnage WHERE nom='Séraphine Rivage'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Repérage côtier des Îlots'), (SELECT id_equipement FROM Equipement WHERE nom='Flasque du Courage Liquide'), (SELECT id_personnage FROM Personnage WHERE nom='Séraphine Rivage'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Repérage côtier des Îlots'), (SELECT id_equipement FROM Equipement WHERE nom='Potion de Vie'), (SELECT id_personnage FROM Personnage WHERE nom='Séraphine Rivage'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Repérage côtier des Îlots'), (SELECT id_equipement FROM Equipement WHERE nom='Torche Infinie'), (SELECT id_personnage FROM Personnage WHERE nom='Séraphine Rivage'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Repérage côtier des Îlots'), (SELECT id_equipement FROM Equipement WHERE nom='Sac de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Séraphine Rivage'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Repérage côtier des Îlots'), (SELECT id_equipement FROM Equipement WHERE nom='Trousse de Soin'), (SELECT id_personnage FROM Personnage WHERE nom='Naga Pearl'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Repérage côtier des Îlots'), (SELECT id_equipement FROM Equipement WHERE nom='Corde du Destin'), (SELECT id_personnage FROM Personnage WHERE nom='Naga Pearl'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Repérage côtier des Îlots'), (SELECT id_equipement FROM Equipement WHERE nom='Pioche de Fer'), (SELECT id_personnage FROM Personnage WHERE nom='Naga Pearl'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Repérage côtier des Îlots'), (SELECT id_equipement FROM Equipement WHERE nom='Marteau de Forgeron'), (SELECT id_personnage FROM Personnage WHERE nom='Nerine Corail'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Repérage côtier des Îlots'), (SELECT id_equipement FROM Equipement WHERE nom='Chaudron de Voyage'), (SELECT id_personnage FROM Personnage WHERE nom='Nerine Corail'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Repérage côtier des Îlots'), (SELECT id_equipement FROM Equipement WHERE nom='Loupe du Savoir'), (SELECT id_personnage FROM Personnage WHERE nom='Nerine Corail'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Repérage côtier des Îlots'), (SELECT id_equipement FROM Equipement WHERE nom='Encens du Calme'), (SELECT id_personnage FROM Personnage WHERE nom='Ondra Mélodie'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Repérage côtier des Îlots'), (SELECT id_equipement FROM Equipement WHERE nom='Orbe de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Ondra Mélodie'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Repérage côtier des Îlots'), (SELECT id_equipement FROM Equipement WHERE nom='Tente de l’Oubli'), (SELECT id_personnage FROM Personnage WHERE nom='Ondra Mélodie'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Repérage côtier des Îlots'), (SELECT id_equipement FROM Equipement WHERE nom='Élixir de Lune'), (SELECT id_personnage FROM Personnage WHERE nom='Ondra Mélodie'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Déminage runique des Crêtes'), (SELECT id_equipement FROM Equipement WHERE nom='Marteau de Forgeron'), (SELECT id_personnage FROM Personnage WHERE nom='Amber Écaillefeu'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Déminage runique des Crêtes'), (SELECT id_equipement FROM Equipement WHERE nom='Pioche de Fer'), (SELECT id_personnage FROM Personnage WHERE nom='Amber Écaillefeu'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Déminage runique des Crêtes'), (SELECT id_equipement FROM Equipement WHERE nom='Torche Infinie'), (SELECT id_personnage FROM Personnage WHERE nom='Amber Écaillefeu'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Déminage runique des Crêtes'), (SELECT id_equipement FROM Equipement WHERE nom='Encens du Calme'), (SELECT id_personnage FROM Personnage WHERE nom='Anvil Mainforte'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Déminage runique des Crêtes'), (SELECT id_equipement FROM Equipement WHERE nom='Corde du Destin'), (SELECT id_personnage FROM Personnage WHERE nom='Anvil Mainforte'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Déminage runique des Crêtes'), (SELECT id_equipement FROM Equipement WHERE nom='Boussole Runique'), (SELECT id_personnage FROM Personnage WHERE nom='Zoé Zéphyr'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Déminage runique des Crêtes'), (SELECT id_equipement FROM Equipement WHERE nom='Trousse de Soin'), (SELECT id_personnage FROM Personnage WHERE nom='Zoé Zéphyr'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Déminage runique des Crêtes'), (SELECT id_equipement FROM Equipement WHERE nom='Chaudron de Voyage'), (SELECT id_personnage FROM Personnage WHERE nom='Givre Longsoif'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Déminage runique des Crêtes'), (SELECT id_equipement FROM Equipement WHERE nom='Sac de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Givre Longsoif'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Déminage runique des Crêtes'), (SELECT id_equipement FROM Equipement WHERE nom='Loupe du Savoir'), (SELECT id_personnage FROM Personnage WHERE nom='Givre Longsoif'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Déminage runique des Crêtes'), (SELECT id_equipement FROM Equipement WHERE nom='Orbe de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Givre Longsoif'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Négociation & Carto des Meules'), (SELECT id_equipement FROM Equipement WHERE nom='Potion de Mana'), (SELECT id_personnage FROM Personnage WHERE nom='Félix Fineplume'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Négociation & Carto des Meules'), (SELECT id_equipement FROM Equipement WHERE nom='Boussole Runique'), (SELECT id_personnage FROM Personnage WHERE nom='Félix Fineplume'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Négociation & Carto des Meules'), (SELECT id_equipement FROM Equipement WHERE nom='Loupe du Savoir'), (SELECT id_personnage FROM Personnage WHERE nom='Félix Fineplume'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Négociation & Carto des Meules'), (SELECT id_equipement FROM Equipement WHERE nom='Torche Infinie'), (SELECT id_personnage FROM Personnage WHERE nom='Gaspard Sanspeur'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Négociation & Carto des Meules'), (SELECT id_equipement FROM Equipement WHERE nom='Sac de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Gaspard Sanspeur'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Négociation & Carto des Meules'), (SELECT id_equipement FROM Equipement WHERE nom='Trousse de Soin'), (SELECT id_personnage FROM Personnage WHERE nom='Gaspard Sanspeur'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Négociation & Carto des Meules'), (SELECT id_equipement FROM Equipement WHERE nom='Corde du Destin'), (SELECT id_personnage FROM Personnage WHERE nom='Ada Clic'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Négociation & Carto des Meules'), (SELECT id_equipement FROM Equipement WHERE nom='Pioche de Fer'), (SELECT id_personnage FROM Personnage WHERE nom='Ada Clic'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Négociation & Carto des Meules'), (SELECT id_equipement FROM Equipement WHERE nom='Marteau de Forgeron'), (SELECT id_personnage FROM Personnage WHERE nom='Ada Clic'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Négociation & Carto des Meules'), (SELECT id_equipement FROM Equipement WHERE nom='Chaudron de Voyage'), (SELECT id_personnage FROM Personnage WHERE nom='Calen Dorélys'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Négociation & Carto des Meules'), (SELECT id_equipement FROM Equipement WHERE nom='Encens du Calme'), (SELECT id_personnage FROM Personnage WHERE nom='Calen Dorélys'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Secours forestier des Canopées'), (SELECT id_equipement FROM Equipement WHERE nom='Trousse de Soin'), (SELECT id_personnage FROM Personnage WHERE nom='Eärwen Feuilledor'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Secours forestier des Canopées'), (SELECT id_equipement FROM Equipement WHERE nom='Corde du Destin'), (SELECT id_personnage FROM Personnage WHERE nom='Eärwen Feuilledor'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Secours forestier des Canopées'), (SELECT id_equipement FROM Equipement WHERE nom='Torche Infinie'), (SELECT id_personnage FROM Personnage WHERE nom='Eärwen Feuilledor'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Secours forestier des Canopées'), (SELECT id_equipement FROM Equipement WHERE nom='Élixir de Lune'), (SELECT id_personnage FROM Personnage WHERE nom='Eärwen Feuilledor'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Secours forestier des Canopées'), (SELECT id_equipement FROM Equipement WHERE nom='Boussole Runique'), (SELECT id_personnage FROM Personnage WHERE nom='Eärwen Feuilledor'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Secours forestier des Canopées'), (SELECT id_equipement FROM Equipement WHERE nom='Pioche de Fer'), (SELECT id_personnage FROM Personnage WHERE nom='Silva Feuillemère'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Secours forestier des Canopées'), (SELECT id_equipement FROM Equipement WHERE nom='Marteau de Forgeron'), (SELECT id_personnage FROM Personnage WHERE nom='Silva Feuillemère'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Secours forestier des Canopées'), (SELECT id_equipement FROM Equipement WHERE nom='Chaudron de Voyage'), (SELECT id_personnage FROM Personnage WHERE nom='Drya Racinette'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Secours forestier des Canopées'), (SELECT id_equipement FROM Equipement WHERE nom='Sac de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Drya Racinette'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Secours forestier des Canopées'), (SELECT id_equipement FROM Equipement WHERE nom='Loupe du Savoir'), (SELECT id_personnage FROM Personnage WHERE nom='Drya Clairebois'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Secours forestier des Canopées'), (SELECT id_equipement FROM Equipement WHERE nom='Encens du Calme'), (SELECT id_personnage FROM Personnage WHERE nom='Drya Clairebois'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Intendance glaciale des Cols'), (SELECT id_equipement FROM Equipement WHERE nom='Chaudron de Voyage'), (SELECT id_personnage FROM Personnage WHERE nom='Morgane Memento'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Intendance glaciale des Cols'), (SELECT id_equipement FROM Equipement WHERE nom='Élixir de Lune'), (SELECT id_personnage FROM Personnage WHERE nom='Morgane Memento'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Intendance glaciale des Cols'), (SELECT id_equipement FROM Equipement WHERE nom='Corde du Destin'), (SELECT id_personnage FROM Personnage WHERE nom='Morgane Memento'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Intendance glaciale des Cols'), (SELECT id_equipement FROM Equipement WHERE nom='Torche Infinie'), (SELECT id_personnage FROM Personnage WHERE nom='Morgane Memento'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Intendance glaciale des Cols'), (SELECT id_equipement FROM Equipement WHERE nom='Sac de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Mireille Mirador'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Intendance glaciale des Cols'), (SELECT id_equipement FROM Equipement WHERE nom='Boussole Runique'), (SELECT id_personnage FROM Personnage WHERE nom='Mireille Mirador'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Intendance glaciale des Cols'), (SELECT id_equipement FROM Equipement WHERE nom='Trousse de Soin'), (SELECT id_personnage FROM Personnage WHERE nom='Givre Longsoif'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Intendance glaciale des Cols'), (SELECT id_equipement FROM Equipement WHERE nom='Pioche de Fer'), (SELECT id_personnage FROM Personnage WHERE nom='Givre Longsoif'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Intendance glaciale des Cols'), (SELECT id_equipement FROM Equipement WHERE nom='Marteau de Forgeron'), (SELECT id_personnage FROM Personnage WHERE nom='Givre Longsoif'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Intendance glaciale des Cols'), (SELECT id_equipement FROM Equipement WHERE nom='Loupe du Savoir'), (SELECT id_personnage FROM Personnage WHERE nom='Givre Longsoif'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Intendance glaciale des Cols'), (SELECT id_equipement FROM Equipement WHERE nom='Encens du Calme'), (SELECT id_personnage FROM Personnage WHERE nom='Yska Longfrimas'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Intendance glaciale des Cols'), (SELECT id_equipement FROM Equipement WHERE nom='Orbe de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Yska Longfrimas'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Intendance glaciale des Cols'), (SELECT id_equipement FROM Equipement WHERE nom='Tente de l’Oubli'), (SELECT id_personnage FROM Personnage WHERE nom='Yska Longfrimas'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Réparation des Ponts de Levain'), (SELECT id_equipement FROM Equipement WHERE nom='Marteau de Forgeron'), (SELECT id_personnage FROM Personnage WHERE nom='Erik Étau'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Réparation des Ponts de Levain'), (SELECT id_equipement FROM Equipement WHERE nom='Pioche de Fer'), (SELECT id_personnage FROM Personnage WHERE nom='Erik Étau'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Réparation des Ponts de Levain'), (SELECT id_equipement FROM Equipement WHERE nom='Corde du Destin'), (SELECT id_personnage FROM Personnage WHERE nom='Erik Étau'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Réparation des Ponts de Levain'), (SELECT id_equipement FROM Equipement WHERE nom='Loupe du Savoir'), (SELECT id_personnage FROM Personnage WHERE nom='Erik Étau'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Réparation des Ponts de Levain'), (SELECT id_equipement FROM Equipement WHERE nom='Torche Infinie'), (SELECT id_personnage FROM Personnage WHERE nom='Erik Étau'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Réparation des Ponts de Levain'), (SELECT id_equipement FROM Equipement WHERE nom='Boussole Runique'), (SELECT id_personnage FROM Personnage WHERE nom='Goma Rondpain'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Réparation des Ponts de Levain'), (SELECT id_equipement FROM Equipement WHERE nom='Trousse de Soin'), (SELECT id_personnage FROM Personnage WHERE nom='Goma Rondpain'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Réparation des Ponts de Levain'), (SELECT id_equipement FROM Equipement WHERE nom='Chaudron de Voyage'), (SELECT id_personnage FROM Personnage WHERE nom='Goma Rondpain'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Réparation des Ponts de Levain'), (SELECT id_equipement FROM Equipement WHERE nom='Sac de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Bibi Brioche'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Réparation des Ponts de Levain'), (SELECT id_equipement FROM Equipement WHERE nom='Encens du Calme'), (SELECT id_personnage FROM Personnage WHERE nom='Bibi Brioche'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Réparation des Ponts de Levain'), (SELECT id_equipement FROM Equipement WHERE nom='Orbe de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Atlas Coupdœil'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Réparation des Ponts de Levain'), (SELECT id_equipement FROM Equipement WHERE nom='Tente de l’Oubli'), (SELECT id_personnage FROM Personnage WHERE nom='Atlas Coupdœil'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Cure des Sources de Tisanelle'), (SELECT id_equipement FROM Equipement WHERE nom='Trousse de Soin'), (SELECT id_personnage FROM Personnage WHERE nom='Éliara Nitescence'), 3),
+((SELECT id_expedition FROM Expedition WHERE nom='Cure des Sources de Tisanelle'), (SELECT id_equipement FROM Equipement WHERE nom='Encens du Calme'), (SELECT id_personnage FROM Personnage WHERE nom='Éliara Nitescence'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Cure des Sources de Tisanelle'), (SELECT id_equipement FROM Equipement WHERE nom='Élixir de Lune'), (SELECT id_personnage FROM Personnage WHERE nom='Éliara Nitescence'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Cure des Sources de Tisanelle'), (SELECT id_equipement FROM Equipement WHERE nom='Boussole Runique'), (SELECT id_personnage FROM Personnage WHERE nom='Éliara Nitescence'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Cure des Sources de Tisanelle'), (SELECT id_equipement FROM Equipement WHERE nom='Sac de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Basile le Subtil'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Cure des Sources de Tisanelle'), (SELECT id_equipement FROM Equipement WHERE nom='Torche Infinie'), (SELECT id_personnage FROM Personnage WHERE nom='Basile le Subtil'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Cure des Sources de Tisanelle'), (SELECT id_equipement FROM Equipement WHERE nom='Corde du Destin'), (SELECT id_personnage FROM Personnage WHERE nom='Basile le Subtil'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Cure des Sources de Tisanelle'), (SELECT id_equipement FROM Equipement WHERE nom='Pioche de Fer'), (SELECT id_personnage FROM Personnage WHERE nom='Silva Feuillemère'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Cure des Sources de Tisanelle'), (SELECT id_equipement FROM Equipement WHERE nom='Marteau de Forgeron'), (SELECT id_personnage FROM Personnage WHERE nom='Silva Feuillemère'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Cure des Sources de Tisanelle'), (SELECT id_equipement FROM Equipement WHERE nom='Chaudron de Voyage'), (SELECT id_personnage FROM Personnage WHERE nom='Silva Feuillemère'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Cure des Sources de Tisanelle'), (SELECT id_equipement FROM Equipement WHERE nom='Loupe du Savoir'), (SELECT id_personnage FROM Personnage WHERE nom='Aster Crinière'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Cure des Sources de Tisanelle'), (SELECT id_equipement FROM Equipement WHERE nom='Orbe de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Aster Crinière'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Cure des Sources de Tisanelle'), (SELECT id_equipement FROM Equipement WHERE nom='Tente de l’Oubli'), (SELECT id_personnage FROM Personnage WHERE nom='Aster Crinière'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Cure des Sources de Tisanelle'), (SELECT id_equipement FROM Equipement WHERE nom='Flasque du Courage Liquide'), (SELECT id_personnage FROM Personnage WHERE nom='Aster Crinière'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Dérivation des Crues Douces'), (SELECT id_equipement FROM Equipement WHERE nom='Pioche de Fer'), (SELECT id_personnage FROM Personnage WHERE nom='Erik Étau'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Dérivation des Crues Douces'), (SELECT id_equipement FROM Equipement WHERE nom='Marteau de Forgeron'), (SELECT id_personnage FROM Personnage WHERE nom='Erik Étau'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Dérivation des Crues Douces'), (SELECT id_equipement FROM Equipement WHERE nom='Corde du Destin'), (SELECT id_personnage FROM Personnage WHERE nom='Erik Étau'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Dérivation des Crues Douces'), (SELECT id_equipement FROM Equipement WHERE nom='Chaudron de Voyage'), (SELECT id_personnage FROM Personnage WHERE nom='Erik Étau'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Dérivation des Crues Douces'), (SELECT id_equipement FROM Equipement WHERE nom='Torche Infinie'), (SELECT id_personnage FROM Personnage WHERE nom='Erik Étau'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Dérivation des Crues Douces'), (SELECT id_equipement FROM Equipement WHERE nom='Boussole Runique'), (SELECT id_personnage FROM Personnage WHERE nom='Korin Martelembrun'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Dérivation des Crues Douces'), (SELECT id_equipement FROM Equipement WHERE nom='Trousse de Soin'), (SELECT id_personnage FROM Personnage WHERE nom='Korin Martelembrun'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Dérivation des Crues Douces'), (SELECT id_equipement FROM Equipement WHERE nom='Sac de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Korin Martelembrun'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Dérivation des Crues Douces'), (SELECT id_equipement FROM Equipement WHERE nom='Loupe du Savoir'), (SELECT id_personnage FROM Personnage WHERE nom='Korin Martelembrun'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Dérivation des Crues Douces'), (SELECT id_equipement FROM Equipement WHERE nom='Encens du Calme'), (SELECT id_personnage FROM Personnage WHERE nom='Corga Ombrebrave'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Dérivation des Crues Douces'), (SELECT id_equipement FROM Equipement WHERE nom='Orbe de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Corga Ombrebrave'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Dérivation des Crues Douces'), (SELECT id_equipement FROM Equipement WHERE nom='Tente de l’Oubli'), (SELECT id_personnage FROM Personnage WHERE nom='Corga Ombrebrave'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Dérivation des Crues Douces'), (SELECT id_equipement FROM Equipement WHERE nom='Élixir de Lune'), (SELECT id_personnage FROM Personnage WHERE nom='Corga Ombrebrave'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Dérivation des Crues Douces'), (SELECT id_equipement FROM Equipement WHERE nom='Flasque du Courage Liquide'), (SELECT id_personnage FROM Personnage WHERE nom='Goran Plancher'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Dérivation des Crues Douces'), (SELECT id_equipement FROM Equipement WHERE nom='Potion de Vie'), (SELECT id_personnage FROM Personnage WHERE nom='Goran Plancher'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Dérivation des Crues Douces'), (SELECT id_equipement FROM Equipement WHERE nom='Potion de Mana'), (SELECT id_personnage FROM Personnage WHERE nom='Goran Plancher'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Pèlerinage sécurisé des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Trousse de Soin'), (SELECT id_personnage FROM Personnage WHERE nom='Mireille Mirador'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Pèlerinage sécurisé des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Élixir de Lune'), (SELECT id_personnage FROM Personnage WHERE nom='Mireille Mirador'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Pèlerinage sécurisé des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Boussole Runique'), (SELECT id_personnage FROM Personnage WHERE nom='Mireille Mirador'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Pèlerinage sécurisé des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Corde du Destin'), (SELECT id_personnage FROM Personnage WHERE nom='Mireille Mirador'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Pèlerinage sécurisé des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Encens du Calme'), (SELECT id_personnage FROM Personnage WHERE nom='Mireille Mirador'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Pèlerinage sécurisé des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Torche Infinie'), (SELECT id_personnage FROM Personnage WHERE nom='Gala Montjoie'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Pèlerinage sécurisé des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Pioche de Fer'), (SELECT id_personnage FROM Personnage WHERE nom='Gala Montjoie'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Pèlerinage sécurisé des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Marteau de Forgeron'), (SELECT id_personnage FROM Personnage WHERE nom='Gala Montjoie'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Pèlerinage sécurisé des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Chaudron de Voyage'), (SELECT id_personnage FROM Personnage WHERE nom='Gala Montjoie'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Pèlerinage sécurisé des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Sac de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Via Rapida'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Pèlerinage sécurisé des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Loupe du Savoir'), (SELECT id_personnage FROM Personnage WHERE nom='Via Rapida'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Pèlerinage sécurisé des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Orbe de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Via Rapida'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Pèlerinage sécurisé des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Tente de l’Oubli'), (SELECT id_personnage FROM Personnage WHERE nom='Camille Cambriole'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Pèlerinage sécurisé des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Flasque du Courage Liquide'), (SELECT id_personnage FROM Personnage WHERE nom='Camille Cambriole'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Pèlerinage sécurisé des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Potion de Vie'), (SELECT id_personnage FROM Personnage WHERE nom='Camille Cambriole'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Pèlerinage sécurisé des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Potion de Mana'), (SELECT id_personnage FROM Personnage WHERE nom='Camille Cambriole'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Fouille ordonnée des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Loupe du Savoir'), (SELECT id_personnage FROM Personnage WHERE nom='Erik Étau'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Fouille ordonnée des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Torche Infinie'), (SELECT id_personnage FROM Personnage WHERE nom='Erik Étau'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Fouille ordonnée des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Boussole Runique'), (SELECT id_personnage FROM Personnage WHERE nom='Erik Étau'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Fouille ordonnée des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Orbe de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Erik Étau'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Fouille ordonnée des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Corde du Destin'), (SELECT id_personnage FROM Personnage WHERE nom='Mimi Microcosme'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Fouille ordonnée des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Trousse de Soin'), (SELECT id_personnage FROM Personnage WHERE nom='Mimi Microcosme'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Fouille ordonnée des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Pioche de Fer'), (SELECT id_personnage FROM Personnage WHERE nom='Ada Clic'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Fouille ordonnée des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Marteau de Forgeron'), (SELECT id_personnage FROM Personnage WHERE nom='Ada Clic'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Fouille ordonnée des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Chaudron de Voyage'), (SELECT id_personnage FROM Personnage WHERE nom='Élo Die'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Fouille ordonnée des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Sac de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Élo Die'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Fouille ordonnée des Caves'), (SELECT id_equipement FROM Equipement WHERE nom='Encens du Calme'), (SELECT id_personnage FROM Personnage WHERE nom='Élo Die'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Surveillance des Dunes Salées'), (SELECT id_equipement FROM Equipement WHERE nom='Boussole Runique'), (SELECT id_personnage FROM Personnage WHERE nom='Ulysse Jaloux'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Surveillance des Dunes Salées'), (SELECT id_equipement FROM Equipement WHERE nom='Corde du Destin'), (SELECT id_personnage FROM Personnage WHERE nom='Ulysse Jaloux'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Surveillance des Dunes Salées'), (SELECT id_equipement FROM Equipement WHERE nom='Loupe du Savoir'), (SELECT id_personnage FROM Personnage WHERE nom='Ulysse Jaloux'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Surveillance des Dunes Salées'), (SELECT id_equipement FROM Equipement WHERE nom='Torche Infinie'), (SELECT id_personnage FROM Personnage WHERE nom='Ulysse Jaloux'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Surveillance des Dunes Salées'), (SELECT id_equipement FROM Equipement WHERE nom='Sac de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Via Rapida'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Surveillance des Dunes Salées'), (SELECT id_equipement FROM Equipement WHERE nom='Trousse de Soin'), (SELECT id_personnage FROM Personnage WHERE nom='Via Rapida'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Surveillance des Dunes Salées'), (SELECT id_equipement FROM Equipement WHERE nom='Pioche de Fer'), (SELECT id_personnage FROM Personnage WHERE nom='Via Rapida'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Surveillance des Dunes Salées'), (SELECT id_equipement FROM Equipement WHERE nom='Marteau de Forgeron'), (SELECT id_personnage FROM Personnage WHERE nom='Atlas Coupdœil'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Surveillance des Dunes Salées'), (SELECT id_equipement FROM Equipement WHERE nom='Chaudron de Voyage'), (SELECT id_personnage FROM Personnage WHERE nom='Atlas Coupdœil'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Surveillance des Dunes Salées'), (SELECT id_equipement FROM Equipement WHERE nom='Encens du Calme'), (SELECT id_personnage FROM Personnage WHERE nom='Atlas Coupdœil'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Surveillance des Dunes Salées'), (SELECT id_equipement FROM Equipement WHERE nom='Orbe de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Atlas Coupdœil'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Surveillance des Dunes Salées'), (SELECT id_equipement FROM Equipement WHERE nom='Tente de l’Oubli'), (SELECT id_personnage FROM Personnage WHERE nom='Yska Longfrimas'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Surveillance des Dunes Salées'), (SELECT id_equipement FROM Equipement WHERE nom='Élixir de Lune'), (SELECT id_personnage FROM Personnage WHERE nom='Yska Longfrimas'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Surveillance des Dunes Salées'), (SELECT id_equipement FROM Equipement WHERE nom='Flasque du Courage Liquide'), (SELECT id_personnage FROM Personnage WHERE nom='Yska Longfrimas'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Ambassade au Quiche Doré'), (SELECT id_equipement FROM Equipement WHERE nom='Encens du Calme'), (SELECT id_personnage FROM Personnage WHERE nom='Gaspard Sanspeur'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Ambassade au Quiche Doré'), (SELECT id_equipement FROM Equipement WHERE nom='Loupe du Savoir'), (SELECT id_personnage FROM Personnage WHERE nom='Gaspard Sanspeur'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Ambassade au Quiche Doré'), (SELECT id_equipement FROM Equipement WHERE nom='Tente de l’Oubli'), (SELECT id_personnage FROM Personnage WHERE nom='Gaspard Sanspeur'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Ambassade au Quiche Doré'), (SELECT id_equipement FROM Equipement WHERE nom='Sac de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Gaspard Sanspeur'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Ambassade au Quiche Doré'), (SELECT id_equipement FROM Equipement WHERE nom='Élixir de Lune'), (SELECT id_personnage FROM Personnage WHERE nom='Nora Cuvelier'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Ambassade au Quiche Doré'), (SELECT id_equipement FROM Equipement WHERE nom='Boussole Runique'), (SELECT id_personnage FROM Personnage WHERE nom='Nora Cuvelier'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Ambassade au Quiche Doré'), (SELECT id_equipement FROM Equipement WHERE nom='Trousse de Soin'), (SELECT id_personnage FROM Personnage WHERE nom='Nora Cuvelier'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Ambassade au Quiche Doré'), (SELECT id_equipement FROM Equipement WHERE nom='Torche Infinie'), (SELECT id_personnage FROM Personnage WHERE nom='Nora Cuvelier'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Ambassade au Quiche Doré'), (SELECT id_equipement FROM Equipement WHERE nom='Corde du Destin'), (SELECT id_personnage FROM Personnage WHERE nom='Félix Fineplume'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Ambassade au Quiche Doré'), (SELECT id_equipement FROM Equipement WHERE nom='Pioche de Fer'), (SELECT id_personnage FROM Personnage WHERE nom='Félix Fineplume'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Ambassade au Quiche Doré'), (SELECT id_equipement FROM Equipement WHERE nom='Marteau de Forgeron'), (SELECT id_personnage FROM Personnage WHERE nom='Félix Fineplume'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Ambassade au Quiche Doré'), (SELECT id_equipement FROM Equipement WHERE nom='Chaudron de Voyage'), (SELECT id_personnage FROM Personnage WHERE nom='Jean Bonparleur'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Ambassade au Quiche Doré'), (SELECT id_equipement FROM Equipement WHERE nom='Orbe de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Jean Bonparleur'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Route des Cols sécurisée'), (SELECT id_equipement FROM Equipement WHERE nom='Corde du Destin'), (SELECT id_personnage FROM Personnage WHERE nom='Crog Silex'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Route des Cols sécurisée'), (SELECT id_equipement FROM Equipement WHERE nom='Boussole Runique'), (SELECT id_personnage FROM Personnage WHERE nom='Crog Silex'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Route des Cols sécurisée'), (SELECT id_equipement FROM Equipement WHERE nom='Sac de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Crog Silex'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Route des Cols sécurisée'), (SELECT id_equipement FROM Equipement WHERE nom='Torche Infinie'), (SELECT id_personnage FROM Personnage WHERE nom='Camille Cambriole'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Route des Cols sécurisée'), (SELECT id_equipement FROM Equipement WHERE nom='Potion de Vie'), (SELECT id_personnage FROM Personnage WHERE nom='Camille Cambriole'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Route des Cols sécurisée'), (SELECT id_equipement FROM Equipement WHERE nom='Trousse de Soin'), (SELECT id_personnage FROM Personnage WHERE nom='Camille Cambriole'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Route des Cols sécurisée'), (SELECT id_equipement FROM Equipement WHERE nom='Pioche de Fer'), (SELECT id_personnage FROM Personnage WHERE nom='Camille Cambriole'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Route des Cols sécurisée'), (SELECT id_equipement FROM Equipement WHERE nom='Marteau de Forgeron'), (SELECT id_personnage FROM Personnage WHERE nom='Ailefine Brisecoeur'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Route des Cols sécurisée'), (SELECT id_equipement FROM Equipement WHERE nom='Chaudron de Voyage'), (SELECT id_personnage FROM Personnage WHERE nom='Ailefine Brisecoeur'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Route des Cols sécurisée'), (SELECT id_equipement FROM Equipement WHERE nom='Loupe du Savoir'), (SELECT id_personnage FROM Personnage WHERE nom='Ailefine Brisecoeur'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Route des Cols sécurisée'), (SELECT id_equipement FROM Equipement WHERE nom='Encens du Calme'), (SELECT id_personnage FROM Personnage WHERE nom='Ailefine Brisecoeur'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Route des Cols sécurisée'), (SELECT id_equipement FROM Equipement WHERE nom='Orbe de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Talos Grandpas'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Route des Cols sécurisée'), (SELECT id_equipement FROM Equipement WHERE nom='Tente de l’Oubli'), (SELECT id_personnage FROM Personnage WHERE nom='Talos Grandpas'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Cartographie des Grandes Meules'), (SELECT id_equipement FROM Equipement WHERE nom='Potion de Mana'), (SELECT id_personnage FROM Personnage WHERE nom='Félix Fineplume'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Cartographie des Grandes Meules'), (SELECT id_equipement FROM Equipement WHERE nom='Boussole Runique'), (SELECT id_personnage FROM Personnage WHERE nom='Félix Fineplume'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Cartographie des Grandes Meules'), (SELECT id_equipement FROM Equipement WHERE nom='Loupe du Savoir'), (SELECT id_personnage FROM Personnage WHERE nom='Félix Fineplume'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Cartographie des Grandes Meules'), (SELECT id_equipement FROM Equipement WHERE nom='Torche Infinie'), (SELECT id_personnage FROM Personnage WHERE nom='Gaspard Sanspeur'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Cartographie des Grandes Meules'), (SELECT id_equipement FROM Equipement WHERE nom='Sac de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Gaspard Sanspeur'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Cartographie des Grandes Meules'), (SELECT id_equipement FROM Equipement WHERE nom='Corde du Destin'), (SELECT id_personnage FROM Personnage WHERE nom='Gaspard Sanspeur'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Cartographie des Grandes Meules'), (SELECT id_equipement FROM Equipement WHERE nom='Trousse de Soin'), (SELECT id_personnage FROM Personnage WHERE nom='Gaspard Sanspeur'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Cartographie des Grandes Meules'), (SELECT id_equipement FROM Equipement WHERE nom='Pioche de Fer'), (SELECT id_personnage FROM Personnage WHERE nom='Calen Dorélys'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Cartographie des Grandes Meules'), (SELECT id_equipement FROM Equipement WHERE nom='Marteau de Forgeron'), (SELECT id_personnage FROM Personnage WHERE nom='Calen Dorélys'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Cartographie des Grandes Meules'), (SELECT id_equipement FROM Equipement WHERE nom='Chaudron de Voyage'), (SELECT id_personnage FROM Personnage WHERE nom='Calen Dorélys'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Cartographie des Grandes Meules'), (SELECT id_equipement FROM Equipement WHERE nom='Encens du Calme'), (SELECT id_personnage FROM Personnage WHERE nom='Calen Dorélys'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Cartographie des Grandes Meules'), (SELECT id_equipement FROM Equipement WHERE nom='Orbe de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Noé Milleplans'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Cartographie des Grandes Meules'), (SELECT id_equipement FROM Equipement WHERE nom='Tente de l’Oubli'), (SELECT id_personnage FROM Personnage WHERE nom='Noé Milleplans'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Cartographie des Grandes Meules'), (SELECT id_equipement FROM Equipement WHERE nom='Élixir de Lune'), (SELECT id_personnage FROM Personnage WHERE nom='Noé Milleplans'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Cartographie des Grandes Meules'), (SELECT id_equipement FROM Equipement WHERE nom='Flasque du Courage Liquide'), (SELECT id_personnage FROM Personnage WHERE nom='Noé Milleplans'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Veille maritime des Îlots'), (SELECT id_equipement FROM Equipement WHERE nom='Boussole Runique'), (SELECT id_personnage FROM Personnage WHERE nom='Phénix Retex'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Veille maritime des Îlots'), (SELECT id_equipement FROM Equipement WHERE nom='Corde du Destin'), (SELECT id_personnage FROM Personnage WHERE nom='Phénix Retex'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Veille maritime des Îlots'), (SELECT id_equipement FROM Equipement WHERE nom='Torche Infinie'), (SELECT id_personnage FROM Personnage WHERE nom='Phénix Retex'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Veille maritime des Îlots'), (SELECT id_equipement FROM Equipement WHERE nom='Sac de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Naga Pearl'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Veille maritime des Îlots'), (SELECT id_equipement FROM Equipement WHERE nom='Flasque du Courage Liquide'), (SELECT id_personnage FROM Personnage WHERE nom='Naga Pearl'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Veille maritime des Îlots'), (SELECT id_equipement FROM Equipement WHERE nom='Potion de Vie'), (SELECT id_personnage FROM Personnage WHERE nom='Naga Pearl'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Veille maritime des Îlots'), (SELECT id_equipement FROM Equipement WHERE nom='Trousse de Soin'), (SELECT id_personnage FROM Personnage WHERE nom='Naga Pearl'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Veille maritime des Îlots'), (SELECT id_equipement FROM Equipement WHERE nom='Pioche de Fer'), (SELECT id_personnage FROM Personnage WHERE nom='Ulysse Jaloux'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Veille maritime des Îlots'), (SELECT id_equipement FROM Equipement WHERE nom='Marteau de Forgeron'), (SELECT id_personnage FROM Personnage WHERE nom='Ulysse Jaloux'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Veille maritime des Îlots'), (SELECT id_equipement FROM Equipement WHERE nom='Chaudron de Voyage'), (SELECT id_personnage FROM Personnage WHERE nom='Ulysse Jaloux'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Veille maritime des Îlots'), (SELECT id_equipement FROM Equipement WHERE nom='Loupe du Savoir'), (SELECT id_personnage FROM Personnage WHERE nom='Nerine Corail'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Veille maritime des Îlots'), (SELECT id_equipement FROM Equipement WHERE nom='Encens du Calme'), (SELECT id_personnage FROM Personnage WHERE nom='Nerine Corail'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Veille maritime des Îlots'), (SELECT id_equipement FROM Equipement WHERE nom='Orbe de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Nerine Corail'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Veille maritime des Îlots'), (SELECT id_equipement FROM Equipement WHERE nom='Tente de l’Oubli'), (SELECT id_personnage FROM Personnage WHERE nom='Nerine Corail'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Mines sous garde de Patateland'), (SELECT id_equipement FROM Equipement WHERE nom='Pioche de Fer'), (SELECT id_personnage FROM Personnage WHERE nom='Frida Foreuse'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Mines sous garde de Patateland'), (SELECT id_equipement FROM Equipement WHERE nom='Torche Infinie'), (SELECT id_personnage FROM Personnage WHERE nom='Frida Foreuse'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Mines sous garde de Patateland'), (SELECT id_equipement FROM Equipement WHERE nom='Marteau de Forgeron'), (SELECT id_personnage FROM Personnage WHERE nom='Frida Foreuse'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Mines sous garde de Patateland'), (SELECT id_equipement FROM Equipement WHERE nom='Chaudron de Voyage'), (SELECT id_personnage FROM Personnage WHERE nom='Goma Rondpain'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Mines sous garde de Patateland'), (SELECT id_equipement FROM Equipement WHERE nom='Corde du Destin'), (SELECT id_personnage FROM Personnage WHERE nom='Goma Rondpain'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Mines sous garde de Patateland'), (SELECT id_equipement FROM Equipement WHERE nom='Boussole Runique'), (SELECT id_personnage FROM Personnage WHERE nom='Korin Martelembrun'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Mines sous garde de Patateland'), (SELECT id_equipement FROM Equipement WHERE nom='Trousse de Soin'), (SELECT id_personnage FROM Personnage WHERE nom='Korin Martelembrun'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Mines sous garde de Patateland'), (SELECT id_equipement FROM Equipement WHERE nom='Sac de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Korin Martelembrun'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Mines sous garde de Patateland'), (SELECT id_equipement FROM Equipement WHERE nom='Loupe du Savoir'), (SELECT id_personnage FROM Personnage WHERE nom='Goran Plancher'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Mines sous garde de Patateland'), (SELECT id_equipement FROM Equipement WHERE nom='Encens du Calme'), (SELECT id_personnage FROM Personnage WHERE nom='Goran Plancher'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Ravitaillement meringué'), (SELECT id_equipement FROM Equipement WHERE nom='Chaudron de Voyage'), (SELECT id_personnage FROM Personnage WHERE nom='Mireille Mirador'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Ravitaillement meringué'), (SELECT id_equipement FROM Equipement WHERE nom='Élixir de Lune'), (SELECT id_personnage FROM Personnage WHERE nom='Mireille Mirador'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Ravitaillement meringué'), (SELECT id_equipement FROM Equipement WHERE nom='Sac de Brume'), (SELECT id_personnage FROM Personnage WHERE nom='Mireille Mirador'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Ravitaillement meringué'), (SELECT id_equipement FROM Equipement WHERE nom='Boussole Runique'), (SELECT id_personnage FROM Personnage WHERE nom='Mireille Mirador'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Ravitaillement meringué'), (SELECT id_equipement FROM Equipement WHERE nom='Trousse de Soin'), (SELECT id_personnage FROM Personnage WHERE nom='Mireille Mirador'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Ravitaillement meringué'), (SELECT id_equipement FROM Equipement WHERE nom='Torche Infinie'), (SELECT id_personnage FROM Personnage WHERE nom='Eliara Nitescence'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Ravitaillement meringué'), (SELECT id_equipement FROM Equipement WHERE nom='Corde du Destin'), (SELECT id_personnage FROM Personnage WHERE nom='Eliara Nitescence'), 2),
+((SELECT id_expedition FROM Expedition WHERE nom='Ravitaillement meringué'), (SELECT id_equipement FROM Equipement WHERE nom='Pioche de Fer'), (SELECT id_personnage FROM Personnage WHERE nom='Bellona Houle'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Ravitaillement meringué'), (SELECT id_equipement FROM Equipement WHERE nom='Marteau de Forgeron'), (SELECT id_personnage FROM Personnage WHERE nom='Bellona Houle'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Ravitaillement meringué'), (SELECT id_equipement FROM Equipement WHERE nom='Loupe du Savoir'), (SELECT id_personnage FROM Personnage WHERE nom='Ondra Mélodie'), 1),
+((SELECT id_expedition FROM Expedition WHERE nom='Ravitaillement meringué'), (SELECT id_equipement FROM Equipement WHERE nom='Encens du Calme'), (SELECT id_personnage FROM Personnage WHERE nom='Ondra Mélodie'), 2);

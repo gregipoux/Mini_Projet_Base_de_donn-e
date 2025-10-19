@@ -19,17 +19,17 @@ DROP TABLE IF EXISTS
   LoiRoyaume,
   Loi,
   RelationDiplomatique,
-  ExpeditionStock,        --
-  ExpeditionMembre,       --
-  Expedition,             --
+  ExpeditionStock,
+  ExpeditionMembre,
+  Expedition,
   Inventaire,
   PersonnageEquipement,
   EquipementRessource,
   Equipement,
-  CreatureBataille,       --
-  GuildeBataille,         --
-  ArmeeBataille,          --
-  Bataille,               --
+  CreatureBataille,
+  GuildeBataille,
+  ArmeeBataille,
+  Bataille,
   Armee,
   PersonnageMaladie,
   Maladie,
@@ -698,7 +698,8 @@ CREATE TABLE ExpeditionMembre (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
--- Stocks portés pendant l’expédition pour chaque membre.
+-- ExpeditionStock
+-- Stocks portés pendant l’expédition pour chaque membre en plus qu'à l'habitude dans PersonnageEquipement.
 -- Le chef de groupe prend les items de la mission (si existants) dans son inventaire.
 CREATE TABLE ExpeditionStock (
   expedition_id INT NOT NULL,
