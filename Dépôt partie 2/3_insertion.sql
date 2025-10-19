@@ -8868,6 +8868,125 @@ INSERT INTO PersonnageTitre (personnage_id, titre_id, royaume_id, lignee_id, dat
  NULL, 'An 420, Lune 7, Jour 29', NULL, TRUE);
 
 
+-- 1) Tous les personnages qui ont un TITRE ACTIF reçoivent une lignée
+UPDATE Personnage p
+JOIN PersonnageTitre pt ON pt.personnage_id = p.id_personnage AND IFNULL(pt.est_actif,1)=1
+JOIN Royaume r         ON r.id_royaume = pt.royaume_id
+SET p.lignee_id = CASE r.nom
+  -- RACLETTEA : varie entre 3 lignées fromage/beurre
+  WHEN 'Raclettea' THEN CASE (p.id_personnage % 3)
+    WHEN 0 THEN (SELECT id_lignee FROM Lignee WHERE nom='de Raclette')
+    WHEN 1 THEN (SELECT id_lignee FROM Lignee WHERE nom='du Comté Beurré')
+    ELSE      (SELECT id_lignee FROM Lignee WHERE nom='du Fromage Antique')
+  END
+  -- DRAGONFLETTE : feu/métal/gloire
+  WHEN 'Dragonflette' THEN CASE (p.id_personnage % 3)
+    WHEN 0 THEN (SELECT id_lignee FROM Lignee WHERE nom='de la Marmite Sacrée')
+    WHEN 1 THEN (SELECT id_lignee FROM Lignee WHERE nom='du Beurre Courageux')
+    ELSE      (SELECT id_lignee FROM Lignee WHERE nom='de la Poudre Dorée')
+  END
+  -- ÉCLAIROISIE : lumière/vent/brume
+  WHEN 'Éclairoisie' THEN CASE (p.id_personnage % 3)
+    WHEN 0 THEN (SELECT id_lignee FROM Lignee WHERE nom='des Croissants Stellaires')
+    WHEN 1 THEN (SELECT id_lignee FROM Lignee WHERE nom='de la Brume Vanillée')
+    ELSE      (SELECT id_lignee FROM Lignee WHERE nom='des Galettes Fulgurantes')
+  END
+  -- BOULANGEA : levain/brioches/crèmes
+  WHEN 'Boulangea' THEN CASE (p.id_personnage % 3)
+    WHEN 0 THEN (SELECT id_lignee FROM Lignee WHERE nom='du Boulanger Perdu')
+    WHEN 1 THEN (SELECT id_lignee FROM Lignee WHERE nom='de la Baguette Noble')
+    ELSE      (SELECT id_lignee FROM Lignee WHERE nom='des Crèmes Vaillantes')
+  END
+  -- QUICHEBOURG : oignons/sauces/vinaigrette
+  WHEN 'Quichebourg' THEN CASE (p.id_personnage % 3)
+    WHEN 0 THEN (SELECT id_lignee FROM Lignee WHERE nom='des Oignons Tactiques')
+    WHEN 1 THEN (SELECT id_lignee FROM Lignee WHERE nom='de la Sauce Mystique')
+    ELSE      (SELECT id_lignee FROM Lignee WHERE nom='de la Vinaigrette Sombre')
+  END
+  -- SUCRALUNE : lune/citron/miel
+  WHEN 'Sucralune' THEN CASE (p.id_personnage % 3)
+    WHEN 0 THEN (SELECT id_lignee FROM Lignee WHERE nom='de la Lune qui Grince')
+    WHEN 1 THEN (SELECT id_lignee FROM Lignee WHERE nom='de la Citronnade Sainte')
+    ELSE      (SELECT id_lignee FROM Lignee WHERE nom='du Miel d’Acier')
+  END
+  -- POISSARIE : eaux/herbes/ruisseaux
+  WHEN 'Poissarie' THEN CASE (p.id_personnage % 3)
+    WHEN 0 THEN (SELECT id_lignee FROM Lignee WHERE nom='de la Truite Savante')
+    WHEN 1 THEN (SELECT id_lignee FROM Lignee WHERE nom='du Ruisseau qui Pique')
+    ELSE      (SELECT id_lignee FROM Lignee WHERE nom='de la Tisane Sauvage')
+  END
+  -- BANARNIA : fruits/bananes/sirop
+  WHEN 'Banarnia' THEN CASE (p.id_personnage % 3)
+    WHEN 0 THEN (SELECT id_lignee FROM Lignee WHERE nom='de Banarnia')
+    WHEN 1 THEN (SELECT id_lignee FROM Lignee WHERE nom='de l’Ananas Armorié')
+    ELSE      (SELECT id_lignee FROM Lignee WHERE nom='du Sirop Froid')
+  END
+  -- CROÛTONIE : croûte/chou/navet
+  WHEN 'Croûtonie' THEN CASE (p.id_personnage % 3)
+    WHEN 0 THEN (SELECT id_lignee FROM Lignee WHERE nom='du Biscuit Antique')
+    WHEN 1 THEN (SELECT id_lignee FROM Lignee WHERE nom='du Chou Souverain')
+    ELSE      (SELECT id_lignee FROM Lignee WHERE nom='du Navet Régalien')
+  END
+  -- BEURROPOLIS / BEURRASIE : beurre/poivre/cumin
+  WHEN 'Beurropolis' THEN CASE (p.id_personnage % 3)
+    WHEN 0 THEN (SELECT id_lignee FROM Lignee WHERE nom='du Beurre Courageux')
+    WHEN 1 THEN (SELECT id_lignee FROM Lignee WHERE nom='du Poivre Astral')
+    ELSE      (SELECT id_lignee FROM Lignee WHERE nom='du Cumin Profond')
+  END
+  WHEN 'Beurrasie' THEN CASE (p.id_personnage % 2)
+    WHEN 0 THEN (SELECT id_lignee FROM Lignee WHERE nom='du Poivre Astral')
+    ELSE      (SELECT id_lignee FROM Lignee WHERE nom='des Pâtes Impériales')
+  END
+  -- HERBULARIA : herbes/figues/noisettes
+  WHEN 'Herbularia' THEN CASE (p.id_personnage % 3)
+    WHEN 0 THEN (SELECT id_lignee FROM Lignee WHERE nom='des Haricots Mystiques')
+    WHEN 1 THEN (SELECT id_lignee FROM Lignee WHERE nom='de la Figue Oraculaire')
+    ELSE      (SELECT id_lignee FROM Lignee WHERE nom='de la Noisette de Fer')
+  END
+  -- PAYS DE LA POMME DE TERRE
+  WHEN 'Patateland' THEN CASE (p.id_personnage % 2)
+    WHEN 0 THEN (SELECT id_lignee FROM Lignee WHERE nom='des Pommes de Terre Royales')
+    ELSE      (SELECT id_lignee FROM Lignee WHERE nom='des Carottes Stellaires')
+  END
+  ELSE p.lignee_id
+END
+WHERE p.lignee_id IS NULL;
+
+-- 2) Élites MAGIQUES sans titre : attribuer à ~50% pour garder le prestige
+UPDATE Personnage p
+JOIN PersonnageClasse pc ON pc.personnage_id = p.id_personnage
+JOIN Classe c            ON c.id_classe = pc.classe_id
+SET p.lignee_id = CASE 
+  WHEN c.libelle IN ('Illusionniste sablé','Luminarque','Ombremancien','Chronomage')
+       THEN (SELECT id_lignee FROM Lignee WHERE nom='de la Brume Vanillée')
+  WHEN c.libelle IN ('Pyromancien gratiné','Cryomancien givré','Électromage citronné')
+       THEN (SELECT id_lignee FROM Lignee WHERE nom='de la Citronnade Sainte')
+  WHEN c.libelle IN ('Aquamancien infusé','Domptelune','Aéromancien feuilleté')
+       THEN (SELECT id_lignee FROM Lignee WHERE nom='de la Soupe Céleste')
+  WHEN c.libelle IN ('Nécromage de levure','Tisseur de runes')
+       THEN (SELECT id_lignee FROM Lignee WHERE nom='des Mines Salées')
+  ELSE p.lignee_id
+END
+WHERE p.lignee_id IS NULL
+  AND pc.niveau >= 6
+  AND (p.id_personnage % 2) = 0;
+
+-- 3) Figures martiales d’élite (sans titre) : attribuer à ~33%
+UPDATE Personnage p
+JOIN PersonnageClasse pc ON pc.personnage_id = p.id_personnage
+JOIN Classe c            ON c.id_classe = pc.classe_id
+SET p.lignee_id = CASE 
+  WHEN c.libelle IN ('Chevalier-louche','Bouclier battu','Gardien croûton','Géomancien croquant')
+       THEN (SELECT id_lignee FROM Lignee WHERE nom='du Bouillon d’Honneur')
+  WHEN c.libelle IN ('Arbalétrier beurré','Épéiste mousseux','Bretteur à deux lames')
+       THEN (SELECT id_lignee FROM Lignee WHERE nom='des Galettes Fulgurantes')
+  ELSE p.lignee_id
+END
+WHERE p.lignee_id IS NULL
+  AND pc.niveau >= 6
+  AND (p.id_personnage % 3) = 0;
+
+
  INSERT INTO GuildeMembre (personnage_id, guilde_id, role, date_entree_lore, date_sortie_lore) VALUES
 ((SELECT id_personnage FROM Personnage WHERE nom='Lara Tatouille'),
  (SELECT id_guilde FROM Guilde WHERE nom='Loge des Artificiers Discrets'),
@@ -9270,4 +9389,938 @@ INSERT INTO EcoleCours (ecole_id, professeur_id, sort_id) VALUES
 ((SELECT id_ecole FROM EcoleMagie WHERE nom='Conservatoire de l’Art Runique'),
  (SELECT id_personnage FROM Personnage WHERE nom='Roxane Rapière'),
  (SELECT id_sort FROM Sort WHERE nom='Étendard Radieux'));
+
+
+INSERT INTO PersonnageEquipement (personnage_id, equipement_id, qualite, date_acquisition_lore, source) VALUES
+((SELECT id_personnage FROM Personnage WHERE nom='Bellona Houle'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Orbe des Étoiles'),
+ 'parfaite (indestructible)', 'An 421, Lune 3, Jour 7', 'Héritage d’école'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Hildi Rochefine'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Lame des Saisons'),
+ 'parfaite (indestructible)', 'An 421, Lune 3, Jour 9', 'Récompense de guilde'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Amber Écaillefeu'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Anneau des Six Éléments'),
+ 'parfaite (indestructible)', 'An 421, Lune 4, Jour 2', 'Quête draconique'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Azazel Courtepointe'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Faux du Néant'),
+ 'parfaite (indestructible)', 'An 421, Lune 4, Jour 6', 'Rituel d’illusion'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Ondra Mélodie'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Relique du Premier Mage'),
+ 'parfaite (indestructible)', 'An 421, Lune 4, Jour 11', 'Donation d’Académie'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Gaspard Sanspeur'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Épée Solaire'),
+ 'parfaite (indestructible)', 'An 421, Lune 3, Jour 5', 'Adoubement royal'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Naga Pearl'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Trident de la Mer Claire'),
+ 'parfaite (indestructible)', 'An 421, Lune 3, Jour 10', 'Don des marins de Poissarie'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Mimi Microcosme'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Miroir de Vérité'),
+ 'parfaite (indestructible)', 'An 421, Lune 3, Jour 12', 'Épreuve des Reflets'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Géraldine Belleplume'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Harpe Céleste'),
+ 'parfaite (indestructible)', 'An 421, Lune 4, Jour 3', 'Concours de ménestrels'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Félix Fineplume'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Grimoire Vivant'),
+ 'parfaite (indestructible)', 'An 421, Lune 4, Jour 4', 'Archives royales'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Élo Die'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Bracelet des Étoiles'),
+ 'parfaite (indestructible)', 'An 421, Lune 4, Jour 7', 'Tournoi nocturne'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Ada Clic'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Sceptre des Arcanes'),
+ 'parfaite (indestructible)', 'An 421, Lune 4, Jour 9', 'Chef-d’œuvre d’atelier'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Talos Grandpas'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Épée des Échos'),
+ 'parfaite (indestructible)', 'An 421, Lune 4, Jour 12', 'Victoire de garnison'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Ailefine Brisecoeur'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Bâton de l’Astrolithe'),
+ 'parfaite (indestructible)', 'An 421, Lune 5, Jour 3', 'Veille astrale'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Nerine Corail'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Sphère du Temps'),
+ 'parfaite (indestructible)', 'An 421, Lune 5, Jour 6', 'Relais des marées'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Hildi Rochefine'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Cuirasse du Zénith'),
+ 'excellent', 'An 421, Lune 3, Jour 11', 'Butin d’expédition'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Bellona Houle'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Lance des Marées'),
+ 'excellent', 'An 421, Lune 3, Jour 8', 'Camp d’entraînement'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Goran Plancher'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Marteau des Forges Hurlantes'),
+ 'très bon', 'An 421, Lune 4, Jour 1', 'Forge militaire'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Corga Ombrebrave'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Lance de l’Aurore'),
+ 'bon', 'An 421, Lune 4, Jour 5', 'Patrouille d’honneur'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Korin Martelembrun'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Hallebarde de l’Empire'),
+ 'bon', 'An 421, Lune 4, Jour 8', 'Armurerie royale'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Givre Longsoif'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Bâton d’Obsidienne'),
+ 'bon', 'An 421, Lune 3, Jour 6', 'Don du maître-forgeron'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Azazel Courtepointe'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Talisman du Néant'),
+ 'excellent', 'An 421, Lune 4, Jour 6', 'Cercle d’illusion'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Mimi Microcosme'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Orbe de Brume'),
+ 'très bon', 'An 421, Lune 3, Jour 12', 'Examen pratique'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Aster Crinière'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Pique du Zéphyr'),
+ 'bon', 'An 421, Lune 3, Jour 10', 'Joutes locales'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Via Rapida'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Boussole Runique'),
+ 'correct', 'An 421, Lune 3, Jour 9', 'Achat au marché'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Renardeau Lapsus'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Dague de Brume'),
+ 'usée', 'An 421, Lune 3, Jour 7', 'Trouvaille'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Silva Feuillemère'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Couteau des Sables'),
+ 'usée', 'An 421, Lune 3, Jour 8', 'Camp forestier'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Drya Racinette'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Pioche de Fer'),
+ 'correct', 'An 421, Lune 3, Jour 11', 'Atelier du village'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Drya Clairebois'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Marteau de Forgeron'),
+ 'usée', 'An 421, Lune 3, Jour 12', 'Prêt d’atelier'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Atlas Coupdœil'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Masse d’Airain'),
+ 'bon', 'An 421, Lune 3, Jour 10', 'Arsenal de brigade'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Basile le Subtil'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Sac de Brume'),
+ 'correct', 'An 421, Lune 4, Jour 2', 'Récompense de guetteur'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Yska Longfrimas'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Torche Infinie'),
+ 'bon', 'An 421, Lune 3, Jour 9', 'Entrepôt de port'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Gala Montjoie'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Trousse de Soin'),
+ 'bon', 'An 421, Lune 3, Jour 10', 'Don d’auberge'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Via Rapida'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Potion de Vie'),
+ 'neuf', 'An 421, Lune 3, Jour 9', 'Boutique d’herboriste'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Renardeau Lapsus'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Potion de Mana'),
+ 'neuf', 'An 421, Lune 3, Jour 7', 'Étal ambulant'),
+
+((SELECT id_personnage FROM Personnage WHERE nom='Silva Feuillemère'),
+ (SELECT id_equipement FROM Equipement WHERE nom='Encens du Calme'),
+ 'neuf', 'An 421, Lune 3, Jour 8', 'Offrande de temple');
+
+
+ INSERT INTO Armee (royaume_id, nom, effectif, composition, moral, etat_approvisionnement, commandant_id) VALUES
+((SELECT id_royaume FROM Royaume WHERE nom='Raclettea'),
+ 'Garde Fondante de Raclettea', 4800,
+ '2 légions de piquiers, 1 aile de cavalerie légère, 1 corps d’ingénieurs',
+ 'très bon', 'excellent',
+ (SELECT id_personnage FROM Personnage WHERE nom='Armelle Armure')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'),
+ 'Cohortes Draconiques', 5300,
+ 'Infanterie lourde “brasefer”, archers de crête, escouades runiques',
+ 'très bon', 'bon',
+ (SELECT id_personnage FROM Personnage WHERE nom='Amber Écaillefeu')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Banarnia'),
+ 'Flotte des Îlots Dorés', 3600,
+ 'Marins arquebusiers, alchimistes de pont, auxiliaires des pêcheries',
+ 'excellent', 'très bon',
+ (SELECT id_personnage FROM Personnage WHERE nom='Phénix Retex')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'),
+ 'Garde des Portails d’Éclairoisie', 4200,
+ 'Lanciers véloces, mages du vent, corps des signaleurs',
+ 'très bon', 'excellent',
+ (SELECT id_personnage FROM Personnage WHERE nom='Calen Dorélys')),
+ 
+((SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'),
+ 'Lanciers Dorés du Quiche', 4400,
+ '2 brigades de lanciers, voltigeurs, cadets diplomatiques',
+ 'très bon', 'très bon',
+ (SELECT id_personnage FROM Personnage WHERE nom='Gaspard Sanspeur')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Boulangea'),
+ 'Levains de Marche', 3900,
+ 'Gardes-boulangers, frondeurs des halles, ingénieurs du pétrin',
+ 'excellent', 'très bon',
+ (SELECT id_personnage FROM Personnage WHERE nom='Bibi Brioche')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Poissarie'),
+ 'Escadre des Voiles Blanches', 3000,
+ 'Marins-archers, troupes de débarquement, cartographes des récifs',
+ 'excellent', 'excellent',
+ (SELECT id_personnage FROM Personnage WHERE nom='Séraphine Rivage')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Patateland'),
+ 'Bataillons Gratinés', 4100,
+ 'Hallebardiers des mines, arbalétriers, trains de vivres salés',
+ 'très bon', 'bon',
+ (SELECT id_personnage FROM Personnage WHERE nom='Tilda Croquenoisette')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'),
+ 'Garde du Nexus', 4500,
+ 'Boucliers carrés, sapeurs, patrouilles de frontières',
+ 'très bon', 'très bon',
+ (SELECT id_personnage FROM Personnage WHERE nom='Crog Silex')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Sucralune'),
+ 'Légion Meringuée', 3800,
+ 'Lanciers légers, prêtres-lunaires, intendance sirop',
+ 'excellent', 'très bon',
+ (SELECT id_personnage FROM Personnage WHERE nom='Morgane Brumelune')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Herbularia'),
+ 'Rangers des Forêts Sacrées', 3200,
+ 'Archers sylvestres, pisteurs, infirmeries d’herboristes',
+ 'très bon', 'excellent',
+ (SELECT id_personnage FROM Personnage WHERE nom='Eärwen Feuilledor')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Beurropolis'),
+ 'Corps des Ponts et Portails', 3500,
+ 'Sapeurs-architectes, gardes urbains, relais des portails',
+ 'bon', 'excellent',
+ (SELECT id_personnage FROM Personnage WHERE nom='Erik Étau')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Raclettea'),
+ 'Lanciers du Crépuscule', 4600,
+ 'Lanciers lourds, éclaireurs des cols, compagnie des feux',
+ 'très bon', 'excellent',
+ (SELECT id_personnage FROM Personnage WHERE nom='Milo Briochette')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Raclettea'),
+ 'Sentinelles des Marches', 4100,
+ 'Boucliers croûtons, frondeurs, sapeurs de frontière',
+ 'très bon', 'très bon',
+ (SELECT id_personnage FROM Personnage WHERE nom='Hildi Rochefine')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'),
+ 'Veilleurs Brasefer du Sud', 5200,
+ 'Infanterie lourde runique, balistes légères, mages du feu',
+ 'très bon', 'bon',
+ (SELECT id_personnage FROM Personnage WHERE nom='Anvil Mainforte')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Dragonflette'),
+ 'Ailes des Cieux', 3600,
+ 'Cavalerie légère, arquebusiers de crête, guetteurs aériens',
+ 'excellent', 'très bon',
+ (SELECT id_personnage FROM Personnage WHERE nom='Urga Tapisdos')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'),
+ 'Gardes de l’Aurore', 4300,
+ 'Lanciers véloces, arcanistes du vent, signaleurs',
+ 'excellent', 'excellent',
+ (SELECT id_personnage FROM Personnage WHERE nom='Fenduil Lierreclair')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Éclairoisie'),
+ 'Cohorte du Sablier', 3400,
+ 'Épéistes, mages du temps, prévôts des routes',
+ 'très bon', 'très bon',
+ (SELECT id_personnage FROM Personnage WHERE nom='Noé Milleplans')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Quichebourg'),
+ 'Vigiles des Abysses', 3900,
+ 'Piquiers, unités anti-siege, patrouilles de tunnels',
+ 'très bon', 'très bon',
+ (SELECT id_personnage FROM Personnage WHERE nom='Nora Cuvelier')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Boulangea'),
+ 'Compagnie du Grand Levain', 4000,
+ 'Gardes-boulangers, frondeurs, génie civil',
+ 'excellent', 'très bon',
+ (SELECT id_personnage FROM Personnage WHERE nom='Goma Rondpain')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Boulangea'),
+ 'Flambeaux des Halles', 3700,
+ 'Cadets diplomatiques, arquebusiers de marché, moines-stewards',
+ 'très bon', 'très bon',
+ (SELECT id_personnage FROM Personnage WHERE nom='Alaric Douxmiel')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Poissarie'),
+ 'Garde des Sables et des Docks', 3200,
+ 'Marins-archers, pisteurs côtiers, cartographes',
+ 'excellent', 'excellent',
+ (SELECT id_personnage FROM Personnage WHERE nom='Ulysse Jaloux')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Patateland'),
+ 'Sapeurs de Grès', 4050,
+ 'Hallebardiers des mines, arbalétriers, génie de campagne',
+ 'très bon', 'bon',
+ (SELECT id_personnage FROM Personnage WHERE nom='Frida Foreuse')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Sucralune'),
+ 'Chœur des Lunes', 3500,
+ 'Prêtres-lunaires, lanciers légers, intendance sirop',
+ 'excellent', 'très bon',
+ (SELECT id_personnage FROM Personnage WHERE nom='Eliara Nitescence')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Herbularia'),
+ 'Garde des Canopées', 3300,
+ 'Archers sylvestres, pisteurs, infirmerie d’herboristes',
+ 'très bon', 'excellent',
+ (SELECT id_personnage FROM Personnage WHERE nom='Eärwen Feuilledor')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Croûtonie'),
+ 'Escouades de l’Ombre', 3600,
+ 'Éclaireurs, sapeurs, maîtres des verrous',
+ 'très bon', 'très bon',
+ (SELECT id_personnage FROM Personnage WHERE nom='Camille Cambriole')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Beurropolis'),
+ 'Légion des Plans et Ponts', 3550,
+ 'Sapeurs-architectes, gardes urbains, relais de portails',
+ 'très bon', 'excellent',
+ (SELECT id_personnage FROM Personnage WHERE nom='Erik Étau')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Banarnia'),
+ 'Brigade des Îlots', 3000,
+ 'Marins arquebusiers, grenadiers alchimiques, matelots-pêcheurs',
+ 'excellent', 'très bon',
+ (SELECT id_personnage FROM Personnage WHERE nom='Jean Bonparleur')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg'),
+ 'Gardes Croquants des Remparts', 4200,
+ 'Piquiers pâte-feuilletée, arbalétriers des moulins, sapeurs vanillés',
+ 'très bon', 'très bon',
+ (SELECT id_personnage FROM Personnage WHERE nom='Bruna Brasero')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Biscuitbourg'),
+ 'Cohorte des Moulins Croquants', 3500,
+ 'Infanterie légère, frondeurs des fossés, intendance des fours',
+ 'très bon', 'bon',
+ (SELECT id_personnage FROM Personnage WHERE nom='Bruna Brasero')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Mascarponie'),
+ 'Bannerets de la Crème', 3800,
+ 'Hallebardiers, mousquetaires beurrés, mages du beurre volant',
+ 'excellent', 'très bon',
+ (SELECT id_personnage FROM Personnage WHERE nom='Démo Niak')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Mascarponie'),
+ 'Lanciers Chantilly', 3000,
+ 'Cavalerie légère, lanciers, alchimistes crémeux',
+ 'très bon', 'très bon',
+ (SELECT id_personnage FROM Personnage WHERE nom='Démo Niak')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime'),
+ 'Gardes de l’Obsidienne', 5100,
+ 'Haches lourdes, boucliers braisés, artilleurs des cols',
+ 'très bon', 'excellent',
+ (SELECT id_personnage FROM Personnage WHERE nom='Durim Brindacier')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Tartiflette Prime'),
+ 'Compagnie des Ponts Dorés', 3700,
+ 'Sapeurs-pontiers, arquebusiers de crête, intendance des cols',
+ 'très bon', 'très bon',
+ (SELECT id_personnage FROM Personnage WHERE nom='Durim Brindacier')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Caramelia'),
+ 'Légion Sucrée', 4100,
+ 'Infanterie dorée, lanciers caramélisés, intendance des sirops',
+ 'excellent', 'très bon',
+ (SELECT id_personnage FROM Personnage WHERE nom='Dulcia Caramiel')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Fondueval'),
+ 'Gardes du Fromage Sacré', 4800,
+ 'Boucliers de cuivre, hallebardiers, moines-du-lait',
+ 'très bon', 'excellent',
+ (SELECT id_personnage FROM Personnage WHERE nom='Maître Fonduin')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Goudaïka'),
+ 'Compagnie des Meules Dorées', 4400,
+ 'Lanciers, artilleurs des collines, intendance du blé',
+ 'très bon', 'très bon',
+ (SELECT id_personnage FROM Personnage WHERE nom='Kara Goudaye')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Rizotto'),
+ 'Régiment des Riz d’Argent', 3900,
+ 'Arquebusiers, sapeurs riziers, gardes-porteurs',
+ 'très bon', 'bon',
+ (SELECT id_personnage FROM Personnage WHERE nom='Lorenzo Risotto')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Citronésie'),
+ 'Brigade des Zestes', 3600,
+ 'Marins-citronniers, lanciers de brise, éclaireurs tropicaux',
+ 'excellent', 'excellent',
+ (SELECT id_personnage FROM Personnage WHERE nom='Selma Citrina')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Levainor'),
+ 'Gardes du Levain Éternel', 4200,
+ 'Hallebardiers du pain sacré, tireurs de farine, intendance des greniers',
+ 'très bon', 'très bon',
+ (SELECT id_personnage FROM Personnage WHERE nom='Goran Levur')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Navet-les-Oies'),
+ 'Lanciers des Champs Doux', 3400,
+ 'Piquiers des plaines, archers des marais, ravitailleurs',
+ 'très bon', 'bon',
+ (SELECT id_personnage FROM Personnage WHERE nom='Tilda Navette')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Tisanelle'),
+ 'Régiment des Infusions', 3300,
+ 'Archers herboristes, moines-tisaniers, cavaliers des sources',
+ 'excellent', 'excellent',
+ (SELECT id_personnage FROM Personnage WHERE nom='Mira Feuillette')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Camemberrie'),
+ 'Gardes Crémeux', 4700,
+ 'Infanterie beurrée, canonniers du lait, patrouilles laitières',
+ 'très bon', 'excellent',
+ (SELECT id_personnage FROM Personnage WHERE nom='Roland Coulant')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Comtédrale'),
+ 'Garde du Comté Doré', 4500,
+ 'Boucliers d’apparat, chevaliers du comté, moines-cave',
+ 'excellent', 'excellent',
+ (SELECT id_personnage FROM Personnage WHERE nom='Amandine Croûte')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Fromagora'),
+ 'Légion des Meules Unies', 4000,
+ 'Fantassins de la pâte, hallebardiers du sel, intendants des caves',
+ 'très bon', 'très bon',
+ (SELECT id_personnage FROM Personnage WHERE nom='Théo Gruyair')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Brie-lande'),
+ 'Bataillon des Brises Blanches', 3800,
+ 'Lanciers, frondeurs, intendance des fermes',
+ 'très bon', 'excellent',
+ (SELECT id_personnage FROM Personnage WHERE nom='Isolde Brievel')),
+
+((SELECT id_royaume FROM Royaume WHERE nom='Sucralune'),
+ 'Garde des Doux Rayons', 3950,
+ 'Prêtres-lunaires, lanciers légers, escorte du sanctuaire',
+ 'excellent', 'excellent',
+ (SELECT id_personnage FROM Personnage WHERE nom='Morgane Brumelune'));
+
+ INSERT INTO Inventaire (ressource_id, stock, seuil_alerte, id_village, armee_id, personnage_id, guilde_id, date_mesure_lore) VALUES
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre tellurique'), 860, 207, 1, NULL, NULL, NULL, 'An 421, Lune 5, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Bois'), 384, 89, 1, NULL, NULL, NULL, 'An 421, Lune 3, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre tellurique'), 795, 225, 2, NULL, NULL, NULL, 'An 421, Lune 2, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Épices'), 795, 185, 2, NULL, NULL, NULL, 'An 421, Lune 5, Jour 7'),
+((SELECT id_ressource FROM Ressource WHERE nom='Herbes'), 871, 241, 3, NULL, NULL, NULL, 'An 421, Lune 1, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 647, 143, 3, NULL, NULL, NULL, 'An 421, Lune 3, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cacao'), 376, 62, 3, NULL, NULL, NULL, 'An 421, Lune 6, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Argent'), 852, 135, 4, NULL, NULL, NULL, 'An 421, Lune 2, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Herbes'), 1052, 293, 4, NULL, NULL, NULL, 'An 421, Lune 1, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal de mana'), 636, 178, 4, NULL, NULL, NULL, 'An 421, Lune 2, Jour 7'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 690, 188, 5, NULL, NULL, NULL, 'An 421, Lune 1, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre tellurique'), 923, 196, 5, NULL, NULL, NULL, 'An 421, Lune 2, Jour 6'),
+((SELECT id_ressource FROM Ressource WHERE nom='Épices'), 829, 222, 5, NULL, NULL, NULL, 'An 421, Lune 3, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Charbon'), 974, 221, 6, NULL, NULL, NULL, 'An 421, Lune 5, Jour 7'),
+((SELECT id_ressource FROM Ressource WHERE nom='Farine'), 872, 166, 6, NULL, NULL, NULL, 'An 421, Lune 6, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Bois'), 548, 91, 6, NULL, NULL, NULL, 'An 421, Lune 1, Jour 8'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre'), 729, 178, 7, NULL, NULL, NULL, 'An 421, Lune 2, Jour 8'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre tellurique'), 1045, 272, 8, NULL, NULL, NULL, 'An 421, Lune 6, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Huile d’olive antique'), 715, 119, 8, NULL, NULL, NULL, 'An 421, Lune 5, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cacao'), 856, 166, 9, NULL, NULL, NULL, 'An 421, Lune 5, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 740, 158, 9, NULL, NULL, NULL, 'An 421, Lune 3, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Sel'), 735, 189, 9, NULL, NULL, NULL, 'An 421, Lune 5, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Or'), 892, 158, 10, NULL, NULL, NULL, 'An 421, Lune 5, Jour 6'),
+((SELECT id_ressource FROM Ressource WHERE nom='Herbes'), 515, 134, 10, NULL, NULL, NULL, 'An 421, Lune 2, Jour 6'),
+((SELECT id_ressource FROM Ressource WHERE nom='Sel'), 1016, 159, 10, NULL, NULL, NULL, 'An 421, Lune 3, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 445, 101, 11, NULL, NULL, NULL, 'An 421, Lune 5, Jour 7'),
+((SELECT id_ressource FROM Ressource WHERE nom='Poisson fumé'), 299, 76, 11, NULL, NULL, NULL, 'An 421, Lune 3, Jour 7'),
+((SELECT id_ressource FROM Ressource WHERE nom='Bois'), 764, 193, 12, NULL, NULL, NULL, 'An 421, Lune 6, Jour 6'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 1013, 261, 12, NULL, NULL, NULL, 'An 421, Lune 3, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre tellurique'), 600, 154, 12, NULL, NULL, NULL, 'An 421, Lune 2, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 328, 65, 13, NULL, NULL, NULL, 'An 421, Lune 3, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre tellurique'), 714, 172, 14, NULL, NULL, NULL, 'An 421, Lune 3, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre'), 260, 56, 14, NULL, NULL, NULL, 'An 421, Lune 3, Jour 7'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal de mana'), 770, 185, 15, NULL, NULL, NULL, 'An 421, Lune 6, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Argent'), 664, 133, 15, NULL, NULL, NULL, 'An 421, Lune 4, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Sel'), 592, 163, 16, NULL, NULL, NULL, 'An 421, Lune 6, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal chaotique'), 1042, 308, 16, NULL, NULL, NULL, 'An 421, Lune 4, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 706, 117, 17, NULL, NULL, NULL, 'An 421, Lune 1, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Farine'), 650, 104, 17, NULL, NULL, NULL, 'An 421, Lune 5, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Argent'), 635, 145, 18, NULL, NULL, NULL, 'An 421, Lune 1, Jour 12'),
+((SELECT id_ressource FROM Ressource WHERE nom='Or'), 583, 162, 19, NULL, NULL, NULL, 'An 421, Lune 6, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Épices'), 1140, 335, 19, NULL, NULL, NULL, 'An 421, Lune 1, Jour 6'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 257, 41, 20, NULL, NULL, NULL, 'An 421, Lune 6, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Poisson fumé'), 468, 103, 21, NULL, NULL, NULL, 'An 421, Lune 1, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 436, 81, 22, NULL, NULL, NULL, 'An 421, Lune 1, Jour 8'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 1053, 216, 22, NULL, NULL, NULL, 'An 421, Lune 5, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Herbes'), 563, 166, 22, NULL, NULL, NULL, 'An 421, Lune 1, Jour 12'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 1077, 212, 23, NULL, NULL, NULL, 'An 421, Lune 5, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Farine'), 869, 176, 24, NULL, NULL, NULL, 'An 421, Lune 6, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal de mana'), 269, 45, 25, NULL, NULL, NULL, 'An 421, Lune 3, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre'), 525, 106, 25, NULL, NULL, NULL, 'An 421, Lune 2, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cacao'), 344, 64, 26, NULL, NULL, NULL, 'An 421, Lune 4, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal chaotique'), 250, 49, 27, NULL, NULL, NULL, 'An 421, Lune 4, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal de mana'), 425, 86, 27, NULL, NULL, NULL, 'An 421, Lune 4, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 463, 109, 28, NULL, NULL, NULL, 'An 421, Lune 6, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Herbes'), 499, 128, 29, NULL, NULL, NULL, 'An 421, Lune 2, Jour 7'),
+((SELECT id_ressource FROM Ressource WHERE nom='Argent'), 451, 121, 29, NULL, NULL, NULL, 'An 421, Lune 4, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Miel'), 1038, 222, 30, NULL, NULL, NULL, 'An 421, Lune 3, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Argent'), 430, 72, 30, NULL, NULL, NULL, 'An 421, Lune 1, Jour 6'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 893, 252, 30, NULL, NULL, NULL, 'An 421, Lune 3, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Farine'), 588, 161, 31, NULL, NULL, NULL, 'An 421, Lune 4, Jour 6'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre tellurique'), 706, 193, 31, NULL, NULL, NULL, 'An 421, Lune 6, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Poisson fumé'), 395, 110, 32, NULL, NULL, NULL, 'An 421, Lune 6, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cacao'), 566, 95, 33, NULL, NULL, NULL, 'An 421, Lune 4, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Huile d’olive antique'), 438, 71, 33, NULL, NULL, NULL, 'An 421, Lune 1, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Charbon'), 431, 77, 33, NULL, NULL, NULL, 'An 421, Lune 4, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Bois'), 456, 119, 34, NULL, NULL, NULL, 'An 421, Lune 5, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Poisson fumé'), 498, 140, 34, NULL, NULL, NULL, 'An 421, Lune 1, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal de mana'), 984, 236, 34, NULL, NULL, NULL, 'An 421, Lune 2, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Bois'), 644, 176, 35, NULL, NULL, NULL, 'An 421, Lune 4, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 1006, 270, 35, NULL, NULL, NULL, 'An 421, Lune 4, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre'), 997, 233, 35, NULL, NULL, NULL, 'An 421, Lune 1, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre'), 953, 160, 36, NULL, NULL, NULL, 'An 421, Lune 5, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Sel'), 1113, 170, 36, NULL, NULL, NULL, 'An 421, Lune 3, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Huile d’olive antique'), 895, 138, 36, NULL, NULL, NULL, 'An 421, Lune 5, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Épices'), 1159, 321, 37, NULL, NULL, NULL, 'An 421, Lune 4, Jour 6'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 1050, 180, 38, NULL, NULL, NULL, 'An 421, Lune 2, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Charbon'), 341, 57, 38, NULL, NULL, NULL, 'An 421, Lune 2, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Bois'), 778, 203, 38, NULL, NULL, NULL, 'An 421, Lune 4, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 860, 136, 39, NULL, NULL, NULL, 'An 421, Lune 2, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuir'), 1030, 188, 40, NULL, NULL, NULL, 'An 421, Lune 1, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Poisson fumé'), 496, 83, 40, NULL, NULL, NULL, 'An 421, Lune 4, Jour 12'),
+((SELECT id_ressource FROM Ressource WHERE nom='Poisson fumé'), 506, 83, 41, NULL, NULL, NULL, 'An 421, Lune 4, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Huile d’olive antique'), 1148, 276, 41, NULL, NULL, NULL, 'An 421, Lune 3, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 798, 214, 41, NULL, NULL, NULL, 'An 421, Lune 6, Jour 8'),
+((SELECT id_ressource FROM Ressource WHERE nom='Charbon'), 1045, 208, 42, NULL, NULL, NULL, 'An 421, Lune 5, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre'), 717, 201, 42, NULL, NULL, NULL, 'An 421, Lune 3, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Sel'), 451, 71, 43, NULL, NULL, NULL, 'An 421, Lune 5, Jour 6'),
+((SELECT id_ressource FROM Ressource WHERE nom='Miel'), 1126, 206, 43, NULL, NULL, NULL, 'An 421, Lune 6, Jour 7'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 768, 220, 44, NULL, NULL, NULL, 'An 421, Lune 2, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre tellurique'), 311, 62, 44, NULL, NULL, NULL, 'An 421, Lune 2, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 877, 229, 45, NULL, NULL, NULL, 'An 421, Lune 3, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Farine'), 677, 179, 46, NULL, NULL, NULL, 'An 421, Lune 4, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 989, 245, 47, NULL, NULL, NULL, 'An 421, Lune 4, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Miel'), 1096, 325, 47, NULL, NULL, NULL, 'An 421, Lune 3, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 808, 157, 48, NULL, NULL, NULL, 'An 421, Lune 1, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Argent'), 255, 67, 48, NULL, NULL, NULL, 'An 421, Lune 5, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 1177, 188, 49, NULL, NULL, NULL, 'An 421, Lune 3, Jour 12'),
+((SELECT id_ressource FROM Ressource WHERE nom='Bois'), 770, 150, 49, NULL, NULL, NULL, 'An 421, Lune 5, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Miel'), 960, 146, 50, NULL, NULL, NULL, 'An 421, Lune 6, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Argent'), 1127, 202, 50, NULL, NULL, NULL, 'An 421, Lune 6, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 538, 103, 50, NULL, NULL, NULL, 'An 421, Lune 3, Jour 6'),
+
+((SELECT id_ressource FROM Ressource WHERE nom='Cuir'), 851, 129, NULL, 1, NULL, NULL, 'An 421, Lune 3, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Herbes'), 695, 173, NULL, 1, NULL, NULL, 'An 421, Lune 4, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Acier'), 1103, 289, NULL, 1, NULL, NULL, 'An 421, Lune 4, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 559, 158, NULL, 1, NULL, NULL, 'An 421, Lune 2, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 1216, 221, NULL, 1, NULL, NULL, 'An 421, Lune 3, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cacao'), 1414, 400, NULL, 2, NULL, NULL, 'An 421, Lune 3, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Épices'), 689, 128, NULL, 2, NULL, NULL, 'An 421, Lune 5, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Miel'), 1346, 357, NULL, 2, NULL, NULL, 'An 421, Lune 6, Jour 8'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 1049, 187, NULL, 3, NULL, NULL, 'An 421, Lune 4, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre brute'), 1110, 274, NULL, 3, NULL, NULL, 'An 421, Lune 4, Jour 8'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuir'), 1249, 209, NULL, 3, NULL, NULL, 'An 421, Lune 3, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuivre'), 1118, 211, NULL, 3, NULL, NULL, 'An 421, Lune 2, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Épices'), 1372, 395, NULL, 4, NULL, NULL, 'An 421, Lune 6, Jour 12'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 1386, 407, NULL, 4, NULL, NULL, 'An 421, Lune 6, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuir'), 367, 106, NULL, 4, NULL, NULL, 'An 421, Lune 1, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Charbon'), 851, 228, NULL, 5, NULL, NULL, 'An 421, Lune 2, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Bois'), 1388, 264, NULL, 5, NULL, NULL, 'An 421, Lune 1, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cacao'), 1491, 445, NULL, 5, NULL, NULL, 'An 421, Lune 6, Jour 6'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 310, 71, NULL, 5, NULL, NULL, 'An 421, Lune 1, Jour 6'),
+((SELECT id_ressource FROM Ressource WHERE nom='Huile d’olive antique'), 1438, 427, NULL, 6, NULL, NULL, 'An 421, Lune 2, Jour 7'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuivre'), 1108, 176, NULL, 6, NULL, NULL, 'An 421, Lune 4, Jour 8'),
+((SELECT id_ressource FROM Ressource WHERE nom='Herbes'), 1260, 248, NULL, 6, NULL, NULL, 'An 421, Lune 5, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 645, 143, NULL, 6, NULL, NULL, 'An 421, Lune 1, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Argent'), 1487, 365, NULL, 7, NULL, NULL, 'An 421, Lune 1, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuivre'), 808, 146, NULL, 7, NULL, NULL, 'An 421, Lune 4, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Farine'), 795, 145, NULL, 7, NULL, NULL, 'An 421, Lune 1, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre brute'), 1293, 354, NULL, 7, NULL, NULL, 'An 421, Lune 5, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 871, 187, NULL, 7, NULL, NULL, 'An 421, Lune 1, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Charbon'), 661, 109, NULL, 8, NULL, NULL, 'An 421, Lune 6, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre brute'), 409, 74, NULL, 8, NULL, NULL, 'An 421, Lune 5, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Or'), 1181, 243, NULL, 8, NULL, NULL, 'An 421, Lune 2, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Charbon'), 304, 49, NULL, 9, NULL, NULL, 'An 421, Lune 6, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 388, 68, NULL, 9, NULL, NULL, 'An 421, Lune 1, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Acier'), 1499, 445, NULL, 10, NULL, NULL, 'An 421, Lune 3, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Huile d’olive antique'), 1181, 321, NULL, 10, NULL, NULL, 'An 421, Lune 5, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 1117, 230, NULL, 10, NULL, NULL, 'An 421, Lune 6, Jour 8'),
+((SELECT id_ressource FROM Ressource WHERE nom='Bois'), 701, 157, NULL, 11, NULL, NULL, 'An 421, Lune 1, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuir'), 789, 205, NULL, 11, NULL, NULL, 'An 421, Lune 5, Jour 6'),
+((SELECT id_ressource FROM Ressource WHERE nom='Sel'), 1046, 303, NULL, 11, NULL, NULL, 'An 421, Lune 4, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 987, 223, NULL, 12, NULL, NULL, 'An 421, Lune 1, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Acier'), 544, 136, NULL, 12, NULL, NULL, 'An 421, Lune 5, Jour 12'),
+((SELECT id_ressource FROM Ressource WHERE nom='Épices'), 825, 141, NULL, 12, NULL, NULL, 'An 421, Lune 6, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuivre'), 1373, 314, NULL, 12, NULL, NULL, 'An 421, Lune 2, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Épices'), 847, 174, NULL, 13, NULL, NULL, 'An 421, Lune 4, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 546, 97, NULL, 13, NULL, NULL, 'An 421, Lune 2, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Charbon'), 632, 151, NULL, 14, NULL, NULL, 'An 421, Lune 4, Jour 7'),
+((SELECT id_ressource FROM Ressource WHERE nom='Gemme astrale'), 1193, 339, NULL, 14, NULL, NULL, 'An 421, Lune 3, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuivre'), 761, 133, NULL, 15, NULL, NULL, 'An 421, Lune 2, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Acier'), 1433, 327, NULL, 15, NULL, NULL, 'An 421, Lune 6, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Charbon'), 845, 154, NULL, 15, NULL, NULL, 'An 421, Lune 1, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Poisson fumé'), 438, 130, NULL, 16, NULL, NULL, 'An 421, Lune 6, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Or'), 1127, 194, NULL, 16, NULL, NULL, 'An 421, Lune 1, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Sel'), 304, 75, NULL, 16, NULL, NULL, 'An 421, Lune 6, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Acier'), 1063, 164, NULL, 16, NULL, NULL, 'An 421, Lune 3, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 1202, 203, NULL, 16, NULL, NULL, 'An 421, Lune 1, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Gemme astrale'), 1350, 225, NULL, 17, NULL, NULL, 'An 421, Lune 5, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Argent'), 918, 241, NULL, 17, NULL, NULL, 'An 421, Lune 1, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Bois'), 1313, 221, NULL, 17, NULL, NULL, 'An 421, Lune 1, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 481, 108, NULL, 17, NULL, NULL, 'An 421, Lune 1, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Sel'), 564, 126, NULL, 18, NULL, NULL, 'An 421, Lune 1, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Or'), 1196, 295, NULL, 18, NULL, NULL, 'An 421, Lune 2, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Poisson fumé'), 931, 159, NULL, 18, NULL, NULL, 'An 421, Lune 1, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Acier'), 1144, 285, NULL, 18, NULL, NULL, 'An 421, Lune 1, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Bois'), 377, 80, NULL, 18, NULL, NULL, 'An 421, Lune 3, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Poisson fumé'), 607, 135, NULL, 19, NULL, NULL, 'An 421, Lune 5, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre brute'), 457, 80, NULL, 19, NULL, NULL, 'An 421, Lune 3, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuivre'), 1175, 242, NULL, 19, NULL, NULL, 'An 421, Lune 6, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Bois'), 594, 103, NULL, 20, NULL, NULL, 'An 421, Lune 1, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Sel'), 931, 195, NULL, 20, NULL, NULL, 'An 421, Lune 5, Jour 12'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 435, 89, NULL, 20, NULL, NULL, 'An 421, Lune 1, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Charbon'), 399, 68, NULL, 20, NULL, NULL, 'An 421, Lune 2, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Acier'), 1279, 300, NULL, 21, NULL, NULL, 'An 421, Lune 1, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Bois'), 1111, 315, NULL, 21, NULL, NULL, 'An 421, Lune 4, Jour 12'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 980, 190, NULL, 21, NULL, NULL, 'An 421, Lune 4, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Sel'), 1165, 331, NULL, 22, NULL, NULL, 'An 421, Lune 2, Jour 6'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 932, 202, NULL, 22, NULL, NULL, 'An 421, Lune 6, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 368, 86, NULL, 22, NULL, NULL, 'An 421, Lune 1, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Miel'), 570, 93, NULL, 22, NULL, NULL, 'An 421, Lune 4, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 962, 254, NULL, 22, NULL, NULL, 'An 421, Lune 2, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Acier'), 508, 149, NULL, 23, NULL, NULL, 'An 421, Lune 5, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Bois'), 1394, 225, NULL, 23, NULL, NULL, 'An 421, Lune 5, Jour 7'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuir'), 980, 204, NULL, 23, NULL, NULL, 'An 421, Lune 5, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 1115, 290, NULL, 23, NULL, NULL, 'An 421, Lune 1, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuir'), 737, 155, NULL, 24, NULL, NULL, 'An 421, Lune 4, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 520, 140, NULL, 24, NULL, NULL, 'An 421, Lune 3, Jour 7'),
+((SELECT id_ressource FROM Ressource WHERE nom='Bois'), 420, 94, NULL, 25, NULL, NULL, 'An 421, Lune 5, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Charbon'), 776, 211, NULL, 25, NULL, NULL, 'An 421, Lune 5, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Acier'), 799, 124, NULL, 26, NULL, NULL, 'An 421, Lune 2, Jour 7'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 1365, 393, NULL, 26, NULL, NULL, 'An 421, Lune 4, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuivre'), 669, 136, NULL, 27, NULL, NULL, 'An 421, Lune 1, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Bois'), 1305, 207, NULL, 27, NULL, NULL, 'An 421, Lune 4, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Épices'), 931, 195, NULL, 27, NULL, NULL, 'An 421, Lune 6, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuir'), 1089, 325, NULL, 27, NULL, NULL, 'An 421, Lune 1, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cacao'), 766, 215, NULL, 28, NULL, NULL, 'An 421, Lune 6, Jour 12'),
+((SELECT id_ressource FROM Ressource WHERE nom='Sel'), 977, 174, NULL, 28, NULL, NULL, 'An 421, Lune 1, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Huile d’olive antique'), 1354, 236, NULL, 28, NULL, NULL, 'An 421, Lune 1, Jour 12'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre brute'), 894, 201, NULL, 28, NULL, NULL, 'An 421, Lune 1, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cacao'), 388, 76, NULL, 29, NULL, NULL, 'An 421, Lune 6, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Huile d’olive antique'), 919, 216, NULL, 29, NULL, NULL, 'An 421, Lune 4, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuivre'), 1368, 291, NULL, 29, NULL, NULL, 'An 421, Lune 6, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Charbon'), 867, 223, NULL, 30, NULL, NULL, 'An 421, Lune 1, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 1456, 350, NULL, 30, NULL, NULL, 'An 421, Lune 5, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre brute'), 771, 201, NULL, 30, NULL, NULL, 'An 421, Lune 6, Jour 8'),
+((SELECT id_ressource FROM Ressource WHERE nom='Épices'), 526, 84, NULL, 30, NULL, NULL, 'An 421, Lune 5, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuir'), 1126, 250, NULL, 30, NULL, NULL, 'An 421, Lune 1, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Huile d’olive antique'), 889, 162, NULL, 31, NULL, NULL, 'An 421, Lune 5, Jour 8'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cacao'), 1077, 257, NULL, 31, NULL, NULL, 'An 421, Lune 1, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Or'), 652, 107, NULL, 31, NULL, NULL, 'An 421, Lune 4, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Charbon'), 453, 108, NULL, 31, NULL, NULL, 'An 421, Lune 1, Jour 7'),
+((SELECT id_ressource FROM Ressource WHERE nom='Sel'), 1037, 242, NULL, 31, NULL, NULL, 'An 421, Lune 5, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Charbon'), 750, 193, NULL, 32, NULL, NULL, 'An 421, Lune 5, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Gemme astrale'), 1170, 316, NULL, 32, NULL, NULL, 'An 421, Lune 4, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 1224, 334, NULL, 33, NULL, NULL, 'An 421, Lune 2, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cacao'), 1467, 422, NULL, 33, NULL, NULL, 'An 421, Lune 2, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Huile d’olive antique'), 821, 240, NULL, 33, NULL, NULL, 'An 421, Lune 1, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre brute'), 1369, 283, NULL, 33, NULL, NULL, 'An 421, Lune 3, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuir'), 1364, 389, NULL, 33, NULL, NULL, 'An 421, Lune 2, Jour 7'),
+((SELECT id_ressource FROM Ressource WHERE nom='Or'), 397, 96, NULL, 34, NULL, NULL, 'An 421, Lune 6, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cacao'), 1372, 256, NULL, 34, NULL, NULL, 'An 421, Lune 4, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuivre'), 1208, 361, NULL, 34, NULL, NULL, 'An 421, Lune 5, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 1118, 194, NULL, 34, NULL, NULL, 'An 421, Lune 5, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 1178, 203, NULL, 34, NULL, NULL, 'An 421, Lune 2, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Bois'), 1274, 219, NULL, 35, NULL, NULL, 'An 421, Lune 2, Jour 6'),
+((SELECT id_ressource FROM Ressource WHERE nom='Or'), 912, 223, NULL, 35, NULL, NULL, 'An 421, Lune 6, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre brute'), 576, 118, NULL, 36, NULL, NULL, 'An 421, Lune 2, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Argent'), 1093, 263, NULL, 36, NULL, NULL, 'An 421, Lune 1, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 790, 182, NULL, 36, NULL, NULL, 'An 421, Lune 6, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cacao'), 732, 110, NULL, 36, NULL, NULL, 'An 421, Lune 3, Jour 8'),
+((SELECT id_ressource FROM Ressource WHERE nom='Farine'), 770, 166, NULL, 37, NULL, NULL, 'An 421, Lune 4, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Bois'), 633, 183, NULL, 37, NULL, NULL, 'An 421, Lune 6, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Miel'), 1238, 207, NULL, 37, NULL, NULL, 'An 421, Lune 5, Jour 12'),
+((SELECT id_ressource FROM Ressource WHERE nom='Argent'), 649, 172, NULL, 37, NULL, NULL, 'An 421, Lune 4, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Herbes'), 430, 67, NULL, 38, NULL, NULL, 'An 421, Lune 4, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Or'), 1264, 290, NULL, 38, NULL, NULL, 'An 421, Lune 2, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Argent'), 1474, 262, NULL, 38, NULL, NULL, 'An 421, Lune 2, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Huile d’olive antique'), 1335, 325, NULL, 39, NULL, NULL, 'An 421, Lune 6, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Charbon'), 1356, 359, NULL, 39, NULL, NULL, 'An 421, Lune 5, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuivre'), 570, 96, NULL, 39, NULL, NULL, 'An 421, Lune 2, Jour 7'),
+((SELECT id_ressource FROM Ressource WHERE nom='Sel'), 1179, 248, NULL, 39, NULL, NULL, 'An 421, Lune 2, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Sel'), 445, 79, NULL, 40, NULL, NULL, 'An 421, Lune 2, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Épices'), 330, 88, NULL, 40, NULL, NULL, 'An 421, Lune 5, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 506, 136, NULL, 41, NULL, NULL, 'An 421, Lune 5, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Acier'), 565, 96, NULL, 41, NULL, NULL, 'An 421, Lune 4, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Herbes'), 388, 67, NULL, 42, NULL, NULL, 'An 421, Lune 1, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 397, 94, NULL, 42, NULL, NULL, 'An 421, Lune 6, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Épices'), 1164, 321, NULL, 42, NULL, NULL, 'An 421, Lune 3, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuir'), 1194, 272, NULL, 42, NULL, NULL, 'An 421, Lune 5, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cacao'), 455, 110, NULL, 42, NULL, NULL, 'An 421, Lune 4, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Poisson fumé'), 1199, 328, NULL, 43, NULL, NULL, 'An 421, Lune 2, Jour 12'),
+((SELECT id_ressource FROM Ressource WHERE nom='Huile d’olive antique'), 793, 208, NULL, 43, NULL, NULL, 'An 421, Lune 3, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Huile d’olive antique'), 1050, 240, NULL, 44, NULL, NULL, 'An 421, Lune 4, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Or'), 899, 189, NULL, 44, NULL, NULL, 'An 421, Lune 6, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Épices'), 1203, 197, NULL, 45, NULL, NULL, 'An 421, Lune 6, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre brute'), 780, 121, NULL, 45, NULL, NULL, 'An 421, Lune 3, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Épices'), 828, 174, NULL, 46, NULL, NULL, 'An 421, Lune 1, Jour 7'),
+((SELECT id_ressource FROM Ressource WHERE nom='Poisson fumé'), 660, 139, NULL, 46, NULL, NULL, 'An 421, Lune 3, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Herbes'), 463, 104, NULL, 46, NULL, NULL, 'An 421, Lune 5, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Farine'), 504, 80, NULL, 46, NULL, NULL, 'An 421, Lune 4, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 1217, 342, NULL, 46, NULL, NULL, 'An 421, Lune 4, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Argent'), 1380, 310, NULL, 47, NULL, NULL, 'An 421, Lune 2, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Miel'), 1270, 255, NULL, 47, NULL, NULL, 'An 421, Lune 4, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuivre'), 1299, 319, NULL, 47, NULL, NULL, 'An 421, Lune 6, Jour 9'),
+
+((SELECT id_ressource FROM Ressource WHERE nom='Gemme élémentaire'), 164, 45, NULL, NULL, 1, NULL, 'An 421, Lune 3, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuir'), 158, 42, NULL, NULL, 2, NULL, 'An 421, Lune 6, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Herbes'), 71, 19, NULL, NULL, 2, NULL, 'An 421, Lune 4, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal chaotique'), 73, 15, NULL, NULL, 3, NULL, 'An 421, Lune 6, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Laine'), 60, 14, NULL, NULL, 3, NULL, 'An 421, Lune 4, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal de mana'), 77, 15, NULL, NULL, 3, NULL, 'An 421, Lune 2, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 148, 44, NULL, NULL, 4, NULL, 'An 421, Lune 6, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Argent'), 90, 22, NULL, NULL, 4, NULL, 'An 421, Lune 5, Jour 8'),
+((SELECT id_ressource FROM Ressource WHERE nom='Or'), 149, 40, NULL, NULL, 5, NULL, 'An 421, Lune 6, Jour 8'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 186, 50, NULL, NULL, 5, NULL, 'An 421, Lune 3, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Laine'), 80, 22, NULL, NULL, 6, NULL, 'An 421, Lune 4, Jour 6'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal de mana'), 49, 12, NULL, NULL, 6, NULL, 'An 421, Lune 5, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuir'), 59, 13, NULL, NULL, 6, NULL, 'An 421, Lune 6, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre brute'), 18, 4, NULL, NULL, 7, NULL, 'An 421, Lune 4, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal chaotique'), 158, 40, NULL, NULL, 8, NULL, 'An 421, Lune 4, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Viande séchée'), 191, 48, NULL, NULL, 8, NULL, 'An 421, Lune 4, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal chaotique'), 85, 25, NULL, NULL, 9, NULL, 'An 421, Lune 3, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Or'), 129, 31, NULL, NULL, 9, NULL, 'An 421, Lune 2, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 130, 28, NULL, NULL, 10, NULL, 'An 421, Lune 5, Jour 6'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal de mana'), 64, 14, NULL, NULL, 10, NULL, 'An 421, Lune 5, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 95, 25, NULL, NULL, 11, NULL, 'An 421, Lune 3, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre brute'), 44, 9, NULL, NULL, 11, NULL, 'An 421, Lune 1, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Laine'), 119, 30, NULL, NULL, 12, NULL, 'An 421, Lune 2, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Miel'), 128, 35, NULL, NULL, 13, NULL, 'An 421, Lune 1, Jour 12'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 83, 18, NULL, NULL, 13, NULL, 'An 421, Lune 5, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal chaotique'), 23, 4, NULL, NULL, 14, NULL, 'An 421, Lune 5, Jour 12'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 95, 27, NULL, NULL, 15, NULL, 'An 421, Lune 1, Jour 6'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 166, 41, NULL, NULL, 16, NULL, 'An 421, Lune 6, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 194, 46, NULL, NULL, 17, NULL, 'An 421, Lune 3, Jour 6'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal de mana'), 115, 24, NULL, NULL, 17, NULL, 'An 421, Lune 6, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 128, 35, NULL, NULL, 17, NULL, 'An 421, Lune 6, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Argent'), 133, 30, NULL, NULL, 18, NULL, 'An 421, Lune 2, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Viande séchée'), 94, 25, NULL, NULL, 18, NULL, 'An 421, Lune 3, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Laine'), 133, 30, NULL, NULL, 19, NULL, 'An 421, Lune 4, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Viande séchée'), 22, 5, NULL, NULL, 19, NULL, 'An 421, Lune 2, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre brute'), 193, 52, NULL, NULL, 20, NULL, 'An 421, Lune 6, Jour 12'),
+((SELECT id_ressource FROM Ressource WHERE nom='Viande séchée'), 97, 27, NULL, NULL, 20, NULL, 'An 421, Lune 6, Jour 6'),
+((SELECT id_ressource FROM Ressource WHERE nom='Huile d’olive antique'), 126, 25, NULL, NULL, 20, NULL, 'An 421, Lune 3, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuir'), 157, 35, NULL, NULL, 21, NULL, 'An 421, Lune 6, Jour 12'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 122, 33, NULL, NULL, 22, NULL, 'An 421, Lune 2, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Gemme élémentaire'), 80, 23, NULL, NULL, 23, NULL, 'An 421, Lune 1, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Or'), 36, 9, NULL, NULL, 23, NULL, 'An 421, Lune 5, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Argent'), 132, 37, NULL, NULL, 24, NULL, 'An 421, Lune 5, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Gemme élémentaire'), 61, 17, NULL, NULL, 24, NULL, 'An 421, Lune 4, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 188, 42, NULL, NULL, 24, NULL, 'An 421, Lune 6, Jour 6'),
+((SELECT id_ressource FROM Ressource WHERE nom='Laine'), 86, 24, NULL, NULL, 25, NULL, 'An 421, Lune 4, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal de mana'), 51, 13, NULL, NULL, 25, NULL, 'An 421, Lune 4, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Herbes'), 116, 33, NULL, NULL, 26, NULL, 'An 421, Lune 3, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 122, 34, NULL, NULL, 27, NULL, 'An 421, Lune 1, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 102, 29, NULL, NULL, 27, NULL, 'An 421, Lune 4, Jour 6'),
+((SELECT id_ressource FROM Ressource WHERE nom='Huile d’olive antique'), 142, 37, NULL, NULL, 27, NULL, 'An 421, Lune 3, Jour 7'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuir'), 157, 45, NULL, NULL, 28, NULL, 'An 421, Lune 5, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Laine'), 168, 43, NULL, NULL, 28, NULL, 'An 421, Lune 5, Jour 6'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 58, 12, NULL, NULL, 28, NULL, 'An 421, Lune 6, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Herbes'), 118, 24, NULL, NULL, 29, NULL, 'An 421, Lune 3, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Gemme élémentaire'), 55, 15, NULL, NULL, 29, NULL, 'An 421, Lune 4, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 28, 6, NULL, NULL, 30, NULL, 'An 421, Lune 5, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 59, 12, NULL, NULL, 31, NULL, 'An 421, Lune 6, Jour 8'),
+((SELECT id_ressource FROM Ressource WHERE nom='Or'), 148, 30, NULL, NULL, 31, NULL, 'An 421, Lune 6, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Huile d’olive antique'), 73, 17, NULL, NULL, 32, NULL, 'An 421, Lune 2, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Herbes'), 176, 36, NULL, NULL, 32, NULL, 'An 421, Lune 3, Jour 12'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal de mana'), 113, 25, NULL, NULL, 32, NULL, 'An 421, Lune 3, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Argent'), 166, 33, NULL, NULL, 33, NULL, 'An 421, Lune 2, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 70, 20, NULL, NULL, 34, NULL, 'An 421, Lune 3, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre brute'), 139, 40, NULL, NULL, 35, NULL, 'An 421, Lune 2, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Laine'), 25, 5, NULL, NULL, 36, NULL, 'An 421, Lune 5, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Viande séchée'), 200, 44, NULL, NULL, 36, NULL, 'An 421, Lune 1, Jour 8'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre brute'), 136, 38, NULL, NULL, 37, NULL, 'An 421, Lune 1, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Huile d’olive antique'), 53, 15, NULL, NULL, 37, NULL, 'An 421, Lune 1, Jour 7'),
+((SELECT id_ressource FROM Ressource WHERE nom='Viande séchée'), 69, 16, NULL, NULL, 38, NULL, 'An 421, Lune 1, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 125, 35, NULL, NULL, 38, NULL, 'An 421, Lune 5, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre brute'), 99, 28, NULL, NULL, 38, NULL, 'An 421, Lune 3, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Huile d’olive antique'), 42, 11, NULL, NULL, 39, NULL, 'An 421, Lune 2, Jour 7'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuir'), 109, 25, NULL, NULL, 40, NULL, 'An 421, Lune 4, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Viande séchée'), 52, 12, NULL, NULL, 40, NULL, 'An 421, Lune 4, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Viande séchée'), 63, 18, NULL, NULL, 41, NULL, 'An 421, Lune 3, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Herbes'), 54, 15, NULL, NULL, 41, NULL, 'An 421, Lune 4, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 43, 10, NULL, NULL, 42, NULL, 'An 421, Lune 6, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 113, 25, NULL, NULL, 42, NULL, 'An 421, Lune 2, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Laine'), 96, 24, NULL, NULL, 43, NULL, 'An 421, Lune 4, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuir'), 155, 42, NULL, NULL, 43, NULL, 'An 421, Lune 2, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Viande séchée'), 117, 32, NULL, NULL, 44, NULL, 'An 421, Lune 3, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 154, 40, NULL, NULL, 45, NULL, 'An 421, Lune 1, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 33, 8, NULL, NULL, 46, NULL, 'An 421, Lune 3, Jour 7'),
+((SELECT id_ressource FROM Ressource WHERE nom='Huile d’olive antique'), 13, 3, NULL, NULL, 47, NULL, 'An 421, Lune 2, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Gemme élémentaire'), 68, 15, NULL, NULL, 47, NULL, 'An 421, Lune 4, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Miel'), 61, 13, NULL, NULL, 48, NULL, 'An 421, Lune 2, Jour 6'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuir'), 52, 13, NULL, NULL, 49, NULL, 'An 421, Lune 3, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Or'), 112, 30, NULL, NULL, 49, NULL, 'An 421, Lune 5, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Argent'), 133, 30, NULL, NULL, 49, NULL, 'An 421, Lune 2, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Laine'), 60, 15, NULL, NULL, 50, NULL, 'An 421, Lune 5, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Gemme élémentaire'), 200, 53, NULL, NULL, 50, NULL, 'An 421, Lune 5, Jour 14'),
+
+((SELECT id_ressource FROM Ressource WHERE nom='Charbon'), 428, 68, NULL, NULL, NULL, 1, 'An 421, Lune 6, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Gelée de mana'), 554, 157, NULL, NULL, NULL, 1, 'An 421, Lune 1, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuir'), 712, 202, NULL, NULL, NULL, 2, 'An 421, Lune 3, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Plumes'), 344, 94, NULL, NULL, NULL, 2, 'An 421, Lune 4, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal chaotique'), 183, 36, NULL, NULL, NULL, 2, 'An 421, Lune 3, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Charbon'), 590, 95, NULL, NULL, NULL, 3, 'An 421, Lune 1, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre brute'), 777, 210, NULL, NULL, NULL, 3, 'An 421, Lune 5, Jour 8'),
+((SELECT id_ressource FROM Ressource WHERE nom='Plumes'), 612, 153, NULL, NULL, NULL, 3, 'An 421, Lune 4, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Gelée de mana'), 234, 54, NULL, NULL, NULL, 4, 'An 421, Lune 2, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre brute'), 496, 85, NULL, NULL, NULL, 4, 'An 421, Lune 6, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Bois'), 797, 157, NULL, NULL, NULL, 4, 'An 421, Lune 5, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Viande séchée'), 434, 119, NULL, NULL, NULL, 5, 'An 421, Lune 4, Jour 7'),
+((SELECT id_ressource FROM Ressource WHERE nom='Huile d’olive antique'), 217, 43, NULL, NULL, NULL, 5, 'An 421, Lune 6, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Thé vert'), 452, 113, NULL, NULL, NULL, 5, 'An 421, Lune 6, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Acier'), 194, 43, NULL, NULL, NULL, 6, 'An 421, Lune 2, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Miel'), 615, 145, NULL, NULL, NULL, 6, 'An 421, Lune 4, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Acier'), 339, 65, NULL, NULL, NULL, 7, 'An 421, Lune 6, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Argent'), 725, 159, NULL, NULL, NULL, 7, 'An 421, Lune 4, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Miel'), 547, 130, NULL, NULL, NULL, 7, 'An 421, Lune 5, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Thé vert'), 334, 67, NULL, NULL, NULL, 7, 'An 421, Lune 6, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre'), 698, 201, NULL, NULL, NULL, 8, 'An 421, Lune 2, Jour 6'),
+((SELECT id_ressource FROM Ressource WHERE nom='Bois'), 638, 98, NULL, NULL, NULL, 8, 'An 421, Lune 5, Jour 7'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal de mana'), 815, 208, NULL, NULL, NULL, 8, 'An 421, Lune 5, Jour 12'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre brute'), 182, 51, NULL, NULL, NULL, 8, 'An 421, Lune 4, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Plumes'), 434, 104, NULL, NULL, NULL, 9, 'An 421, Lune 3, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Épices'), 386, 110, NULL, NULL, NULL, 9, 'An 421, Lune 4, Jour 12'),
+((SELECT id_ressource FROM Ressource WHERE nom='Miel'), 354, 102, NULL, NULL, NULL, 9, 'An 421, Lune 6, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal chaotique'), 212, 53, NULL, NULL, NULL, 9, 'An 421, Lune 3, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Argent'), 602, 144, NULL, NULL, NULL, 10, 'An 421, Lune 1, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Thé vert'), 403, 98, NULL, NULL, NULL, 10, 'An 421, Lune 3, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Épices'), 871, 176, NULL, NULL, NULL, 10, 'An 421, Lune 5, Jour 6'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 445, 106, NULL, NULL, NULL, 11, 'An 421, Lune 6, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal de mana'), 370, 100, NULL, NULL, NULL, 11, 'An 421, Lune 1, Jour 6'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 233, 61, NULL, NULL, NULL, 11, 'An 421, Lune 4, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Viande séchée'), 247, 38, NULL, NULL, NULL, 12, 'An 421, Lune 3, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Argent'), 241, 64, NULL, NULL, NULL, 12, 'An 421, Lune 6, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Herbes'), 215, 56, NULL, NULL, NULL, 12, 'An 421, Lune 1, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 460, 128, NULL, NULL, NULL, 12, 'An 421, Lune 1, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal de mana'), 448, 83, NULL, NULL, NULL, 13, 'An 421, Lune 1, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 425, 95, NULL, NULL, NULL, 13, 'An 421, Lune 2, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Herbes'), 701, 188, NULL, NULL, NULL, 13, 'An 421, Lune 4, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Miel'), 631, 169, NULL, NULL, NULL, 14, 'An 421, Lune 3, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Herbes'), 617, 146, NULL, NULL, NULL, 14, 'An 421, Lune 6, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Bois'), 420, 66, NULL, NULL, NULL, 15, 'An 421, Lune 4, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre'), 293, 46, NULL, NULL, NULL, 15, 'An 421, Lune 3, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Charbon'), 735, 196, NULL, NULL, NULL, 16, 'An 421, Lune 1, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Huile d’olive antique'), 715, 195, NULL, NULL, NULL, 16, 'An 421, Lune 6, Jour 8'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 857, 237, NULL, NULL, NULL, 17, 'An 421, Lune 1, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Herbes'), 623, 118, NULL, NULL, NULL, 17, 'An 421, Lune 5, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Acier'), 844, 178, NULL, NULL, NULL, 18, 'An 421, Lune 5, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 653, 189, NULL, NULL, NULL, 18, 'An 421, Lune 4, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre'), 226, 57, NULL, NULL, NULL, 18, 'An 421, Lune 6, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal de mana'), 387, 91, NULL, NULL, NULL, 19, 'An 421, Lune 3, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Viande séchée'), 731, 131, NULL, NULL, NULL, 19, 'An 421, Lune 3, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Bois'), 838, 248, NULL, NULL, NULL, 19, 'An 421, Lune 4, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Argent'), 850, 235, NULL, NULL, NULL, 20, 'An 421, Lune 3, Jour 12'),
+((SELECT id_ressource FROM Ressource WHERE nom='Charbon'), 711, 203, NULL, NULL, NULL, 20, 'An 421, Lune 4, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre'), 228, 65, NULL, NULL, NULL, 21, 'An 421, Lune 6, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal chaotique'), 406, 104, NULL, NULL, NULL, 21, 'An 421, Lune 6, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal de mana'), 474, 103, NULL, NULL, NULL, 21, 'An 421, Lune 6, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 711, 120, NULL, NULL, NULL, 21, 'An 421, Lune 6, Jour 7'),
+((SELECT id_ressource FROM Ressource WHERE nom='Gelée de mana'), 245, 67, NULL, NULL, NULL, 22, 'An 421, Lune 4, Jour 8'),
+((SELECT id_ressource FROM Ressource WHERE nom='Huile d’olive antique'), 157, 27, NULL, NULL, NULL, 22, 'An 421, Lune 1, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Viande séchée'), 693, 166, NULL, NULL, NULL, 22, 'An 421, Lune 5, Jour 7'),
+((SELECT id_ressource FROM Ressource WHERE nom='Épices'), 229, 55, NULL, NULL, NULL, 22, 'An 421, Lune 1, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Huile d’olive antique'), 238, 47, NULL, NULL, NULL, 23, 'An 421, Lune 1, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Viande séchée'), 897, 211, NULL, NULL, NULL, 23, 'An 421, Lune 2, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuir'), 680, 174, NULL, NULL, NULL, 23, 'An 421, Lune 1, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Épices'), 252, 63, NULL, NULL, NULL, 23, 'An 421, Lune 5, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Charbon'), 449, 130, NULL, NULL, NULL, 24, 'An 421, Lune 3, Jour 8'),
+((SELECT id_ressource FROM Ressource WHERE nom='Plumes'), 648, 167, NULL, NULL, NULL, 24, 'An 421, Lune 5, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Bois'), 703, 131, NULL, NULL, NULL, 24, 'An 421, Lune 3, Jour 7'),
+((SELECT id_ressource FROM Ressource WHERE nom='Charbon'), 418, 111, NULL, NULL, NULL, 25, 'An 421, Lune 5, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Huile d’olive antique'), 291, 58, NULL, NULL, NULL, 25, 'An 421, Lune 5, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal chaotique'), 564, 131, NULL, NULL, NULL, 26, 'An 421, Lune 6, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuir'), 302, 65, NULL, NULL, NULL, 26, 'An 421, Lune 4, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 573, 124, NULL, NULL, NULL, 26, 'An 421, Lune 3, Jour 12'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre'), 343, 53, NULL, NULL, NULL, 26, 'An 421, Lune 6, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 767, 204, NULL, NULL, NULL, 27, 'An 421, Lune 5, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Acier'), 256, 51, NULL, NULL, NULL, 27, 'An 421, Lune 3, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal chaotique'), 702, 123, NULL, NULL, NULL, 27, 'An 421, Lune 6, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 891, 203, NULL, NULL, NULL, 27, 'An 421, Lune 2, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 708, 133, NULL, NULL, NULL, 28, 'An 421, Lune 1, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 528, 151, NULL, NULL, NULL, 28, 'An 421, Lune 6, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Bois'), 788, 160, NULL, NULL, NULL, 29, 'An 421, Lune 3, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Herbes'), 751, 190, NULL, NULL, NULL, 29, 'An 421, Lune 5, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Plumes'), 521, 116, NULL, NULL, NULL, 29, 'An 421, Lune 2, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 342, 53, NULL, NULL, NULL, 29, 'An 421, Lune 5, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuir'), 600, 112, NULL, NULL, NULL, 30, 'An 421, Lune 4, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Gelée de mana'), 821, 149, NULL, NULL, NULL, 30, 'An 421, Lune 1, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Gelée de mana'), 339, 58, NULL, NULL, NULL, 31, 'An 421, Lune 6, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuir'), 713, 188, NULL, NULL, NULL, 31, 'An 421, Lune 5, Jour 8'),
+((SELECT id_ressource FROM Ressource WHERE nom='Huile d’olive antique'), 805, 222, NULL, NULL, NULL, 32, 'An 421, Lune 6, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal chaotique'), 564, 155, NULL, NULL, NULL, 32, 'An 421, Lune 5, Jour 12'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre brute'), 527, 148, NULL, NULL, NULL, 33, 'An 421, Lune 5, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 774, 213, NULL, NULL, NULL, 33, 'An 421, Lune 2, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 439, 88, NULL, NULL, NULL, 33, 'An 421, Lune 6, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Argent'), 738, 115, NULL, NULL, NULL, 34, 'An 421, Lune 4, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Vin'), 396, 101, NULL, NULL, NULL, 34, 'An 421, Lune 5, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Charbon'), 500, 134, NULL, NULL, NULL, 34, 'An 421, Lune 4, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Plumes'), 257, 67, NULL, NULL, NULL, 34, 'An 421, Lune 1, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Charbon'), 656, 178, NULL, NULL, NULL, 35, 'An 421, Lune 3, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Huile d’olive antique'), 618, 128, NULL, NULL, NULL, 35, 'An 421, Lune 6, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal chaotique'), 515, 84, NULL, NULL, NULL, 36, 'An 421, Lune 5, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Bois'), 451, 111, NULL, NULL, NULL, 36, 'An 421, Lune 6, Jour 12'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre brute'), 738, 163, NULL, NULL, NULL, 37, 'An 421, Lune 1, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal de mana'), 735, 116, NULL, NULL, NULL, 37, 'An 421, Lune 6, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 898, 168, NULL, NULL, NULL, 37, 'An 421, Lune 3, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Viande séchée'), 361, 62, NULL, NULL, NULL, 37, 'An 421, Lune 1, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Huile d’olive antique'), 894, 147, NULL, NULL, NULL, 38, 'An 421, Lune 5, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Gelée de mana'), 556, 161, NULL, NULL, NULL, 38, 'An 421, Lune 2, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre brute'), 435, 100, NULL, NULL, NULL, 39, 'An 421, Lune 3, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Miel'), 462, 93, NULL, NULL, NULL, 39, 'An 421, Lune 1, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre brute'), 846, 157, NULL, NULL, NULL, 40, 'An 421, Lune 1, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 825, 224, NULL, NULL, NULL, 40, 'An 421, Lune 4, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Plumes'), 809, 175, NULL, NULL, NULL, 40, 'An 421, Lune 5, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Charbon'), 738, 209, NULL, NULL, NULL, 41, 'An 421, Lune 1, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 261, 50, NULL, NULL, NULL, 41, 'An 421, Lune 5, Jour 3'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal chaotique'), 225, 61, NULL, NULL, NULL, 41, 'An 421, Lune 1, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Fer'), 535, 105, NULL, NULL, NULL, 42, 'An 421, Lune 1, Jour 5'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal de mana'), 366, 57, NULL, NULL, NULL, 42, 'An 421, Lune 3, Jour 15'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 235, 64, NULL, NULL, NULL, 43, 'An 421, Lune 5, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal chaotique'), 367, 75, NULL, NULL, NULL, 43, 'An 421, Lune 1, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre brute'), 642, 179, NULL, NULL, NULL, 44, 'An 421, Lune 3, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal chaotique'), 177, 51, NULL, NULL, NULL, 44, 'An 421, Lune 3, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Thé vert'), 397, 71, NULL, NULL, NULL, 44, 'An 421, Lune 6, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Herbes'), 224, 43, NULL, NULL, NULL, 44, 'An 421, Lune 1, Jour 14'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cristal de mana'), 826, 157, NULL, NULL, NULL, 45, 'An 421, Lune 3, Jour 13'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 185, 34, NULL, NULL, NULL, 45, 'An 421, Lune 2, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Herbes'), 323, 80, NULL, NULL, NULL, 46, 'An 421, Lune 2, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre brute'), 358, 57, NULL, NULL, NULL, 46, 'An 421, Lune 1, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Gelée de mana'), 254, 50, NULL, NULL, NULL, 46, 'An 421, Lune 5, Jour 8'),
+((SELECT id_ressource FROM Ressource WHERE nom='Épices'), 363, 66, NULL, NULL, NULL, 47, 'An 421, Lune 6, Jour 12'),
+((SELECT id_ressource FROM Ressource WHERE nom='Viande séchée'), 691, 126, NULL, NULL, NULL, 47, 'An 421, Lune 2, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Thé vert'), 324, 90, NULL, NULL, NULL, 47, 'An 421, Lune 6, Jour 9'),
+((SELECT id_ressource FROM Ressource WHERE nom='Huile d’olive antique'), 745, 196, NULL, NULL, NULL, 47, 'An 421, Lune 1, Jour 10'),
+((SELECT id_ressource FROM Ressource WHERE nom='Thé vert'), 407, 108, NULL, NULL, NULL, 48, 'An 421, Lune 1, Jour 8'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 801, 221, NULL, NULL, NULL, 48, 'An 421, Lune 2, Jour 1'),
+((SELECT id_ressource FROM Ressource WHERE nom='Herbes'), 405, 90, NULL, NULL, NULL, 49, 'An 421, Lune 1, Jour 2'),
+((SELECT id_ressource FROM Ressource WHERE nom='Acier'), 389, 97, NULL, NULL, NULL, 49, 'An 421, Lune 3, Jour 4'),
+((SELECT id_ressource FROM Ressource WHERE nom='Tissu runique'), 263, 66, NULL, NULL, NULL, 50, 'An 421, Lune 3, Jour 11'),
+((SELECT id_ressource FROM Ressource WHERE nom='Pierre'), 616, 102, NULL, NULL, NULL, 50, 'An 421, Lune 4, Jour 6'),
+((SELECT id_ressource FROM Ressource WHERE nom='Cuir'), 168, 48, NULL, NULL, NULL, 50, 'An 421, Lune 5, Jour 4');
 

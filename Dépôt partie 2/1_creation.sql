@@ -19,17 +19,17 @@ DROP TABLE IF EXISTS
   LoiRoyaume,
   Loi,
   RelationDiplomatique,
-  ExpeditionStock,
-  ExpeditionMembre,
-  Expedition,
+  ExpeditionStock,        --
+  ExpeditionMembre,       --
+  Expedition,             --
   Inventaire,
   PersonnageEquipement,
   EquipementRessource,
   Equipement,
-  CreatureBataille,
-  GuildeBataille,
-  ArmeeBataille,
-  Bataille,
+  CreatureBataille,       --
+  GuildeBataille,         --
+  ArmeeBataille,          --
+  Bataille,               --
   Armee,
   PersonnageMaladie,
   Maladie,
@@ -648,8 +648,8 @@ CREATE TABLE Inventaire (
   ressource_id INT NOT NULL,
   stock INT,
   seuil_alerte INT,
-  id_village INT,
-  armee_id INT,
+  id_village INT NULL,
+  armee_id INT NULL,
   personnage_id INT NULL,
   guilde_id INT NULL,
   date_mesure_lore VARCHAR(60),
